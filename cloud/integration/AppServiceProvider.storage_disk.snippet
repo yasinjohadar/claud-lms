@@ -1,0 +1,7 @@
+{{-- أضف داخل App\Providers\AppServiceProvider::boot() --}}
+
+        if (! function_exists('storage_disk')) {
+            function storage_disk(string $diskName) {
+                return app(\App\Services\Storage\AppStorageManager::class)->getDisk($diskName);
+            }
+        }

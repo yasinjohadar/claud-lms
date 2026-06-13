@@ -1,0 +1,642 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة التعليم الإلكتروني - تفاصيل الكورس</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="course-detail-page">
+        <nav class="navbar navbar-expand-xl fixed-top main-nav site-navbar site-navbar--standalone" id="siteNavbar">
+        <div class="container site-navbar-container">
+            <a class="navbar-brand site-brand" href="index.html">
+                <span class="site-brand-mark"><i class="fas fa-graduation-cap"></i></span>
+                <span class="site-brand-name">إدي<span>وماتيك</span></span>
+            </a>
+
+            <div class="site-nav-mobile-tools d-xl-none">
+                <button type="button" class="site-nav-icon-btn site-nav-search-toggle" aria-label="فتح البحث" data-bs-toggle="collapse" data-bs-target="#navSearchMobile">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="navbar-toggler site-nav-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="فتح القائمة">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse site-nav-collapse" id="mainNav">
+                <ul class="navbar-nav site-nav-menu">
+                    <li class="nav-item"><a class="nav-link" href="index.html" data-nav="index.html">الرئيسية</a></li>
+                    <li class="nav-item"><a class="nav-link" href="courses.html" data-nav="courses.html">الكورسات</a></li>
+                    <li class="nav-item"><a class="nav-link" href="categories.html" data-nav="categories.html">التصنيفات</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html" data-nav="blog.html">المدونة</a></li>
+                    <li class="nav-item"><a class="nav-link" href="who-we-are.html" data-nav="who-we-are.html">من نحن</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html" data-nav="about.html">حول</a></li>
+                </ul>
+
+                <div class="site-nav-search-wrap collapse d-xl-flex" id="navSearchMobile">
+                    <form class="site-search-form" role="search">
+                        <div class="site-search-box" id="siteSearchBox">
+                            <span class="site-search-glow" aria-hidden="true"></span>
+                            <span class="site-search-ring" aria-hidden="true"></span>
+                            <i class="fas fa-search site-search-icon" aria-hidden="true"></i>
+                            <input type="search" class="site-search-input" id="nav-search-input" placeholder="ابحث عن كورس، مدرب، أو مهارة..." autocomplete="off" aria-label="بحث في المنصة">
+                            <kbd class="site-search-kbd d-none d-lg-inline-flex" aria-hidden="true">Ctrl+K</kbd>
+                            <button type="submit" class="site-search-submit" aria-label="بحث">
+                                <i class="fas fa-arrow-left"></i>
+                            </button>
+                        </div>
+                        <div class="site-search-results" id="nav-search-results" hidden></div>
+                    </form>
+                </div>
+
+                <div class="site-nav-actions">
+                    <button class="site-nav-icon-btn theme-toggle" type="button" aria-label="تبديل الوضع الليلي">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    <a href="cart.html" class="site-nav-icon-btn site-nav-cart" aria-label="سلة التسوق">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-badge">0</span>
+                    </a>
+                    <a href="login.html" class="site-nav-cta">
+                        <i class="fas fa-user"></i>
+                        <span>تسجيل الدخول</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+<!-- Top Page Header -->
+    <header class="course-detail-hero">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb course-detail-breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">الرئيسية</a></li>
+                    <li class="breadcrumb-item"><a href="courses.html">الكورسات</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">الدورة الشاملة في تطوير واجهات الويب المحترفة</li>
+                </ol>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container course-detail-main py-4">
+        <div id="toast-container"></div>
+        <div class="row g-5">
+            <!-- Right Column: Details -->
+            <div class="col-lg-8">
+                <div class="section-fade-up course-detail-intro">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <span class="badge bg-glass text-accent px-3 py-2 rounded-pill">البرمجة والتطوير</span>
+                        <span class="badge bg-danger px-3 py-2 rounded-pill">الأكثر مبيعاً</span>
+                    </div>
+                    <h1 class="fw-bold mb-4 lh-base" id="detail-title">الدورة الشاملة في تطوير واجهات الويب المحترفة (HTML, CSS, JS, React)</h1>
+                    <p class="text-secondary fs-5 mb-4 lh-lg">تعلم بناء واجهات ويب عصرية ومستجيبة من الصفر حتى الاحتراف باستخدام أحدث تقنيات الويب، مع مشاريع عملية وتطبيقية حقيقية.</p>
+                    
+                    <div class="d-flex flex-wrap gap-4 align-items-center text-secondary small mb-5 course-detail-meta">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-user-tie text-accent fs-5 me-2 ms-1"></i>
+                            <strong id="detail-instructor">م. أحمد سعيد</strong>
+                        </div>
+                        <div class="d-flex align-items-center en-text">
+                            <span class="text-warning me-1 ms-1"><i class="fas fa-star"></i> 4.8</span>
+                            <span>(3,240 تقييم)</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-users text-accent fs-5 me-2 mt-1 ms-1"></i>
+                            <span class="en-text meta-value fw-bold me-1">12,500</span> طالب
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-calendar-alt text-accent fs-5 me-2 mt-1 ms-1"></i>
+                            آخر تحديث: <span class="meta-value ms-1 fw-bold en-text">10/2025</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-globe text-accent fs-5 me-2 mt-1 ms-1"></i>
+                            اللغة: <span class="meta-value ms-1 fw-bold">العربية</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="course-detail-tabs-card section-fade-up">
+                    <ul class="nav nav-tabs course-tabs border-0 flex-nowrap overflow-auto" id="courseTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active w-100 text-nowrap" id="content-tab" data-bs-toggle="tab" data-bs-target="#content" type="button" role="tab" aria-selected="true">محتوى الكورس</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link w-100 text-nowrap" id="requirements-tab" data-bs-toggle="tab" data-bs-target="#requirements" type="button" role="tab" aria-selected="false">المتطلبات</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link w-100 text-nowrap" id="instructor-tab" data-bs-toggle="tab" data-bs-target="#instructor" type="button" role="tab" aria-selected="false">المدرب</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link w-100 text-nowrap" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab" aria-selected="false">التقييمات</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Tab Content -->
+                <div class="tab-content" id="courseTabContent">
+                    <!-- Content Tab -->
+                    <div class="tab-pane fade show active section-fade-up" id="content" role="tabpanel" tabindex="0">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h4 class="fw-bold m-0 text-white">منهج الدورة</h4>
+                            <span class="text-secondary small">12 وحدة &bull; 140 درس &bull; 45 ساعة</span>
+                        </div>
+                        
+                        <div class="course-curriculum accordion" id="courseAccordion">
+                            <!-- Module 1 -->
+                            <div class="accordion-item curriculum-module">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <span class="curriculum-module-num">01</span>
+                                        <span class="curriculum-module-title">الوحدة 1: أساسيات HTML5 وبناء الهيكل</span>
+                                        <span class="curriculum-module-meta en-text">3 دروس</span>
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#courseAccordion">
+                                    <div class="accordion-body p-0">
+                                        <ul class="curriculum-lessons">
+                                            <li class="curriculum-lesson">
+                                                <span class="curriculum-lesson-icon is-video"><i class="fas fa-play"></i></span>
+                                                <span class="curriculum-lesson-title">مقدمة في تطوير الويب وكيف يعمل الإنترنت</span>
+                                                <span class="curriculum-lesson-duration en-text">10:45</span>
+                                            </li>
+                                            <li class="curriculum-lesson">
+                                                <span class="curriculum-lesson-icon is-video"><i class="fas fa-play"></i></span>
+                                                <span class="curriculum-lesson-title">كتابة أول كود HTML لك وإعداد بيئة العمل</span>
+                                                <span class="curriculum-lesson-duration en-text">15:20</span>
+                                            </li>
+                                            <li class="curriculum-lesson">
+                                                <span class="curriculum-lesson-icon is-file"><i class="fas fa-file-alt"></i></span>
+                                                <span class="curriculum-lesson-title">تطبيق عملي: بناء هيكل صفحة شخصية</span>
+                                                <span class="curriculum-lesson-duration">مرفق</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Module 2 -->
+                            <div class="accordion-item curriculum-module">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        <span class="curriculum-module-num">02</span>
+                                        <span class="curriculum-module-title">الوحدة 2: تجميل الصفحات باستخدام CSS3</span>
+                                        <span class="curriculum-module-meta en-text">2 دروس</span>
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#courseAccordion">
+                                    <div class="accordion-body p-0">
+                                        <ul class="curriculum-lessons">
+                                            <li class="curriculum-lesson">
+                                                <span class="curriculum-lesson-icon is-video"><i class="fas fa-play"></i></span>
+                                                <span class="curriculum-lesson-title">أساسيات CSS وكيفية ربط الملفات</span>
+                                                <span class="curriculum-lesson-duration en-text">12:30</span>
+                                            </li>
+                                            <li class="curriculum-lesson is-locked">
+                                                <span class="curriculum-lesson-icon is-locked"><i class="fas fa-lock"></i></span>
+                                                <span class="curriculum-lesson-title">نموذج الصندوق والمسافات (Box Model)</span>
+                                                <span class="curriculum-lesson-duration en-text">22:15</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Module 3 -->
+                            <div class="accordion-item curriculum-module">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        <span class="curriculum-module-num">03</span>
+                                        <span class="curriculum-module-title">الوحدة 3: التجاوب مع الشاشات (Responsive Design)</span>
+                                        <span class="curriculum-module-meta"><i class="fas fa-lock"></i></span>
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#courseAccordion">
+                                    <div class="accordion-body curriculum-locked-body">
+                                        <i class="fas fa-lock"></i>
+                                        <p>اشترك في الكورس لعرض محتوى هذه الوحدة بالكامل.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Module 4 -->
+                            <div class="accordion-item curriculum-module">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                        <span class="curriculum-module-num">04</span>
+                                        <span class="curriculum-module-title">الوحدة 4: أساسيات جافاسكربت والتفاعل</span>
+                                        <span class="curriculum-module-meta"><i class="fas fa-lock"></i></span>
+                                    </button>
+                                </h2>
+                                <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#courseAccordion">
+                                    <div class="accordion-body curriculum-locked-body">
+                                        <i class="fas fa-lock"></i>
+                                        <p>اشترك في الكورس لعرض محتوى هذه الوحدة بالكامل.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Requirements Tab -->
+                    <div class="tab-pane fade" id="requirements" role="tabpanel" tabindex="0">
+                        <h4 class="fw-bold text-white mb-4">متطلبات الكورس</h4>
+                        <ul class="list-unstyled text-secondary lh-lg mb-5">
+                            <li class="mb-3 d-flex align-items-start gap-3">
+                                <i class="fas fa-check-circle text-accent mt-1"></i>
+                                <span>لا يشترط وجود أي خبرة مسبقة في البرمجة، سنبدأ من الصفر تماماً.</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-start gap-3">
+                                <i class="fas fa-check-circle text-accent mt-1"></i>
+                                <span>جهاز كمبيوتر (ويندوز، ماك، أو لينكس) متصل بالإنترنت.</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-start gap-3">
+                                <i class="fas fa-check-circle text-accent mt-1"></i>
+                                <span>الرغبة في التعلم وتخصيص وقت للممارسة العملية والتطبيق.</span>
+                            </li>
+                        </ul>
+                        <h4 class="fw-bold text-white mb-4">لمن هذا الكورس؟</h4>
+                        <ul class="list-unstyled text-secondary lh-lg">
+                            <li class="mb-2 d-flex align-items-center gap-3">
+                                <i class="fas fa-caret-left text-accent"></i><span>المبتدئين الذين يرغبون في دخول مجال البرمجة.</span>
+                            </li>
+                            <li class="mb-2 d-flex align-items-center gap-3">
+                                <i class="fas fa-caret-left text-accent"></i><span>مصممي الويب الذين يريدون تطوير مهاراتهم للبرمجة.</span>
+                            </li>
+                            <li class="mb-2 d-flex align-items-center gap-3">
+                                <i class="fas fa-caret-left text-accent"></i><span>المبرمجين الذين دخلوا حديثاً ويريدون تقوية أساسياتهم.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Instructor Tab -->
+                    <div class="tab-pane fade" id="instructor" role="tabpanel" tabindex="0">
+                        <div class="glass-panel p-4 p-md-5">
+                            <div class="row align-items-center mb-4">
+                                <div class="col-auto">
+                                    <div class="rounded-circle overflow-hidden bg-gradient-opacity border border-3 border-accent d-flex align-items-center justify-content-center" style="width: 120px; height: 120px;">
+                                        <i class="fas fa-user-tie fs-1 text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="col mt-3 mt-md-0">
+                                    <h3 class="fw-bold text-white mb-1">م. أحمد سعيد</h3>
+                                    <p class="text-accent mb-3">Senior Front-end Engineer</p>
+                                    <div class="d-flex flex-wrap gap-4 text-secondary small">
+                                        <div class="d-flex align-items-center gap-2"><i class="fas fa-star text-warning"></i> تقييم 4.9 منصة</div>
+                                        <div class="d-flex align-items-center gap-2"><i class="fas fa-comment"></i> 15K مراجعة</div>
+                                        <div class="d-flex align-items-center gap-2"><i class="fas fa-users"></i> 125K طالب</div>
+                                        <div class="d-flex align-items-center gap-2"><i class="fas fa-play-circle"></i> 14 كورس</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-secondary lh-lg mb-4">خبير في هندسة البرمجيات وتطوير واجهات المستخدم بخبرة تزيد عن 10 سنوات في الشركات العالمية. شغوف بالتعليم ونشر المعرفة التقنية باللغة العربية بأسلوب مبسط وعملي.</p>
+                            <div class="d-flex gap-2">
+                                <a href="#" class="btn btn-outline-light rounded-circle" style="width: 40px; height: 40px; padding:0; display:flex; align-items:center; justify-content:center"><i class="fab fa-youtube"></i></a>
+                                <a href="#" class="btn btn-outline-light rounded-circle" style="width: 40px; height: 40px; padding:0; display:flex; align-items:center; justify-content:center"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" class="btn btn-outline-light rounded-circle" style="width: 40px; height: 40px; padding:0; display:flex; align-items:center; justify-content:center"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reviews Tab -->
+                    <div class="tab-pane fade" id="reviews" role="tabpanel" tabindex="0">
+                        <div class="row mb-5 align-items-center">
+                            <div class="col-md-4 text-center mb-4 mb-md-0">
+                                <h1 class="display-1 fw-bold text-accent en-text m-0">4.8</h1>
+                                <div class="text-warning fs-5 my-2 en-text">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <p class="text-secondary m-0">متوسط تقييم الكورس</p>
+                            </div>
+                            <div class="col-md-8">
+                                <!-- Bars -->
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="text-warning en-text" style="width: 80px">5 <i class="fas fa-star small"></i></div>
+                                    <div class="rating-bar"><div class="rating-fill" style="width: 75%"></div></div>
+                                    <div class="text-secondary en-text small" style="width: 30px">75%</div>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="text-warning en-text" style="width: 80px">4 <i class="fas fa-star small"></i></div>
+                                    <div class="rating-bar"><div class="rating-fill" style="width: 15%"></div></div>
+                                    <div class="text-secondary en-text small" style="width: 30px">15%</div>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="text-warning en-text" style="width: 80px">3 <i class="fas fa-star small"></i></div>
+                                    <div class="rating-bar"><div class="rating-fill" style="width: 7%"></div></div>
+                                    <div class="text-secondary en-text small" style="width: 30px">7%</div>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="text-warning en-text" style="width: 80px">2 <i class="fas fa-star small"></i></div>
+                                    <div class="rating-bar"><div class="rating-fill" style="width: 2%"></div></div>
+                                    <div class="text-secondary en-text small" style="width: 30px">2%</div>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <div class="text-warning en-text" style="width: 80px">1 <i class="fas fa-star small"></i></div>
+                                    <div class="rating-bar"><div class="rating-fill" style="width: 1%"></div></div>
+                                    <div class="text-secondary en-text small" style="width: 30px">1%</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="border-secondary border-opacity-25 mb-4">
+                        
+                        <!-- Review Item -->
+                        <div class="d-flex gap-3 mb-4 section-fade-up">
+                            <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center flex-shrink-0" style="width: 50px; height: 50px;">
+                                <span class="text-white fw-bold en-text">SM</span>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold text-white m-0 mb-1">سارة مطر</h6>
+                                <div class="d-flex align-items-center gap-3 mb-2">
+                                    <div class="text-warning small en-text"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                    <span class="text-secondary small en-text">أمس</span>
+                                </div>
+                                <p class="text-secondary">كورس رائع جداً وشرح المهندس أحمد لا يعلى عليه. التطبيق العملي بعد كل درس يثبت المعلومة بقوة.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Review Item -->
+                        <div class="d-flex gap-3 mb-4 section-fade-up">
+                            <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center flex-shrink-0" style="width: 50px; height: 50px;">
+                                <span class="text-white fw-bold en-text">OM</span>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold text-white m-0 mb-1">عمر محمد</h6>
+                                <div class="d-flex align-items-center gap-3 mb-2">
+                                    <div class="text-warning small en-text"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
+                                    <span class="text-secondary small en-text">منذ أسبوع</span>
+                                </div>
+                                <p class="text-secondary">محتوى دسم وغني، ولكن يحتاج إلى المزيد من التمارين العملية السريعة أثناء الدرس. غير ذلك، كورس احترافي جداً.</p>
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <button class="btn btn-outline-light rounded-pill px-4">عرض المزيد</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Left Column: Sticky Purchase Card -->
+            <div class="col-lg-4">
+                <aside class="course-purchase-card position-sticky section-fade-up">
+                    <div class="course-purchase-preview">
+                        <div class="course-purchase-preview-bg">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <button type="button" class="course-purchase-play" aria-label="معاينة الكورس">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <span class="course-purchase-preview-label">معاينة مجانية</span>
+                    </div>
+
+                    <div class="course-purchase-body">
+                        <div class="course-purchase-pricing">
+                            <div class="course-purchase-prices">
+                                <span class="course-purchase-price en-text" id="detail-new-price">$49</span>
+                                <span class="course-purchase-old en-text" id="detail-old-price">$199</span>
+                            </div>
+                            <span class="course-purchase-discount">خصم 75%</span>
+                        </div>
+
+                        <p class="course-purchase-urgency"><i class="fas fa-stopwatch"></i> العرض ينتهي خلال 2 أيام!</p>
+
+                        <div class="course-purchase-actions">
+                            <button type="button" class="course-purchase-btn-primary" onclick='addToCart({id:1, title:"الدورة الشاملة في تطوير واجهات الويب المحترفة", category:"programming", instructor:"م. أحمد سعيد", newPrice:49, oldPrice:199, imgIcon:"fa-laptop-code"})'>
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                            <a href="checkout.html" class="course-purchase-btn-secondary">اشترِ الآن</a>
+                        </div>
+
+                        <p class="course-purchase-guarantee"><i class="fas fa-shield-alt"></i> ضمان استرداد الأموال خلال 30 يوماً</p>
+
+                        <h3 class="course-purchase-includes-title">هذا الكورس يتضمن:</h3>
+                        <ul class="course-purchase-includes">
+                            <li><i class="fas fa-video"></i> 45 ساعة من الفيديو حسب الطلب</li>
+                            <li><i class="fas fa-file-download"></i> 25 مصدر قابل للتنزيل</li>
+                            <li><i class="fas fa-infinity"></i> وصول مدى الحياة</li>
+                            <li><i class="fas fa-mobile-alt"></i> الوصول من الجوال والكمبيوتر</li>
+                            <li><i class="fas fa-certificate"></i> شهادة إتمام معتمدة</li>
+                        </ul>
+
+                        <div class="course-purchase-share">
+                            <a href="#"><i class="fas fa-share-alt"></i> مشاركة الكورس</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+        
+        <!-- Related Courses -->
+        <section class="course-detail-related section-fade-up">
+            <div class="course-detail-related-header">
+                <div>
+                    <span class="course-detail-related-eyebrow">اقتراحات لك</span>
+                    <h3 class="course-detail-related-title">كورسات قد تعجبك أيضاً</h3>
+                </div>
+                <a href="courses.html" class="course-detail-related-link">عرض كل الكورسات <i class="fas fa-arrow-left"></i></a>
+            </div>
+            <div class="row g-4" id="related-courses-container"></div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <!-- Decorative top wave -->
+        <div class="footer-wave">
+            <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0,40 C360,90 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,80 L0,80 Z" fill="currentColor"/>
+            </svg>
+        </div>
+
+        <!-- CTA Band -->
+        <div class="footer-cta-band">
+            <div class="container">
+                <div class="footer-cta-inner">
+                    <div class="footer-cta-text">
+                        <span class="footer-cta-label"><i class="fas fa-crown me-2"></i>تجربة تعليمية استثنائية</span>
+                        <h3 class="footer-cta-title">ابدأ رحلتك نحو <span>التميز المهني</span> اليوم</h3>
+                        <p class="footer-cta-desc">انضم لأكثر من 100,000 متعلم واكتشف عالماً من المعرفة بانتظارك</p>
+                    </div>
+                    <div class="footer-cta-actions">
+                        <a href="courses.html" class="btn footer-cta-btn-primary">استكشف الكورسات <i class="fas fa-arrow-left"></i></a>
+                        <a href="register.html" class="btn footer-cta-btn-outline">إنشاء حساب مجاني</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Footer Body -->
+        <div class="footer-main">
+            <div class="footer-glow footer-glow-1"></div>
+            <div class="footer-glow footer-glow-2"></div>
+            <div class="container position-relative">
+                <div class="row g-5 footer-grid">
+
+                    <!-- Brand -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-brand">
+                            <a href="index.html" class="footer-logo">
+                                <span class="footer-logo-icon"><i class="fas fa-graduation-cap"></i></span>
+                                <span class="footer-logo-text">إديو<span>ماتيك</span></span>
+                            </a>
+                            <p class="footer-brand-desc">
+                                منصة تعليمية عربية رائدة تقدّم تجربة تعلم فاخرة بمحتوى عالي الجودة، مدربين نخبة، وشهادات معتمدة — لتمكين الجيل القادم من قادة التكنولوجيا والإبداع.
+                            </p>
+                            <div class="footer-trust-badges">
+                                <div class="footer-trust-item">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>دفع آمن</span>
+                                </div>
+                                <div class="footer-trust-item">
+                                    <i class="fas fa-certificate"></i>
+                                    <span>شهادات معتمدة</span>
+                                </div>
+                                <div class="footer-trust-item">
+                                    <i class="fas fa-headset"></i>
+                                    <span>دعم 24/7</span>
+                                </div>
+                            </div>
+                            <div class="footer-social">
+                                <a href="#" class="footer-social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="footer-social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="footer-social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="footer-social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" class="footer-social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Explore -->
+                    <div class="col-6 col-lg-2 col-md-3">
+                        <h6 class="footer-heading">استكشف</h6>
+                        <ul class="footer-links">
+                            <li><a href="courses.html"><i class="fas fa-chevron-left"></i> جميع الكورسات</a></li>
+                            <li><a href="categories.html"><i class="fas fa-chevron-left"></i> التصنيفات</a></li>
+                            <li><a href="blog.html"><i class="fas fa-chevron-left"></i> المدونة</a></li>
+                            <li><a href="who-we-are.html"><i class="fas fa-chevron-left"></i> فريق الخبراء</a></li>
+                            <li><a href="cart.html"><i class="fas fa-chevron-left"></i> سلة التسوق</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Company -->
+                    <div class="col-6 col-lg-2 col-md-3">
+                        <h6 class="footer-heading">المنصة</h6>
+                        <ul class="footer-links">
+                            <li><a href="about.html"><i class="fas fa-chevron-left"></i> حول إديوماتيك</a></li>
+                            <li><a href="who-we-are.html"><i class="fas fa-chevron-left"></i> من نحن</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-left"></i> انضم كمدرب</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-left"></i> الشركاء</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-left"></i> الوظائف</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Support -->
+                    <div class="col-6 col-lg-2 col-md-3">
+                        <h6 class="footer-heading">الدعم</h6>
+                        <ul class="footer-links">
+                            <li><a href="#"><i class="fas fa-chevron-left"></i> مركز المساعدة</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-left"></i> الأسئلة الشائعة</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-left"></i> سياسة الخصوصية</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-left"></i> الشروط والأحكام</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-left"></i> سياسة الاسترداد</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Contact & Newsletter -->
+                    <div class="col-lg-2 col-md-6">
+                        <h6 class="footer-heading">تواصل معنا</h6>
+                        <ul class="footer-contact">
+                            <li>
+                                <span class="footer-contact-icon"><i class="fas fa-envelope"></i></span>
+                                <div>
+                                    <small>البريد الإلكتروني</small>
+                                    <a href="mailto:info@edumatic.com">info@edumatic.com</a>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="footer-contact-icon"><i class="fas fa-phone-alt"></i></span>
+                                <div>
+                                    <small>الهاتف</small>
+                                    <a href="tel:+971501234567" class="en-text" dir="ltr">+971 50 123 4567</a>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="footer-contact-icon"><i class="fas fa-map-marker-alt"></i></span>
+                                <div>
+                                    <small>المقر</small>
+                                    <span>دبي، الإمارات العربية</span>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="footer-newsletter">
+                            <p class="footer-newsletter-label">النشرة البريدية</p>
+                            <form class="footer-newsletter-form">
+                                <input type="email" placeholder="بريدك الإلكتروني" required>
+                                <button type="submit" aria-label="اشتراك"><i class="fas fa-paper-plane"></i></button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Stats Strip -->
+                <div class="footer-stats">
+                    <div class="footer-stat">
+                        <strong class="en-text">500+</strong>
+                        <span>كورس متاح</span>
+                    </div>
+                    <div class="footer-stat-divider"></div>
+                    <div class="footer-stat">
+                        <strong class="en-text">100K+</strong>
+                        <span>طالب مسجل</span>
+                    </div>
+                    <div class="footer-stat-divider"></div>
+                    <div class="footer-stat">
+                        <strong class="en-text">150+</strong>
+                        <span>مدرب خبير</span>
+                    </div>
+                    <div class="footer-stat-divider"></div>
+                    <div class="footer-stat">
+                        <strong class="en-text">4.9</strong>
+                        <span>تقييم المتعلمين</span>
+                    </div>
+                    <div class="footer-stat-divider"></div>
+                    <div class="footer-stat">
+                        <strong class="en-text">15K+</strong>
+                        <span>ساعة محتوى</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-inner">
+                    <p class="footer-copyright">&copy; 2026 <strong>إديوماتيك</strong>. جميع الحقوق محفوظة.</p>
+                    <div class="footer-payments">
+                        <span class="footer-payments-label">طرق الدفع:</span>
+                        <div class="footer-payment-icons">
+                            <span title="Visa"><i class="fab fa-cc-visa"></i></span>
+                            <span title="Mastercard"><i class="fab fa-cc-mastercard"></i></span>
+                            <span title="PayPal"><i class="fab fa-cc-paypal"></i></span>
+                            <span title="Apple Pay"><i class="fab fa-cc-apple-pay"></i></span>
+                        </div>
+                    </div>
+                    <div class="footer-legal">
+                        <a href="#">الخصوصية</a>
+                        <span class="footer-legal-sep">|</span>
+                        <a href="#">الشروط</a>
+                        <span class="footer-legal-sep">|</span>
+                        <a href="#">ملفات تعريف الارتباط</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

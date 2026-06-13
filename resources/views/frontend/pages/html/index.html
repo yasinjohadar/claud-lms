@@ -1,0 +1,1204 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة التعليم الإلكتروني</title>
+    <!-- Bootstrap 5 RTL CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <!-- Google Fonts: Cairo + Alexandria -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;600;700;800&family=Cairo:wght@300;400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Top Contact Bar -->
+    <div class="top-bar d-none d-md-block">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="d-flex gap-4 align-items-center">
+                <span class="top-bar-item"><i class="fas fa-envelope me-2"></i>info@edumatic.com</span>
+                <span class="top-bar-item"><i class="fas fa-phone me-2"></i>+971 50 123 4567</span>
+            </div>
+            <div class="d-flex gap-2 align-items-center">
+                <a href="#" class="top-bar-social"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="top-bar-social"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="top-bar-social"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="top-bar-social"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="top-bar-social"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navbar -->
+    <nav class="navbar navbar-expand-xl main-nav site-navbar" id="siteNavbar">
+        <div class="container site-navbar-container">
+            <a class="navbar-brand site-brand" href="index.html">
+                <span class="site-brand-mark"><i class="fas fa-graduation-cap"></i></span>
+                <span class="site-brand-name">إدي<span>وماتيك</span></span>
+            </a>
+
+            <div class="site-nav-mobile-tools d-xl-none">
+                <button type="button" class="site-nav-icon-btn site-nav-search-toggle" aria-label="فتح البحث" data-bs-toggle="collapse" data-bs-target="#navSearchMobile">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="navbar-toggler site-nav-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="فتح القائمة">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse site-nav-collapse" id="mainNav">
+                <ul class="navbar-nav site-nav-menu">
+                    <li class="nav-item"><a class="nav-link" href="index.html" data-nav="index.html">الرئيسية</a></li>
+                    <li class="nav-item"><a class="nav-link" href="courses.html" data-nav="courses.html">الكورسات</a></li>
+                    <li class="nav-item"><a class="nav-link" href="categories.html" data-nav="categories.html">التصنيفات</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html" data-nav="blog.html">المدونة</a></li>
+                    <li class="nav-item"><a class="nav-link" href="who-we-are.html" data-nav="who-we-are.html">من نحن</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html" data-nav="about.html">حول</a></li>
+                </ul>
+
+                <div class="site-nav-search-wrap collapse d-xl-flex" id="navSearchMobile">
+                    <form class="site-search-form" role="search">
+                        <div class="site-search-box" id="siteSearchBox">
+                            <span class="site-search-glow" aria-hidden="true"></span>
+                            <span class="site-search-ring" aria-hidden="true"></span>
+                            <i class="fas fa-search site-search-icon" aria-hidden="true"></i>
+                            <input type="search" class="site-search-input" id="nav-search-input" placeholder="ابحث عن كورس، مدرب، أو مهارة..." autocomplete="off" aria-label="بحث في المنصة">
+                            <kbd class="site-search-kbd d-none d-lg-inline-flex" aria-hidden="true">Ctrl+K</kbd>
+                            <button type="submit" class="site-search-submit" aria-label="بحث">
+                                <i class="fas fa-arrow-left"></i>
+                            </button>
+                        </div>
+                        <div class="site-search-results" id="nav-search-results" hidden></div>
+                    </form>
+                </div>
+
+                <div class="site-nav-actions">
+                    <button class="site-nav-icon-btn theme-toggle" type="button" aria-label="تبديل الوضع الليلي">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    <a href="cart.html" class="site-nav-icon-btn site-nav-cart" aria-label="سلة التسوق">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-badge">0</span>
+                    </a>
+                    <a href="login.html" class="site-nav-cta">
+                        <i class="fas fa-user"></i>
+                        <span>تسجيل الدخول</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+<!-- Main Body -->
+    <div id="toast-container"></div>
+    <main class="home-main">
+        <!-- Hero Section — Swiper Slider -->
+        <section class="hero-section position-relative">
+            <div class="swiper hero-swiper">
+                <div class="swiper-wrapper">
+
+                    <!-- Slide 1: Main -->
+                    <div class="swiper-slide hero-slide hero-slide-main" style="--slide-accent: #059669; --slide-accent-2: #7c3aed;">
+                        <div class="hero-slide-bg"></div>
+                        <div class="hero-bg-shapes">
+                            <div class="shape shape-1"></div>
+                            <div class="shape shape-2"></div>
+                            <div class="shape shape-3"></div>
+                        </div>
+                        <div class="container hero-slide-inner">
+                            <div class="row align-items-center gy-5 min-vh-hero">
+                                <div class="col-lg-6 text-center text-lg-start hero-content">
+                                    <span class="hero-badge"><i class="fas fa-bolt me-2"></i>المنصة الأولى عربياً للتعليم التفاعلي</span>
+                                    <h1 class="hero-title display-3 fw-bolder mb-4 lh-base typing-container">
+                                        إبدأ رحلتك في <br>
+                                        <span class="hero-accent-text typing-text" data-text='["البرمجة والتطوير", "التصميم الجرافيكي", "التسويق الرقمي", "الذكاء الاصطناعي"]'></span><span class="typing-cursor">|</span>
+                                    </h1>
+                                    <p class="hero-desc lead mb-4 pe-lg-5">
+                                        طور مهاراتك مع أفضل المدربين العرب وانضم لأكثر من 100,000 طالب في مجالات التكنولوجيا والإبداع.
+                                    </p>
+                                    <div class="hero-actions d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
+                                        <a href="courses.html" class="btn btn-hero-primary"><span>تصفح الكورسات</span> <i class="fas fa-arrow-left"></i></a>
+                                        <a href="about.html" class="btn btn-hero-glass"><span>اكتشف المزيد</span> <i class="fas fa-play-circle"></i></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 hero-visual d-none d-lg-block">
+                                    <div class="hero-visual-card">
+                                        <div class="hero-visual-main">
+                                            <i class="fas fa-laptop-code"></i>
+                                        </div>
+                                        <div class="hero-float-card hero-float-top">
+                                            <i class="fas fa-star text-warning"></i>
+                                            <div>
+                                                <strong class="en-text">4.9/5</strong>
+                                                <small>تقييم المتعلمين</small>
+                                            </div>
+                                        </div>
+                                        <div class="hero-float-card hero-float-bottom">
+                                            <div class="hero-float-icon"><i class="fas fa-user-graduate"></i></div>
+                                            <div>
+                                                <strong class="counter en-text" data-target="100000">0</strong>
+                                                <small>طالب مسجل</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2: Programming -->
+                    <div class="swiper-slide hero-slide hero-slide-code" style="--slide-accent: #14b8a6; --slide-accent-2: #059669;">
+                        <div class="hero-slide-bg"></div>
+                        <div class="hero-bg-shapes">
+                            <div class="shape shape-1"></div>
+                            <div class="shape shape-2"></div>
+                        </div>
+                        <div class="container hero-slide-inner">
+                            <div class="row align-items-center gy-5 min-vh-hero">
+                                <div class="col-lg-6 text-center text-lg-start hero-content">
+                                    <span class="hero-badge"><i class="fas fa-code me-2"></i>مسار البرمجة</span>
+                                    <h1 class="hero-title display-3 fw-bolder mb-4 lh-base">
+                                        أتقن <span class="hero-accent-text">البرمجة والتطوير</span> من الصفر
+                                    </h1>
+                                    <p class="hero-desc lead mb-4 pe-lg-5">
+                                        HTML, CSS, JavaScript, React وغيرها — كورسات عملية مع مشاريع حقيقية تجهّزك لسوق العمل.
+                                    </p>
+                                    <div class="hero-actions d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
+                                        <a href="categories.html#programming" class="btn btn-hero-primary"><span>ابدأ التعلم</span> <i class="fas fa-arrow-left"></i></a>
+                                        <a href="courses.html" class="btn btn-hero-glass"><span>500+ كورس</span> <i class="fas fa-book-open"></i></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 hero-visual d-none d-lg-block">
+                                    <div class="hero-visual-card hero-visual-code">
+                                        <div class="hero-code-window">
+                                            <div class="hero-code-bar"><span></span><span></span><span></span></div>
+                                            <pre class="hero-code-body"><code><span class="c-keyword">const</span> developer = {
+  skills: [<span class="c-string">'React'</span>, <span class="c-string">'Node.js'</span>],
+  ready: <span class="c-bool">true</span>
+};</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3: Design -->
+                    <div class="swiper-slide hero-slide hero-slide-design" style="--slide-accent: #ec4899; --slide-accent-2: #8b5cf6;">
+                        <div class="hero-slide-bg"></div>
+                        <div class="hero-bg-shapes">
+                            <div class="shape shape-1"></div>
+                            <div class="shape shape-2"></div>
+                        </div>
+                        <div class="container hero-slide-inner">
+                            <div class="row align-items-center gy-5 min-vh-hero">
+                                <div class="col-lg-6 text-center text-lg-start hero-content">
+                                    <span class="hero-badge"><i class="fas fa-paint-brush me-2"></i>مسار التصميم</span>
+                                    <h1 class="hero-title display-3 fw-bolder mb-4 lh-base">
+                                        اصنع <span class="hero-accent-text">تصاميم تلهم</span> العالم
+                                    </h1>
+                                    <p class="hero-desc lead mb-4 pe-lg-5">
+                                        UI/UX، Figma، وAdobe — تعلّم من مصممين محترفين وابنِ portfolio يفتح لك الأبواب.
+                                    </p>
+                                    <div class="hero-actions d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
+                                        <a href="categories.html#design" class="btn btn-hero-primary"><span>استكشف التصميم</span> <i class="fas fa-arrow-left"></i></a>
+                                        <a href="courses.html" class="btn btn-hero-glass"><span>150+ مدرب</span> <i class="fas fa-palette"></i></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 hero-visual d-none d-lg-block">
+                                    <div class="hero-visual-card hero-visual-design">
+                                        <div class="hero-design-orbit">
+                                            <div class="hero-orbit-ring"></div>
+                                            <div class="hero-orbit-icon hero-orbit-1"><i class="fab fa-figma"></i></div>
+                                            <div class="hero-orbit-icon hero-orbit-2"><i class="fas fa-pen-nib"></i></div>
+                                            <div class="hero-orbit-icon hero-orbit-3"><i class="fas fa-mobile-alt"></i></div>
+                                            <div class="hero-orbit-center"><i class="fas fa-paint-brush"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 4: AI -->
+                    <div class="swiper-slide hero-slide hero-slide-ai" style="--slide-accent: #10b981; --slide-accent-2: #06b6d4;">
+                        <div class="hero-slide-bg"></div>
+                        <div class="hero-bg-shapes">
+                            <div class="shape shape-1"></div>
+                            <div class="shape shape-2"></div>
+                        </div>
+                        <div class="container hero-slide-inner">
+                            <div class="row align-items-center gy-5 min-vh-hero">
+                                <div class="col-lg-6 text-center text-lg-start hero-content">
+                                    <span class="hero-badge"><i class="fas fa-robot me-2"></i>مسار الذكاء الاصطناعي</span>
+                                    <h1 class="hero-title display-3 fw-bolder mb-4 lh-base">
+                                        مستقبلك يبدأ بـ <span class="hero-accent-text">الذكاء الاصطناعي</span>
+                                    </h1>
+                                    <p class="hero-desc lead mb-4 pe-lg-5">
+                                        Machine Learning، ChatGPT، وبناء النماذج التوليدية — كن جزءاً من ثورة التكنولوجيا.
+                                    </p>
+                                    <div class="hero-actions d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
+                                        <a href="categories.html#ai" class="btn btn-hero-primary"><span>اكتشف AI</span> <i class="fas fa-arrow-left"></i></a>
+                                        <a href="register.html" class="btn btn-hero-glass"><span>سجّل مجاناً</span> <i class="fas fa-user-plus"></i></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 hero-visual d-none d-lg-block">
+                                    <div class="hero-visual-card hero-visual-ai">
+                                        <div class="hero-ai-core">
+                                            <div class="hero-ai-ring hero-ai-ring-1"></div>
+                                            <div class="hero-ai-ring hero-ai-ring-2"></div>
+                                            <div class="hero-ai-ring hero-ai-ring-3"></div>
+                                            <div class="hero-ai-icon"><i class="fas fa-brain"></i></div>
+                                        </div>
+                                        <div class="hero-ai-tags">
+                                            <span>ML</span><span>GPT</span><span>Python</span><span>Data</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Navigation & Pagination -->
+                <div class="hero-swiper-nav">
+                    <button class="hero-nav-btn hero-prev" aria-label="الشريحة السابقة">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="swiper-pagination hero-pagination"></div>
+                    <button class="hero-nav-btn hero-next" aria-label="الشريحة التالية">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                </div>
+
+                <!-- Autoplay Progress -->
+                <div class="hero-autoplay-progress"><span class="hero-progress-fill"></span></div>
+            </div>
+        </section>
+
+        <div class="home-hero-bridge" aria-hidden="true"></div>
+
+        <!-- Stats Section -->
+        <section class="stats-section home-zone home-zone--alt section-fade-up">
+            <div class="container">
+                <div class="row g-3 g-md-4 stats-row">
+                    <div class="col-6 col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-card-icon"><i class="fas fa-book-open"></i></div>
+                            <h2 class="stat-card-number counter en-text" data-target="500">0</h2>
+                            <p class="stat-card-label">كورس متاح</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-card-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                            <h2 class="stat-card-number counter en-text" data-target="150">0</h2>
+                            <p class="stat-card-label">مدرب خبير</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-card-icon"><i class="fas fa-certificate"></i></div>
+                            <h2 class="stat-card-number counter en-text" data-target="85000">0</h2>
+                            <p class="stat-card-label">شهادة معتمدة</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-card-icon"><i class="fas fa-video"></i></div>
+                            <h2 class="stat-card-number counter en-text" data-target="15000">0</h2>
+                            <p class="stat-card-label">ساعة فيديو</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Categories -->
+        <section class="categories-section home-zone home-zone--base section-fade-up">
+            <div class="container">
+                <div class="categories-header">
+                    <div class="categories-header-text">
+                        <span class="categories-eyebrow">أبرز المجالات</span>
+                        <h2 class="categories-title">استكشف التصنيفات</h2>
+                        <p class="categories-subtitle">اختر مجالك وابدأ التعلم مع أفضل الكورسات العربية</p>
+                    </div>
+                    <a href="categories.html" class="btn categories-view-all d-none d-md-inline-flex">
+                        عرض الكل <i class="fas fa-arrow-left ms-2"></i>
+                    </a>
+                </div>
+
+                <div class="row g-3 g-md-4 categories-grid">
+                    <div class="col-6 col-md-4 col-lg-2">
+                        <a href="categories.html#programming" class="category-item" style="--cat-color: #059669;">
+                            <span class="category-item-icon"><i class="fas fa-code"></i></span>
+                            <span class="category-item-title">البرمجة</span>
+                            <span class="category-item-meta">120+ كورس</span>
+                            <span class="category-item-arrow"><i class="fas fa-arrow-left"></i></span>
+                        </a>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-2">
+                        <a href="categories.html#design" class="category-item" style="--cat-color: #ec4899;">
+                            <span class="category-item-icon"><i class="fas fa-paint-brush"></i></span>
+                            <span class="category-item-title">التصميم</span>
+                            <span class="category-item-meta">85+ كورس</span>
+                            <span class="category-item-arrow"><i class="fas fa-arrow-left"></i></span>
+                        </a>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-2">
+                        <a href="categories.html#marketing" class="category-item" style="--cat-color: #f59e0b;">
+                            <span class="category-item-icon"><i class="fas fa-bullhorn"></i></span>
+                            <span class="category-item-title">التسويق</span>
+                            <span class="category-item-meta">60+ كورس</span>
+                            <span class="category-item-arrow"><i class="fas fa-arrow-left"></i></span>
+                        </a>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-2">
+                        <a href="categories.html#languages" class="category-item" style="--cat-color: #10b981;">
+                            <span class="category-item-icon"><i class="fas fa-language"></i></span>
+                            <span class="category-item-title">اللغات</span>
+                            <span class="category-item-meta">45+ كورس</span>
+                            <span class="category-item-arrow"><i class="fas fa-arrow-left"></i></span>
+                        </a>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-2">
+                        <a href="categories.html#business" class="category-item" style="--cat-color: #8b5cf6;">
+                            <span class="category-item-icon"><i class="fas fa-briefcase"></i></span>
+                            <span class="category-item-title">الأعمال</span>
+                            <span class="category-item-meta">70+ كورس</span>
+                            <span class="category-item-arrow"><i class="fas fa-arrow-left"></i></span>
+                        </a>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-2">
+                        <a href="categories.html#ai" class="category-item" style="--cat-color: #06b6d4;">
+                            <span class="category-item-icon"><i class="fas fa-robot"></i></span>
+                            <span class="category-item-title">الذكاء الاصطناعي</span>
+                            <span class="category-item-meta">35+ كورس</span>
+                            <span class="category-item-arrow"><i class="fas fa-arrow-left"></i></span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4 d-md-none">
+                    <a href="categories.html" class="btn categories-view-all">
+                        عرض الكل <i class="fas fa-arrow-left ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Popular Courses -->
+        <section class="courses-section home-zone home-zone--alt section-fade-up">
+            <div class="container">
+                <div class="courses-header">
+                    <div class="courses-header-text">
+                        <span class="courses-eyebrow">تعلم الآن</span>
+                        <h2 class="courses-title">الكورسات الأكثر مبيعاً</h2>
+                        <p class="courses-subtitle">اختر من بين أفضل الكورسات التي يثق بها آلاف المتعلمين</p>
+                    </div>
+                    <a href="courses.html" class="btn courses-view-all d-none d-md-inline-flex">
+                        جميع الكورسات <i class="fas fa-arrow-left ms-2"></i>
+                    </a>
+                </div>
+
+                <div class="row g-4" id="home-courses-container">
+                    <!-- Populated by JS -->
+                </div>
+
+                <div class="text-center mt-4 d-md-none">
+                    <a href="courses.html" class="btn courses-view-all">
+                        جميع الكورسات <i class="fas fa-arrow-left ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Courses Slider -->
+        <section class="courses-slider-section home-zone home-zone--base section-fade-up">
+            <div class="container">
+                <div class="courses-header">
+                    <div class="courses-header-text">
+                        <span class="courses-eyebrow">اكتشف المزيد</span>
+                        <h2 class="courses-title">كورسات مختارة لك</h2>
+                        <p class="courses-subtitle">مرّر واستكشف مجموعة واسعة من الكورسات في مختلف المجالات</p>
+                    </div>
+                    <a href="courses.html" class="btn courses-view-all d-none d-md-inline-flex">
+                        جميع الكورسات <i class="fas fa-arrow-left ms-2"></i>
+                    </a>
+                </div>
+
+                <div class="courses-swiper-wrap">
+                    <button class="courses-swiper-btn courses-swiper-prev" aria-label="السابق">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="swiper courses-swiper">
+                        <div class="swiper-wrapper" id="home-courses-slider-wrapper">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                    <button class="courses-swiper-btn courses-swiper-next" aria-label="التالي">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                </div>
+                <div class="swiper-pagination courses-swiper-pagination"></div>
+            </div>
+        </section>
+
+        <!-- Why Us / Features -->
+        <section class="features-section home-zone home-zone--alt section-fade-up">
+            <div class="container">
+                <div class="features-header text-center">
+                    <span class="features-eyebrow">مميزاتنا</span>
+                    <h2 class="features-title">لماذا تختار إديوماتيك؟</h2>
+                    <p class="features-subtitle mx-auto">منصة تعليمية متكاملة تجمع بين الجودة والمرونة لتمنحك تجربة تعلم استثنائية</p>
+                </div>
+
+                <div class="row g-4 features-grid">
+                    <div class="col-md-6 col-lg-3">
+                        <article class="feature-card" style="--feature-color: #059669;">
+                            <span class="feature-card-number">01</span>
+                            <span class="feature-card-icon"><i class="fas fa-chalkboard-teacher"></i></span>
+                            <h3 class="feature-card-title">نخبة المدربين</h3>
+                            <p class="feature-card-desc">تعلم من خبراء الصناعة الذين يمتلكون سنوات من الخبرة العملية المتراكمة.</p>
+                            <span class="feature-card-accent" aria-hidden="true"></span>
+                        </article>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <article class="feature-card" style="--feature-color: #0891b2;">
+                            <span class="feature-card-number">02</span>
+                            <span class="feature-card-icon"><i class="fas fa-clock"></i></span>
+                            <h3 class="feature-card-title">وصول مدى الحياة</h3>
+                            <p class="feature-card-desc">تعلم بالسرعة التي تناسبك وفي الوقت الذي تريده، بدون أي قيود زمنية.</p>
+                            <span class="feature-card-accent" aria-hidden="true"></span>
+                        </article>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <article class="feature-card" style="--feature-color: #7c3aed;">
+                            <span class="feature-card-number">03</span>
+                            <span class="feature-card-icon"><i class="fas fa-certificate"></i></span>
+                            <h3 class="feature-card-title">شهادات معتمدة</h3>
+                            <p class="feature-card-desc">احصل على شهادات موثقة عند إتمامك للكورس لتعزيز سيرتك الذاتية في سوق العمل.</p>
+                            <span class="feature-card-accent" aria-hidden="true"></span>
+                        </article>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <article class="feature-card" style="--feature-color: #059669;">
+                            <span class="feature-card-number">04</span>
+                            <span class="feature-card-icon"><i class="fas fa-mobile-alt"></i></span>
+                            <h3 class="feature-card-title">تعلم من أي مكان</h3>
+                            <p class="feature-card-desc">منصتنا متوافقة مع كل الأجهزة لتستمر في التعلم سواء كنت في المنزل أو خارجه.</p>
+                            <span class="feature-card-accent" aria-hidden="true"></span>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Slider Section -->
+        <section class="team-section home-zone home-zone--base section-fade-up">
+            <div class="container">
+                <div class="team-header text-center">
+                    <span class="team-eyebrow">شركاء النجاح</span>
+                    <h2 class="team-title">فريق الخبراء</h2>
+                    <p class="team-subtitle mx-auto">مجموعة من أفضل المدربين في الوطن العربي، يجمعهم شغف نقل خبراتهم العملية.</p>
+                </div>
+
+                <div class="team-swiper-wrap">
+                    <button class="team-swiper-btn team-swiper-prev" aria-label="السابق">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+
+                    <div class="swiper team-swiper">
+                        <div class="swiper-wrapper">
+
+                            <div class="swiper-slide">
+                                <article class="team-card" style="--team-color: #059669;">
+                                    <div class="team-card-avatar">
+                                        <span class="team-card-avatar-inner"><i class="fas fa-user-tie"></i></span>
+                                    </div>
+                                    <h3 class="team-card-name">م. أحمد سعيد</h3>
+                                    <p class="team-card-role en-text">Senior Front-end Engineer</p>
+                                    <div class="team-card-rating en-text" aria-label="تقييم 4.9 من 5">
+                                        <span class="team-rating-stars">
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                        </span>
+                                        <span class="team-rating-value">4.9</span>
+                                    </div>
+                                    <p class="team-card-bio">خبير في بناء وتطوير واجهات الويب الحديثة بأحدث التقنيات.</p>
+                                    <div class="team-card-social">
+                                        <a href="#" class="team-social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                        <a href="#" class="team-social-btn" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                                    </div>
+                                </article>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <article class="team-card" style="--team-color: #ec4899;">
+                                    <div class="team-card-avatar">
+                                        <span class="team-card-avatar-inner"><i class="fas fa-paint-brush"></i></span>
+                                    </div>
+                                    <h3 class="team-card-name">سارة محمد</h3>
+                                    <p class="team-card-role en-text">UX/UI Designer</p>
+                                    <div class="team-card-rating en-text" aria-label="تقييم 4.8 من 5">
+                                        <span class="team-rating-stars">
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                        </span>
+                                        <span class="team-rating-value">4.8</span>
+                                    </div>
+                                    <p class="team-card-bio">متخصصة في تصميم تجربة المستخدم وواجهات الجوال الحديثة.</p>
+                                    <div class="team-card-social">
+                                        <a href="#" class="team-social-btn" aria-label="Behance"><i class="fab fa-behance"></i></a>
+                                        <a href="#" class="team-social-btn" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
+                                    </div>
+                                </article>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <article class="team-card" style="--team-color: #7c3aed;">
+                                    <div class="team-card-avatar">
+                                        <span class="team-card-avatar-inner"><i class="fas fa-robot"></i></span>
+                                    </div>
+                                    <h3 class="team-card-name">عمر مصطفى</h3>
+                                    <p class="team-card-role en-text">Machine Learning Engineer</p>
+                                    <div class="team-card-rating en-text" aria-label="تقييم 4.9 من 5">
+                                        <span class="team-rating-stars">
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                        </span>
+                                        <span class="team-rating-value">4.9</span>
+                                    </div>
+                                    <p class="team-card-bio">شغوف بعلوم البيانات والذكاء الاصطناعي وبناء نماذج توليدية متقدمة.</p>
+                                    <div class="team-card-social">
+                                        <a href="#" class="team-social-btn" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                                        <a href="#" class="team-social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                </article>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <article class="team-card" style="--team-color: #f59e0b;">
+                                    <div class="team-card-avatar">
+                                        <span class="team-card-avatar-inner"><i class="fas fa-chart-pie"></i></span>
+                                    </div>
+                                    <h3 class="team-card-name">طارق زياد</h3>
+                                    <p class="team-card-role en-text">Digital Marketing Expert</p>
+                                    <div class="team-card-rating en-text" aria-label="تقييم 4.5 من 5">
+                                        <span class="team-rating-stars">
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                        </span>
+                                        <span class="team-rating-value">4.5</span>
+                                    </div>
+                                    <p class="team-card-bio">خبير في التسويق الرقمي وإدارة الحملات الإعلانية لتحقيق أعلى عائد.</p>
+                                    <div class="team-card-social">
+                                        <a href="#" class="team-social-btn" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                                        <a href="#" class="team-social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                </article>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <article class="team-card" style="--team-color: #0891b2;">
+                                    <div class="team-card-avatar">
+                                        <span class="team-card-avatar-inner"><i class="fas fa-mobile-alt"></i></span>
+                                    </div>
+                                    <h3 class="team-card-name">م. خالد أحمد</h3>
+                                    <p class="team-card-role en-text">Flutter / Mobile Developer</p>
+                                    <div class="team-card-rating en-text" aria-label="تقييم 5.0 من 5">
+                                        <span class="team-rating-stars">
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                        </span>
+                                        <span class="team-rating-value">5.0</span>
+                                    </div>
+                                    <p class="team-card-bio">متخصص في تطوير تطبيقات الجوال بـ Flutter وDart للـ iOS والـ Android.</p>
+                                    <div class="team-card-social">
+                                        <a href="#" class="team-social-btn" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                                        <a href="#" class="team-social-btn" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                                    </div>
+                                </article>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <button class="team-swiper-btn team-swiper-next" aria-label="التالي">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                </div>
+
+                <div class="swiper-pagination team-swiper-pagination"></div>
+
+                <div class="text-center team-footer-cta">
+                    <a href="who-we-are.html" class="btn team-view-all">
+                        تعرف على كامل الفريق <i class="fas fa-arrow-left ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="testimonials-section home-zone home-zone--alt section-fade-up">
+            <div class="container">
+                <div class="testimonials-header text-center">
+                    <span class="testimonials-eyebrow">قصص نجاح</span>
+                    <h2 class="testimonials-title">آراء المتعلمين</h2>
+                    <p class="testimonials-subtitle mx-auto">تجارب حقيقية من متعلمين غيّروا مساراتهم المهنية بفضل محتوى عملي ومحدّث</p>
+                </div>
+
+                <div class="row g-4 testimonials-grid">
+                    <div class="col-md-6 col-lg-4">
+                        <blockquote class="testimonial-card" style="--testimonial-color: #059669;">
+                            <span class="testimonial-quote-icon" aria-hidden="true"><i class="fas fa-quote-right"></i></span>
+                            <div class="testimonial-avatar">
+                                <span class="testimonial-avatar-inner"><i class="fas fa-user"></i></span>
+                            </div>
+                            <p class="testimonial-text">بفضل الكورسات هنا، استطعت تغيير مساري المهني والعمل كمطور واجهات أمامية في شركة عالمية بوقت قياسي.</p>
+                            <div class="testimonial-rating en-text" aria-label="تقييم 5 من 5">
+                                <span class="testimonial-stars">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </span>
+                            </div>
+                            <footer class="testimonial-author">
+                                <cite class="testimonial-name">أحمد محمود</cite>
+                                <span class="testimonial-role en-text">Front-end Developer</span>
+                            </footer>
+                        </blockquote>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <blockquote class="testimonial-card" style="--testimonial-color: #ec4899;">
+                            <span class="testimonial-quote-icon" aria-hidden="true"><i class="fas fa-quote-right"></i></span>
+                            <div class="testimonial-avatar">
+                                <span class="testimonial-avatar-inner"><i class="fas fa-user-graduate"></i></span>
+                            </div>
+                            <p class="testimonial-text">منصة رائعة، المحتوى مشروح بطريقة مبسطة وعملية. الكورسات يتم تحديثها باستمرار لتطابق متطلبات السوق.</p>
+                            <div class="testimonial-rating en-text" aria-label="تقييم 4.5 من 5">
+                                <span class="testimonial-stars">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </span>
+                            </div>
+                            <footer class="testimonial-author">
+                                <cite class="testimonial-name">سارة خليل</cite>
+                                <span class="testimonial-role en-text">UI/UX Designer</span>
+                            </footer>
+                        </blockquote>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <blockquote class="testimonial-card" style="--testimonial-color: #0891b2;">
+                            <span class="testimonial-quote-icon" aria-hidden="true"><i class="fas fa-quote-right"></i></span>
+                            <div class="testimonial-avatar">
+                                <span class="testimonial-avatar-inner"><i class="fas fa-laptop-code"></i></span>
+                            </div>
+                            <p class="testimonial-text">المشاريع العملية والدعم المستمر من المدربين ساعدوني على بناء portfolio قوي والحصول على وظيفة خلال شهرين فقط.</p>
+                            <div class="testimonial-rating en-text" aria-label="تقييم 5 من 5">
+                                <span class="testimonial-stars">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </span>
+                            </div>
+                            <footer class="testimonial-author">
+                                <cite class="testimonial-name">محمد العلي</cite>
+                                <span class="testimonial-role en-text">Data Analyst</span>
+                            </footer>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="newsletter-section home-zone home-zone--base section-fade-up">
+            <div class="container">
+                <div class="newsletter-box">
+                    <div class="row g-4 g-lg-5 align-items-center">
+                        <div class="col-lg-6">
+                            <div class="newsletter-content">
+                                <span class="newsletter-eyebrow"><i class="fas fa-envelope-open-text"></i> ابقَ على اطلاع</span>
+                                <h2 class="newsletter-title">انضم لنشرتنا البريدية</h2>
+                                <p class="newsletter-desc">اشترك ليصلك آخر الأخبار عن الكورسات الجديدة، نصائح تعليمية حصرية، وعروض الخصومات قبل الجميع.</p>
+
+                                <ul class="newsletter-benefits">
+                                    <li>
+                                        <span class="newsletter-benefit-icon"><i class="fas fa-tags"></i></span>
+                                        <span>خصومات حصرية تصل إلى <strong>40%</strong> للمشتركين</span>
+                                    </li>
+                                    <li>
+                                        <span class="newsletter-benefit-icon"><i class="fas fa-book-open"></i></span>
+                                        <span>دروس مجانية وموارد تعليمية أسبوعياً</span>
+                                    </li>
+                                    <li>
+                                        <span class="newsletter-benefit-icon"><i class="fas fa-bell"></i></span>
+                                        <span>تنبيهات فورية عند إطلاق كورسات جديدة</span>
+                                    </li>
+                                </ul>
+
+                                <div class="newsletter-trust">
+                                    <div class="newsletter-trust-item">
+                                        <strong>+25K</strong>
+                                        <span>مشترك نشط</span>
+                                    </div>
+                                    <div class="newsletter-trust-divider" aria-hidden="true"></div>
+                                    <div class="newsletter-trust-item">
+                                        <strong>أسبوعياً</strong>
+                                        <span>محتوى جديد</span>
+                                    </div>
+                                    <div class="newsletter-trust-divider" aria-hidden="true"></div>
+                                    <div class="newsletter-trust-item">
+                                        <strong>0%</strong>
+                                        <span>رسائل مزعجة</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="newsletter-form-card">
+                                <div class="newsletter-form-header">
+                                    <span class="newsletter-form-badge">مجاني</span>
+                                    <h3 class="newsletter-form-title">سجّل بريدك الآن</h3>
+                                    <p class="newsletter-form-subtitle">انضم لآلاف المتعلمين واحصل على مزايا حصرية</p>
+                                </div>
+                                <form class="newsletter-form" action="#" method="post">
+                                    <label class="visually-hidden" for="newsletter-email">البريد الإلكتروني</label>
+                                    <div class="newsletter-input-wrap">
+                                        <i class="fas fa-envelope newsletter-input-icon" aria-hidden="true"></i>
+                                        <input type="email" id="newsletter-email" class="newsletter-input" placeholder="أدخل بريدك الإلكتروني" required>
+                                    </div>
+                                    <button type="submit" class="newsletter-submit">
+                                        اشترك الآن <i class="fas fa-arrow-left"></i>
+                                    </button>
+                                </form>
+                                <p class="newsletter-privacy">
+                                    <i class="fas fa-lock"></i>
+                                    نحترم خصوصيتك — لن نشارك بريدك مع أي طرف ثالث.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Latest Blog Section -->
+        <section class="blog-section home-zone home-zone--alt home-zone--last section-fade-up">
+            <div class="container">
+                <div class="blog-header">
+                    <div class="blog-header-text">
+                        <span class="blog-eyebrow">المدونة التعليمية</span>
+                        <h2 class="blog-section-title">آخر المقالات والأخبار</h2>
+                        <p class="blog-section-subtitle">مقالات عملية ونصائح من خبراء لتطوير مهاراتك ومواكبة أحدث التوجهات</p>
+                    </div>
+                    <a href="blog.html" class="btn blog-view-all d-none d-md-inline-flex">
+                        جميع المقالات <i class="fas fa-arrow-left ms-2"></i>
+                    </a>
+                </div>
+
+                <div class="blog-swiper-wrap">
+                    <button class="blog-swiper-btn blog-swiper-prev" aria-label="السابق">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+
+                    <div class="swiper blog-swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <article class="blog-card">
+                                    <a href="blog-detail.html" class="blog-card-image-link">
+                                        <div class="blog-image-wrapper">
+                                            <span class="blog-category-badge">برمجة</span>
+                                            <span class="blog-read-time"><i class="far fa-clock"></i> 8 د</span>
+                                            <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="أفضل تقنيات تطوير الويب" class="blog-card-img">
+                                        </div>
+                                    </a>
+                                    <div class="blog-card-body">
+                                        <div class="blog-meta">
+                                            <span><i class="far fa-calendar-alt"></i> 15 مارس 2026</span>
+                                            <span><i class="far fa-comment"></i> 12</span>
+                                        </div>
+                                        <h3 class="blog-title"><a href="blog-detail.html">أفضل 5 تقنيات لتطوير الويب في عام 2026</a></h3>
+                                        <p class="blog-excerpt">تعرف على أحدث الأدوات والتقنيات التي ستغير شكل تطوير المواقع وتمنحك ميزة تنافسية في السوق.</p>
+                                        <div class="blog-card-footer">
+                                            <div class="blog-author">
+                                                <span class="blog-author-avatar"><i class="fas fa-user-edit"></i></span>
+                                                <span class="blog-author-name">م. أحمد سعيد</span>
+                                            </div>
+                                            <a href="blog-detail.html" class="read-more-link">اقرأ المزيد <i class="fas fa-arrow-left"></i></a>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <article class="blog-card">
+                                    <a href="blog-detail.html" class="blog-card-image-link">
+                                        <div class="blog-image-wrapper">
+                                            <span class="blog-category-badge" style="--badge-color: #ec4899;">تصميم</span>
+                                            <span class="blog-read-time"><i class="far fa-clock"></i> 6 د</span>
+                                            <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="كيف تبدأ في UX" class="blog-card-img">
+                                        </div>
+                                    </a>
+                                    <div class="blog-card-body">
+                                        <div class="blog-meta">
+                                            <span><i class="far fa-calendar-alt"></i> 12 مارس 2026</span>
+                                            <span><i class="far fa-comment"></i> 8</span>
+                                        </div>
+                                        <h3 class="blog-title"><a href="blog-detail.html">كيف تبدأ مسيرتك في مجال تجربة المستخدم UX؟</a></h3>
+                                        <p class="blog-excerpt">خطوات عملية ونصائح من خبراء التصميم للبدء في تعلم وتطبيق مبادئ UX/UI بشكل احترافي.</p>
+                                        <div class="blog-card-footer">
+                                            <div class="blog-author">
+                                                <span class="blog-author-avatar"><i class="fas fa-user-edit"></i></span>
+                                                <span class="blog-author-name">سارة محمد</span>
+                                            </div>
+                                            <a href="blog-detail.html" class="read-more-link">اقرأ المزيد <i class="fas fa-arrow-left"></i></a>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <article class="blog-card">
+                                    <a href="blog-detail.html" class="blog-card-image-link">
+                                        <div class="blog-image-wrapper">
+                                            <span class="blog-category-badge" style="--badge-color: #7c3aed;">ذكاء اصطناعي</span>
+                                            <span class="blog-read-time"><i class="far fa-clock"></i> 10 د</span>
+                                            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="مستقبل التعليم" class="blog-card-img">
+                                        </div>
+                                    </a>
+                                    <div class="blog-card-body">
+                                        <div class="blog-meta">
+                                            <span><i class="far fa-calendar-alt"></i> 10 مارس 2026</span>
+                                            <span><i class="far fa-comment"></i> 25</span>
+                                        </div>
+                                        <h3 class="blog-title"><a href="blog-detail.html">مستقبل التعليم في عصر الذكاء الاصطناعي</a></h3>
+                                        <p class="blog-excerpt">دراسة حول تأثير تقنيات الذكاء الاصطناعي التوليدي على أساليب التدريس والتعلم الذاتي.</p>
+                                        <div class="blog-card-footer">
+                                            <div class="blog-author">
+                                                <span class="blog-author-avatar"><i class="fas fa-user-edit"></i></span>
+                                                <span class="blog-author-name">عمر مصطفى</span>
+                                            </div>
+                                            <a href="blog-detail.html" class="read-more-link">اقرأ المزيد <i class="fas fa-arrow-left"></i></a>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <article class="blog-card">
+                                    <a href="blog-detail.html" class="blog-card-image-link">
+                                        <div class="blog-image-wrapper">
+                                            <span class="blog-category-badge" style="--badge-color: #f59e0b;">تسويق</span>
+                                            <span class="blog-read-time"><i class="far fa-clock"></i> 7 د</span>
+                                            <img src="https://images.unsplash.com/photo-1533750516457-a7f992034fce?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="التجارة الإلكترونية" class="blog-card-img">
+                                        </div>
+                                    </a>
+                                    <div class="blog-card-body">
+                                        <div class="blog-meta">
+                                            <span><i class="far fa-calendar-alt"></i> 05 مارس 2026</span>
+                                            <span><i class="far fa-comment"></i> 15</span>
+                                        </div>
+                                        <h3 class="blog-title"><a href="blog-detail.html">أسرار النجاح في التجارة الإلكترونية لعام 2026</a></h3>
+                                        <p class="blog-excerpt">كيف يمكنك بناء علامتك التجارية وزيادة مبيعاتك عبر استراتيجيات تسويق رقمي حديثة ومثبتة.</p>
+                                        <div class="blog-card-footer">
+                                            <div class="blog-author">
+                                                <span class="blog-author-avatar"><i class="fas fa-user-edit"></i></span>
+                                                <span class="blog-author-name">طارق زياد</span>
+                                            </div>
+                                            <a href="blog-detail.html" class="read-more-link">اقرأ المزيد <i class="fas fa-arrow-left"></i></a>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="blog-swiper-btn blog-swiper-next" aria-label="التالي">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                </div>
+
+                <div class="swiper-pagination blog-swiper-pagination"></div>
+
+                <div class="text-center mt-4 d-md-none">
+                    <a href="blog.html" class="btn blog-view-all">جميع المقالات <i class="fas fa-arrow-left ms-2"></i></a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <!-- Decorative top wave -->
+        <div class="footer-wave">
+            <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0,40 C360,90 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,80 L0,80 Z" fill="currentColor"/>
+            </svg>
+        </div>
+
+        <!-- CTA Band -->
+        <div class="footer-cta-band">
+            <div class="container">
+                <div class="footer-cta-inner">
+                    <div class="footer-cta-text">
+                        <span class="footer-cta-label"><i class="fas fa-crown me-2"></i>تجربة تعليمية استثنائية</span>
+                        <h3 class="footer-cta-title">ابدأ رحلتك نحو <span>التميز المهني</span> اليوم</h3>
+                        <p class="footer-cta-desc">انضم لأكثر من 100,000 متعلم واكتشف عالماً من المعرفة بانتظارك</p>
+                    </div>
+                    <div class="footer-cta-actions">
+                        <a href="courses.html" class="btn footer-cta-btn-primary">استكشف الكورسات <i class="fas fa-arrow-left"></i></a>
+                        <a href="register.html" class="btn footer-cta-btn-outline">إنشاء حساب مجاني</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Footer Body -->
+        <div class="footer-main">
+            <div class="footer-glow footer-glow-1"></div>
+            <div class="footer-glow footer-glow-2"></div>
+            <div class="container position-relative">
+                <div class="row g-5 footer-grid">
+
+                    <!-- Brand -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-brand">
+                            <a href="index.html" class="footer-logo">
+                                <span class="footer-logo-icon"><i class="fas fa-graduation-cap"></i></span>
+                                <span class="footer-logo-text">إديو<span>ماتيك</span></span>
+                            </a>
+                            <p class="footer-brand-desc">
+                                منصة تعليمية عربية رائدة تقدّم تجربة تعلم فاخرة بمحتوى عالي الجودة، مدربين نخبة، وشهادات معتمدة — لتمكين الجيل القادم من قادة التكنولوجيا والإبداع.
+                            </p>
+                            <div class="footer-trust-badges">
+                                <div class="footer-trust-item">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>دفع آمن</span>
+                                </div>
+                                <div class="footer-trust-item">
+                                    <i class="fas fa-certificate"></i>
+                                    <span>شهادات معتمدة</span>
+                                </div>
+                                <div class="footer-trust-item">
+                                    <i class="fas fa-headset"></i>
+                                    <span>دعم 24/7</span>
+                                </div>
+                            </div>
+                            <div class="footer-social">
+                                <a href="#" class="footer-social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="footer-social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="footer-social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="footer-social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" class="footer-social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Explore -->
+                    <div class="col-6 col-lg-2 col-md-3">
+                        <h6 class="footer-heading">استكشف</h6>
+                        <ul class="footer-links">
+                            <li><a href="courses.html"><i class="fas fa-chevron-left"></i> جميع الكورسات</a></li>
+                            <li><a href="categories.html"><i class="fas fa-chevron-left"></i> التصنيفات</a></li>
+                            <li><a href="blog.html"><i class="fas fa-chevron-left"></i> المدونة</a></li>
+                            <li><a href="who-we-are.html"><i class="fas fa-chevron-left"></i> فريق الخبراء</a></li>
+                            <li><a href="cart.html"><i class="fas fa-chevron-left"></i> سلة التسوق</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Company -->
+                    <div class="col-6 col-lg-2 col-md-3">
+                        <h6 class="footer-heading">المنصة</h6>
+                        <ul class="footer-links">
+                            <li><a href="about.html"><i class="fas fa-chevron-left"></i> حول إديوماتيك</a></li>
+                            <li><a href="who-we-are.html"><i class="fas fa-chevron-left"></i> من نحن</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-left"></i> انضم كمدرب</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-left"></i> الشركاء</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-left"></i> الوظائف</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Support -->
+                    <div class="col-6 col-lg-2 col-md-3">
+                        <h6 class="footer-heading">الدعم</h6>
+                        <ul class="footer-links">
+                            <li><a href="#"><i class="fas fa-chevron-left"></i> مركز المساعدة</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-left"></i> الأسئلة الشائعة</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-left"></i> سياسة الخصوصية</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-left"></i> الشروط والأحكام</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-left"></i> سياسة الاسترداد</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Contact & Newsletter -->
+                    <div class="col-lg-2 col-md-6">
+                        <h6 class="footer-heading">تواصل معنا</h6>
+                        <ul class="footer-contact">
+                            <li>
+                                <span class="footer-contact-icon"><i class="fas fa-envelope"></i></span>
+                                <div>
+                                    <small>البريد الإلكتروني</small>
+                                    <a href="mailto:info@edumatic.com">info@edumatic.com</a>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="footer-contact-icon"><i class="fas fa-phone-alt"></i></span>
+                                <div>
+                                    <small>الهاتف</small>
+                                    <a href="tel:+971501234567" class="en-text" dir="ltr">+971 50 123 4567</a>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="footer-contact-icon"><i class="fas fa-map-marker-alt"></i></span>
+                                <div>
+                                    <small>المقر</small>
+                                    <span>دبي، الإمارات العربية</span>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="footer-newsletter">
+                            <p class="footer-newsletter-label">النشرة البريدية</p>
+                            <form class="footer-newsletter-form">
+                                <input type="email" placeholder="بريدك الإلكتروني" required>
+                                <button type="submit" aria-label="اشتراك"><i class="fas fa-paper-plane"></i></button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Stats Strip -->
+                <div class="footer-stats">
+                    <div class="footer-stat">
+                        <strong class="en-text">500+</strong>
+                        <span>كورس متاح</span>
+                    </div>
+                    <div class="footer-stat-divider"></div>
+                    <div class="footer-stat">
+                        <strong class="en-text">100K+</strong>
+                        <span>طالب مسجل</span>
+                    </div>
+                    <div class="footer-stat-divider"></div>
+                    <div class="footer-stat">
+                        <strong class="en-text">150+</strong>
+                        <span>مدرب خبير</span>
+                    </div>
+                    <div class="footer-stat-divider"></div>
+                    <div class="footer-stat">
+                        <strong class="en-text">4.9</strong>
+                        <span>تقييم المتعلمين</span>
+                    </div>
+                    <div class="footer-stat-divider"></div>
+                    <div class="footer-stat">
+                        <strong class="en-text">15K+</strong>
+                        <span>ساعة محتوى</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-inner">
+                    <p class="footer-copyright">&copy; 2026 <strong>إديوماتيك</strong>. جميع الحقوق محفوظة.</p>
+                    <div class="footer-payments">
+                        <span class="footer-payments-label">طرق الدفع:</span>
+                        <div class="footer-payment-icons">
+                            <span title="Visa"><i class="fab fa-cc-visa"></i></span>
+                            <span title="Mastercard"><i class="fab fa-cc-mastercard"></i></span>
+                            <span title="PayPal"><i class="fab fa-cc-paypal"></i></span>
+                            <span title="Apple Pay"><i class="fab fa-cc-apple-pay"></i></span>
+                        </div>
+                    </div>
+                    <div class="footer-legal">
+                        <a href="#">الخصوصية</a>
+                        <span class="footer-legal-sep">|</span>
+                        <a href="#">الشروط</a>
+                        <span class="footer-legal-sep">|</span>
+                        <a href="#">ملفات تعريف الارتباط</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Custom Main JS -->
+    <script src="js/main.js"></script>
+    <script>
+        // Init Hero Swiper
+        const heroSwiper = new Swiper('.hero-swiper', {
+            effect: 'fade',
+            fadeEffect: { crossFade: true },
+            speed: 900,
+            loop: true,
+            autoplay: {
+                delay: 6000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true
+            },
+            pagination: {
+                el: '.hero-pagination',
+                clickable: true,
+                renderBullet: (index, className) =>
+                    `<span class="${className}"><span class="hero-bullet-inner"></span><span class="hero-bullet-label">${['الرئيسية', 'برمجة', 'تصميم', 'AI'][index]}</span></span>`
+            },
+            navigation: {
+                nextEl: '.hero-next',
+                prevEl: '.hero-prev'
+            },
+            on: {
+                autoplayTimeLeft(s, time, progress) {
+                    const fill = document.querySelector('.hero-progress-fill');
+                    if (fill) fill.style.width = `${(1 - progress) * 100}%`;
+                },
+                slideChangeTransitionStart() {
+                    document.querySelectorAll('.hero-slide .hero-content > *').forEach(el => {
+                        el.style.animation = 'none';
+                        el.offsetHeight;
+                        el.style.animation = '';
+                    });
+                }
+            }
+        });
+
+        // Init Team Swiper
+        const teamSwiper = new Swiper('.team-swiper', {
+            slidesPerView: 1,
+            spaceBetween: 24,
+            loop: true,
+            autoplay: { delay: 4500, disableOnInteraction: false },
+            pagination: { el: '.team-swiper-pagination', clickable: true },
+            navigation: { nextEl: '.team-swiper-next', prevEl: '.team-swiper-prev' },
+            breakpoints: {
+                576:  { slidesPerView: 2 },
+                992:  { slidesPerView: 3 },
+                1200: { slidesPerView: 4 }
+            }
+        });
+
+        // Init Blog Swiper
+        const blogSwiper = new Swiper('.blog-swiper', {
+            slidesPerView: 1,
+            spaceBetween: 24,
+            loop: true,
+            autoplay: { delay: 5000, disableOnInteraction: false },
+            pagination: { el: '.blog-swiper-pagination', clickable: true },
+            navigation: { nextEl: '.blog-swiper-next', prevEl: '.blog-swiper-prev' },
+            breakpoints: {
+                768:  { slidesPerView: 2 },
+                992:  { slidesPerView: 3 }
+            }
+        });
+    </script>
+</body>
+</html>
