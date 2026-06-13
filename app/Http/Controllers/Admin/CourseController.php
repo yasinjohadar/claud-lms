@@ -120,6 +120,7 @@ class CourseController extends Controller
 
     public function edit(Course $course)
     {
+        $course->loadCount('sections');
         $categories = CourseCategory::orderBy('name')->get();
         $tags = CourseTag::orderBy('name')->get();
         $instructors = User::role('instructor')->orderBy('name')->get();
@@ -213,12 +214,9 @@ class CourseController extends Controller
             'rating_avg' => 'nullable|numeric|min:0|max:5',
             'rating_count' => 'nullable|integer|min:0',
             'students_count' => 'nullable|integer|min:0',
-            'lessons_count' => 'nullable|integer|min:0',
-            'duration_hours' => 'nullable|integer|min:0',
             'language' => 'nullable|string|max:10',
             'what_you_learn' => 'nullable|string',
             'requirements' => 'nullable|string',
-            'curriculum_outline' => 'nullable|string',
             'status' => 'required|in:draft,published',
             'published_at' => 'nullable|date',
             'is_featured' => 'boolean',
@@ -260,12 +258,9 @@ class CourseController extends Controller
             'rating_avg' => $validated['rating_avg'] ?? 0,
             'rating_count' => $validated['rating_count'] ?? 0,
             'students_count' => $validated['students_count'] ?? 0,
-            'lessons_count' => $validated['lessons_count'] ?? 0,
-            'duration_hours' => $validated['duration_hours'] ?? 0,
             'language' => $validated['language'] ?? 'ar',
             'what_you_learn' => $this->linesToArray($validated['what_you_learn'] ?? null),
             'requirements' => $this->linesToArray($validated['requirements'] ?? null),
-            'curriculum_outline' => $validated['curriculum_outline'] ?? null,
             'status' => $validated['status'],
             'published_at' => $validated['published_at'] ?? ($validated['status'] === 'published' ? now() : null),
             'is_featured' => $request->boolean('is_featured'),

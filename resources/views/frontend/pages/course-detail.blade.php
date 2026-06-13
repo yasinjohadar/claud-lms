@@ -15,6 +15,8 @@
     $discount = ($course->compare_at_price && $course->compare_at_price > $course->price)
         ? round((1 - $course->price / $course->compare_at_price) * 100)
         : 0;
+    $sections = $course->sections;
+    $moduleCount = $sections->count();
 @endphp
 
 @section('content')
@@ -115,16 +117,53 @@
                             <div class="text-secondary lh-lg mb-5">{!! $course->description !!}</div>
                         @endif
 
-                        @if($course->curriculum_outline)
+                        @if($sections->isNotEmpty())
                             <div class="d-flex justify-content-between align-items-center mb-4">
                                 <h4 class="fw-bold m-0 text-white">منهج الدورة</h4>
                                 <span class="text-secondary small">
+                                    <span class="en-text">{{ $moduleCount }}</span> قسم &bull;
                                     <span class="en-text">{{ $course->lessons_count }}</span> درس &bull;
                                     <span class="en-text">{{ $course->duration_hours }}</span> ساعة
                                 </span>
                             </div>
-                            <div class="course-curriculum-content text-secondary lh-lg mb-5">
-                                {!! $course->curriculum_outline !!}
+
+                            <div class="course-curriculum accordion" id="courseAccordion">
+                                @foreach($sections as $index => $section)
+                                    @php
+                                        $collapseId = 'module-' . $section->id;
+                                        $isFirst = $index === 0;
+                                    @endphp
+                                    <div class="accordion-item curriculum-module">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button {{ $isFirst ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#{{ $collapseId }}" aria-expanded="{{ $isFirst ? 'true' : 'false' }}">
+                                                <span class="curriculum-module-num">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                                                <span class="curriculum-module-title">{{ $section->title }}</span>
+                                                <span class="curriculum-module-meta en-text">{{ $section->lessons->count() }} دروس</span>
+                                            </button>
+                                        </h2>
+                                        <div id="{{ $collapseId }}" class="accordion-collapse collapse {{ $isFirst ? 'show' : '' }}" data-bs-parent="#courseAccordion">
+                                            <div class="accordion-body p-0">
+                                                <ul class="curriculum-lessons">
+                                                    @foreach($section->lessons as $lesson)
+                                                        <li class="curriculum-lesson">
+                                                            <span class="curriculum-lesson-icon is-video">
+                                                                <i class="fas fa-play"></i>
+                                                            </span>
+                                                            <span class="curriculum-lesson-title">{{ $lesson->title }}</span>
+                                                            <span class="curriculum-lesson-duration en-text">
+                                                                @if($lesson->formatted_duration)
+                                                                    {{ $lesson->formatted_duration }}
+                                                                @else
+                                                                    {{ $lesson->provider_label }}
+                                                                @endif
+                                                            </span>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
                         @endif
                     </div>

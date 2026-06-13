@@ -136,7 +136,7 @@
         }
         if (document.querySelector('[data-course-post-form]')) {
             window.AdminBlogPostForm.init({
-                contentSelectors: ['#description', '#curriculum_outline']
+                contentSelectors: ['#description']
             });
         }
     });

@@ -72,7 +72,7 @@ class CourseController extends Controller
     {
         $course = Course::where('slug', $slug)
             ->published()
-            ->with(['category', 'instructor', 'tags'])
+            ->with(['category', 'instructor', 'tags', 'sections.lessons'])
             ->firstOrFail();
 
         $course->increment('views_count');

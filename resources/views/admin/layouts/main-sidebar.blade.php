@@ -105,7 +105,7 @@
                                 <i class="ri-arrow-left-s-line side-menu__angle"></i>
                             </a>
                             <ul class="slide-menu child1">
-                                <li class="slide {{ request()->routeIs('admin.courses.index', 'admin.courses.create', 'admin.courses.edit', 'admin.courses.store', 'admin.courses.update') ? 'active' : '' }}">
+                                <li class="slide {{ request()->routeIs('admin.courses.index', 'admin.courses.create', 'admin.courses.edit', 'admin.courses.store', 'admin.courses.update', 'admin.courses.curriculum', 'admin.courses.curriculum.*') ? 'active' : '' }}">
                                     <a href="{{ route('admin.courses.index') }}" class="side-menu__item">الكورسات</a>
                                 </li>
                                 <li class="slide {{ request()->routeIs('admin.courses.categories.*') ? 'active' : '' }}">

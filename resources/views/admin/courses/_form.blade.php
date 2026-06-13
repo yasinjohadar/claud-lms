@@ -61,14 +61,28 @@
                 <label class="form-label">المتطلبات (سطر لكل نقطة)</label>
                 <textarea name="requirements" rows="3" class="form-control">{{ $requirements }}</textarea>
             </div>
-            <div class="mb-0">
-                <label class="form-label fw-semibold" for="curriculum_outline">منهج الدورة</label>
-                <textarea name="curriculum_outline" id="curriculum_outline"
-                          class="form-control @error('curriculum_outline') is-invalid @enderror">{{ old('curriculum_outline', $course?->curriculum_outline) }}</textarea>
-                @error('curriculum_outline')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
+            @if($course)
+                <div class="alert alert-light border mb-0">
+                    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                        <div>
+                            <div class="fw-semibold mb-1"><i class="ri-list-ordered me-1 text-primary"></i> منهج الكورس</div>
+                            <span class="text-muted fs-13">
+                                {{ $course->sections_count ?? $course->sections()->count() }} قسم &bull;
+                                {{ $course->lessons_count }} درس &bull;
+                                {{ $course->duration_hours }} ساعة
+                            </span>
+                        </div>
+                        <a href="{{ route('admin.courses.curriculum', $course) }}" class="btn btn-primary btn-sm">
+                            <i class="ri-settings-3-line me-1"></i> إدارة المنهاج
+                        </a>
+                    </div>
+                </div>
+            @else
+                <div class="alert alert-info border-0 mb-0 fs-13">
+                    <i class="ri-information-line me-1"></i>
+                    بعد حفظ الكورس يمكنك إضافة الأقسام والدروس من صفحة «إدارة المنهاج».
+                </div>
+            @endif
             </div>
         </div>
     </div>
@@ -116,10 +130,6 @@
             <div class="row g-2 mb-3">
                 <div class="col-6"><label class="form-label">التقييم</label><input type="number" step="0.1" name="rating_avg" class="form-control" value="{{ old('rating_avg', $course?->rating_avg ?? 0) }}"></div>
                 <div class="col-6"><label class="form-label">عدد الطلاب</label><input type="number" name="students_count" class="form-control" value="{{ old('students_count', $course?->students_count ?? 0) }}"></div>
-            </div>
-            <div class="row g-2 mb-3">
-                <div class="col-6"><label class="form-label">الدروس</label><input type="number" name="lessons_count" class="form-control" value="{{ old('lessons_count', $course?->lessons_count ?? 0) }}"></div>
-                <div class="col-6"><label class="form-label">الساعات</label><input type="number" name="duration_hours" class="form-control" value="{{ old('duration_hours', $course?->duration_hours ?? 0) }}"></div>
             </div>
             <div class="mb-3">
                 <label class="form-label">الشارة</label>

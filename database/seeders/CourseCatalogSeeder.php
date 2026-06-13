@@ -6,6 +6,7 @@ use App\Models\Course;
 use App\Models\CourseCategory;
 use App\Models\CourseTag;
 use App\Models\User;
+use App\Services\CourseCurriculumService;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role;
@@ -109,12 +110,11 @@ class CourseCatalogSeeder extends Seeder
                     'rating_avg' => $data['rating_avg'],
                     'rating_count' => rand(50, 500),
                     'students_count' => $data['students_count'],
-                    'lessons_count' => $data['lessons_count'],
-                    'duration_hours' => $data['duration_hours'],
+                    'lessons_count' => 0,
+                    'duration_hours' => 0,
                     'language' => 'ar',
                     'what_you_learn' => ['مهارات عملية قابلة للتطبيق', 'مشاريع حقيقية', 'شهادة إتمام'],
                     'requirements' => ['جهاز كمبيوتر', 'اتصال بالإنترنت', 'رغبة في التعلم'],
-                    'curriculum_outline' => '<h3>مقدمة الدورة</h3><ul><li>مرحباً بك في الدورة <em>(08:00)</em></li><li>إعداد بيئة العمل <em>(12:30)</em></li></ul>',
                     'status' => 'published',
                     'published_at' => now()->subDays($i),
                     'is_featured' => $data['is_featured'],
@@ -132,6 +132,8 @@ class CourseCatalogSeeder extends Seeder
             if ($tagSlug && $tagModels->has($tagSlug)) {
                 $course->tags()->syncWithoutDetaching([$tagModels[$tagSlug]->id]);
             }
+
+            $this->seedSampleCurriculum($course, $i);
         }
 
         foreach (CourseCategory::all() as $category) {
@@ -141,5 +143,53 @@ class CourseCatalogSeeder extends Seeder
         foreach (CourseTag::all() as $tag) {
             $tag->updateCoursesCount();
         }
+    }
+
+    protected function seedSampleCurriculum(Course $course, int $index): void
+    {
+        $course->sections()->delete();
+
+        $providers = ['youtube', 'vimeo', 'bunny_stream', 'bunny_cdn'];
+        $references = [
+            'dQw4w9WgXcQ',
+            '76979871',
+            json_encode(['library_id' => '12345', 'video_id' => 'sample-guid-' . $index], JSON_UNESCAPED_UNICODE),
+            'https://cdn.example.b-cdn.net/courses/intro.mp4',
+        ];
+
+        $section = $course->sections()->create([
+            'title' => 'مقدمة الدورة',
+            'sort_order' => 1,
+        ]);
+
+        $section->lessons()->createMany([
+            [
+                'title' => 'مرحباً بك في الدورة',
+                'video_provider' => $providers[$index % 4],
+                'video_reference' => $references[$index % 4],
+                'duration_seconds' => 480,
+                'sort_order' => 1,
+            ],
+            [
+                'title' => 'إعداد بيئة العمل',
+                'video_provider' => 'youtube',
+                'video_reference' => 'dQw4w9WgXcQ',
+                'duration_seconds' => 750,
+                'sort_order' => 2,
+            ],
+        ]);
+
+        $course->sections()->create([
+            'title' => 'الوحدة التطبيقية',
+            'sort_order' => 2,
+        ])->lessons()->create([
+            'title' => 'مشروع عملي أول',
+            'video_provider' => 'vimeo',
+            'video_reference' => '76979871',
+            'duration_seconds' => 1200,
+            'sort_order' => 1,
+        ]);
+
+        app(CourseCurriculumService::class)->syncCourseStats($course);
     }
 }

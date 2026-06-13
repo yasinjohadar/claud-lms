@@ -35,7 +35,6 @@ class Course extends Model
         'language',
         'what_you_learn',
         'requirements',
-        'curriculum_outline',
         'status',
         'published_at',
         'is_featured',
@@ -75,6 +74,11 @@ class Course extends Model
     {
         return $this->belongsToMany(CourseTag::class, 'course_course_tag', 'course_id', 'course_tag_id')
             ->withTimestamps();
+    }
+
+    public function sections(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(CourseSection::class)->orderBy('sort_order');
     }
 
     public function scopePublished($query)

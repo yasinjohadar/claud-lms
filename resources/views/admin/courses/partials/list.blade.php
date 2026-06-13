@@ -76,6 +76,10 @@
                                    class="action-btn action-btn--view" title="عرض">
                                     <i class="ri-external-link-line"></i>
                                 </a>
+                                <a href="{{ route('admin.courses.curriculum', $course) }}"
+                                   class="action-btn action-btn--view" title="المنهاج">
+                                    <i class="ri-list-ordered"></i>
+                                </a>
                                 <a href="{{ route('admin.courses.edit', $course) }}"
                                    class="action-btn action-btn--edit" title="تعديل">
                                     <i class="ri-pencil-line"></i>
