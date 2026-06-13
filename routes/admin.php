@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\CourseCurriculumController;
 use App\Http\Controllers\Admin\CourseCategoryController;
 use App\Http\Controllers\Admin\CourseTagController;
+use App\Http\Controllers\Admin\TeamMemberController;
+use App\Http\Controllers\Admin\PublicResourceController;
 use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\ConsultationRequestController;
 use App\Http\Controllers\Admin\NewsletterSubscriberController;
@@ -32,6 +34,11 @@ use App\Http\Controllers\Admin\StorageMigrationController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\MediaMonitoringController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\StudentController;
+use App\Http\Controllers\Admin\EnrollmentController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\HeroSlideController;
+use App\Http\Controllers\Admin\HeroSliderSettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +59,23 @@ Route::middleware(['auth', 'check.user.active'])->prefix('admin')->name('admin.'
     Route::resource('users', UserController::class);
     Route::post('users/{user}/update-password', [UserController::class, 'updatePassword'])->name('users.update-password');
     Route::post('users/{user}/toggle-status', [UserController::class, 'toggleStatus'])->name('users.toggle-status');
+
+    // الطلاب والتسجيلات والطلبات
+    Route::resource('students', StudentController::class);
+    Route::post('students/{student}/toggle-status', [StudentController::class, 'toggleStatus'])->name('students.toggle-status');
+    Route::post('students/{student}/enrollments', [EnrollmentController::class, 'store'])->name('students.enrollments.store');
+    Route::delete('enrollments/{enrollment}', [EnrollmentController::class, 'destroy'])->name('enrollments.destroy');
+    Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+    Route::post('orders/{order}/mark-paid', [OrderController::class, 'markPaid'])->name('orders.mark-paid');
+
+    // سلايدر الرئيسية
+    Route::get('hero-slider/settings', [HeroSliderSettingsController::class, 'edit'])->name('hero-slider.settings');
+    Route::put('hero-slider/settings', [HeroSliderSettingsController::class, 'update'])->name('hero-slider.settings.update');
+    Route::post('hero-slides/reorder', [HeroSlideController::class, 'reorder'])->name('hero-slides.reorder');
+    Route::post('hero-slides/{hero_slide}/toggle', [HeroSlideController::class, 'toggle'])->name('hero-slides.toggle');
+    Route::post('hero-slides/{hero_slide}/duplicate', [HeroSlideController::class, 'duplicate'])->name('hero-slides.duplicate');
+    Route::resource('hero-slides', HeroSlideController::class)->except(['show']);
 
     // الصلاحيات والأدوار
     Route::resource('roles', RoleController::class);
@@ -104,12 +128,35 @@ Route::middleware(['auth', 'check.user.active'])->prefix('admin')->name('admin.'
         Route::post('{course}/curriculum/sections/{section}/lessons', [CourseCurriculumController::class, 'storeLesson'])->name('curriculum.lessons.store');
         Route::put('{course}/curriculum/lessons/{lesson}', [CourseCurriculumController::class, 'updateLesson'])->name('curriculum.lessons.update');
         Route::delete('{course}/curriculum/lessons/{lesson}', [CourseCurriculumController::class, 'destroyLesson'])->name('curriculum.lessons.destroy');
+        Route::post('{course}/curriculum/resources', [CourseCurriculumController::class, 'storeResource'])->name('curriculum.resources.store');
+        Route::put('{course}/curriculum/resources/{resource}', [CourseCurriculumController::class, 'updateResource'])->name('curriculum.resources.update');
+        Route::delete('{course}/curriculum/resources/{resource}', [CourseCurriculumController::class, 'destroyResource'])->name('curriculum.resources.destroy');
         Route::post('{course}/curriculum/reorder', [CourseCurriculumController::class, 'reorder'])->name('curriculum.reorder');
         Route::get('{course}/edit', [CourseController::class, 'edit'])->name('edit');
         Route::put('{course}', [CourseController::class, 'update'])->name('update');
         Route::delete('{course}', [CourseController::class, 'destroy'])->name('destroy');
         Route::post('{course}/toggle-featured', [CourseController::class, 'toggleFeatured'])->name('toggle-featured');
         Route::post('{course}/toggle-publish', [CourseController::class, 'togglePublish'])->name('toggle-publish');
+    });
+
+    Route::prefix('team-members')->name('team-members.')->group(function () {
+        Route::get('users-picker', [TeamMemberController::class, 'usersPicker'])->name('users-picker');
+        Route::get('/', [TeamMemberController::class, 'index'])->name('index');
+        Route::get('create', [TeamMemberController::class, 'create'])->name('create');
+        Route::post('/', [TeamMemberController::class, 'store'])->name('store');
+        Route::get('{teamMember}/edit', [TeamMemberController::class, 'edit'])->name('edit');
+        Route::put('{teamMember}', [TeamMemberController::class, 'update'])->name('update');
+        Route::delete('{teamMember}', [TeamMemberController::class, 'destroy'])->name('destroy');
+    });
+
+    // Public resources (site-wide, not tied to courses)
+    Route::prefix('public-resources')->name('public-resources.')->group(function () {
+        Route::get('/', [PublicResourceController::class, 'index'])->name('index');
+        Route::get('create', [PublicResourceController::class, 'create'])->name('create');
+        Route::post('/', [PublicResourceController::class, 'store'])->name('store');
+        Route::get('{publicResource}/edit', [PublicResourceController::class, 'edit'])->name('edit');
+        Route::put('{publicResource}', [PublicResourceController::class, 'update'])->name('update');
+        Route::delete('{publicResource}', [PublicResourceController::class, 'destroy'])->name('destroy');
     });
 
 

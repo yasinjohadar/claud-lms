@@ -56,5 +56,7 @@ class AppServiceProvider extends ServiceProvider
             WhatsAppMessageReceived::class,
             AutoReplyWhatsAppListener::class
         );
+
+        \App\Models\CourseEnrollment::observe(\App\Observers\CourseEnrollmentObserver::class);
     }
 }

@@ -122,9 +122,10 @@
                     </ul>
                     <div class="footer-newsletter">
                         <p class="footer-newsletter-label">النشرة البريدية</p>
-                        <form class="footer-newsletter-form" action="{{ route('newsletter.subscribe') }}" method="post">
+                        <div class="newsletter-alert newsletter-alert--compact" role="alert" aria-live="polite" hidden></div>
+                        <form class="footer-newsletter-form js-newsletter-form" action="{{ route('newsletter.subscribe') }}" method="post" data-source="footer">
                             @csrf
-                            <input type="email" name="email" placeholder="بريدك الإلكتروني" required>
+                            <input type="email" name="email" placeholder="بريدك الإلكتروني" required autocomplete="email">
                             <button type="submit" aria-label="اشتراك"><i class="fas fa-paper-plane"></i></button>
                         </form>
                     </div>

@@ -28,6 +28,16 @@ class CourseLesson extends Model
         return $this->belongsTo(CourseSection::class, 'course_section_id');
     }
 
+    public function getCourseIdAttribute(): ?int
+    {
+        return $this->section?->course_id;
+    }
+
+    public function progress(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(LessonProgress::class, 'course_lesson_id');
+    }
+
     public function getFormattedDurationAttribute(): ?string
     {
         if (! $this->duration_seconds) {

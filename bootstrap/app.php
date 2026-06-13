@@ -17,6 +17,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
             'role-list' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
             'check.user.active' => \App\Http\Middleware\CheckUserActive::class,
+            'ensure.student' => \App\Http\Middleware\EnsureStudent::class,
+            'ensure.enrolled' => \App\Http\Middleware\EnsureEnrolledInCourse::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

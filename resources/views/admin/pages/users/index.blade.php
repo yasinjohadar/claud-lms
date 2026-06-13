@@ -223,25 +223,7 @@
 
 
 
-            <x-admin.confirm-modal
-
-                id="userToggleStatusModal"
-
-                ajax-confirm
-
-                variant="success"
-
-                icon="ri-shut-down-line"
-
-                title="تأكيد تفعيل المستخدم"
-
-                message="سيتمكن المستخدم من الدخول واستخدام النظام."
-
-                confirm-text="نعم، فعّل"
-
-            />
-
-
+            <x-admin.toggle-status-modal id="userToggleStatusModal" entity-label="المستخدم" />
 
         </div>
 

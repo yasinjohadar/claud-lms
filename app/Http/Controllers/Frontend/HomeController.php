@@ -6,10 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Models\BlogPost;
 use App\Models\Course;
 use App\Models\CourseCategory;
+use App\Models\TeamMember;
+use App\Services\HeroSliderService;
 use Illuminate\View\View;
 
 class HomeController extends Controller
 {
+    public function __construct(
+        protected HeroSliderService $heroSliderService
+    ) {}
+
     public function index(): View
     {
         $blogPosts = BlogPost::published()
@@ -55,11 +61,22 @@ class HomeController extends Controller
                 });
         }
 
+        $teamMembers = TeamMember::forHome()
+            ->with('user')
+            ->ordered()
+            ->get();
+
+        $heroSettings = $this->heroSliderService->getSettings();
+        $heroSlides = $this->heroSliderService->getPublishedSlides();
+
         return view('frontend.pages.index', compact(
             'blogPosts',
             'homeCourses',
             'sliderCourses',
-            'homeCategories'
+            'homeCategories',
+            'teamMembers',
+            'heroSettings',
+            'heroSlides',
         ));
     }
 }

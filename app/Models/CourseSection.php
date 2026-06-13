@@ -27,4 +27,9 @@ class CourseSection extends Model
     {
         return $this->hasMany(CourseLesson::class)->orderBy('sort_order');
     }
+
+    public function resources(): HasMany
+    {
+        return $this->hasMany(CourseResource::class)->orderBy('sort_order');
+    }
 }

@@ -157,9 +157,10 @@
                         <span class="blog-detail-newsletter-icon"><i class="fas fa-envelope-open-text"></i></span>
                         <h3>اشترك في النشرة</h3>
                         <p>احصل على آخر المقالات والكورسات مباشرة في بريدك الإلكتروني.</p>
-                        <form class="blog-detail-newsletter-form" action="{{ route('newsletter.subscribe') }}" method="post">
+                        <div class="newsletter-alert" role="alert" aria-live="polite" hidden></div>
+                        <form class="blog-detail-newsletter-form js-newsletter-form" action="{{ route('newsletter.subscribe') }}" method="post" data-source="blog-detail">
                             @csrf
-                            <input type="email" name="email" placeholder="بريدك الإلكتروني" required aria-label="البريد الإلكتروني">
+                            <input type="email" name="email" placeholder="بريدك الإلكتروني" required autocomplete="email" aria-label="البريد الإلكتروني">
                             <button type="submit">اشترك الآن</button>
                         </form>
                     </div>

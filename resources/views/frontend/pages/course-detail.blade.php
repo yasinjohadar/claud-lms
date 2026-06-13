@@ -17,6 +17,7 @@
         : 0;
     $sections = $course->sections;
     $moduleCount = $sections->count();
+    $globalResources = $course->globalResources;
 @endphp
 
 @section('content')
@@ -82,6 +83,23 @@
                     @endif
                 </div>
 
+                @if($globalResources->isNotEmpty())
+                <div class="course-global-resources-banner section-fade-up mb-4">
+                    <div class="course-global-resources-banner__icon">
+                        <i class="fas fa-folder-open"></i>
+                    </div>
+                    <div class="course-global-resources-banner__content">
+                        <h3 class="course-global-resources-banner__title">موارد الكورس العامة</h3>
+                        <p class="course-global-resources-banner__text mb-0">
+                            <span class="en-text">{{ $globalResources->count() }}</span> مورد إضافي متاح في صفحات مستقلة — غير مرتبط بأقسام المنهاج.
+                        </p>
+                    </div>
+                    <a href="{{ route('courses.resources', $course->slug) }}" class="btn btn-accent course-global-resources-banner__btn">
+                        عرض الموارد <i class="fas fa-arrow-left ms-2"></i>
+                    </a>
+                </div>
+                @endif
+
                 <div class="course-detail-tabs-card section-fade-up">
                     <ul class="nav nav-tabs course-tabs border-0 flex-nowrap overflow-auto" id="courseTab" role="tablist">
                         <li class="nav-item" role="presentation">
@@ -93,6 +111,13 @@
                         <li class="nav-item" role="presentation">
                             <button class="nav-link w-100 text-nowrap" id="instructor-tab" data-bs-toggle="tab" data-bs-target="#instructor" type="button" role="tab">المدرب</button>
                         </li>
+                        @if($globalResources->isNotEmpty())
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link w-100 text-nowrap course-tab-external" href="{{ route('courses.resources', $course->slug) }}">
+                                الموارد <span class="en-text">({{ $globalResources->count() }})</span>
+                            </a>
+                        </li>
+                        @endif
                         <li class="nav-item" role="presentation">
                             <button class="nav-link w-100 text-nowrap" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab">التقييمات</button>
                         </li>
@@ -157,6 +182,29 @@
                                                                     {{ $lesson->provider_label }}
                                                                 @endif
                                                             </span>
+                                                        </li>
+                                                    @endforeach
+                                                    @foreach($section->resources as $resource)
+                                                        <li class="curriculum-lesson curriculum-resource">
+                                                            @if($resource->isLink())
+                                                                <a href="{{ $resource->url }}" target="_blank" rel="noopener noreferrer" class="curriculum-resource-link d-flex align-items-center gap-3 flex-grow-1 text-decoration-none">
+                                                                    <span class="curriculum-lesson-icon is-file">
+                                                                        <i class="fas fa-link"></i>
+                                                                    </span>
+                                                                    <span class="curriculum-lesson-title">{{ $resource->title }}</span>
+                                                                    <span class="curriculum-lesson-duration">{{ $resource->type_label }}</span>
+                                                                </a>
+                                                            @else
+                                                                <a href="{{ route('courses.resource-file.download', [$course->slug, $resource->id]) }}" class="curriculum-resource-link d-flex align-items-center gap-3 flex-grow-1 text-decoration-none">
+                                                                    <span class="curriculum-lesson-icon is-file">
+                                                                        <i class="fas {{ $resource->file_icon }}"></i>
+                                                                    </span>
+                                                                    <span class="curriculum-lesson-title">{{ $resource->title }}</span>
+                                                                    <span class="curriculum-lesson-duration en-text">
+                                                                        {{ $resource->formatted_file_size ?? $resource->type_label }}
+                                                                    </span>
+                                                                </a>
+                                                            @endif
                                                         </li>
                                                     @endforeach
                                                 </ul>
@@ -245,6 +293,8 @@
                             </button>
                             <a href="{{ route('checkout') }}" class="course-purchase-btn-secondary">اشترِ الآن</a>
                         </div>
+
+                        @include('frontend.pages.course-detail.partials.resources-sidebar')
 
                         <p class="course-purchase-guarantee"><i class="fas fa-shield-alt"></i> ضمان استرداد الأموال خلال 30 يوماً</p>
 

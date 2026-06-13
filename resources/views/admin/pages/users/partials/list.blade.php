@@ -96,17 +96,19 @@
                             @endif
                         </td>
                         <td>
-                            <label class="activation-pill {{ $user->is_active ? 'activation-pill--active' : 'activation-pill--inactive' }} mb-0">
-                                <input type="checkbox" class="toggle-status"
-                                       data-user-id="{{ $user->id }}"
-                                       data-user-name="{{ $user->name }}"
-                                       data-user-email="{{ $user->email }}"
-                                       data-user-avatar="{{ $user->photo ? asset('storage/' . $user->photo) : '' }}"
-                                       data-user-initial="{{ $initials }}"
-                                       {{ $user->is_active ? 'checked' : '' }}>
-                                <i class="ri-shut-down-line"></i>
-                                <span class="toggle-label">{{ $user->is_active ? 'نشط' : 'غير نشط' }}</span>
-                            </label>
+                            @can('user-toggle-status')
+                                <x-admin.activation-toggle
+                                    :entity-id="$user->id"
+                                    :is-active="$user->is_active"
+                                    :subject="$user->name"
+                                    :subject-meta="$user->email"
+                                    :disabled="auth()->id() === $user->id"
+                                />
+                            @else
+                                <span class="badge-soft {{ $user->is_active ? 'badge-soft-success' : 'badge-soft-secondary' }}">
+                                    {{ $user->is_active ? 'نشط' : 'غير نشط' }}
+                                </span>
+                            @endcan
                         </td>
                         <td>
                             <div class="action-btn-group">

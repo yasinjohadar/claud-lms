@@ -81,6 +81,41 @@ class Course extends Model
         return $this->hasMany(CourseSection::class)->orderBy('sort_order');
     }
 
+    public function resources(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(CourseResource::class)->orderBy('sort_order');
+    }
+
+    public function globalResources(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(CourseResource::class)
+            ->whereNull('course_section_id')
+            ->where('is_published', true)
+            ->orderBy('sort_order');
+    }
+
+    public function enrollments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(CourseEnrollment::class);
+    }
+
+    public function activeEnrollments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->enrollments()->where('status', 'active');
+    }
+
+    public function enrolledStudents(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
+    {
+        return $this->hasManyThrough(
+            Student::class,
+            CourseEnrollment::class,
+            'course_id',
+            'id',
+            'id',
+            'student_id'
+        )->where('course_enrollments.status', 'active');
+    }
+
     public function scopePublished($query)
     {
         return $query->where('status', 'published')

@@ -61,10 +61,22 @@
                     <span class="cart-badge">0</span>
                 </a>
                 @auth
-                    <a href="{{ route('dashboard') }}" class="site-nav-cta">
-                        <i class="fas fa-user"></i>
-                        <span>لوحة التحكم</span>
-                    </a>
+                    @if(auth()->user()->hasRole('student'))
+                        <a href="{{ route('student.dashboard') }}" class="site-nav-cta">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>لوحة الطالب</span>
+                        </a>
+                    @elseif(auth()->user()->hasRole('admin'))
+                        <a href="{{ route('admin.dashboard') }}" class="site-nav-cta">
+                            <i class="fas fa-user-shield"></i>
+                            <span>لوحة التحكم</span>
+                        </a>
+                    @else
+                        <a href="{{ route('dashboard') }}" class="site-nav-cta">
+                            <i class="fas fa-user"></i>
+                            <span>حسابي</span>
+                        </a>
+                    @endif
                 @else
                     <a href="{{ route('login') }}" class="site-nav-cta">
                         <i class="fas fa-user"></i>

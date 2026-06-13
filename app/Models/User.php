@@ -3,6 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -62,5 +65,32 @@ class User extends Authenticatable
      public function sessions()
     {
         return $this->hasMany(\App\Models\Session::class, 'user_id');
+    }
+
+    public function student(): HasOne
+    {
+        return $this->hasOne(Student::class);
+    }
+
+    public function isStudent(): bool
+    {
+        return $this->hasRole('student') && $this->student !== null;
+    }
+
+    public function scopeStudents(Builder $query): Builder
+    {
+        return $query->role('student');
+    }
+
+    public function enrollments(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            CourseEnrollment::class,
+            Student::class,
+            'user_id',
+            'student_id',
+            'id',
+            'id'
+        );
     }
 }

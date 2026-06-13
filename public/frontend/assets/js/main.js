@@ -606,7 +606,6 @@ function flipCard(show) {
 }
 
 function submitOrder() {
-  // Basic validation
   const firstName = document.getElementById('first-name')?.value.trim();
   const email     = document.getElementById('email')?.value.trim();
   const cardNum   = document.getElementById('card-number')?.value.replace(/\s/g,'');
@@ -619,20 +618,71 @@ function submitOrder() {
     return;
   }
 
-  // Simulate processing
+  const cart = getCart();
+  if (!cart.length) {
+    showToast('السلة فارغة', 'warning');
+    return;
+  }
+
+  const checkoutUrl = document.querySelector('meta[name="checkout-url"]')?.content;
+  const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
+
   const btn = document.getElementById('submit-order');
   if (btn) {
     btn.disabled = true;
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>جارٍ المعالجة...</span>';
   }
 
-  setTimeout(() => {
+  const payload = {
+    items: cart.map(item => ({ course_id: item.id })),
+    simulate_payment: true,
+    payment_method: 'card_simulated',
+  };
+
+  const finishSuccess = (data) => {
     clearCart();
     const successEl = document.getElementById('order-success');
     if (successEl) successEl.classList.remove('d-none');
     if (btn) btn.classList.add('d-none');
-    showToast('تم تأكيد طلبك بنجاح!', 'success');
+    showToast(data?.message || 'تم تأكيد طلبك بنجاح!', 'success');
     const checkoutItems = document.getElementById('checkout-order-items');
-    if (checkoutItems) checkoutItems.innerHTML = '<p class="text-success text-center fw-bold"><i class="fas fa-check-circle me-2"></i>تم الدفع بنجاح!</p>';
-  }, 2000);
+    if (checkoutItems) {
+      checkoutItems.innerHTML = '<p class="text-success text-center fw-bold"><i class="fas fa-check-circle me-2"></i>تم الدفع بنجاح!</p>';
+    }
+  };
+
+  const finishError = (message) => {
+    showToast(message || 'تعذّر إتمام الطلب', 'danger');
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-lock"></i><span>تأكيد الدفع وإتمام الطلب</span>';
+    }
+  };
+
+  if (!checkoutUrl) {
+    setTimeout(() => finishSuccess({}), 2000);
+    return;
+  }
+
+  fetch(checkoutUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'X-CSRF-TOKEN': csrfToken,
+    },
+    body: JSON.stringify(payload),
+    credentials: 'same-origin',
+  })
+    .then(async (res) => {
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        if (res.status === 401 || res.status === 403) {
+          throw new Error('يجب تسجيل الدخول كطالب لإتمام الشراء');
+        }
+        throw new Error(data.message || 'تعذّر إتمام الطلب');
+      }
+      finishSuccess(data);
+    })
+    .catch((err) => finishError(err.message));
 }

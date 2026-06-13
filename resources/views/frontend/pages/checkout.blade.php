@@ -4,6 +4,10 @@
 
 @section('body_class', 'checkout-page')
 
+@section('meta')
+    <meta name="checkout-url" content="{{ route('checkout.store') }}">
+@endsection
+
 @section('content')
 <!-- Page Hero -->
     <header class="checkout-page-hero">

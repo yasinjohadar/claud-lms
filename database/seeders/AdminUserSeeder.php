@@ -37,6 +37,9 @@ class AdminUserSeeder extends Seeder
 
         Role::firstOrCreate(['name' => 'instructor']);
 
+        $studentRole = Role::firstOrCreate(['name' => 'student', 'guard_name' => 'web']);
+        $studentRole->syncPermissions(['dashboard-view']);
+
         // إنشاء دور مستخدم عادي
         $userRole = Role::firstOrCreate(['name' => 'user']);
 

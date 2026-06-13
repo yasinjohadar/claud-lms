@@ -19,6 +19,10 @@ class DatabaseSeeder extends Seeder
             BlogTagSeeder::class,
             BlogPostSeeder::class,
             CourseCatalogSeeder::class,
+            PublicResourceSeeder::class,
+            TeamMemberSeeder::class,
+            HeroSlideSeeder::class,
+            StudentSeeder::class,
         ]);
 
         User::factory()->create([

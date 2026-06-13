@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\CourseLesson;
+use App\Models\CourseResource;
 use App\Models\CourseSection;
 use App\Services\CourseCurriculumService;
+use App\Services\CourseResourceService;
 use App\Services\VideoReferenceService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -16,12 +18,13 @@ class CourseCurriculumController extends Controller
 {
     public function __construct(
         protected CourseCurriculumService $curriculumService,
+        protected CourseResourceService $resourceService,
         protected VideoReferenceService $videoReferenceService
     ) {}
 
     public function index(Course $course): View
     {
-        $course->load(['sections.lessons']);
+        $course->load(['sections.lessons', 'sections.resources', 'resources' => fn ($q) => $q->whereNull('course_section_id')]);
 
         return view('admin.courses.curriculum.index', compact('course'));
     }
@@ -41,6 +44,7 @@ class CourseCurriculumController extends Controller
 
         return $this->jsonSuccess('تم إضافة القسم بنجاح', [
             'html' => $this->renderSections($course),
+            'global_resources_html' => $this->renderGlobalResources($course),
             'section_id' => $section->id,
             'stats' => $this->courseStats($course),
         ]);
@@ -58,6 +62,7 @@ class CourseCurriculumController extends Controller
 
         return $this->jsonSuccess('تم تحديث القسم بنجاح', [
             'html' => $this->renderSections($course),
+            'global_resources_html' => $this->renderGlobalResources($course),
             'stats' => $this->courseStats($course),
         ]);
     }
@@ -71,6 +76,7 @@ class CourseCurriculumController extends Controller
 
         return $this->jsonSuccess('تم حذف القسم بنجاح', [
             'html' => $this->renderSections($course),
+            'global_resources_html' => $this->renderGlobalResources($course),
             'stats' => $this->courseStats($course),
         ]);
     }
@@ -105,6 +111,7 @@ class CourseCurriculumController extends Controller
 
         return $this->jsonSuccess('تم إضافة الدرس بنجاح', [
             'html' => $this->renderSections($course),
+            'global_resources_html' => $this->renderGlobalResources($course),
             'stats' => $this->courseStats($course),
         ]);
     }
@@ -136,6 +143,7 @@ class CourseCurriculumController extends Controller
 
         return $this->jsonSuccess('تم تحديث الدرس بنجاح', [
             'html' => $this->renderSections($course),
+            'global_resources_html' => $this->renderGlobalResources($course),
             'stats' => $this->courseStats($course),
         ]);
     }
@@ -149,8 +157,50 @@ class CourseCurriculumController extends Controller
 
         return $this->jsonSuccess('تم حذف الدرس بنجاح', [
             'html' => $this->renderSections($course),
+            'global_resources_html' => $this->renderGlobalResources($course),
             'stats' => $this->courseStats($course),
         ]);
+    }
+
+    public function storeResource(Request $request, Course $course): JsonResponse
+    {
+        $this->normalizeResourceSectionInput($request);
+
+        $validated = $this->resourceService->validatePayload($request);
+        $validated['course_section_id'] = $validated['course_section_id'] ?? null;
+        $validated['is_published'] = filter_var($validated['is_published'] ?? true, FILTER_VALIDATE_BOOLEAN);
+
+        $this->resourceService->store(
+            $course,
+            $validated,
+            $request->file('file')
+        );
+
+        return $this->jsonSuccess('تم إضافة المورد بنجاح', $this->curriculumResponse($course));
+    }
+
+    public function updateResource(Request $request, Course $course, CourseResource $resource): JsonResponse
+    {
+        $this->ensureResourceBelongsToCourse($course, $resource);
+
+        $this->normalizeResourceSectionInput($request);
+
+        $validated = $this->resourceService->validatePayload($request, true);
+        $validated['course_section_id'] = $validated['course_section_id'] ?? null;
+        $validated['is_published'] = filter_var($validated['is_published'] ?? $resource->is_published, FILTER_VALIDATE_BOOLEAN);
+
+        $this->resourceService->update($resource, $validated, $request->file('file'));
+
+        return $this->jsonSuccess('تم تحديث المورد بنجاح', $this->curriculumResponse($course));
+    }
+
+    public function destroyResource(Course $course, CourseResource $resource): JsonResponse
+    {
+        $this->ensureResourceBelongsToCourse($course, $resource);
+
+        $this->resourceService->destroy($resource);
+
+        return $this->jsonSuccess('تم حذف المورد بنجاح', $this->curriculumResponse($course));
     }
 
     public function reorder(Request $request, Course $course): JsonResponse
@@ -161,6 +211,11 @@ class CourseCurriculumController extends Controller
             'lessons' => 'nullable|array',
             'lessons.*' => 'integer|exists:course_lessons,id',
             'section_id' => 'nullable|integer|exists:course_sections,id',
+            'resources' => 'nullable|array',
+            'resources.*' => 'integer|exists:course_resources,id',
+            'resource_section_id' => 'nullable|integer|exists:course_sections,id',
+            'global_resources' => 'nullable|array',
+            'global_resources.*' => 'integer|exists:course_resources,id',
         ]);
 
         if (! empty($validated['sections'])) {
@@ -176,17 +231,43 @@ class CourseCurriculumController extends Controller
             $this->curriculumService->reorderLessons($section, $validated['lessons']);
         }
 
-        return $this->jsonSuccess('تم تحديث الترتيب', [
+        if (! empty($validated['resources'])) {
+            $this->resourceService->reorderResources(
+                $course,
+                $validated['resource_section_id'] ?? null,
+                $validated['resources']
+            );
+        }
+
+        if (! empty($validated['global_resources'])) {
+            $this->resourceService->reorderResources($course, null, $validated['global_resources']);
+        }
+
+        return $this->jsonSuccess('تم تحديث الترتيب', $this->curriculumResponse($course));
+    }
+
+    protected function curriculumResponse(Course $course): array
+    {
+        return [
             'html' => $this->renderSections($course),
+            'global_resources_html' => $this->renderGlobalResources($course),
             'stats' => $this->courseStats($course),
-        ]);
+        ];
     }
 
     protected function renderSections(Course $course): string
     {
-        $course->load(['sections.lessons']);
+        $course->load(['sections.lessons', 'sections.resources']);
 
         return view('admin.courses.curriculum.partials.sections', compact('course'))->render();
+    }
+
+    protected function renderGlobalResources(Course $course): string
+    {
+        $course->load(['resources' => fn ($q) => $q->whereNull('course_section_id')]);
+        $globalResources = $course->resources;
+
+        return view('admin.courses.curriculum.partials.global-resources', compact('course', 'globalResources'))->render();
     }
 
     protected function courseStats(Course $course): array
@@ -197,12 +278,31 @@ class CourseCurriculumController extends Controller
             'sections_count' => $course->sections()->count(),
             'lessons_count' => $course->lessons_count,
             'duration_hours' => $course->duration_hours,
+            'resources_count' => $course->resources()->count(),
         ];
     }
 
     protected function jsonSuccess(string $message, array $extra = []): JsonResponse
     {
         return response()->json(array_merge(['success' => true, 'message' => $message], $extra));
+    }
+
+    protected function normalizeSectionId(mixed $sectionId): ?int
+    {
+        if ($sectionId === null || $sectionId === '' || $sectionId === 'global') {
+            return null;
+        }
+
+        return (int) $sectionId;
+    }
+
+    protected function normalizeResourceSectionInput(Request $request): void
+    {
+        $sectionId = $request->input('course_section_id');
+
+        if ($sectionId === 'global' || $sectionId === '' || $sectionId === null) {
+            $request->merge(['course_section_id' => null]);
+        }
     }
 
     protected function ensureSectionBelongsToCourse(Course $course, CourseSection $section): void
@@ -213,5 +313,10 @@ class CourseCurriculumController extends Controller
     protected function ensureLessonBelongsToCourse(Course $course, CourseLesson $lesson): void
     {
         abort_unless($lesson->section?->course_id === $course->id, 404);
+    }
+
+    protected function ensureResourceBelongsToCourse(Course $course, CourseResource $resource): void
+    {
+        abort_unless($resource->course_id === $course->id, 404);
     }
 }

@@ -183,6 +183,50 @@
         }
     };
 
+    function getToggleModalConfig(modalEl, isActive) {
+        var configHost = modalEl ? modalEl.closest('[data-toggle-status-modal]') : null;
+        var fallbackActivate = {
+            variant: 'success',
+            title: 'تأكيد التفعيل',
+            message: 'سيتمكن من الدخول واستخدام النظام.',
+            confirmText: 'نعم، فعّل',
+            confirmIcon: 'ri-shut-down-line',
+            icon: 'ri-shut-down-line'
+        };
+        var fallbackDeactivate = {
+            variant: 'warning',
+            title: 'تأكيد الإيقاف',
+            message: 'لن يتمكن من الدخول إلى النظام حتى إعادة التفعيل.',
+            confirmText: 'نعم، أوقف التفعيل',
+            confirmIcon: 'ri-shut-down-line',
+            icon: 'ri-shut-down-line'
+        };
+
+        if (!configHost) {
+            return isActive ? fallbackActivate : fallbackDeactivate;
+        }
+
+        if (isActive) {
+            return {
+                variant: 'success',
+                title: configHost.dataset.activateTitle || fallbackActivate.title,
+                message: configHost.dataset.activateMessage || fallbackActivate.message,
+                confirmText: configHost.dataset.activateConfirm || fallbackActivate.confirmText,
+                confirmIcon: 'ri-shut-down-line',
+                icon: 'ri-shut-down-line'
+            };
+        }
+
+        return {
+            variant: 'warning',
+            title: configHost.dataset.deactivateTitle || fallbackDeactivate.title,
+            message: configHost.dataset.deactivateMessage || fallbackDeactivate.message,
+            confirmText: configHost.dataset.deactivateConfirm || fallbackDeactivate.confirmText,
+            confirmIcon: 'ri-shut-down-line',
+            icon: 'ri-shut-down-line'
+        };
+    }
+
     function initActivationToggles(root, baseUrl, modalSelector) {
         var scope = root || document;
         var urlBase = (baseUrl || '').replace(/\/$/, '');
@@ -190,31 +234,20 @@
         scope.querySelectorAll('.toggle-status:not([data-toggle-bound])').forEach(function (toggle) {
             toggle.dataset.toggleBound = '1';
             toggle.addEventListener('change', function () {
-                var userId = this.dataset.userId;
+                var entityId = this.dataset.entityId || this.dataset.userId;
                 var isActive = this.checked;
                 var pill = this.closest('.activation-pill');
                 var label = pill ? pill.querySelector('.toggle-label') : null;
                 var self = this;
+                var activeLabel = self.dataset.activeLabel || 'نشط';
+                var inactiveLabel = self.dataset.inactiveLabel || 'غير نشط';
 
                 self.checked = !isActive;
 
-                var activateConfig = {
-                    variant: 'success',
-                    title: 'تأكيد تفعيل المستخدم',
-                    message: 'سيتمكن المستخدم من الدخول واستخدام النظام.',
-                    confirmText: 'نعم، فعّل',
-                    confirmIcon: 'ri-shut-down-line',
-                    icon: 'ri-shut-down-line'
-                };
-                var deactivateConfig = {
-                    variant: 'warning',
-                    title: 'تأكيد إلغاء التفعيل',
-                    message: 'لن يتمكن المستخدم من الدخول إلى النظام حتى إعادة تفعيل حسابه.',
-                    confirmText: 'نعم، أوقف التفعيل',
-                    confirmIcon: 'ri-shut-down-line',
-                    icon: 'ri-shut-down-line'
-                };
-                var config = isActive ? activateConfig : deactivateConfig;
+                var config = getToggleModalConfig(
+                    modalSelector ? document.querySelector(modalSelector) : null,
+                    isActive
+                );
 
                 function runToggleRequest() {
                     self.checked = isActive;
@@ -229,7 +262,7 @@
                         confirmBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> جاري التحديث...';
                     }
 
-                    fetch(urlBase + '/' + userId + '/toggle-status', {
+                    fetch(urlBase + '/' + entityId + '/toggle-status', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -239,14 +272,22 @@
                         },
                         body: JSON.stringify({ is_active: isActive })
                     })
-                    .then(function (r) { if (!r.ok) throw new Error(); return r.json(); })
+                    .then(function (r) {
+                        return r.json().then(function (data) {
+                            if (!r.ok) throw data;
+                            return data;
+                        });
+                    })
                     .then(function (data) {
                         if (data.success) {
-                            if (label) label.textContent = data.is_active ? 'نشط' : 'غير نشط';
-                            self.checked = Boolean(data.is_active);
+                            var active = Boolean(data.is_active);
+                            if (label) {
+                                label.textContent = data.status_label || (active ? activeLabel : inactiveLabel);
+                            }
+                            self.checked = active;
                             if (pill) {
-                                pill.classList.toggle('activation-pill--active', data.is_active);
-                                pill.classList.toggle('activation-pill--inactive', !data.is_active);
+                                pill.classList.toggle('activation-pill--active', active);
+                                pill.classList.toggle('activation-pill--inactive', !active);
                             }
                             window.adminUiToast(data.message || 'تم التحديث بنجاح', 'success');
                         } else {
@@ -254,9 +295,9 @@
                             window.adminUiToast(data.message || 'حدث خطأ', 'error');
                         }
                     })
-                    .catch(function () {
+                    .catch(function (err) {
                         self.checked = !isActive;
-                        window.adminUiToast('حدث خطأ أثناء التحديث', 'error');
+                        window.adminUiToast((err && err.message) || 'حدث خطأ أثناء التحديث', 'error');
                     })
                     .finally(function () {
                         self.disabled = false;
@@ -276,8 +317,8 @@
                         variant: config.variant,
                         title: config.title,
                         message: config.message,
-                        subject: self.dataset.userName || '',
-                        subjectMeta: self.dataset.userEmail || '',
+                        subject: self.dataset.subjectName || self.dataset.userName || '',
+                        subjectMeta: self.dataset.subjectMeta || self.dataset.userEmail || '',
                         confirmText: config.confirmText,
                         confirmIcon: config.confirmIcon,
                         icon: config.icon,

@@ -32,6 +32,29 @@ return [
                 'user-update-password' => 'تغيير كلمة مرور مستخدم',
             ],
         ],
+        'students' => [
+            'label' => 'الطلاب',
+            'permissions' => [
+                'student-list' => 'عرض قائمة الطلاب',
+                'student-create' => 'إنشاء طالب',
+                'student-edit' => 'تعديل طالب',
+                'student-delete' => 'حذف طالب',
+                'student-show' => 'عرض ملف طالب',
+                'student-toggle-status' => 'تفعيل/إيقاف طالب',
+                'enrollment-manage' => 'إدارة تسجيل الكورسات',
+                'order-manage' => 'إدارة الطلبات',
+            ],
+        ],
+        'hero_slides' => [
+            'label' => 'سلايدر الرئيسية',
+            'permissions' => [
+                'hero-slide-list' => 'عرض شرائح السلايدر',
+                'hero-slide-create' => 'إنشاء شريحة',
+                'hero-slide-edit' => 'تعديل شريحة',
+                'hero-slide-delete' => 'حذف شريحة',
+                'hero-slide-settings' => 'إعدادات السلايدر',
+            ],
+        ],
         'blog_posts' => [
             'label' => 'المدونة — المقالات',
             'permissions' => [

@@ -63,6 +63,24 @@
                             </a>
                         </li>
 
+                        <li class="slide {{ request()->routeIs('admin.students.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.students.index') }}" class="side-menu__item {{ request()->routeIs('admin.students.*') ? 'active' : '' }}">
+                                <span class="side-menu__icon side-menu__icon--boxed side-menu__icon--users">
+                                    <i class="ri-graduation-cap-line"></i>
+                                </span>
+                                <span class="side-menu__label">الطلاب</span>
+                            </a>
+                        </li>
+
+                        <li class="slide {{ request()->routeIs('admin.orders.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.orders.index') }}" class="side-menu__item {{ request()->routeIs('admin.orders.*') ? 'active' : '' }}">
+                                <span class="side-menu__icon side-menu__icon--boxed side-menu__icon--blog">
+                                    <i class="ri-shopping-bag-line"></i>
+                                </span>
+                                <span class="side-menu__label">الطلبات</span>
+                            </a>
+                        </li>
+
                         <li class="slide {{ request()->routeIs('admin.roles.*') ? 'active' : '' }}">
                             <a href="{{ route('admin.roles.index') }}" class="side-menu__item {{ request()->routeIs('admin.roles.*') ? 'active' : '' }}">
                                 <span class="side-menu__icon side-menu__icon--boxed side-menu__icon--roles">
@@ -115,6 +133,33 @@
                                     <a href="{{ route('admin.courses.tags.index') }}" class="side-menu__item">التاغات</a>
                                 </li>
                             </ul>
+                        </li>
+
+                        <li class="slide {{ request()->routeIs('admin.team-members.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.team-members.index') }}" class="side-menu__item {{ request()->routeIs('admin.team-members.*') ? 'active' : '' }}">
+                                <span class="side-menu__icon side-menu__icon--boxed side-menu__icon--users">
+                                    <i class="ri-team-line"></i>
+                                </span>
+                                <span class="side-menu__label">فريق العمل</span>
+                            </a>
+                        </li>
+
+                        <li class="slide {{ request()->routeIs('admin.hero-slides.*') || request()->routeIs('admin.hero-slider.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.hero-slides.index') }}" class="side-menu__item {{ request()->routeIs('admin.hero-slides.*') || request()->routeIs('admin.hero-slider.*') ? 'active' : '' }}">
+                                <span class="side-menu__icon side-menu__icon--boxed side-menu__icon--blog">
+                                    <i class="ri-slideshow-line"></i>
+                                </span>
+                                <span class="side-menu__label">سلايدر الرئيسية</span>
+                            </a>
+                        </li>
+
+                        <li class="slide {{ request()->routeIs('admin.public-resources.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.public-resources.index') }}" class="side-menu__item {{ request()->routeIs('admin.public-resources.*') ? 'active' : '' }}">
+                                <span class="side-menu__icon side-menu__icon--boxed side-menu__icon--blog">
+                                    <i class="ri-folder-open-line"></i>
+                                </span>
+                                <span class="side-menu__label">الموارد العامة</span>
+                            </a>
                         </li>
 
                         <li class="slide {{ request()->routeIs('admin.contact-messages.*') ? 'active' : '' }}">

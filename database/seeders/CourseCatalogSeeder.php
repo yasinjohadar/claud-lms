@@ -4,15 +4,32 @@ namespace Database\Seeders;
 
 use App\Models\Course;
 use App\Models\CourseCategory;
+use App\Models\CourseResource;
 use App\Models\CourseTag;
 use App\Models\User;
 use App\Services\CourseCurriculumService;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role;
 
 class CourseCatalogSeeder extends Seeder
 {
+    private const VIDEO_PROVIDERS = ['youtube', 'vimeo', 'bunny_stream', 'bunny_cdn'];
+
+    private const VIDEO_REFERENCES = [
+        'youtube' => ['dQw4w9WgXcQ', 'jNQXAC9IVRw', 'M7lc1UVf-VE', '9bZkp7q19f0', 'kJQP7kiw5Fk'],
+        'vimeo' => ['76979871', '22439234', '148751763', '357274789'],
+        'bunny_stream' => [
+            '{"library_id":"12345","video_id":"intro-web-001"}',
+            '{"library_id":"12345","video_id":"module-css-002"}',
+            '{"library_id":"67890","video_id":"flutter-lesson-03"}',
+        ],
+        'bunny_cdn' => [
+            'https://vz-example.b-cdn.net/courses/lesson-01.mp4',
+            'https://vz-example.b-cdn.net/courses/lesson-02.mp4',
+            'https://cdn-demo.b-cdn.net/videos/chapter-03.mp4',
+        ],
+    ];
+
     public function run(): void
     {
         $instructorRole = Role::firstOrCreate(['name' => 'instructor']);
@@ -133,7 +150,7 @@ class CourseCatalogSeeder extends Seeder
                 $course->tags()->syncWithoutDetaching([$tagModels[$tagSlug]->id]);
             }
 
-            $this->seedSampleCurriculum($course, $i);
+            $this->seedFullCurriculum($course, $data);
         }
 
         foreach (CourseCategory::all() as $category) {
@@ -145,51 +162,410 @@ class CourseCatalogSeeder extends Seeder
         }
     }
 
-    protected function seedSampleCurriculum(Course $course, int $index): void
+    protected function seedFullCurriculum(Course $course, array $data): void
     {
         $course->sections()->delete();
+        $course->resources()->delete();
 
-        $providers = ['youtube', 'vimeo', 'bunny_stream', 'bunny_cdn'];
-        $references = [
-            'dQw4w9WgXcQ',
-            '76979871',
-            json_encode(['library_id' => '12345', 'video_id' => 'sample-guid-' . $index], JSON_UNESCAPED_UNICODE),
-            'https://cdn.example.b-cdn.net/courses/intro.mp4',
-        ];
+        $blueprint = $this->curriculumBlueprint($data['slug']);
+        $targetLessons = $data['lessons_count'];
+        $avgDuration = max(300, (int) (($data['duration_hours'] * 3600) / max($targetLessons, 1)));
 
-        $section = $course->sections()->create([
-            'title' => 'مقدمة الدورة',
-            'sort_order' => 1,
-        ]);
+        $lessonCounter = 0;
+        $providerIndex = 0;
 
-        $section->lessons()->createMany([
-            [
-                'title' => 'مرحباً بك في الدورة',
-                'video_provider' => $providers[$index % 4],
-                'video_reference' => $references[$index % 4],
-                'duration_seconds' => 480,
-                'sort_order' => 1,
-            ],
-            [
-                'title' => 'إعداد بيئة العمل',
-                'video_provider' => 'youtube',
-                'video_reference' => 'dQw4w9WgXcQ',
-                'duration_seconds' => 750,
-                'sort_order' => 2,
-            ],
-        ]);
+        foreach ($blueprint as $sectionIndex => $sectionData) {
+            $section = $course->sections()->create([
+                'title' => $sectionData['title'],
+                'sort_order' => $sectionIndex + 1,
+            ]);
 
-        $course->sections()->create([
-            'title' => 'الوحدة التطبيقية',
-            'sort_order' => 2,
-        ])->lessons()->create([
-            'title' => 'مشروع عملي أول',
-            'video_provider' => 'vimeo',
-            'video_reference' => '76979871',
-            'duration_seconds' => 1200,
-            'sort_order' => 1,
-        ]);
+            $lessonTitles = $sectionData['lessons'];
+            $lessonsInSection = $this->distributeLessonsForSection(
+                count($lessonTitles),
+                $targetLessons,
+                count($blueprint),
+                $sectionIndex,
+                $lessonCounter
+            );
+
+            $expandedTitles = $this->expandLessonTitles($lessonTitles, $lessonsInSection, $sectionData['title']);
+
+            foreach ($expandedTitles as $lessonIndex => $title) {
+                $provider = self::VIDEO_PROVIDERS[$providerIndex % count(self::VIDEO_PROVIDERS)];
+                $refs = self::VIDEO_REFERENCES[$provider];
+                $reference = $refs[($lessonCounter + $lessonIndex) % count($refs)];
+
+                $section->lessons()->create([
+                    'title' => $title,
+                    'video_provider' => $provider,
+                    'video_reference' => $reference,
+                    'duration_seconds' => $this->lessonDuration($avgDuration, $lessonCounter + $lessonIndex),
+                    'sort_order' => $lessonIndex + 1,
+                ]);
+
+                $providerIndex++;
+            }
+
+            $lessonCounter += count($expandedTitles);
+
+            if ($lessonCounter >= $targetLessons) {
+                break;
+            }
+        }
+
+        while ($lessonCounter < $targetLessons) {
+            $section = $course->sections()->last()
+                ?? $course->sections()->create(['title' => 'دروس إضافية', 'sort_order' => $course->sections()->count() + 1]);
+
+            $provider = self::VIDEO_PROVIDERS[$providerIndex % count(self::VIDEO_PROVIDERS)];
+            $refs = self::VIDEO_REFERENCES[$provider];
+            $num = $lessonCounter + 1;
+
+            $section->lessons()->create([
+                'title' => 'درس تطبيقي إضافي ' . $num,
+                'video_provider' => $provider,
+                'video_reference' => $refs[$lessonCounter % count($refs)],
+                'duration_seconds' => $this->lessonDuration($avgDuration, $lessonCounter),
+                'sort_order' => $section->lessons()->count() + 1,
+            ]);
+
+            $lessonCounter++;
+            $providerIndex++;
+        }
 
         app(CourseCurriculumService::class)->syncCourseStats($course);
+
+        $this->seedResources($course);
+    }
+
+    protected function seedResources(Course $course): void
+    {
+        $course->resources()->create([
+            'title' => 'دليل المراجع والمصادر',
+            'slug' => CourseResource::generateUniqueSlug($course->id, 'دليل المراجع والمصادر'),
+            'description' => 'مجموعة روابط لمصادر إضافية ومقالات مرجعية تساعدك على تعميق فهمك لموضوعات الكورس.',
+            'type' => 'link',
+            'url' => 'https://developer.mozilla.org/ar/',
+            'sort_order' => 1,
+            'is_published' => true,
+        ]);
+
+        $course->resources()->create([
+            'title' => 'قائمة المصطلحات',
+            'slug' => CourseResource::generateUniqueSlug($course->id, 'قائمة المصطلحات'),
+            'description' => 'ملف يضم أهم المصطلحات والمفاهيم المستخدمة طوال الدورة مع شرح مختصر لكل منها.',
+            'type' => 'link',
+            'url' => 'https://www.w3schools.com/',
+            'sort_order' => 2,
+            'is_published' => true,
+        ]);
+
+        $firstSection = $course->sections()->orderBy('sort_order')->first();
+
+        if ($firstSection) {
+            $course->resources()->create([
+                'course_section_id' => $firstSection->id,
+                'title' => 'ملخص القسم الأول',
+                'slug' => CourseResource::generateUniqueSlug($course->id, 'ملخص القسم الأول'),
+                'type' => 'link',
+                'url' => 'https://github.com/',
+                'sort_order' => 1,
+                'is_published' => true,
+            ]);
+        }
+    }
+
+    protected function distributeLessonsForSection(int $baseCount, int $targetTotal, int $sectionCount, int $sectionIndex, int $alreadyCreated): int
+    {
+        $remaining = max(0, $targetTotal - $alreadyCreated);
+        $remainingSections = max(1, $sectionCount - $sectionIndex);
+
+        if ($sectionIndex === $sectionCount - 1) {
+            return max($baseCount, $remaining);
+        }
+
+        $share = (int) ceil($remaining / $remainingSections);
+
+        return max($baseCount, min($share, $remaining));
+    }
+
+    /**
+     * @param  array<int, string>  $baseTitles
+     * @return array<int, string>
+     */
+    protected function expandLessonTitles(array $baseTitles, int $targetCount, string $sectionTitle): array
+    {
+        if ($targetCount <= count($baseTitles)) {
+            return array_slice($baseTitles, 0, $targetCount);
+        }
+
+        $titles = $baseTitles;
+        $i = 1;
+
+        while (count($titles) < $targetCount) {
+            $titles[] = 'تمرين عملي — ' . $sectionTitle . ' (' . $i . ')';
+            $i++;
+        }
+
+        return $titles;
+    }
+
+    protected function lessonDuration(int $average, int $index): int
+    {
+        $variance = [-120, -60, 0, 60, 120, 180][$index % 6];
+
+        return max(180, $average + $variance);
+    }
+
+    /**
+     * @return array<int, array{title: string, lessons: array<int, string>}>
+     */
+    protected function curriculumBlueprint(string $slug): array
+    {
+        return match ($slug) {
+            'professional-web-development' => [
+                ['title' => 'مقدمة في تطوير الويب', 'lessons' => [
+                    'مرحباً بك في الدورة الشاملة', 'كيف يعمل الإنترنت والمتصفحات', 'تثبيت VS Code والأدوات الأساسية',
+                    'هيكل مشروع ويب احترافي', 'Git و GitHub للمبتدئين', 'أفضل ممارسات كتابة الكود',
+                ]],
+                ['title' => 'أساسيات HTML5', 'lessons' => [
+                    'أول صفحة HTML', 'العناوين والفقرات والروابط', 'القوائم والجداول', 'النماذج والمدخلات',
+                    'Semantic HTML', 'SEO أساسيات للصفحات', 'مشروع: صفحة هبوط شخصية',
+                ]],
+                ['title' => 'تنسيق CSS3 المتقدم', 'lessons' => [
+                    'المحددات والخصائص', 'Box Model و Flexbox', 'CSS Grid Layout', 'التجاوب Responsive Design',
+                    'المتغيرات والحركات CSS', 'SASS أساسيات', 'مشروع: واجهة متجاوبة كاملة',
+                ]],
+                ['title' => 'JavaScript للواجهات', 'lessons' => [
+                    'المتغيرات والدوال', 'DOM Manipulation', 'الأحداث Events', 'Fetch API و AJAX',
+                    'ES6+ الميزات الحديثة', 'التعامل مع JSON', 'مشروع: تطبيق Todo List',
+                ]],
+                ['title' => 'إطار React.js', 'lessons' => [
+                    'مقدمة React و JSX', 'المكونات Components', 'State و Props', 'Hooks الأساسية',
+                    'React Router', 'إدارة الحالة', 'مشروع: لوحة تحكم تفاعلية',
+                ]],
+                ['title' => 'Laravel للواجهة الخلفية', 'lessons' => [
+                    'تثبيت Laravel', 'Routing و Controllers', 'Eloquent ORM', 'Blade Templates',
+                    'المصادقة Authentication', 'RESTful API', 'مشروع: API للمدونة',
+                ]],
+                ['title' => 'مشاريع نهائية ونشر', 'lessons' => [
+                    'ربط React مع Laravel API', 'إدارة الأخطاء والاختبار', 'تحسين الأداء',
+                    'النشر على السيرفر', 'مراجعة شاملة للمشروع', 'نصائح التوظيف والبورتفوليو',
+                ]],
+            ],
+            'interactive-ui-ux-design' => [
+                ['title' => 'أساسيات تجربة المستخدم', 'lessons' => [
+                    'ما الفرق بين UI و UX', 'رحلة المستخدم User Journey', 'بحوث المستخدم', 'بناء Personas',
+                    'تحليل المنافسين', 'مبادئ التصميم البصري',
+                ]],
+                ['title' => 'Figma من الصفر', 'lessons' => [
+                    'واجهة Figma والأدوات', 'الإطارات Frames والشبكات', 'المكونات Components',
+                    'Auto Layout', 'النماذج الأولية Prototyping', 'التعاون والمشاركة',
+                ]],
+                ['title' => 'أنظمة التصميم Design Systems', 'lessons' => [
+                    'الألوان والطباعة', 'Spacing و Grid', 'مكتبة مكونات', 'Dark Mode',
+                    'إمكانية الوصول Accessibility', 'توثيق النظام',
+                ]],
+                ['title' => 'تصميم تطبيقات الموبايل', 'lessons' => [
+                    'إرشادات iOS و Android', 'تصميم شاشات التسجيل', 'التنقل Navigation Patterns',
+                    'Micro-interactions', 'مشروع: تطبيق توصيل طعام',
+                ]],
+                ['title' => 'تصميم مواقع الويب', 'lessons' => [
+                    'هيكل الصفحة الرئيسية', 'صفحات المنتج والتفاصيل', 'لوحات التحكم Dashboard',
+                    'حالات التحميل والأخطاء', 'مشروع: موقع SaaS كامل',
+                ]],
+                ['title' => 'اختبار وتسليم التصاميم', 'lessons' => [
+                    'اختبار قابلية الاستخدام', 'تسليم Handoff للمطورين', 'Design Critique',
+                    'بناء Portfolio احترافي',
+                ]],
+            ],
+            'digital-marketing-campaigns' => [
+                ['title' => 'مقدمة التسويق الرقمي', 'lessons' => [
+                    'مفهوم التسويق الرقمي', 'رحلة العميل', 'بناء استراتيجية تسويقية', 'تحديد الجمهور المستهدف',
+                ]],
+                ['title' => 'التسويق عبر محركات البحث SEO', 'lessons' => [
+                    'أساسيات SEO', 'بحث الكلمات المفتاحية', 'تحسين On-Page', 'بناء الروابط Backlinks',
+                    'Google Search Console', 'قياس أداء SEO',
+                ]],
+                ['title' => 'الإعلانات المدفوعة PPC', 'lessons' => [
+                    'مقدمة Google Ads', 'حملات البحث Search', 'حملات العرض Display', 'إعادة الاستهداف Remarketing',
+                    'Facebook و Instagram Ads', 'تحسين معدل التحويل',
+                ]],
+                ['title' => 'التسويق بالمحتوى', 'lessons' => [
+                    'استراتيجية المحتوى', 'كتابة محتوى جذاب', 'التسويق عبر البريد Email Marketing',
+                    'أتمتة التسويق', 'تحليلات المحتوى',
+                ]],
+                ['title' => 'وسائل التواصل الاجتماعي', 'lessons' => [
+                    'خطة محتوى شهرية', 'إدارة المجتمعات', 'التعامل مع الأزمات', 'Influencer Marketing',
+                ]],
+                ['title' => 'التحليلات والتقارير', 'lessons' => [
+                    'Google Analytics 4', 'لوحات المتابعة', 'ROI وحساب العائد', 'تقرير حملة كامل',
+                ]],
+            ],
+            'generative-ai-models' => [
+                ['title' => 'أساسيات الذكاء الاصطناعي', 'lessons' => [
+                    'تاريخ وتطور AI', 'التعلم الآلي Machine Learning', 'الشبكات العصبية', 'مفهوم Deep Learning',
+                ]],
+                ['title' => 'نماذج اللغة الكبيرة LLMs', 'lessons' => [
+                    'كيف تعمل GPT', 'Prompt Engineering', 'Fine-tuning أساسيات', 'RAG والبحث المعزز',
+                    'تقييم جودة المخرجات', 'أخلاقيات استخدام AI',
+                ]],
+                ['title' => 'النماذج التوليدية للصور', 'lessons' => [
+                    'مقدمة Diffusion Models', 'Stable Diffusion', 'Midjourney و DALL-E', 'ControlNet',
+                    'تحرير الصور بالذكاء الاصطناعي',
+                ]],
+                ['title' => 'بناء تطبيقات AI', 'lessons' => [
+                    'OpenAI API', 'LangChain أساسيات', 'بناء Chatbot', 'وكلاء AI Agents',
+                    'نشر التطبيقات', 'مراقبة التكلفة',
+                ]],
+                ['title' => 'مشاريع متقدمة', 'lessons' => [
+                    'مشروع: مساعد ذكي للشركات', 'مشروع: مولّد محتوى', 'مشروع: تحليل مستندات',
+                    'مراجعة وخطة تطوير مستقبلية',
+                ]],
+            ],
+            'business-english-mastery' => [
+                ['title' => 'أساسيات التواصل المهني', 'lessons' => [
+                    'التعارف في بيئة العمل', 'البريد الإلكتروني الاحترافي', 'المكالمات الهاتفية', 'آداب الاجتماعات',
+                ]],
+                ['title' => 'المفردات التجارية', 'lessons' => [
+                    'مصطلحات المالية', 'مصطلحات التسويق', 'مصطلحات الموارد البشرية', 'مصطلحات التقنية',
+                    'اختبار المفردات الأول',
+                ]],
+                ['title' => 'العروض التقديمية', 'lessons' => [
+                    'هيكل العرض Presentation Structure', 'لغة الإقناع', 'التعامل مع الأسئلة', 'عرض مشروع عملي',
+                ]],
+                ['title' => 'المفاوضات والاجتماعات', 'lessons' => [
+                    'لغة التفاوض', 'صياغة الاقتراحات', 'حل النزاعات', 'محاكاة اجتماع Board Meeting',
+                ]],
+                ['title' => 'الكتابة المهنية', 'lessons' => [
+                    'التقارير Reports', 'المذكرات Memos', 'خطابات التغطية Cover Letters', 'السيرة الذاتية CV',
+                ]],
+                ['title' => 'محاكاة بيئة العمل', 'lessons' => [
+                    'مقابلة عمل بالإنجليزية', 'يوم عمل كامل بالإنجليزية', 'مراجعة شاملة', 'خطة تطوير لغوية',
+                ]],
+            ],
+            'agile-scrum-project-management' => [
+                ['title' => 'مقدمة إدارة المشاريع', 'lessons' => [
+                    'دورة حياة المشروع', 'Waterfall vs Agile', 'قيم وأ principles أجايل', 'متى نستخدم Scrum',
+                ]],
+                ['title' => 'أدوار Scrum', 'lessons' => [
+                    'دور Product Owner', 'دور Scrum Master', 'دور فريق التطوير', 'مسؤوليات كل دور',
+                ]],
+                ['title' => 'فعاليات Scrum', 'lessons' => [
+                    'Sprint Planning', 'Daily Standup', 'Sprint Review', 'Sprint Retrospective', 'إدارة Backlog',
+                ]],
+                ['title' => 'أدوات ولوحات العمل', 'lessons' => [
+                    'Kanban Board', 'Jira أساسيات', 'تقدير المهام Estimation', 'Velocity و Burndown Chart',
+                ]],
+                ['title' => 'إدارة الفرق والمخاطر', 'lessons' => [
+                    'بناء فريق عالي الأداء', 'إدارة أصحاب المصلحة', 'تحديد المخاطر', 'خطط التصحيح',
+                ]],
+                ['title' => 'تطبيق عملي', 'lessons' => [
+                    'محاكاة Sprint كامل', 'تسليم مشروع Agile', 'مراجعة شهادة PSM', 'نصائح التطبيق في الشركات',
+                ]],
+            ],
+            'flutter-mobile-development' => [
+                ['title' => 'مقدمة Flutter و Dart', 'lessons' => [
+                    'لماذا Flutter', 'تثبيت Flutter SDK', 'أساسيات Dart', 'أول تطبيق Hello World',
+                    'Hot Reload و الأدوات', 'هيكل المشروع',
+                ]],
+                ['title' => 'واجهات Flutter', 'lessons' => [
+                    'Widgets أساسية', 'Layout: Row و Column', 'ListView و GridView', 'التنقل Navigation',
+                    'الثيمات Themes', 'التجاوب مع الشاشات',
+                ]],
+                ['title' => 'إدارة الحالة', 'lessons' => [
+                    'setState', 'Provider', 'Riverpod مقدمة', 'BLoC Pattern', 'مقارنة الحلول',
+                ]],
+                ['title' => 'التعامل مع البيانات', 'lessons' => [
+                    'HTTP و REST API', 'JSON Serialization', 'التخزين المحلي SharedPreferences', 'SQLite و Hive',
+                    'Firebase Integration',
+                ]],
+                ['title' => 'ميزات الجهاز', 'lessons' => [
+                    'الكاميرا والمعرض', 'الموقع GPS', 'الإشعارات Push', 'الصلاحيات Permissions',
+                ]],
+                ['title' => 'النشر والمشاريع', 'lessons' => [
+                    'بناء APK و IPA', 'Google Play Store', 'App Store', 'مشروع: تطبيق تجارة إلكترونية',
+                    'مراجعة شاملة',
+                ]],
+            ],
+            'python-pandas-data-analysis' => [
+                ['title' => 'أساسيات Python للتحليل', 'lessons' => [
+                    'تثبيت Python و Jupyter', 'المتغيرات والهياكل', 'الدوال والوحدات', 'قراءة الملفات',
+                ]],
+                ['title' => 'مكتبة Pandas', 'lessons' => [
+                    'Series و DataFrame', 'تصفية البيانات', 'التجميع GroupBy', 'دمج الجداول Merge',
+                    'معالجة القيم المفقودة', 'تحويل أنواع البيانات',
+                ]],
+                ['title' => 'تنظيف البيانات', 'lessons' => [
+                    'اكتشاف الشذوذ Outliers', 'تطبيع البيانات', 'استخراج الميزات Feature Engineering',
+                    'أتمتة خط التنظيف',
+                ]],
+                ['title' => 'التحليل الإحصائي', 'lessons' => [
+                    'الإحصاء الوصفي', 'الارتباط Correlation', 'اختبار الفرضيات', 'NumPy للعمليات الرياضية',
+                ]],
+                ['title' => 'التصور البياني', 'lessons' => [
+                    'Matplotlib أساسيات', 'Seaborn للرسوم الإحصائية', 'لوحات Plotly التفاعلية', 'تصميم تقارير بصرية',
+                ]],
+                ['title' => 'مشاريع تحليل حقيقية', 'lessons' => [
+                    'تحليل مبيعات متجر', 'تحليل بيانات موظفين', 'تحليل وسائل التواصل', 'مشروع نهائي شامل',
+                ]],
+            ],
+            'accounting-finance-basics' => [
+                ['title' => 'مقدمة المحاسبة', 'lessons' => [
+                    'ما هي المحاسبة', 'المعادلة المحاسبية', 'القوائم المالية الأساسية', 'دورة العمل المحاسبية',
+                ]],
+                ['title' => 'القيود اليومية', 'lessons' => [
+                    'المدين والدائن', 'تسجيل العمليات', 'دفتر الأستاذ', 'ميزان المراجعة',
+                ]],
+                ['title' => 'الأصول والخصوم', 'lessons' => [
+                    'الأصول المتداولة', 'الأصول الثابتة والإهلاك', 'الخصوم والالتزامات', 'حقوق الملكية',
+                ]],
+                ['title' => 'الإيرادات والمصروفات', 'lessons' => [
+                    'معرفة الإيراد', 'تصنيف المصروفات', 'تكلفة البضاعة المباعة', 'هامش الربح',
+                ]],
+                ['title' => 'التحليل المالي', 'lessons' => [
+                    'النسب المالية', 'التدفقات النقدية', 'قراءة قائمة الدخل', 'اتخاذ قرارات مالية',
+                ]],
+                ['title' => 'تطبيقات عملية', 'lessons' => [
+                    'محاكاة شركة ناشئة', 'إعداد ميزانية', 'مراجعة شاملة', 'أسئلة شائعة لغير الماليين',
+                ]],
+            ],
+            'unity-game-development' => [
+                ['title' => 'مقدمة Unity', 'lessons' => [
+                    'تثبيت Unity Hub', 'واجهة المحرر', 'GameObjects و Components', 'المشهد Scene الأول',
+                ]],
+                ['title' => 'البرمجة بـ C#', 'lessons' => [
+                    'أساسيات C#', 'المتغيرات والدوال', 'الكلاسات في Unity', 'الوراثة والواجهات',
+                    'التعامل مع Input',
+                ]],
+                ['title' => 'فيزياء وحركة', 'lessons' => [
+                    'Rigidbody و Colliders', 'حركة اللاعب', 'الجاذبية والقوى', 'كشف التصادم',
+                ]],
+                ['title' => 'الرسوميات والصوت', 'lessons' => [
+                    'المواد Materials', 'الإضاءة Lighting', 'الرسوم المتحركة Animation', 'المؤثرات الصوتية',
+                ]],
+                ['title' => 'تصميم اللعبة', 'lessons' => [
+                    'نظام النقاط والحياة', 'واجهة المستخدم UI', 'إدارة المشاهد', 'حفظ التقدم',
+                ]],
+                ['title' => 'مشاريع ونشر', 'lessons' => [
+                    'لعبة منصات 2D', 'لعبة مطاردة 3D', 'تحسين الأداء', 'بناء ونشر اللعبة',
+                ]],
+            ],
+            default => [
+                ['title' => 'مقدمة الدورة', 'lessons' => [
+                    'مرحباً بك', 'أهداف التعلم', 'تجهيز الأدوات', 'نظرة عامة على المنهاج',
+                ]],
+                ['title' => 'الوحدة الأساسية', 'lessons' => [
+                    'المفاهيم الأولى', 'تطبيق عملي', 'مراجعة الوحدة', 'اختبار قصير',
+                ]],
+                ['title' => 'الوحدة المتقدمة', 'lessons' => [
+                    'تعميق المعرفة', 'حالات عملية', 'أخطاء شائعة', 'أفضل الممارسات',
+                ]],
+                ['title' => 'المشروع النهائي', 'lessons' => [
+                    'تخطيط المشروع', 'تنفيذ المشروع', 'مراجعة وتسليم', 'الخطوات التالية',
+                ]],
+            ],
+        };
     }
 }

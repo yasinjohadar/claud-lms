@@ -1,0 +1,56 @@
+<?php
+
+namespace App\Services;
+
+use App\Models\CourseEnrollment;
+use App\Models\CourseLesson;
+use App\Models\LessonProgress;
+use App\Models\Student;
+use Illuminate\Support\Facades\DB;
+
+class LessonProgressService
+{
+    public function __construct(
+        protected EnrollmentService $enrollmentService
+    ) {}
+
+    public function updateProgress(
+        Student $student,
+        CourseLesson $lesson,
+        int $lastPositionSeconds = 0,
+        int $watchedSeconds = 0,
+        bool $markCompleted = false
+    ): LessonProgress {
+        return DB::transaction(function () use ($student, $lesson, $lastPositionSeconds, $watchedSeconds, $markCompleted) {
+            $enrollment = $this->enrollmentService->getEnrollmentForLesson($student, $lesson);
+
+            if (! $enrollment || ! $enrollment->isActive()) {
+                throw new \RuntimeException('الطالب غير مسجّل في هذا الكورس.');
+            }
+
+            $progress = LessonProgress::query()->firstOrNew([
+                'enrollment_id' => $enrollment->id,
+                'course_lesson_id' => $lesson->id,
+            ]);
+
+            $progress->student_id = $student->id;
+            $progress->last_position_seconds = max($progress->last_position_seconds ?? 0, $lastPositionSeconds);
+            $progress->watched_seconds = max($progress->watched_seconds ?? 0, $watchedSeconds);
+
+            if ($markCompleted) {
+                $progress->status = 'completed';
+                $progress->completed_at = $progress->completed_at ?? now();
+            } elseif ($progress->status !== 'completed') {
+                $progress->status = ($progress->watched_seconds > 0 || $progress->last_position_seconds > 0)
+                    ? 'in_progress'
+                    : 'not_started';
+            }
+
+            $progress->save();
+
+            $this->enrollmentService->recalculateProgress($enrollment->fresh());
+
+            return $progress->fresh();
+        });
+    }
+}

@@ -13,192 +13,7 @@
 @section('content')
 <!-- Main Body -->
     <main class="home-main">
-        <!-- Hero Section — Swiper Slider -->
-        <section class="hero-section position-relative">
-            <div class="swiper hero-swiper">
-                <div class="swiper-wrapper">
-
-                    <!-- Slide 1: Main -->
-                    <div class="swiper-slide hero-slide hero-slide-main" style="--slide-accent: #059669; --slide-accent-2: #7c3aed;">
-                        <div class="hero-slide-bg"></div>
-                        <div class="hero-bg-shapes">
-                            <div class="shape shape-1"></div>
-                            <div class="shape shape-2"></div>
-                            <div class="shape shape-3"></div>
-                        </div>
-                        <div class="container hero-slide-inner">
-                            <div class="row align-items-center gy-5 min-vh-hero">
-                                <div class="col-lg-6 text-center text-lg-start hero-content">
-                                    <span class="hero-badge"><i class="fas fa-bolt me-2"></i>المنصة الأولى عربياً للتعليم التفاعلي</span>
-                                    <h1 class="hero-title display-3 fw-bolder mb-4 lh-base typing-container">
-                                        إبدأ رحلتك في <br>
-                                        <span class="hero-accent-text typing-text" data-text='["البرمجة والتطوير", "التصميم الجرافيكي", "التسويق الرقمي", "الذكاء الاصطناعي"]'></span><span class="typing-cursor">|</span>
-                                    </h1>
-                                    <p class="hero-desc lead mb-4 pe-lg-5">
-                                        طور مهاراتك مع أفضل المدربين العرب وانضم لأكثر من 100,000 طالب في مجالات التكنولوجيا والإبداع.
-                                    </p>
-                                    <div class="hero-actions d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
-                                        <a href="{{ route('courses') }}" class="btn btn-hero-primary"><span>تصفح الكورسات</span> <i class="fas fa-arrow-left"></i></a>
-                                        <a href="{{ route('about') }}" class="btn btn-hero-glass"><span>اكتشف المزيد</span> <i class="fas fa-play-circle"></i></a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 hero-visual d-none d-lg-block">
-                                    <div class="hero-visual-card">
-                                        <div class="hero-visual-main">
-                                            <i class="fas fa-laptop-code"></i>
-                                        </div>
-                                        <div class="hero-float-card hero-float-top">
-                                            <i class="fas fa-star text-warning"></i>
-                                            <div>
-                                                <strong class="en-text">4.9/5</strong>
-                                                <small>تقييم المتعلمين</small>
-                                            </div>
-                                        </div>
-                                        <div class="hero-float-card hero-float-bottom">
-                                            <div class="hero-float-icon"><i class="fas fa-user-graduate"></i></div>
-                                            <div>
-                                                <strong class="counter en-text" data-target="100000">0</strong>
-                                                <small>طالب مسجل</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Slide 2: Programming -->
-                    <div class="swiper-slide hero-slide hero-slide-code" style="--slide-accent: #14b8a6; --slide-accent-2: #059669;">
-                        <div class="hero-slide-bg"></div>
-                        <div class="hero-bg-shapes">
-                            <div class="shape shape-1"></div>
-                            <div class="shape shape-2"></div>
-                        </div>
-                        <div class="container hero-slide-inner">
-                            <div class="row align-items-center gy-5 min-vh-hero">
-                                <div class="col-lg-6 text-center text-lg-start hero-content">
-                                    <span class="hero-badge"><i class="fas fa-code me-2"></i>مسار البرمجة</span>
-                                    <h1 class="hero-title display-3 fw-bolder mb-4 lh-base">
-                                        أتقن <span class="hero-accent-text">البرمجة والتطوير</span> من الصفر
-                                    </h1>
-                                    <p class="hero-desc lead mb-4 pe-lg-5">
-                                        HTML, CSS, JavaScript, React وغيرها — كورسات عملية مع مشاريع حقيقية تجهّزك لسوق العمل.
-                                    </p>
-                                    <div class="hero-actions d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
-                                        <a href="{{ route('categories') }}#programming" class="btn btn-hero-primary"><span>ابدأ التعلم</span> <i class="fas fa-arrow-left"></i></a>
-                                        <a href="{{ route('courses') }}" class="btn btn-hero-glass"><span>500+ كورس</span> <i class="fas fa-book-open"></i></a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 hero-visual d-none d-lg-block">
-                                    <div class="hero-visual-card hero-visual-code">
-                                        <div class="hero-code-window">
-                                            <div class="hero-code-bar"><span></span><span></span><span></span></div>
-                                            <pre class="hero-code-body"><code><span class="c-keyword">const</span> developer = {
-  skills: [<span class="c-string">'React'</span>, <span class="c-string">'Node.js'</span>],
-  ready: <span class="c-bool">true</span>
-};</code></pre>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Slide 3: Design -->
-                    <div class="swiper-slide hero-slide hero-slide-design" style="--slide-accent: #ec4899; --slide-accent-2: #8b5cf6;">
-                        <div class="hero-slide-bg"></div>
-                        <div class="hero-bg-shapes">
-                            <div class="shape shape-1"></div>
-                            <div class="shape shape-2"></div>
-                        </div>
-                        <div class="container hero-slide-inner">
-                            <div class="row align-items-center gy-5 min-vh-hero">
-                                <div class="col-lg-6 text-center text-lg-start hero-content">
-                                    <span class="hero-badge"><i class="fas fa-paint-brush me-2"></i>مسار التصميم</span>
-                                    <h1 class="hero-title display-3 fw-bolder mb-4 lh-base">
-                                        اصنع <span class="hero-accent-text">تصاميم تلهم</span> العالم
-                                    </h1>
-                                    <p class="hero-desc lead mb-4 pe-lg-5">
-                                        UI/UX، Figma، وAdobe — تعلّم من مصممين محترفين وابنِ portfolio يفتح لك الأبواب.
-                                    </p>
-                                    <div class="hero-actions d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
-                                        <a href="{{ route('categories') }}#design" class="btn btn-hero-primary"><span>استكشف التصميم</span> <i class="fas fa-arrow-left"></i></a>
-                                        <a href="{{ route('courses') }}" class="btn btn-hero-glass"><span>150+ مدرب</span> <i class="fas fa-palette"></i></a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 hero-visual d-none d-lg-block">
-                                    <div class="hero-visual-card hero-visual-design">
-                                        <div class="hero-design-orbit">
-                                            <div class="hero-orbit-ring"></div>
-                                            <div class="hero-orbit-icon hero-orbit-1"><i class="fab fa-figma"></i></div>
-                                            <div class="hero-orbit-icon hero-orbit-2"><i class="fas fa-pen-nib"></i></div>
-                                            <div class="hero-orbit-icon hero-orbit-3"><i class="fas fa-mobile-alt"></i></div>
-                                            <div class="hero-orbit-center"><i class="fas fa-paint-brush"></i></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Slide 4: AI -->
-                    <div class="swiper-slide hero-slide hero-slide-ai" style="--slide-accent: #10b981; --slide-accent-2: #06b6d4;">
-                        <div class="hero-slide-bg"></div>
-                        <div class="hero-bg-shapes">
-                            <div class="shape shape-1"></div>
-                            <div class="shape shape-2"></div>
-                        </div>
-                        <div class="container hero-slide-inner">
-                            <div class="row align-items-center gy-5 min-vh-hero">
-                                <div class="col-lg-6 text-center text-lg-start hero-content">
-                                    <span class="hero-badge"><i class="fas fa-robot me-2"></i>مسار الذكاء الاصطناعي</span>
-                                    <h1 class="hero-title display-3 fw-bolder mb-4 lh-base">
-                                        مستقبلك يبدأ بـ <span class="hero-accent-text">الذكاء الاصطناعي</span>
-                                    </h1>
-                                    <p class="hero-desc lead mb-4 pe-lg-5">
-                                        Machine Learning، ChatGPT، وبناء النماذج التوليدية — كن جزءاً من ثورة التكنولوجيا.
-                                    </p>
-                                    <div class="hero-actions d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
-                                        <a href="{{ route('categories') }}#ai" class="btn btn-hero-primary"><span>اكتشف AI</span> <i class="fas fa-arrow-left"></i></a>
-                                        <a href="{{ route('register') }}" class="btn btn-hero-glass"><span>سجّل مجاناً</span> <i class="fas fa-user-plus"></i></a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 hero-visual d-none d-lg-block">
-                                    <div class="hero-visual-card hero-visual-ai">
-                                        <div class="hero-ai-core">
-                                            <div class="hero-ai-ring hero-ai-ring-1"></div>
-                                            <div class="hero-ai-ring hero-ai-ring-2"></div>
-                                            <div class="hero-ai-ring hero-ai-ring-3"></div>
-                                            <div class="hero-ai-icon"><i class="fas fa-brain"></i></div>
-                                        </div>
-                                        <div class="hero-ai-tags">
-                                            <span>ML</span><span>GPT</span><span>Python</span><span>Data</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- Navigation & Pagination -->
-                <div class="hero-swiper-nav">
-                    <button class="hero-nav-btn hero-prev" aria-label="الشريحة السابقة">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                    <div class="swiper-pagination hero-pagination"></div>
-                    <button class="hero-nav-btn hero-next" aria-label="الشريحة التالية">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                </div>
-
-                <!-- Autoplay Progress -->
-                <div class="hero-autoplay-progress"><span class="hero-progress-fill"></span></div>
-            </div>
-        </section>
-
-        <div class="home-hero-bridge" aria-hidden="true"></div>
+        @include('frontend.partials.hero-slider')
 
         <!-- Stats Section -->
         <section class="stats-section home-zone home-zone--alt section-fade-up">
@@ -402,112 +217,15 @@
 
                     <div class="swiper team-swiper">
                         <div class="swiper-wrapper">
-
-                            <div class="swiper-slide">
-                                <article class="team-card" style="--team-color: #059669;">
-                                    <div class="team-card-avatar">
-                                        <span class="team-card-avatar-inner"><i class="fas fa-user-tie"></i></span>
-                                    </div>
-                                    <h3 class="team-card-name">م. أحمد سعيد</h3>
-                                    <p class="team-card-role en-text">Senior Front-end Engineer</p>
-                                    <div class="team-card-rating en-text" aria-label="تقييم 4.9 من 5">
-                                        <span class="team-rating-stars">
-                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                        </span>
-                                        <span class="team-rating-value">4.9</span>
-                                    </div>
-                                    <p class="team-card-bio">خبير في بناء وتطوير واجهات الويب الحديثة بأحدث التقنيات.</p>
-                                    <div class="team-card-social">
-                                        <a href="#" class="team-social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                                        <a href="#" class="team-social-btn" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                                    </div>
-                                </article>
-                            </div>
-
-                            <div class="swiper-slide">
-                                <article class="team-card" style="--team-color: #ec4899;">
-                                    <div class="team-card-avatar">
-                                        <span class="team-card-avatar-inner"><i class="fas fa-paint-brush"></i></span>
-                                    </div>
-                                    <h3 class="team-card-name">سارة محمد</h3>
-                                    <p class="team-card-role en-text">UX/UI Designer</p>
-                                    <div class="team-card-rating en-text" aria-label="تقييم 4.8 من 5">
-                                        <span class="team-rating-stars">
-                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-                                        </span>
-                                        <span class="team-rating-value">4.8</span>
-                                    </div>
-                                    <p class="team-card-bio">متخصصة في تصميم تجربة المستخدم وواجهات الجوال الحديثة.</p>
-                                    <div class="team-card-social">
-                                        <a href="#" class="team-social-btn" aria-label="Behance"><i class="fab fa-behance"></i></a>
-                                        <a href="#" class="team-social-btn" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
-                                    </div>
-                                </article>
-                            </div>
-
-                            <div class="swiper-slide">
-                                <article class="team-card" style="--team-color: #7c3aed;">
-                                    <div class="team-card-avatar">
-                                        <span class="team-card-avatar-inner"><i class="fas fa-robot"></i></span>
-                                    </div>
-                                    <h3 class="team-card-name">عمر مصطفى</h3>
-                                    <p class="team-card-role en-text">Machine Learning Engineer</p>
-                                    <div class="team-card-rating en-text" aria-label="تقييم 4.9 من 5">
-                                        <span class="team-rating-stars">
-                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                        </span>
-                                        <span class="team-rating-value">4.9</span>
-                                    </div>
-                                    <p class="team-card-bio">شغوف بعلوم البيانات والذكاء الاصطناعي وبناء نماذج توليدية متقدمة.</p>
-                                    <div class="team-card-social">
-                                        <a href="#" class="team-social-btn" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                                        <a href="#" class="team-social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                                    </div>
-                                </article>
-                            </div>
-
-                            <div class="swiper-slide">
-                                <article class="team-card" style="--team-color: #f59e0b;">
-                                    <div class="team-card-avatar">
-                                        <span class="team-card-avatar-inner"><i class="fas fa-chart-pie"></i></span>
-                                    </div>
-                                    <h3 class="team-card-name">طارق زياد</h3>
-                                    <p class="team-card-role en-text">Digital Marketing Expert</p>
-                                    <div class="team-card-rating en-text" aria-label="تقييم 4.5 من 5">
-                                        <span class="team-rating-stars">
-                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
-                                        </span>
-                                        <span class="team-rating-value">4.5</span>
-                                    </div>
-                                    <p class="team-card-bio">خبير في التسويق الرقمي وإدارة الحملات الإعلانية لتحقيق أعلى عائد.</p>
-                                    <div class="team-card-social">
-                                        <a href="#" class="team-social-btn" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                                        <a href="#" class="team-social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                                    </div>
-                                </article>
-                            </div>
-
-                            <div class="swiper-slide">
-                                <article class="team-card" style="--team-color: #0891b2;">
-                                    <div class="team-card-avatar">
-                                        <span class="team-card-avatar-inner"><i class="fas fa-mobile-alt"></i></span>
-                                    </div>
-                                    <h3 class="team-card-name">م. خالد أحمد</h3>
-                                    <p class="team-card-role en-text">Flutter / Mobile Developer</p>
-                                    <div class="team-card-rating en-text" aria-label="تقييم 5.0 من 5">
-                                        <span class="team-rating-stars">
-                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                        </span>
-                                        <span class="team-rating-value">5.0</span>
-                                    </div>
-                                    <p class="team-card-bio">متخصص في تطوير تطبيقات الجوال بـ Flutter وDart للـ iOS والـ Android.</p>
-                                    <div class="team-card-social">
-                                        <a href="#" class="team-social-btn" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                                        <a href="#" class="team-social-btn" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                                    </div>
-                                </article>
-                            </div>
-
+                            @forelse($teamMembers as $member)
+                                @include('frontend.partials.team-card', ['member' => $member, 'slide' => true])
+                            @empty
+                                <div class="swiper-slide">
+                                    <article class="team-card">
+                                        <p class="text-muted text-center py-5 mb-0">لا يوجد أعضاء فريق للعرض حالياً.</p>
+                                    </article>
+                                </div>
+                            @endforelse
                         </div>
                     </div>
 
@@ -648,12 +366,13 @@
                                     <h3 class="newsletter-form-title">سجّل بريدك الآن</h3>
                                     <p class="newsletter-form-subtitle">انضم لآلاف المتعلمين واحصل على مزايا حصرية</p>
                                 </div>
-                                <form class="newsletter-form" action="{{ route('newsletter.subscribe') }}" method="post">
+                                <div class="newsletter-alert" role="alert" aria-live="polite" hidden></div>
+                                <form class="newsletter-form js-newsletter-form" action="{{ route('newsletter.subscribe') }}" method="post" data-source="home">
                                     @csrf
                                     <label class="visually-hidden" for="newsletter-email">البريد الإلكتروني</label>
                                     <div class="newsletter-input-wrap">
                                         <i class="fas fa-envelope newsletter-input-icon" aria-hidden="true"></i>
-                                        <input type="email" id="newsletter-email" name="email" class="newsletter-input" placeholder="أدخل بريدك الإلكتروني" required>
+                                        <input type="email" id="newsletter-email" name="email" class="newsletter-input" placeholder="أدخل بريدك الإلكتروني" required autocomplete="email">
                                     </div>
                                     <button type="submit" class="newsletter-submit">
                                         اشترك الآن <i class="fas fa-arrow-left"></i>
@@ -726,43 +445,8 @@
 @endsection
 
 @push('scripts')
+<script src="{{ asset('frontend/assets/js/hero-slider.js') }}"></script>
 <script>
-// Init Hero Swiper
-        const heroSwiper = new Swiper('.hero-swiper', {
-            effect: 'fade',
-            fadeEffect: { crossFade: true },
-            speed: 900,
-            loop: true,
-            autoplay: {
-                delay: 6000,
-                disableOnInteraction: false,
-                pauseOnMouseEnter: true
-            },
-            pagination: {
-                el: '.hero-pagination',
-                clickable: true,
-                renderBullet: (index, className) =>
-                    `<span class="${className}"><span class="hero-bullet-inner"></span><span class="hero-bullet-label">${['الرئيسية', 'برمجة', 'تصميم', 'AI'][index]}</span></span>`
-            },
-            navigation: {
-                nextEl: '.hero-next',
-                prevEl: '.hero-prev'
-            },
-            on: {
-                autoplayTimeLeft(s, time, progress) {
-                    const fill = document.querySelector('.hero-progress-fill');
-                    if (fill) fill.style.width = `${(1 - progress) * 100}%`;
-                },
-                slideChangeTransitionStart() {
-                    document.querySelectorAll('.hero-slide .hero-content > *').forEach(el => {
-                        el.style.animation = 'none';
-                        el.offsetHeight;
-                        el.style.animation = '';
-                    });
-                }
-            }
-        });
-
         // Init Team Swiper
         const teamSwiper = new Swiper('.team-swiper', {
             slidesPerView: 1,
