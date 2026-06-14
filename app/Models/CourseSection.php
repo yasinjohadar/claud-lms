@@ -32,4 +32,9 @@ class CourseSection extends Model
     {
         return $this->hasMany(CourseResource::class)->orderBy('sort_order');
     }
+
+    public function modules(): HasMany
+    {
+        return $this->hasMany(CourseModule::class, 'section_id')->orderBy('sort_order');
+    }
 }

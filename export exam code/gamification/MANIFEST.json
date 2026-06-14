@@ -1,0 +1,1417 @@
+﻿{
+    "module":  "gamification",
+    "generated_at":  "2026-06-14T18:26:31.0056670Z",
+    "file_count":  282,
+    "files":  [
+                  {
+                      "path":  "app/Console/Commands/AssignDailyChallenges.php",
+                      "size":  2255,
+                      "sha256":  "1f671f9f9566727d4384f85887a20f3cc876d2c1f3068e9c4ebd0cd8f294676c"
+                  },
+                  {
+                      "path":  "app/Console/Commands/CheckAllBadges.php",
+                      "size":  3564,
+                      "sha256":  "8efc0b611b84a65cedc5e2dde58576ab906d2264201949db17988afd6c784b80"
+                  },
+                  {
+                      "path":  "app/Console/Commands/CheckExpiredChallenges.php",
+                      "size":  1256,
+                      "sha256":  "fe5333582477448e7adce8a63d8ad9f77746a9e46d10635f2aede96a9129d28c"
+                  },
+                  {
+                      "path":  "app/Console/Commands/GamificationDailyTasks.php",
+                      "size":  3121,
+                      "sha256":  "390b1f8a7763b642bc1c09d98b7bea074315f8ded7912a5ad1805baf2d3616cc"
+                  },
+                  {
+                      "path":  "app/Console/Commands/RecalcGamificationBadges.php",
+                      "size":  9129,
+                      "sha256":  "2250d6ffdd995e38daec33f07004c42d1b1fd1af52cf4050da4f56b31d085d55"
+                  },
+                  {
+                      "path":  "app/Console/Commands/SendWeeklySummary.php",
+                      "size":  2231,
+                      "sha256":  "3367355fd09879c14cf87fc1a9348538e97929c06a8a4b9da9b3f62c64ecabf8"
+                  },
+                  {
+                      "path":  "app/Console/Commands/UpdateGamificationStats.php",
+                      "size":  1956,
+                      "sha256":  "04e66eae8247f8a07b30e8e058315d7d56aebbb2d7290f5a9baa031bc64c6b4e"
+                  },
+                  {
+                      "path":  "app/Console/Commands/UpdateLeaderboards.php",
+                      "size":  1213,
+                      "sha256":  "c1954979244f9bee848bcff0c49c8ee35e1cc0300ff9ea24d0dd649734541ebd"
+                  },
+                  {
+                      "path":  "app/Events/Gamification/AchievementUnlocked.php",
+                      "size":  485,
+                      "sha256":  "c7229fafce694e4fe8d79d4aff8241c0e92b5ea1665822c8d6eb8970c3a00e00"
+                  },
+                  {
+                      "path":  "app/Events/Gamification/BadgeEarned.php",
+                      "size":  453,
+                      "sha256":  "52b073bbb13e497b2b42cc24d5cfecd4a0d7526a085bb220e8cbcc845b74e6a3"
+                  },
+                  {
+                      "path":  "app/Events/Gamification/ChallengeCompleted.php",
+                      "size":  573,
+                      "sha256":  "af7f25d871ba9e8998448214f4234767b18e9e5e8a1d5cbe4c6ede1193c418a2"
+                  },
+                  {
+                      "path":  "app/Events/Gamification/LeaderboardRankChanged.php",
+                      "size":  636,
+                      "sha256":  "4eefb9d053c8ea23bb97055afadd769c840d0b989964c844fe4a90620901fd59"
+                  },
+                  {
+                      "path":  "app/Events/Gamification/LevelUp.php",
+                      "size":  547,
+                      "sha256":  "419086c79fc5c176f4cab93480de60acd851f2c28751c5cfdf13ebf9facc4c07"
+                  },
+                  {
+                      "path":  "app/Events/Gamification/PointsEarned.php",
+                      "size":  780,
+                      "sha256":  "7df30b08f6fdbfa1dd1601a10f8266340874368f245f9fe7068aca2e8b8f04dc"
+                  },
+                  {
+                      "path":  "app/Events/Gamification/StreakUpdated.php",
+                      "size":  593,
+                      "sha256":  "550f419e6609170e1c70d5b97fa1eea3c0f28a1bd76364bf2c26d0216f30eea2"
+                  },
+                  {
+                      "path":  "app/Events/Gamification/XPEarned.php",
+                      "size":  760,
+                      "sha256":  "65546799754a60c48c2488614adba1e0b56adec072e7c4a49571f5c32294a20e"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Admin/Gamification/AchievementController.php",
+                      "size":  11380,
+                      "sha256":  "9fae1b2f1728e37d96a3c4a59b13f407edb71a03daac54281892993a0effff90"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Admin/Gamification/AnalyticsController.php",
+                      "size":  2551,
+                      "sha256":  "a838f46dcfb9281cd31236d1dd9e1518eb7e37efaed12c45aac6fa09a4f7822e"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Admin/Gamification/BadgeController.php",
+                      "size":  15685,
+                      "sha256":  "bef46a0d564a00b30523c1dc038de1e9c5d797a923783a34ed55ff1a452c1da6"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Admin/Gamification/ChallengeController.php",
+                      "size":  15171,
+                      "sha256":  "bbe4b7d6e3cc66facf474163b395b545741a052219d27fb3a9961282321de3e4"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Admin/Gamification/CompetitionController.php",
+                      "size":  4225,
+                      "sha256":  "219fa846a4534e72a4e8724f48e9fcefdc5ec58cd7f92dffa9a6df58b45ab4fa"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Admin/Gamification/DashboardController.php",
+                      "size":  9133,
+                      "sha256":  "88fbcc27cbabca2741a1646f83e7bfb78425a964b4fc9c6a3ce237b3f49daa98"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Admin/Gamification/LeaderboardController.php",
+                      "size":  7785,
+                      "sha256":  "7447f266fedb799066abecc43df6aceda968f6ad7f7eb0b680ad73cf4afdd831"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Admin/Gamification/LevelController.php",
+                      "size":  11385,
+                      "sha256":  "75704197827dc7dc9f3afcb344c90543505efdd107cb61e1aa60ab778e90347d"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Admin/Gamification/PointsController.php",
+                      "size":  11971,
+                      "sha256":  "46c2212567fc61909cd174ad80ba584da698116761f078e0a0c9ff0f1820f1e1"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Admin/Gamification/PurchaseController.php",
+                      "size":  1788,
+                      "sha256":  "c79e2c1dab7cc4297df44f8562c7dcca1f4c19316801b798bf1244c00968eb16"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Admin/Gamification/ShopCategoryController.php",
+                      "size":  4102,
+                      "sha256":  "0d3fcf62523af119c9f60ab5f27830257d19edc669b44b9f941f402dafaeedab"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Admin/Gamification/ShopItemController.php",
+                      "size":  10298,
+                      "sha256":  "a3dac6b0f46e04dc38d4e402105f9ae693f4dcd6a4347d9ec9fe8d0442adaee7"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Admin/Gamification/SocialActivityController.php",
+                      "size":  4688,
+                      "sha256":  "779d3a886cb8ec26dad216373abd67100d9e001e109ba704bf8a5288a8e18f8c"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Api/Student/Gamification/AchievementApiController.php",
+                      "size":  1935,
+                      "sha256":  "75b4410ca62ddbf0459caf7d02125630244a4b1bf83f486c992705ef6e17de82"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Api/Student/Gamification/BadgeApiController.php",
+                      "size":  1594,
+                      "sha256":  "177abd4d8e837221c9ac9b016242028beff6c45ea4b4947e887c650bd09e60f6"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Api/Student/Gamification/ChallengeApiController.php",
+                      "size":  1915,
+                      "sha256":  "2e5d5e03f1edffc4ffbf69dcc5e54af0e3845d57117f3e74adf5d296aceabb99"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Api/Student/Gamification/LeaderboardApiController.php",
+                      "size":  2348,
+                      "sha256":  "e4f0ab7e59ba585c13ecaa6c0798069c928222aad60fff6217529d4e918381b7"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Api/Student/Gamification/PointsApiController.php",
+                      "size":  1379,
+                      "sha256":  "db313fdeca1f7b40817ba455ded01194b338f5d2f3ffcc50128ba547a8960c25"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Api/Student/Gamification/ShopApiController.php",
+                      "size":  3177,
+                      "sha256":  "7626e2687bff9868bba75cbd9f59358311657ad641c11c1271d5b23a2945eb31"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Api/Student/Gamification/StreakApiController.php",
+                      "size":  2244,
+                      "sha256":  "6c2fff6ee098575275f1439f52dc74d2a46ba95004bd5ff0420387ead6045038"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Student/Gamification/AchievementController.php",
+                      "size":  3602,
+                      "sha256":  "a04528d99203bd277046fd7f4dd05500287279270a2f18b605cdc91d1cd7efd3"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Student/Gamification/BadgeController.php",
+                      "size":  3696,
+                      "sha256":  "586e2175af151ceea98ca42d427592c736959b74e0d3cac5f56f1aa0856bd29f"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Student/Gamification/ChallengeController.php",
+                      "size":  13992,
+                      "sha256":  "cf0ac353c82e625a32fefe328523052a4912620863fffb6180ff9c2638601d6e"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Student/Gamification/CompetitionController.php",
+                      "size":  4585,
+                      "sha256":  "d723c754c1505a3bd7d79ccd191c9eb2fbb9d8b5f15346ae4a21364052d92844"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Student/Gamification/DashboardController.php",
+                      "size":  5716,
+                      "sha256":  "e463a6264ee1538d13a589cb26aad14228cf3692eed6b056746d16c691669f1f"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Student/Gamification/FriendshipController.php",
+                      "size":  6475,
+                      "sha256":  "e24ede9c16af673ecdd8c62bae0ea3bbbc45f3eaa43bc7036de5d4bb54d2b322"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Student/Gamification/InventoryController.php",
+                      "size":  8854,
+                      "sha256":  "7be7a4d253d13b05ee665b767551d5bd3f4a116c4db440a4f2006af066873f11"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Student/Gamification/LeaderboardController.php",
+                      "size":  4892,
+                      "sha256":  "3600038ea65166b3d83e8211585d59d2ced1ad964e6759fa1e2b9b5335d18f2b"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Student/Gamification/LevelController.php",
+                      "size":  2500,
+                      "sha256":  "37b1897ec89fa5ed509e6a78f271b6eb309a19a485bba17ec2600e8a7502e796"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Student/Gamification/NotificationController.php",
+                      "size":  5963,
+                      "sha256":  "776cf3a5ae2380c221d924083b2729afb4800b134f74d91ff9e8d5169c899234"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Student/Gamification/PointsController.php",
+                      "size":  4138,
+                      "sha256":  "34c2937a857fe7b632c09d19295fce45d889adaf53086ec21e5661e3c12d1dbe"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Student/Gamification/ShopController.php",
+                      "size":  8532,
+                      "sha256":  "922d3782ea6caa10386ff1eaf38e283092d7674dd57350cf232d6754ec2d4fae"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Student/Gamification/SocialActivityController.php",
+                      "size":  6539,
+                      "sha256":  "c3ec90bc423b8942fbc90e014234be4a9cb72170c65ffb9914c9c10f22521f1c"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Student/Gamification/StreakController.php",
+                      "size":  3040,
+                      "sha256":  "9b2c53d80a905dd8940cdb7a19464b7b6db454cca8618b5ce4f5ba74cece2f29"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Student/GamificationController.php",
+                      "size":  4811,
+                      "sha256":  "74b19ae4821ce1716fba0a9df8c13ff105d6e471eebae8821d581711876b7b24"
+                  },
+                  {
+                      "path":  "app/Listeners/Gamification/AssignmentSubmittedListener.php",
+                      "size":  2067,
+                      "sha256":  "3f70e65d52d5702b82e95326bf7be6a65cd4956f5db354d9f6aa8d6cda0900a1"
+                  },
+                  {
+                      "path":  "app/Listeners/Gamification/AwardReferralPointsListener.php",
+                      "size":  542,
+                      "sha256":  "fc7bd960bc4e77f3bb82fd58392b448f294fea0121fe4520314508fa98cae2b7"
+                  },
+                  {
+                      "path":  "app/Listeners/Gamification/CheckAchievementsListener.php",
+                      "size":  1045,
+                      "sha256":  "82d87544194921b6b0c942c320cb21661347d91de9e13d5308f20492724cf290"
+                  },
+                  {
+                      "path":  "app/Listeners/Gamification/CheckBadgesListener.php",
+                      "size":  1011,
+                      "sha256":  "280edea017a82f035d46a5e49f94cb280884e2d659aad09934af768caf2fbe01"
+                  },
+                  {
+                      "path":  "app/Listeners/Gamification/CourseCompletedListener.php",
+                      "size":  2084,
+                      "sha256":  "65d40a4f9c1a578865cd6ea848723e46ee8d083d50f9ce6bf99640b0ef7ea381"
+                  },
+                  {
+                      "path":  "app/Listeners/Gamification/LessonCompletedListener.php",
+                      "size":  2653,
+                      "sha256":  "7a39c77490b801a1a2041f5cb756fd06f1f55476a8d868ea5fae3adb64d21b14"
+                  },
+                  {
+                      "path":  "app/Listeners/Gamification/QuizCompletedListener.php",
+                      "size":  2160,
+                      "sha256":  "86b6123ac600e04d9ec43283e3dccdb9dec242fc4b06712a9689969d473bc89d"
+                  },
+                  {
+                      "path":  "app/Listeners/Gamification/SendNotificationListener.php",
+                      "size":  5292,
+                      "sha256":  "a87f5e4007fcb42216c5ed83f2bfd1b285351a71906fa137cd72c9c2ab678af0"
+                  },
+                  {
+                      "path":  "app/Listeners/Gamification/SocialActivityListener.php",
+                      "size":  3083,
+                      "sha256":  "dad252dcdbde9c5a376fe7e71c999d6799b8f165cf4789811cd1718c302af3db"
+                  },
+                  {
+                      "path":  "app/Listeners/Gamification/UpdateChallengeProgressListener.php",
+                      "size":  6299,
+                      "sha256":  "0a17c2100174a84d32e086519cb1f7d3f3c679d9a80cf8503999ec0c7da4dac2"
+                  },
+                  {
+                      "path":  "app/Listeners/Gamification/UpdateCompetitionListener.php",
+                      "size":  4042,
+                      "sha256":  "1b6b62b70945c48a22be7273710d4a8c68a6d3aa60403e3443ff5619ed4d48cf"
+                  },
+                  {
+                      "path":  "app/Listeners/Gamification/UpdateLeaderboardListener.php",
+                      "size":  566,
+                      "sha256":  "a26fd4c2718b84799aa54a5559b22552fd6ce0c84c0c79fe1e923385920453e6"
+                  },
+                  {
+                      "path":  "app/Listeners/Gamification/UserLoginListener.php",
+                      "size":  1806,
+                      "sha256":  "40609126138dcd6f41de32cb62f9ba67d79ba20238e648759c5514f1db39a05b"
+                  },
+                  {
+                      "path":  "app/Listeners/Gamification/VideoWatchedListener.php",
+                      "size":  1805,
+                      "sha256":  "9065973fe3e12164db4885ddc071157ec5792e2258fdb7885461022d210423da"
+                  },
+                  {
+                      "path":  "app/Mail/AchievementUnlockedEmail.php",
+                      "size":  1435,
+                      "sha256":  "6a371649925a0dbf7133baf6f3f80feb5c683e866364b81e27baba41d1d00c6b"
+                  },
+                  {
+                      "path":  "app/Mail/BadgeEarnedEmail.php",
+                      "size":  1393,
+                      "sha256":  "ee556884f4dc040f0cc081b4cffed0641a4189d04aff22338f686c5b859fa2a6"
+                  },
+                  {
+                      "path":  "app/Mail/LevelUpEmail.php",
+                      "size":  1258,
+                      "sha256":  "2f946cb542727ebb925ae17b00bd78a7c75fd0778649ae479499c064d36965dc"
+                  },
+                  {
+                      "path":  "app/Models/Achievement.php",
+                      "size":  2601,
+                      "sha256":  "43438c0e9deebf4fecbaacc8b34dff96bb9a7b2e1fb9764126d5b5c581e2d50b"
+                  },
+                  {
+                      "path":  "app/Models/Badge.php",
+                      "size":  2589,
+                      "sha256":  "ff0c013885b6d408ebceb8068b0c9352aa03d117e44579e71b6d6ce986621586"
+                  },
+                  {
+                      "path":  "app/Models/Challenge.php",
+                      "size":  4932,
+                      "sha256":  "a4c51f2bdbb8ead9a5c67ab8ea0629ee2056844ffc4576f308839183a4b47a8c"
+                  },
+                  {
+                      "path":  "app/Models/DailyStreak.php",
+                      "size":  2560,
+                      "sha256":  "65962be65ce2d0ccc35e9efba943d07a8b92803c1a72a7705bd126a50c40dc34"
+                  },
+                  {
+                      "path":  "app/Models/ExperienceLevel.php",
+                      "size":  2816,
+                      "sha256":  "94a6d83519363ecb2d5e197f0fc46cf54ebf3405726f6f84e36a1aa71edaf874"
+                  },
+                  {
+                      "path":  "app/Models/Gamification/Achievement.php",
+                      "size":  812,
+                      "sha256":  "0b92b66bb8260e048cfa913084b102b4fa71299a7cc0e47720bcf18a54a11ce7"
+                  },
+                  {
+                      "path":  "app/Models/Gamification/Badge.php",
+                      "size":  1441,
+                      "sha256":  "740d84be5722be527ba147da08e7b5e0ef2c8a9c7d801286c1e926e3dd506096"
+                  },
+                  {
+                      "path":  "app/Models/Gamification/Challenge.php",
+                      "size":  1371,
+                      "sha256":  "c6f69cf54d345de89260f8775b09e5db6ed6accc0df680b23444334a0d5ddd40"
+                  },
+                  {
+                      "path":  "app/Models/Gamification/Leaderboard.php",
+                      "size":  445,
+                      "sha256":  "e6a9ae1ba8c2c1f3d1c9f667bb7bfbe0b45566f42433ce6de29bf9d264733e5e"
+                  },
+                  {
+                      "path":  "app/Models/Gamification/Level.php",
+                      "size":  549,
+                      "sha256":  "7d3eb83df1dcc1c59b786dd61212da2976c9ff280e7d8ca31d72bc067943491d"
+                  },
+                  {
+                      "path":  "app/Models/Gamification/PointTransaction.php",
+                      "size":  659,
+                      "sha256":  "b5924d42b2369e849de89cd829ba6f8ffa5a2efc00ff85b526dc066831e9a550"
+                  },
+                  {
+                      "path":  "app/Models/Gamification/ShopCategory.php",
+                      "size":  557,
+                      "sha256":  "c91c9d8a772a606ac4021947395edcee993fcb1f804cfc36a3edcd2d6395bc2a"
+                  },
+                  {
+                      "path":  "app/Models/Gamification/ShopItem.php",
+                      "size":  1437,
+                      "sha256":  "51adf7fa3ffca9a5d883c0715de3d5c7d7b5624c4b5b65ab322058bb01e0d8f2"
+                  },
+                  {
+                      "path":  "app/Models/Gamification/UserInventory.php",
+                      "size":  1160,
+                      "sha256":  "409125806c9f78ec8b8e739dd6c14ac163b421fd30b32d7cb30c1ddadf040700"
+                  },
+                  {
+                      "path":  "app/Models/Gamification/UserPurchase.php",
+                      "size":  918,
+                      "sha256":  "c14d8e43c86c7116d80a18cbe5a94686362f9c16c4b2aaaa2456538a54d731d3"
+                  },
+                  {
+                      "path":  "app/Models/Gamification/UserStat.php",
+                      "size":  1017,
+                      "sha256":  "7cd4caa434edf594d0dae6bce9a593a32950feee1ce36ff6b8a443e4253dd57b"
+                  },
+                  {
+                      "path":  "app/Models/GamificationNotification.php",
+                      "size":  2845,
+                      "sha256":  "74df2a80733fbcdda2aa6f3ede9a25bbf88b560b0e392d70e24644ba94672b7a"
+                  },
+                  {
+                      "path":  "app/Models/Leaderboard.php",
+                      "size":  3062,
+                      "sha256":  "efb0f469a145b759f260304096fbd78e38b1832fccdccd29f3baa704a8dabb31"
+                  },
+                  {
+                      "path":  "app/Models/LeaderboardEntry.php",
+                      "size":  2611,
+                      "sha256":  "b5d1a0671c696415f71d439bb5ff2e50ce3a97f8203f3e1c4de2e447b6ca9c5c"
+                  },
+                  {
+                      "path":  "app/Models/Models/Gamification/ShopCategory.php",
+                      "size":  135,
+                      "sha256":  "a7c2b4f135533b58c95bebf1bd87cd57c2038402a75cf4a6a6ba6f60027ecd14"
+                  },
+                  {
+                      "path":  "app/Models/PointsTransaction.php",
+                      "size":  2069,
+                      "sha256":  "f8544285c667b855cf692deb27280311f000f6ef05611dafb12bb16809085e2a"
+                  },
+                  {
+                      "path":  "app/Models/RewardCatalog.php",
+                      "size":  4598,
+                      "sha256":  "660842a23aec0a18e3d6c8e462ab7add400327ceb1f292277b8645e4f88de9e1"
+                  },
+                  {
+                      "path":  "app/Models/UserAchievement.php",
+                      "size":  2143,
+                      "sha256":  "ddf9a65f180130c08462d7933030066928b17a68f3545d9c4eae10d836958d77"
+                  },
+                  {
+                      "path":  "app/Models/UserBadge.php",
+                      "size":  1456,
+                      "sha256":  "fa6677ee969b09b217289442723625da205d15b3c096e7407ae4158a725b6f17"
+                  },
+                  {
+                      "path":  "app/Models/UserChallenge.php",
+                      "size":  3638,
+                      "sha256":  "1a8edc628e83b5243dd4d9039c2a5e731c785f5d43f7be667355495d86854bd1"
+                  },
+                  {
+                      "path":  "app/Models/UserReward.php",
+                      "size":  3756,
+                      "sha256":  "47ab0087fcb34b2a328254195d1016594e5383173d0d47953059323212cc084b"
+                  },
+                  {
+                      "path":  "app/Models/UserStat.php",
+                      "size":  2911,
+                      "sha256":  "7d87313efef203a540003ce555377a7a02b2f8f6ce6366ee1ce33ac6369bb9c1"
+                  },
+                  {
+                      "path":  "app/Providers/GamificationServiceProvider.php",
+                      "size":  6433,
+                      "sha256":  "271045968cfbb276db33f703ae618e756116f50ded6064deb1bb87a377edb165"
+                  },
+                  {
+                      "path":  "app/Services/Gamification/AchievementRecalculationService.php",
+                      "size":  4032,
+                      "sha256":  "4a51f2532d3f8e1f397eee230d1e09e102f4726bcdc9daf000b053fdb2265855"
+                  },
+                  {
+                      "path":  "app/Services/Gamification/AchievementService.php",
+                      "size":  13346,
+                      "sha256":  "c3c750d5fe4fbc2f0ea345214573a5e833cab8dc17cb4decb1d974974b60e4e0"
+                  },
+                  {
+                      "path":  "app/Services/Gamification/AnalyticsService.php",
+                      "size":  12854,
+                      "sha256":  "71f7818191d71c1453284bd90295d8b2e42afeae6dad668c281c12fc05907d2d"
+                  },
+                  {
+                      "path":  "app/Services/Gamification/BadgeManualAwardService.php",
+                      "size":  7618,
+                      "sha256":  "411fdcd8555f8c05e2af7462167c2cee1cbdc4dd9d510030abe301047373b4db"
+                  },
+                  {
+                      "path":  "app/Services/Gamification/BadgeService.php",
+                      "size":  14057,
+                      "sha256":  "fd0dded6471b637efcb9145e269b25f84a20e0183e5da6ed00d53418e0599ad1"
+                  },
+                  {
+                      "path":  "app/Services/Gamification/BoosterService.php",
+                      "size":  13911,
+                      "sha256":  "d6e1b8524e355b8620cc65972cbacfc8354bf1a8f82252f5158764416b8703f1"
+                  },
+                  {
+                      "path":  "app/Services/Gamification/ChallengeService.php",
+                      "size":  14368,
+                      "sha256":  "4d4d682212eb1d61f49a515615cb07935cca8700a8fe99435707a9c023e08b50"
+                  },
+                  {
+                      "path":  "app/Services/Gamification/CompetitionService.php",
+                      "size":  12876,
+                      "sha256":  "f05e35e1629c6b45135cb80661dce94023cff1506a62f4b0f97114b4bd1eeb6e"
+                  },
+                  {
+                      "path":  "app/Services/Gamification/FriendshipService.php",
+                      "size":  13318,
+                      "sha256":  "b0c0986a985545f40f9ebbb4a6a6a1ed92b154e221a9cef944f81adc10d993a2"
+                  },
+                  {
+                      "path":  "app/Services/Gamification/GamificationService.php",
+                      "size":  16786,
+                      "sha256":  "f3651e143d0c49073e5487b2d0a62952efe50d5cf3d9ffa37fd8c089c2a9c572"
+                  },
+                  {
+                      "path":  "app/Services/Gamification/InventoryService.php",
+                      "size":  15133,
+                      "sha256":  "894a41df9a8d6c6429fa4cce957ce6064e885c80c33d218b7c67f2064d31b25b"
+                  },
+                  {
+                      "path":  "app/Services/Gamification/LeaderboardCatalog.php",
+                      "size":  3828,
+                      "sha256":  "789f52ff62542141d0f8708cfbe9c2d7b0a094ba58cb592712815521f85b63d3"
+                  },
+                  {
+                      "path":  "app/Services/Gamification/LeaderboardService.php",
+                      "size":  12910,
+                      "sha256":  "5391f9018a3d470b93cede45d39bad38e4d6f355f1db3f876383033100411fc2"
+                  },
+                  {
+                      "path":  "app/Services/Gamification/LevelService.php",
+                      "size":  9070,
+                      "sha256":  "f66713887cc8b971a1bf7ae488274e6905ddc71aca19c9ac43828ffac5f36132"
+                  },
+                  {
+                      "path":  "app/Services/Gamification/NotificationService.php",
+                      "size":  13584,
+                      "sha256":  "6d529e9c56b8443e96c682dd9a0a1f6e600ecb35c1bd135956ce7c1d93a30bce"
+                  },
+                  {
+                      "path":  "app/Services/Gamification/PointEarningCatalog.php",
+                      "size":  7579,
+                      "sha256":  "8ade2016b2819ffc53a77238a5e2fd30f2d25e761839fe6dcb5ad2f18f6c83c1"
+                  },
+                  {
+                      "path":  "app/Services/Gamification/PointsBackfillService.php",
+                      "size":  7909,
+                      "sha256":  "4da46870825d4820851262504aa23f8d7fa06bfd2951f5e670a3db880316e861"
+                  },
+                  {
+                      "path":  "app/Services/Gamification/PointsBulkGrantService.php",
+                      "size":  3848,
+                      "sha256":  "7dbec558c4524bf20b3875d2d9bd3e0c97f71dbe70a2f61bbc0fa133e4c978d9"
+                  },
+                  {
+                      "path":  "app/Services/Gamification/PointsService.php",
+                      "size":  10483,
+                      "sha256":  "5af8d634e33e859dc3e150a69018760ea2fdfd87f0e1739a2246443f9f5c8265"
+                  },
+                  {
+                      "path":  "app/Services/Gamification/ReferralService.php",
+                      "size":  2862,
+                      "sha256":  "ea5436288a714def2be7d552499617ca06e29bdc121aa6b2102e5645df562822"
+                  },
+                  {
+                      "path":  "app/Services/Gamification/ShopService.php",
+                      "size":  16912,
+                      "sha256":  "dee9680fb523eb68d4933df9b4408385628629626a20c72622c79a75aff98739"
+                  },
+                  {
+                      "path":  "app/Services/Gamification/SocialActivityService.php",
+                      "size":  12504,
+                      "sha256":  "55b4ad65724086f6099dbfcc43e4aa7fcc87b9b411dac15ef8ec746b6d2eff9a"
+                  },
+                  {
+                      "path":  "app/Services/Gamification/StreakService.php",
+                      "size":  11281,
+                      "sha256":  "55ae3fbe8aba50484a52f108ae5399443fb926ad17b768e25c13b18e84c99145"
+                  },
+                  {
+                      "path":  "app/Services/Gamification/UserGamificationStatSyncService.php",
+                      "size":  4485,
+                      "sha256":  "3223f50da66b45917b5d1d72438412d8bab6c1ee286ac9f92cab036a3ef80829"
+                  },
+                  {
+                      "path":  "app/Services/Gamification/XPService.php",
+                      "size":  411,
+                      "sha256":  "02f1240e7403cd470067262f69d8623ac4b4b6ae5622a98ab3e794d9749a9177"
+                  },
+                  {
+                      "path":  "app/Support/Gamification/AchievementCriteriaMapper.php",
+                      "size":  3432,
+                      "sha256":  "10762da8403368169404861957cadd4a16357e9a881321bf7580f0a5ff163b76"
+                  },
+                  {
+                      "path":  "app/Support/Gamification/BadgeCriteriaMapper.php",
+                      "size":  3680,
+                      "sha256":  "26f38b83ff170c9427f1e10474e57bf2b6fa9bca5446dd7b0b52e31fd7119d65"
+                  },
+                  {
+                      "path":  "config/gamification.php",
+                      "size":  10991,
+                      "sha256":  "e8a1703f452c21475c8e7fb123801a1a5e801eafcc097f7ea17535a7d6bfcefe"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_23_052854_create_badges_table.php",
+                      "size":  2698,
+                      "sha256":  "5c0acff7ed6b827ad34d9e0756b342054a636ea27ba0f6310d0e1e5c0fafd0b5"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_23_052901_create_achievements_table.php",
+                      "size":  3045,
+                      "sha256":  "591005e8a328eb9d7dd90751103429b397fc6635f3c736e7a1cff17cf2c22f86"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_23_052901_create_user_badges_table.php",
+                      "size":  2268,
+                      "sha256":  "6a04928ad4a54b8fc95d10f8eb32f4b22736aae4d0bf17fcda0cb582d168fe5c"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_23_052902_create_points_transactions_table.php",
+                      "size":  2630,
+                      "sha256":  "c4a334b6ed880693ef2ec2ebaa0165943110a9cdfcf0dd0f1c85de7d2ee1b45c"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_23_052902_create_user_achievements_table.php",
+                      "size":  2435,
+                      "sha256":  "ac3beb06a122edebb80ee6069b78b0a628c70203a2d5fa922e97055a58dc5a75"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_23_052903_create_user_stats_table.php",
+                      "size":  4446,
+                      "sha256":  "9850c2cb1d3ef13fdc84e98c5da24d18c52585c75e115fa3627f6ec284174a67"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_23_052907_create_leaderboards_table.php",
+                      "size":  3290,
+                      "sha256":  "754fb41eaad0e91e514d21a94d23cbcd0985d4c9d26293b27f92b020cc7b6da3"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_23_052908_create_challenges_table.php",
+                      "size":  3849,
+                      "sha256":  "5f3029b8c503e46d4d5815ca141f74fe64a55173059a623b84cd17e10e6f71d6"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_23_052908_create_daily_streaks_table.php",
+                      "size":  2421,
+                      "sha256":  "a4113480600b2d820ee4d6863a56f54e2d42a21bac249755dc6cbe555940caef"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_23_052908_create_leaderboard_entries_table.php",
+                      "size":  2565,
+                      "sha256":  "da7214d84fded78d5b5e54b7038d507ce06c1d25cd3dc6dd25f1fa3fd21962df"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_23_052909_create_user_challenges_table.php",
+                      "size":  2992,
+                      "sha256":  "47f40e8f7ce6ff7bedda90eff6825cb33c946b16324794c78d8e2ba16b4ffc23"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_23_052913_create_rewards_catalog_table.php",
+                      "size":  3522,
+                      "sha256":  "0b918a647bae57d681f3a439576db2b73621f87019e9e573079bc7c8e3bbe122"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_23_052913_create_user_rewards_table.php",
+                      "size":  2699,
+                      "sha256":  "19a03e5b78e1c8db513fabc4c9eadd3d91383d0c8cc1741bb4429a414047d006"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_23_052914_create_experience_levels_table.php",
+                      "size":  2318,
+                      "sha256":  "1165f72cf6bd340ad070186446e0b80305cd1cc2a009a99b6968ecaac1226213"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_23_084635_create_gamification_tables.php",
+                      "size":  7183,
+                      "sha256":  "7de1644006b28bbccf424b75f89e5d88cce4d7db2ad8200a202aad6f9be46b20"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_23_100644_add_total_badges_to_gamification_user_stats.php",
+                      "size":  766,
+                      "sha256":  "7e6de2102c9c94ad78c02bd406dd0ef2af3da24cf8ed15bd255cfa257479d634"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_23_101538_add_status_to_gamification_user_achievements.php",
+                      "size":  793,
+                      "sha256":  "bc3de18e7092bd275ed800eb30b68b36d771887532a3c9c7e185d07131701f28"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_23_101710_add_source_to_gamification_point_transactions.php",
+                      "size":  569,
+                      "sha256":  "e256482aef6eb3e85690dd9fece540886b5ad8fa484cda8f41ee7c104122e0a5"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_23_103633_add_difficulty_to_gamification_challenges.php",
+                      "size":  659,
+                      "sha256":  "94b3ac2aeb6827c5cffd3a2f0939d15db9316b3c986d788ab8bd83c14691aba9"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_23_175029_add_sort_order_to_gamification_shop_categories_table.php",
+                      "size":  667,
+                      "sha256":  "a54609a67141f51161a9138dbb86c5492609b07f5c6305d6434d75b34470f393"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_26_133357_add_missing_columns_to_gamification_badges_table.php",
+                      "size":  2492,
+                      "sha256":  "6f5072048fe12c853f16841c36bd6b7417f0ace73c7b048028572fd3e3fcc6e3"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_26_133903_add_missing_columns_to_gamification_challenges_table.php",
+                      "size":  1445,
+                      "sha256":  "69fba6d62c7eac2c04059c2fb1b5470b0aeb47637caf353be69758a649ccc7c7"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_26_135814_add_date_column_to_daily_streaks_table.php",
+                      "size":  1339,
+                      "sha256":  "e711161ef66307494478da3db635419979d1b77408502911ac9b4e42a7d6afcb"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_26_143129_add_is_visible_to_badges_table.php",
+                      "size":  740,
+                      "sha256":  "fd522f7a04672ff0a38cd002ce7e897ba4203305742d12e50f23c59e009fd851"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_26_145230_create_gamification_user_purchases_table.php",
+                      "size":  1275,
+                      "sha256":  "ce43cf9529d30345cc647aca6df620182a50313c4ffb564076fc1a58eafe2711"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_26_145235_create_gamification_user_inventory_table.php",
+                      "size":  1556,
+                      "sha256":  "f474a54eb967d231abeda8773632ebbfb4474ab1eb60675109f49a2a698cde5f"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_26_183024_create_gamification_notifications_table.php",
+                      "size":  1680,
+                      "sha256":  "a4e9dbd5b80155b91bae99a10f35a11195653b4a30e2306a20d3835f3455aaf8"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_26_203318_rename_earned_at_to_awarded_at_in_gamification_user_badges_table.php",
+                      "size":  660,
+                      "sha256":  "1ad96d80934d17fc3b6183c8b7f6dcb3e0960860f7f689d2434795674f5c1d14"
+                  },
+                  {
+                      "path":  "database/migrations/2026_02_03_100000_add_lessons_completed_to_user_stats_table.php",
+                      "size":  912,
+                      "sha256":  "a62f688a3f3cddc65013bd9801eb89d2f3696d22ecae255f9fc91889d1ad951e"
+                  },
+                  {
+                      "path":  "database/migrations/2026_02_12_200000_make_related_nullable_on_user_achievements_table.php",
+                      "size":  1510,
+                      "sha256":  "aab58ab9544e9891e7bf0a82287fa20ac3e8fa32c7bef8b6f327d69ac0f276d9"
+                  },
+                  {
+                      "path":  "database/migrations/2026_02_12_210000_make_related_nullable_on_user_badges_table.php",
+                      "size":  1456,
+                      "sha256":  "f6dae542c8ba90609951728f77a8ac637dbb9b1efff3e5f8a82bf2d0781ad235"
+                  },
+                  {
+                      "path":  "database/migrations/2026_06_04_140000_add_rewards_to_leaderboards_table.php",
+                      "size":  752,
+                      "sha256":  "9102848dc547d62f2ae079362f2d7a3f3417ca724b6fe3e47e136c0bf7287b18"
+                  },
+                  {
+                      "path":  "database/seeders/AchievementSeeder.php",
+                      "size":  12341,
+                      "sha256":  "dc8c30ade746fa66678f9148caf562a06973f79408a983588d11b5482d06512a"
+                  },
+                  {
+                      "path":  "database/seeders/BadgeSeeder.php",
+                      "size":  19612,
+                      "sha256":  "761c31b97584e5f27875105f2386479d18064ea534d2dc0ee1b86d559f7595a2"
+                  },
+                  {
+                      "path":  "database/seeders/ChallengeSeeder.php",
+                      "size":  13482,
+                      "sha256":  "04ba4a4cbaf046ad683e25c2d62475aa1d93115bd4d611ee0b97b759b4793d68"
+                  },
+                  {
+                      "path":  "database/seeders/CompetitionSeeder.php",
+                      "size":  4150,
+                      "sha256":  "46b69c67bf2e54cc7563d354633b8499aaf0cee20766c8be16e8a0cd3c4e9440"
+                  },
+                  {
+                      "path":  "database/seeders/LeaderboardSeeder.php",
+                      "size":  5807,
+                      "sha256":  "6f74d4db90a2d3c07f7f3bb3d6161623953f8c5e4327a65843950fe8864ba1de"
+                  },
+                  {
+                      "path":  "database/seeders/LevelSeeder.php",
+                      "size":  2742,
+                      "sha256":  "3b075d8dedc3d87702742a02380bd42d8d1a76b7d609bc3186be05412c8d2dbd"
+                  },
+                  {
+                      "path":  "database/seeders/NotificationTypeSeeder.php",
+                      "size":  5449,
+                      "sha256":  "b71db3933ba27e08ce2c0ddbd346c1c55719e86422a4ffa2d9e496d902f26d99"
+                  },
+                  {
+                      "path":  "database/seeders/ShopCategorySeeder.php",
+                      "size":  2239,
+                      "sha256":  "f6bf523160de435caf8926309bc20f1578ab32af7a3a3cbd139460ecb0d1ef10"
+                  },
+                  {
+                      "path":  "database/seeders/ShopItemSeeder.php",
+                      "size":  20840,
+                      "sha256":  "68fcee8bbb9937b4eeee76550d98fe9a10088df6619ad2fceb3261dc5d4555c2"
+                  },
+                  {
+                      "path":  "DEPENDENCIES.md",
+                      "size":  2371,
+                      "sha256":  "e5def138be403877d882fbcc28204f626694c4804c6d6d5dd90e171343f586b7"
+                  },
+                  {
+                      "path":  "INSTALL.md",
+                      "size":  2691,
+                      "sha256":  "6aeebf7c8ab9ad5ec65fcecb956c25b540e71636ace4f9fe0c3f095e57461666"
+                  },
+                  {
+                      "path":  "INTEGRATION-HOOKS.md",
+                      "size":  2712,
+                      "sha256":  "ee30ab508ad22ed05277e7abdca6b735fb63f9b6baf2c130b96e517f08ae22c3"
+                  },
+                  {
+                      "path":  "README.md",
+                      "size":  1297,
+                      "sha256":  "d74577226d84d0756656dd0e00e7c07a44b129dd5375d41fb8cb8955be04d56e"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/achievements/create.blade.php",
+                      "size":  1766,
+                      "sha256":  "0ef092eef76dd1f1d9338325a74a45f4479dfc9cffb3676ec8e0b18189e3cffd"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/achievements/edit.blade.php",
+                      "size":  2029,
+                      "sha256":  "1993c9fb9052a219662594a9cbea2b0649654059169b7ff4f46ae35e7529feb1"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/achievements/index.blade.php",
+                      "size":  13167,
+                      "sha256":  "f36d8b647d124bfd65e301c9077280d2e75d22155e238cf662ac9e885874d763"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/achievements/partials/_form.blade.php",
+                      "size":  4111,
+                      "sha256":  "27a6cea0384a68177eeb17ce29305f6981efb5923a2ac02dd35310ffd9a2187c"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/achievements/partials/stats.blade.php",
+                      "size":  1565,
+                      "sha256":  "e5d86f8384a6162ecfb9c8e00ca184371f4677288739a107d414ad9ee0fb0538"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/achievements/partials/tier-badge.blade.php",
+                      "size":  706,
+                      "sha256":  "b8b020b3a8cff32cb74b473a6604ef5dc63aecdb6e79cdf2c3683a697f057081"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/achievements/show.blade.php",
+                      "size":  7701,
+                      "sha256":  "52a08ae055d22af855837da6001001f061aef9c1bc40e0011dd5c36f207b48bf"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/achievements/statistics.blade.php",
+                      "size":  5761,
+                      "sha256":  "b4460db310f8d3aed40d2d636b9ca31cc1526b6231afa15772215c2f429b363d"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/analytics/dashboard.blade.php",
+                      "size":  10923,
+                      "sha256":  "642298dc1f3583691b7de6bd18bb5690581ae98430207c0feccc5ccf72f42f9c"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/badges/_form.blade.php",
+                      "size":  5781,
+                      "sha256":  "21bc84bdcd97075bd530038eb774408c680bf899dffc5f535b721885c27cc186"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/badges/award.blade.php",
+                      "size":  18319,
+                      "sha256":  "2bac09a6bd4043ce7a03244da4d18456adeb6fbf3a4841a2f7fac0ef9911eb4c"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/badges/create.blade.php",
+                      "size":  1889,
+                      "sha256":  "822bdabd974f34cfc79bfb885c5663891ac6f0f9a42960fc865b26ff4264de00"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/badges/edit.blade.php",
+                      "size":  2203,
+                      "sha256":  "00184e09b500675bbafd4d9bb8750d06a193b61949eb8aa24e8d703150e96d74"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/badges/index.blade.php",
+                      "size":  10266,
+                      "sha256":  "a8d7936aad689ad375892ee9939a6eeb93fe3e23fd467e2f4d645bfe42207436"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/badges/show.blade.php",
+                      "size":  7302,
+                      "sha256":  "2ea00514dd2f07121577fc59ff3b5c0dddf78f46c2a9849dc336ff4a86286f7e"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/challenges/create.blade.php",
+                      "size":  6165,
+                      "sha256":  "1ded7d3e4b8a0bae9c6a48f8476b2dda893784b8838987fafeaace5b49754039"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/challenges/edit.blade.php",
+                      "size":  7076,
+                      "sha256":  "4ce260caf750a917b590d890be7ec9e737a45fd011e705987a877d49023dac61"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/challenges/index.blade.php",
+                      "size":  8714,
+                      "sha256":  "ef7eef1c719b77f64d7a26a5fd4a0e3de17b151d71991c7f4af7eb9a9a523423"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/dashboard.blade.php",
+                      "size":  17826,
+                      "sha256":  "23809be324020042c9f3c4a05c63c66c0c34e46f814dbc54002ea4e523e07024"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/leaderboards/create.blade.php",
+                      "size":  1533,
+                      "sha256":  "bba4a9e594794725f41e375f1caf67fc6d23f16559a91d403330fdfb57175ccf"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/leaderboards/edit.blade.php",
+                      "size":  1627,
+                      "sha256":  "948dee1143e832f68f44ae1f8e2089e2852a830606bf6943757199f46f49318e"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/leaderboards/index.blade.php",
+                      "size":  8454,
+                      "sha256":  "7ff308e365999d697d6d0aa3b1219ee0c09fb2cb3ac68bcbbf53dc90b8f419ce"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/leaderboards/partials/form.blade.php",
+                      "size":  5617,
+                      "sha256":  "32f81dc9d54f9f4b679f4ea165b9d70f42d5e23dbb8e5b8c11e4f087e7888cd2"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/leaderboards/partials/stats.blade.php",
+                      "size":  1523,
+                      "sha256":  "4e4c9f1c4a24da0712753406cf0c672c0e23eaafda334e885b6c2a8618572b5b"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/leaderboards/partials/type-badge.blade.php",
+                      "size":  968,
+                      "sha256":  "404e34863a4bf39a4f82b3a87b2f1f8ddbd90b4b3bca78e72e8352ba2f06fe27"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/leaderboards/show.blade.php",
+                      "size":  7831,
+                      "sha256":  "ff4016c8c56c7608eb7bf970e4038833e79fdc487975d8654082c9ddab1a3474"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/levels/create.blade.php",
+                      "size":  3762,
+                      "sha256":  "4239c89a144cdf76b535615e28f6e8509f5fea6988fdd49e336b1eb935e947b6"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/levels/edit.blade.php",
+                      "size":  3679,
+                      "sha256":  "ac24195ab2af08101a590e604a02d1fd45363d25be7fe3e4db311723f79094fe"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/levels/index.blade.php",
+                      "size":  9915,
+                      "sha256":  "9102055d0229363574aad867cf1ee95987feadfab932baf12faabe47d3db43f5"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/partials/achievements-recalculate-button.blade.php",
+                      "size":  2550,
+                      "sha256":  "33b5d4267fe641a69004c2e83cb37eaab3b3b7f95b0e4ce9dd0eb60aef91def8"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/partials/recalculate-button.blade.php",
+                      "size":  2589,
+                      "sha256":  "3d89055dea56be57ba8635df20efe1ed88c00a1b6ceb850400d2de0e59cd29bd"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/points/create.blade.php",
+                      "size":  11511,
+                      "sha256":  "9df5bcdb915ec42ff795f14bee70db113507588a5091d6992953ceeff517f402"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/points/index.blade.php",
+                      "size":  17363,
+                      "sha256":  "40577e116c8d4177f6c67bdee2c75987251000b83732bc2f5706fdb4a548ff7e"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/points/partials/grant-scripts.blade.php",
+                      "size":  7060,
+                      "sha256":  "a9c98c22536a997756848826cbf3c21b4360bc1ceeec352e02374db254ee284f"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/points/partials/stats.blade.php",
+                      "size":  2073,
+                      "sha256":  "6f72686cbca881631be7ed218a38d0d261eea6cc0958e1a59fa8100cfe4a7468"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/points/user-transactions.blade.php",
+                      "size":  14765,
+                      "sha256":  "43b21bd81d9597c8cdd51c53f4dd7cb692c3824ba587d62c3cc5e940196bbad8"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/shop/categories.blade.php",
+                      "size":  13381,
+                      "sha256":  "321cedcef11827c66dcdd90c548dd620a6facc81b51f46776604b90a961f212e"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/shop/items.blade.php",
+                      "size":  8538,
+                      "sha256":  "904f3dceebbf0312cf551c6bb2d24334b837b0bf7b3f882322ed3858bce10e70"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/shop/items/create.blade.php",
+                      "size":  5624,
+                      "sha256":  "16bf7a6ee64109c5a71cf4b99618f6325eba4f2a803e50262d2c71cdc2c8f97a"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/gamification/shop/items/edit.blade.php",
+                      "size":  5902,
+                      "sha256":  "d6d3c9040eb8371b4ef6257a80f2ac4a274fe5805c6ecf361d1999da135f67ab"
+                  },
+                  {
+                      "path":  "resources/views/emails/achievement-unlocked.blade.php",
+                      "size":  1510,
+                      "sha256":  "2752a13f17d1f344c89d291c4ee1415fb3b1036d0a1d68a9eb8dc78aa71318af"
+                  },
+                  {
+                      "path":  "resources/views/emails/badge-earned.blade.php",
+                      "size":  1528,
+                      "sha256":  "245c8bc51bf59b17dd104a7a1197e071d0c79c0baef1e7b404a86f22bda2d914"
+                  },
+                  {
+                      "path":  "resources/views/emails/level-up.blade.php",
+                      "size":  2551,
+                      "sha256":  "334b43e8c80a6182ede34e41c56cdaf8ba44dcfede529fb7c6d0904757204b76"
+                  },
+                  {
+                      "path":  "resources/views/student/gamification/levels/index.blade.php",
+                      "size":  9967,
+                      "sha256":  "fb89ccbc53abb5ec6a2660c77ace2dc56000de32e54b2def9756912f4ba2c518"
+                  },
+                  {
+                      "path":  "resources/views/student/gamification/notifications/index.blade.php",
+                      "size":  12446,
+                      "sha256":  "77b7e2c8fdc0636bc18f7324f752229f93b83dcbd53a9b7e40a9fa2b8bf61e4a"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/achievements.blade.php",
+                      "size":  6377,
+                      "sha256":  "0cb65e94136670b39944576c9bed1bf2442257b5768066dfa77175a40301c7b3"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/achievements/show.blade.php",
+                      "size":  5376,
+                      "sha256":  "323e0bc94994d624fbfccc8f4953fc77b9bd99b9ae9f6e191c83af337923c45f"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/badges.blade.php",
+                      "size":  5703,
+                      "sha256":  "5e3f12600e6c9572dcf9c43008f9ecfef067e87b24286fdf4194f53a0ab993f0"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/challenges.blade.php",
+                      "size":  6807,
+                      "sha256":  "de3e691bda99480a02f84e34953f2d5a190bf6064e2471728ac536ade16b0acb"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/dashboard.blade.php",
+                      "size":  13230,
+                      "sha256":  "d2d05fcf65334f482f226020f9e5defb013b0d1af20d4d63e551f6cbc54398e5"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/leaderboard.blade.php",
+                      "size":  5822,
+                      "sha256":  "fed775937f457d8937c9e14b26049d86efa5a9e3df09d4d47e24b89d7e8642d8"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/leaderboards/division.blade.php",
+                      "size":  2693,
+                      "sha256":  "92cbf663ed9cf4dea85726851019477bb3a4ed12433546dd0831fe893bbfcd10"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/leaderboards/index.blade.php",
+                      "size":  3327,
+                      "sha256":  "3610069cd442767f2dedd38a9d61fe7fc2c5539d6c7cce434ab61faf9517b443"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/leaderboards/my-rank.blade.php",
+                      "size":  3637,
+                      "sha256":  "701e014304f16d9e00e422960fbbc294a8cf01a04a7ee959d735249360eaa4ca"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/leaderboards/partials/board-card.blade.php",
+                      "size":  4992,
+                      "sha256":  "73f0948c02d78f5a3f064c58c887331c9acae1d4aea64dea0a54a396921d128e"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/leaderboards/partials/division-badge.blade.php",
+                      "size":  835,
+                      "sha256":  "fde009b0fc6b79887986350db2e5a517afeb18435e0d33c827de842b4f91926a"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/leaderboards/partials/division-tab.blade.php",
+                      "size":  1198,
+                      "sha256":  "938a6f862afc030c9811a04adcca9de4bf5181c70beed16e3c2bc68a41528eb6"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/leaderboards/partials/index-stats.blade.php",
+                      "size":  2095,
+                      "sha256":  "6611249e35b7041e72766a663587e5271f980c4b42be5230cb82dab43e48e3e1"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/leaderboards/partials/interaction-scripts.blade.php",
+                      "size":  5987,
+                      "sha256":  "657ec6fa396d4501b0290cb7e44c01c6efcbb13b57a0297d0a1c2f9e0470508a"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/leaderboards/partials/list-entry.blade.php",
+                      "size":  3097,
+                      "sha256":  "8239364deb0b1fd4aef2e91b68b8ba182b8b52bb190e99b761451f7d01f18fd1"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/leaderboards/partials/player-modal.blade.php",
+                      "size":  2758,
+                      "sha256":  "612457bed8d78cacf6b2f9571d503e6854849e0ad92cc537d86ece7bcec630c7"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/leaderboards/partials/podium-entry.blade.php",
+                      "size":  2293,
+                      "sha256":  "bec83903e0157d132dade19de75f761ce35eb9858fbe176d9ead3ccb6908d64a"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/leaderboards/partials/user-avatar.blade.php",
+                      "size":  693,
+                      "sha256":  "32747835d404f4f99011d47ec08d9201b77eb12c3b7183b91b5e7ed1e0e9f961"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/leaderboards/partials/user-name.blade.php",
+                      "size":  566,
+                      "sha256":  "6cac0a760711d9edf82c6dc4293cb811d3272f232dd22aa0a3cedbc22ab5d17a"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/leaderboards/show.blade.php",
+                      "size":  7769,
+                      "sha256":  "73b8272f8e38005ee4d6d769e9c9bc09a49e939b372ee3c1054ba8cb1edc226d"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/partials/achievement-card.blade.php",
+                      "size":  5025,
+                      "sha256":  "bd97302d18394a74f1ce0812f5bb24e309bcb2f1b2fee6080bfbf8cc74c12be9"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/partials/achievement-interaction-scripts.blade.php",
+                      "size":  5875,
+                      "sha256":  "7ca7f124e31b5dd17b585a97d4e5e2ab1a72417f83ac143c660f6141000f6ea7"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/partials/achievement-modal.blade.php",
+                      "size":  3199,
+                      "sha256":  "87b6ba8fd2d302365ecb9073935bd3c030967b82b4b061336ea7a587909b72a6"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/partials/achievements-filters.blade.php",
+                      "size":  3275,
+                      "sha256":  "9372805f2bee2203b41acecce38223bc0c9d35abc94944df1bf5d98a47a9a7cd"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/partials/achievements-stats.blade.php",
+                      "size":  1871,
+                      "sha256":  "dbac857e7e5fcd8e754b883310f21688eca9d99dbf5959f7ba5211e6a7a7f7e0"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/partials/badge-card.blade.php",
+                      "size":  3196,
+                      "sha256":  "4afb98e76d3fb97247080ca50c5926d4d180ece7ffa53f5d96e39c88073f4641"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/partials/badges-empty.blade.php",
+                      "size":  289,
+                      "sha256":  "45e175051c16efcb2b4040cc94ade8ada53d325c3f4f9e6e838efbea408e722c"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/partials/badges-filters.blade.php",
+                      "size":  1277,
+                      "sha256":  "175054ebb084e30b662aef5c9e9b97cd37e7419eb54adacac3ffb091a40bbd8a"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/partials/badges-stats.blade.php",
+                      "size":  1980,
+                      "sha256":  "c4cf328830d55d3123995124c57234e74ad3a9d54e90030e5bd92ffa2c769a86"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/partials/dashboard-kpi.blade.php",
+                      "size":  2083,
+                      "sha256":  "72765021966c5c2ac90f4b4dac4e2c3915830e3931637749e395ff8c6a68f1cc"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/partials/dashboard-quick-links.blade.php",
+                      "size":  2460,
+                      "sha256":  "853b2638d91fdd420d16b095579a37cbe49873262e51dc8e8659b122ef1f5e90"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/points.blade.php",
+                      "size":  8390,
+                      "sha256":  "a8acd6e4fef09a1912f27b78d87bf96725ae5e47c3ccb9339f6e11cd6a6fcd0c"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/points/history.blade.php",
+                      "size":  11459,
+                      "sha256":  "c679ef73389d594784bf6f83d876fc75efac82b76a4c3bb9249cd5a3d464a37e"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/points/how-to-earn.blade.php",
+                      "size":  7455,
+                      "sha256":  "f8c1b7d50808e61fec69805560b689b72fbd0628793b7752b0930ff87ac12c8a"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/points/partials/earning-methods.blade.php",
+                      "size":  1117,
+                      "sha256":  "8d6705684cc8bc8432bbaf533c045fe56f62ab1d18ce28bd28e56bb6f2dccfda"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/points/partials/history-stats.blade.php",
+                      "size":  2346,
+                      "sha256":  "719c3f1cbcdaa07997d97d7e7e36e47950e344c8306fdcd80ab4b8310fa2c421"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/points/partials/stats.blade.php",
+                      "size":  1765,
+                      "sha256":  "225d720ef1d5aa0d44e71562747e3a933cf2f07ddd73fa4a0faea616e2921f47"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/profile.blade.php",
+                      "size":  8229,
+                      "sha256":  "70f9579b4048f7b0833f159799d13144dc3d8dc6645a5f9c9e71532549cf9f6d"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/shop.blade.php",
+                      "size":  6276,
+                      "sha256":  "3bbb7a1bc4b4065767c27f44d1333b7b62a7351845aae7aaff59554b3a54c02e"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/statistics.blade.php",
+                      "size":  10099,
+                      "sha256":  "eb0e38a758dd19b43db857139ccdba4b5a1cfe8b21a468f3e1965a25eff4deb6"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/streak.blade.php",
+                      "size":  10940,
+                      "sha256":  "64f4f82020a64263112c1706d1db4f90e3c468d667af6c0a824d506164727658"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/streak/calendar.blade.php",
+                      "size":  9623,
+                      "sha256":  "dc666d3f04110f54b1d070bba5f64fb1237077a0b3592b68c9d39f0542c6637b"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/gamification/streak/history.blade.php",
+                      "size":  5788,
+                      "sha256":  "3032d5575e494afcd96c5abf243f986040b3026b2015b5a31961b5c23ce60a51"
+                  },
+                  {
+                      "path":  "routes/admin.php",
+                      "size":  15365,
+                      "sha256":  "42d1f32be66d19c1acaf4350a040ca4cbe08b7f357fdd5d915c36be6b383682e"
+                  },
+                  {
+                      "path":  "routes/api.php",
+                      "size":  2654,
+                      "sha256":  "3b3a9161657bf82e321ea7576fecdb9d37d31e9e76a286cc5289b2222eac2585"
+                  },
+                  {
+                      "path":  "routes/console-schedule.php",
+                      "size":  598,
+                      "sha256":  "db2fa92135f38a46511e129603ba2c196941962a5d77320f58faf567c10ca8b8"
+                  },
+                  {
+                      "path":  "routes/student.php",
+                      "size":  14302,
+                      "sha256":  "e3fead215ebbdf6f7e6af59b3b95ffe6e571beb792b19dee3be2a2272dcb2fca"
+                  },
+                  {
+                      "path":  "snippets/providers.php",
+                      "size":  195,
+                      "sha256":  "b2e0c39ef7dcf2fbe064b0f054b07226a21b0083b2974917349a2d3a946cc505"
+                  },
+                  {
+                      "path":  "snippets/sidebar-admin.blade.php",
+                      "size":  1221,
+                      "sha256":  "aec798d086b6e7aaa2394d072b59b10b56045497c126ed1e6244ed02a853448b"
+                  },
+                  {
+                      "path":  "snippets/user-relationships.php",
+                      "size":  2911,
+                      "sha256":  "ba2cfec1901c007d495f36ea2a0ed407f4ba684f8033254278c6b37345502b83"
+                  },
+                  {
+                      "path":  "tests/Feature/Gamification/AchievementsSystemTest.php",
+                      "size":  7091,
+                      "sha256":  "d5874527610930d2ed77d585103267dabead37ad16048767ae2db6138ec48dae"
+                  },
+                  {
+                      "path":  "tests/Feature/Gamification/AdminBadgeUnificationTest.php",
+                      "size":  2555,
+                      "sha256":  "0f93f98149d572cfc016b831e64040db0b81147ce4d00e8f20d5206a81f0a207"
+                  },
+                  {
+                      "path":  "tests/Feature/Gamification/AdminRecalculateTest.php",
+                      "size":  2262,
+                      "sha256":  "e697fb078ce57ec361ccd859bad1394556a886b08c5437c730047afda79175dc"
+                  },
+                  {
+                      "path":  "tests/Feature/Gamification/BadgeManualAwardTest.php",
+                      "size":  9023,
+                      "sha256":  "3e8f461eae3b5b0b13c2802b9f7b8fb500d5622269e5bc0ae47cd98d5e78dc6e"
+                  },
+                  {
+                      "path":  "tests/Feature/Gamification/BadgeServiceTest.php",
+                      "size":  5247,
+                      "sha256":  "79e6dd853ea90b27523f0a5e566f84143dfb457ccb97a4a8bcc083f85f16bedb"
+                  },
+                  {
+                      "path":  "tests/Feature/Gamification/GamificationMysqlTestCase.php",
+                      "size":  396,
+                      "sha256":  "c06606ecc90cfce7e1debf21ac6eeb0315b0169c96b0888b08164a190e617b84"
+                  },
+                  {
+                      "path":  "tests/Feature/Gamification/HowToEarnPageTest.php",
+                      "size":  923,
+                      "sha256":  "d74951df7ad46fc3c53d99908ca05c8efd14c0fc7c966af9547dd4e5d1a7d606"
+                  },
+                  {
+                      "path":  "tests/Feature/Gamification/PointsBulkGrantTest.php",
+                      "size":  6242,
+                      "sha256":  "a64d12e739e614b7826ffc92308501c94d50d8ae863cc7de8d263903fdbb8ee8"
+                  },
+                  {
+                      "path":  "tests/Feature/Gamification/PointsEarnedEventTest.php",
+                      "size":  837,
+                      "sha256":  "d3619d2aaae1946706eacbcbb445e491070b09ee55f0e537aa0b7ea9c710b35e"
+                  },
+                  {
+                      "path":  "tests/Feature/Gamification/PointsServiceTest.php",
+                      "size":  2487,
+                      "sha256":  "07cfa314bba9ce85ec494eadb579a3b9e994438e371a986b1010cca021f8c156"
+                  },
+                  {
+                      "path":  "tests/Feature/Gamification/ReferralPointsTest.php",
+                      "size":  1286,
+                      "sha256":  "6f25f1664499040108cd67eeff913346036c785494bc486f85f4e566e02d8f29"
+                  },
+                  {
+                      "path":  "tests/Feature/Gamification/ShopPointsLedgerTest.php",
+                      "size":  1172,
+                      "sha256":  "0d5086ddac109aec1cf967f26943a06b97840f1d10b7c14296fed220d6a34836"
+                  },
+                  {
+                      "path":  "tests/Feature/Gamification/SocialPointsTest.php",
+                      "size":  1222,
+                      "sha256":  "472c2d7fef5b9457c1338b5cf845dd692875e345f2c88af6816cc11292509d85"
+                  },
+                  {
+                      "path":  "tests/Feature/Gamification/VideoWatchPointsTest.php",
+                      "size":  2557,
+                      "sha256":  "1b4dd956c52358e4a1798200047ce6b3f02590c1144944a939b23f86c53c6962"
+                  },
+                  {
+                      "path":  "tests/Feature/Leaderboards/AdminLeaderboardTest.php",
+                      "size":  2067,
+                      "sha256":  "0951b55dfe3e3359d44264ac8595906376907995da4d566f0abf75766920e18c"
+                  },
+                  {
+                      "path":  "tests/Feature/Leaderboards/LeaderboardMysqlTestCase.php",
+                      "size":  183,
+                      "sha256":  "9248fc6a7e5294ba5ce067ab194a2aefc2b5c1050e220c020147c92419c1b863"
+                  },
+                  {
+                      "path":  "tests/Feature/Leaderboards/LeaderboardServiceTest.php",
+                      "size":  3655,
+                      "sha256":  "a7068e939d9979c58213974bd3a9b037ecacaa75d79623ac698a4ac9dff407ff"
+                  },
+                  {
+                      "path":  "tests/Feature/Leaderboards/StudentLeaderboardPageTest.php",
+                      "size":  2081,
+                      "sha256":  "22814becf00ea40ec124e1810ccc181aaa5cd7cf68d5433b00f4ad6b7cf81749"
+                  }
+              ]
+}

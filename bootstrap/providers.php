@@ -6,4 +6,5 @@ return [
     App\Providers\MailConfigServiceProvider::class,
     App\Providers\StorageServiceProvider::class,
     App\Providers\StorageHelperServiceProvider::class,
+    App\Providers\GamificationServiceProvider::class,
 ];

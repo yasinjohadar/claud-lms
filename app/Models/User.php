@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Spatie\Permission\Traits\HasRoles;
@@ -92,5 +94,98 @@ class User extends Authenticatable
             'id',
             'id'
         );
+    }
+
+    /**
+     * إحصائيات التحفيز (جدول user_stats — يستخدمه GamificationService).
+     */
+    public function stats(): HasOne
+    {
+        return $this->hasOne(UserStat::class);
+    }
+
+    /**
+     * إحصائيات التحفيز (جدول gamification_user_stats — بوابة الطالب).
+     */
+    public function gamificationStats(): HasOne
+    {
+        return $this->hasOne(Gamification\UserStat::class);
+    }
+
+    public function pointsTransactions(): HasMany
+    {
+        return $this->hasMany(PointsTransaction::class);
+    }
+
+    public function gamificationPointTransactions(): HasMany
+    {
+        return $this->hasMany(Gamification\PointTransaction::class);
+    }
+
+    public function userBadges(): HasMany
+    {
+        return $this->hasMany(UserBadge::class);
+    }
+
+    public function badges(): BelongsToMany
+    {
+        return $this->belongsToMany(Gamification\Badge::class, 'gamification_user_badges', 'user_id', 'badge_id')
+            ->withPivot('awarded_at')
+            ->withTimestamps();
+    }
+
+    public function legacyBadges(): BelongsToMany
+    {
+        return $this->belongsToMany(Badge::class, 'user_badges')
+            ->withPivot([
+                'awarded_at',
+                'reason',
+                'related_type',
+                'related_id',
+                'progress',
+                'is_seen',
+                'is_featured',
+                'points_awarded',
+                'metadata',
+            ])
+            ->withTimestamps();
+    }
+
+    public function userAchievements(): HasMany
+    {
+        return $this->hasMany(UserAchievement::class);
+    }
+
+    public function achievements(): BelongsToMany
+    {
+        return $this->belongsToMany(Gamification\Achievement::class, 'gamification_user_achievements', 'user_id', 'achievement_id')
+            ->withPivot(['unlocked_at', 'status', 'completed_at'])
+            ->withTimestamps();
+    }
+
+    public function legacyAchievements(): BelongsToMany
+    {
+        return $this->belongsToMany(Achievement::class, 'user_achievements')
+            ->withPivot([
+                'current_value',
+                'target_value',
+                'progress_percentage',
+                'status',
+                'started_at',
+                'completed_at',
+                'claimed_at',
+                'related_type',
+                'related_id',
+                'progress_data',
+                'points_claimed',
+                'xp_claimed',
+                'is_notified',
+            ])
+            ->withTimestamps();
+    }
+
+    public function gamificationNotifications(): HasMany
+    {
+        return $this->hasMany(GamificationNotification::class);
     }
 }

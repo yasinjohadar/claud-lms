@@ -28,6 +28,16 @@ class CourseLesson extends Model
         return $this->belongsTo(CourseSection::class, 'course_section_id');
     }
 
+    public function module(): \Illuminate\Database\Eloquent\Relations\MorphOne
+    {
+        return $this->morphOne(CourseModule::class, 'modulable');
+    }
+
+    public function scopePublished($query)
+    {
+        return $query;
+    }
+
     public function getCourseIdAttribute(): ?int
     {
         return $this->section?->course_id;

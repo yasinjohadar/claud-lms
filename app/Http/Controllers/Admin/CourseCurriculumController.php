@@ -24,7 +24,7 @@ class CourseCurriculumController extends Controller
 
     public function index(Course $course): View
     {
-        $course->load(['sections.lessons', 'sections.resources', 'resources' => fn ($q) => $q->whereNull('course_section_id')]);
+        $course->load(['sections.lessons', 'sections.resources', 'sections.modules.modulable', 'resources' => fn ($q) => $q->whereNull('course_section_id')]);
 
         return view('admin.courses.curriculum.index', compact('course'));
     }
@@ -257,7 +257,7 @@ class CourseCurriculumController extends Controller
 
     protected function renderSections(Course $course): string
     {
-        $course->load(['sections.lessons', 'sections.resources']);
+        $course->load(['sections.lessons', 'sections.resources', 'sections.modules.modulable']);
 
         return view('admin.courses.curriculum.partials.sections', compact('course'))->render();
     }

@@ -32,7 +32,7 @@
                         </span>
                         <div class="curriculum-section-card__summary">
                             <h6 class="mb-0 fw-bold">{{ $section->title }}</h6>
-                            <span class="text-muted fs-12">{{ $section->lessons->count() }} درس</span>
+                            <span class="text-muted fs-12">{{ $section->lessons->count() }} درس@if($section->modules->isNotEmpty()) &bull; {{ $section->modules->count() }} تقييم@endif</span>
                         </div>
                     </div>
                     <div class="d-flex align-items-center gap-2 flex-wrap curriculum-section-card__actions" data-accordion-ignore>
@@ -112,6 +112,49 @@
                                 </li>
                             @endforeach
                         </ul>
+                    @endif
+
+                    @if($section->modules->isNotEmpty())
+                        <div class="curriculum-section-resources">
+                            <div class="curriculum-section-resources__title">
+                                <i class="ri-question-answer-line me-1"></i> وحدات التقييم
+                            </div>
+                            <ul class="curriculum-resources-builder list-unstyled mb-0">
+                                @foreach($section->modules as $module)
+                                    @php
+                                        $editUrl = match ($module->module_type) {
+                                            'quiz' => route('quizzes.edit', $module->modulable_id),
+                                            'question_module' => route('question-modules.edit', $module->modulable_id),
+                                            default => null,
+                                        };
+                                        $typeLabel = match ($module->module_type) {
+                                            'quiz' => 'اختبار',
+                                            'question_module' => 'تدريب',
+                                            default => $module->module_type,
+                                        };
+                                    @endphp
+                                    <li class="curriculum-resource-row curriculum-resource-row--inline">
+                                        <span class="row-avatar row-avatar--sm">
+                                            <i class="{{ $module->module_type === 'quiz' ? 'ri-file-list-3-line' : 'ri-questionnaire-line' }}"></i>
+                                        </span>
+                                        <div class="curriculum-resource-row__info">
+                                            <span class="fw-semibold">{{ $module->title }}</span>
+                                            <span class="text-muted fs-12 d-block">
+                                                <span class="badge-soft badge-soft-success me-1">{{ $typeLabel }}</span>
+                                                @if(!$module->is_visible)
+                                                    <span class="badge-soft badge-soft-warning">مخفي</span>
+                                                @endif
+                                            </span>
+                                        </div>
+                                        @if($editUrl)
+                                            <a href="{{ $editUrl }}" class="action-btn action-btn--edit" title="تعديل">
+                                                <i class="ri-pencil-line"></i>
+                                            </a>
+                                        @endif
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
                     @endif
 
                     @if($section->resources->isNotEmpty())

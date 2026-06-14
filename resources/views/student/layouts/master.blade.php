@@ -36,6 +36,18 @@
                         <a class="nav-link {{ request()->routeIs('student.courses.*') ? 'active' : '' }}"
                            href="{{ route('student.courses.index') }}">كورساتي</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('student.quizzes.*') ? 'active' : '' }}"
+                           href="{{ route('student.quizzes.index') }}">اختباراتي</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('student.question-module.*') ? 'active' : '' }}"
+                           href="{{ route('student.question-module.stats.index') }}">تدريباتي</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('gamification.*') ? 'active' : '' }}"
+                           href="{{ route('gamification.dashboard') }}">التحفيز</a>
+                    </li>
                 </ul>
                 <div class="d-flex align-items-center gap-3">
                     <span class="text-secondary small">{{ auth()->user()->name }}</span>

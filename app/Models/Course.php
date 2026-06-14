@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class Course extends Model
@@ -118,11 +119,40 @@ class Course extends Model
 
     public function scopePublished($query)
     {
-        return $query->where('status', 'published')
-            ->where(function ($q) {
-                $q->whereNull('published_at')
-                    ->orWhere('published_at', '<=', now());
-            });
+        if (static::usesStatusColumn()) {
+            return $query->where('status', 'published')
+                ->where(function ($q) {
+                    $q->whereNull('published_at')
+                        ->orWhere('published_at', '<=', now());
+                });
+        }
+
+        return $query->where('is_published', true);
+    }
+
+    public function isPublished(): bool
+    {
+        if (static::usesStatusColumn()) {
+            return $this->status === 'published'
+                && ($this->published_at === null || $this->published_at <= now());
+        }
+
+        return (bool) ($this->is_published ?? false);
+    }
+
+    protected static function usesStatusColumn(): bool
+    {
+        static $cache = [];
+
+        $model = new static;
+        $connection = $model->getConnectionName() ?? config('database.default');
+
+        if (! array_key_exists($connection, $cache)) {
+            $cache[$connection] = Schema::connection($connection)
+                ->hasColumn($model->getTable(), 'status');
+        }
+
+        return $cache[$connection];
     }
 
     public function scopeFeatured($query)

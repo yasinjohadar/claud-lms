@@ -18,6 +18,7 @@
 
     @include('admin.layouts.head')
     
+    @include('admin.pages.assignments.partials.page-styles')
     @yield('css')
     @yield('styles')
     @stack('styles')

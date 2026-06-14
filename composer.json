@@ -14,8 +14,9 @@
         "league/flysystem-azure-blob-storage": "^3.28",
         "league/flysystem-ftp": "^3.28",
         "league/flysystem-sftp-v3": "^3.28",
-        "spatie/flysystem-dropbox": "^3.0",
+        "phpoffice/phpspreadsheet": "*",
         "platformcommunity/flysystem-bunnycdn": "^3.3",
+        "spatie/flysystem-dropbox": "^3.0",
         "spatie/laravel-permission": "^6.19",
         "yaza/laravel-google-drive-storage": "^4.1"
     },

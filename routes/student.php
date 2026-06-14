@@ -15,3 +15,10 @@ Route::middleware(['auth', 'check.user.active', 'role:student', 'ensure.student'
             ->middleware('ensure.enrolled')
             ->name('lessons.progress');
     });
+
+Route::middleware(['auth', 'check.user.active', 'role:student', 'ensure.student'])
+    ->prefix('student')
+    ->group(function () {
+        require base_path('routes/exam-student.php');
+        require base_path('routes/gamification-student.php');
+    });

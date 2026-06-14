@@ -46,6 +46,22 @@
 <!-- Admin Ajax Filter (central table search/filter) -->
 <script src="{{ asset('assets/js/admin-ajax-filter.js') }}"></script>
 
+<!-- Admin exam/gamification page reveal -->
+<script>
+(function () {
+    function markPageLoaded() {
+        document.documentElement.classList.add('loaded');
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(markPageLoaded, 50);
+        });
+    } else {
+        setTimeout(markPageLoaded, 50);
+    }
+})();
+</script>
+
 <!-- Page Specific Scripts -->
 @yield('script')
 @stack('scripts')

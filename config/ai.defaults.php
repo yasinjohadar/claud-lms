@@ -6,6 +6,17 @@
  */
 return [
 
+    'application' => [
+        'engine' => env('AI_APPLICATION_ENGINE', 'legacy'),
+        'blog_engine' => env('AI_BLOG_ENGINE'),
+        'docs_engine' => env('AI_DOCS_ENGINE'),
+        'questions_engine' => env('AI_QUESTIONS_ENGINE'),
+        'reports_engine' => env('AI_REPORTS_ENGINE'),
+        'completion_tokens_ceiling' => env('AI_COMPLETION_TOKENS_CEILING') !== null && env('AI_COMPLETION_TOKENS_CEILING') !== ''
+            ? (int) env('AI_COMPLETION_TOKENS_CEILING')
+            : null,
+    ],
+
     'default' => 'openai',
     'default_for_images' => 'openai',
     'default_for_audio' => 'openai',

@@ -29,6 +29,19 @@
                         <svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"> <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"></path> </svg>
                     </div>
                     @php
+                        $isExamOpen = request()->routeIs([
+                            'quizzes.*',
+                            'question-bank.*',
+                            'question-pools.*',
+                            'question-modules.*',
+                            'grading.*',
+                            'quiz-analytics.*',
+                            'admin.question-module-grading.*',
+                            'admin.ai.question-creation.*',
+                            'admin.ai.question-generations.*',
+                            'admin.ai.question-solutions.*',
+                        ]);
+                        $isGamificationOpen = request()->routeIs('admin.gamification.*');
                         $isSettingsOpen = request()->routeIs([
                             'admin.settings.*',
                             'admin.ai.*',
@@ -135,6 +148,95 @@
                             </ul>
                         </li>
 
+                        <li class="slide has-sub {{ $isExamOpen ? 'open active' : '' }}">
+                            <a href="javascript:void(0);" class="side-menu__item {{ $isExamOpen ? 'active' : '' }}">
+                                <span class="side-menu__icon side-menu__icon--boxed side-menu__icon--blog">
+                                    <i class="ri-questionnaire-line"></i>
+                                </span>
+                                <span class="side-menu__label">الاختبارات والأسئلة</span>
+                                <i class="ri-arrow-left-s-line side-menu__angle"></i>
+                            </a>
+                            <ul class="slide-menu child1">
+                                @can('quiz-list')
+                                <li class="slide {{ request()->routeIs('quizzes.*') ? 'active' : '' }}">
+                                    <a href="{{ route('quizzes.index') }}" class="side-menu__item">الاختبارات</a>
+                                </li>
+                                @endcan
+                                @can('question-bank-list')
+                                <li class="slide {{ request()->routeIs('question-bank.*') ? 'active' : '' }}">
+                                    <a href="{{ route('question-bank.index') }}" class="side-menu__item">بنك الأسئلة</a>
+                                </li>
+                                @endcan
+                                @can('question-pool-list')
+                                <li class="slide {{ request()->routeIs('question-pools.*') ? 'active' : '' }}">
+                                    <a href="{{ route('question-pools.index') }}" class="side-menu__item">مجموعات الأسئلة</a>
+                                </li>
+                                @endcan
+                                @can('question-module-list')
+                                <li class="slide {{ request()->routeIs('question-modules.*', 'admin.question-module-grading.*') ? 'active' : '' }}">
+                                    <a href="{{ route('question-modules.index') }}" class="side-menu__item">وحدات الأسئلة</a>
+                                </li>
+                                @endcan
+                                @can('grading-list')
+                                <li class="slide {{ request()->routeIs('grading.*') ? 'active' : '' }}">
+                                    <a href="{{ route('grading.index') }}" class="side-menu__item">تصحيح الاختبارات</a>
+                                </li>
+                                @endcan
+                                @can('quiz-analytics-list')
+                                <li class="slide {{ request()->routeIs('quiz-analytics.*') ? 'active' : '' }}">
+                                    <a href="{{ route('quiz-analytics.index') }}" class="side-menu__item">تحليلات الاختبارات</a>
+                                </li>
+                                @endcan
+                            </ul>
+                        </li>
+
+                        <li class="slide has-sub {{ $isGamificationOpen ? 'open active' : '' }}">
+                            <a href="javascript:void(0);" class="side-menu__item {{ $isGamificationOpen ? 'active' : '' }}">
+                                <span class="side-menu__icon side-menu__icon--boxed side-menu__icon--roles">
+                                    <i class="ri-trophy-line"></i>
+                                </span>
+                                <span class="side-menu__label">التحفيز</span>
+                                <i class="ri-arrow-left-s-line side-menu__angle"></i>
+                            </a>
+                            <ul class="slide-menu child1">
+                                @can('gamification-dashboard')
+                                <li class="slide {{ request()->routeIs('admin.gamification.dashboard', 'admin.gamification.analytics') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.gamification.dashboard') }}" class="side-menu__item">لوحة التحكم</a>
+                                </li>
+                                @endcan
+                                @can('gamification-points')
+                                <li class="slide {{ request()->routeIs('admin.gamification.points.*') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.gamification.points.index') }}" class="side-menu__item">النقاط</a>
+                                </li>
+                                @endcan
+                                @can('gamification-badges')
+                                <li class="slide {{ request()->routeIs('admin.gamification.badges.*') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.gamification.badges.index') }}" class="side-menu__item">الشارات</a>
+                                </li>
+                                @endcan
+                                @can('gamification-achievements')
+                                <li class="slide {{ request()->routeIs('admin.gamification.achievements.*') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.gamification.achievements.index') }}" class="side-menu__item">الإنجازات</a>
+                                </li>
+                                @endcan
+                                @can('gamification-challenges')
+                                <li class="slide {{ request()->routeIs('admin.gamification.challenges.*') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.gamification.challenges.index') }}" class="side-menu__item">التحديات</a>
+                                </li>
+                                @endcan
+                                @can('gamification-leaderboards')
+                                <li class="slide {{ request()->routeIs('admin.gamification.leaderboards.*') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.gamification.leaderboards.index') }}" class="side-menu__item">لوائح المتصدرين</a>
+                                </li>
+                                @endcan
+                                @can('gamification-shop')
+                                <li class="slide {{ request()->routeIs('admin.gamification.shop.*') ? 'active' : '' }}">
+                                    <a href="{{ route('admin.gamification.shop.items.index') }}" class="side-menu__item">المتجر</a>
+                                </li>
+                                @endcan
+                            </ul>
+                        </li>
+
                         <li class="slide {{ request()->routeIs('admin.team-members.*') ? 'active' : '' }}">
                             <a href="{{ route('admin.team-members.index') }}" class="side-menu__item {{ request()->routeIs('admin.team-members.*') ? 'active' : '' }}">
                                 <span class="side-menu__icon side-menu__icon--boxed side-menu__icon--users">
@@ -213,6 +315,15 @@
                                         </li>
                                         <li class="slide {{ request()->routeIs('admin.ai.models.*') ? 'active' : '' }}">
                                             <a href="{{ route('admin.ai.models.index') }}" class="side-menu__item">الموديلات</a>
+                                        </li>
+                                        <li class="slide {{ request()->routeIs('admin.ai.question-creation.*', 'admin.ai.question-generations.*', 'admin.ai.question-solutions.*') ? 'active' : '' }}">
+                                            <a href="{{ route('admin.ai.question-creation.create') }}" class="side-menu__item">أسئلة بالذكاء الاصطناعي</a>
+                                        </li>
+                                        <li class="slide {{ request()->routeIs('admin.ai.question-generations.*') ? 'active' : '' }}">
+                                            <a href="{{ route('admin.ai.question-generations.index') }}" class="side-menu__item">توليد الأسئلة</a>
+                                        </li>
+                                        <li class="slide {{ request()->routeIs('admin.ai.question-solutions.*') ? 'active' : '' }}">
+                                            <a href="{{ route('admin.ai.question-solutions.index') }}" class="side-menu__item">حلول الأسئلة</a>
                                         </li>
                                     </ul>
                                 </li>

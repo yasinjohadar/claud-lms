@@ -306,6 +306,8 @@ Route::middleware(['auth', 'check.user.active'])->prefix('admin')->name('admin.'
             ->name('models.import-catalog');
         Route::resource('models', \App\Http\Controllers\Admin\AiModelConfigController::class)
             ->except(['show']);
+
+        require base_path('routes/exam-admin-ai.php');
     });
     
     /**
@@ -366,3 +368,10 @@ Route::middleware(['auth', 'check.user.active'])->prefix('admin')->name('admin.'
         });
 
 });
+
+Route::middleware(['auth', 'check.user.active'])
+    ->prefix('admin')
+    ->group(function () {
+        require base_path('routes/exam-admin.php');
+        require base_path('routes/gamification-admin.php');
+    });

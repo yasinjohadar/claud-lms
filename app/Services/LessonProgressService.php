@@ -2,6 +2,9 @@
 
 namespace App\Services;
 
+use App\Events\CourseCompleted;
+use App\Events\LessonCompleted;
+use App\Events\VideoWatched;
 use App\Models\CourseEnrollment;
 use App\Models\CourseLesson;
 use App\Models\LessonProgress;
@@ -37,6 +40,8 @@ class LessonProgressService
             $progress->last_position_seconds = max($progress->last_position_seconds ?? 0, $lastPositionSeconds);
             $progress->watched_seconds = max($progress->watched_seconds ?? 0, $watchedSeconds);
 
+            $wasCompleted = $progress->status === 'completed';
+
             if ($markCompleted) {
                 $progress->status = 'completed';
                 $progress->completed_at = $progress->completed_at ?? now();
@@ -49,6 +54,16 @@ class LessonProgressService
             $progress->save();
 
             $this->enrollmentService->recalculateProgress($enrollment->fresh());
+            $enrollment = $enrollment->fresh(['course']);
+
+            if ($student->user && ! $wasCompleted && $progress->status === 'completed') {
+                LessonCompleted::dispatch($student->user, $lesson);
+                VideoWatched::dispatch($student->user, $lesson, 100);
+            }
+
+            if ($student->user && $enrollment && (int) $enrollment->progress_percent >= 100) {
+                CourseCompleted::dispatch($student->user, $enrollment->course);
+            }
 
             return $progress->fresh();
         });

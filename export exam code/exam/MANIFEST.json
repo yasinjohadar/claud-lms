@@ -1,0 +1,1002 @@
+﻿{
+    "module":  "exam",
+    "generated_at":  "2026-06-14T18:26:30.7225900Z",
+    "file_count":  199,
+    "files":  [
+                  {
+                      "path":  "app/Ai/Agents/QuestionGenerationPlainAgent.php",
+                      "size":  640,
+                      "sha256":  "ed50aa30eba263de7e6ae1c1a0bc4842ad572477a5d076e5a3162d714fba0712"
+                  },
+                  {
+                      "path":  "app/Console/Commands/RegradeOldQuizAttempts.php",
+                      "size":  7197,
+                      "sha256":  "bc33d38aa07105e61c88590a7eb6bfb584237959f0a5deb5f08f93888bf23c17"
+                  },
+                  {
+                      "path":  "app/Events/QuizCompleted.php",
+                      "size":  921,
+                      "sha256":  "232a3cfbeb310ad7904b9fcc2b4097df2d79e04747ad2a0b295bff6cc2bf77e9"
+                  },
+                  {
+                      "path":  "app/Events/QuizStarted.php",
+                      "size":  383,
+                      "sha256":  "db50c8697b71c86ff3d4abefae6abc606c9e6ddb86f3ee4d8334e628c5acea5c"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Admin/AIQuestionCreationController.php",
+                      "size":  12182,
+                      "sha256":  "8bc7ebf522e6814b42ffdf4c291faffe030ce4017c2369c839bc30792e754249"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Admin/AIQuestionGenerationController.php",
+                      "size":  11662,
+                      "sha256":  "8adddc62620189e9a833ef025a0ccc324ca1b9d5e64cd9fc645c24823adf5b9b"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Admin/AIQuestionSolvingController.php",
+                      "size":  4018,
+                      "sha256":  "32b3fc1963d86d0f208e569421a3c4c9fe07b7fca089570288480f8bfa90512c"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Admin/QuestionBankController.php",
+                      "size":  62581,
+                      "sha256":  "cca234518f726419ecc33c428f2d9a58c9c94f024a629d6c279ba0c434a70753"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Admin/QuestionBankTypeImportController.php",
+                      "size":  9202,
+                      "sha256":  "5ca75ce2785d2fc70eb5d3c9f1b7d583a2ca0ccedbe5439d7753dc4488e4da93"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Admin/QuestionModuleController.php",
+                      "size":  17578,
+                      "sha256":  "bb9b826949d4d0b0933c1942bbb763194c7b3e0e2c2c1a1eaf66741b4f2aec66"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Admin/QuestionModuleGradingController.php",
+                      "size":  10685,
+                      "sha256":  "05d96056c4071a3823ef637e5a2fbc61bf6442c76b15a9e8e52b71e674889ebf"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Admin/QuestionPoolController.php",
+                      "size":  15364,
+                      "sha256":  "7e734de8ec8e5d679d950b9945e536cf0c1c2f9212de7e77729cabaf7aa552a8"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Admin/QuizAnalyticsController.php",
+                      "size":  26145,
+                      "sha256":  "bc8b24c927a023be42365bb61041e5c62a0075166db229bc24acfebf3292bcd9"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Admin/QuizController.php",
+                      "size":  30804,
+                      "sha256":  "fbe3825a14bc7d8047015ba099d064617976b4b7991e68a220e4670259f66076"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Admin/QuizGradingController.php",
+                      "size":  26458,
+                      "sha256":  "4705f1ea6064c590932ce83b596942bddba688c3e8f226e22a6edb481c1548da"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Api/Student/QuestionModuleStatsApiController.php",
+                      "size":  5251,
+                      "sha256":  "1967b6183f266d18eab2bfd3758904d9ac77223b4ae66f3183e611f9d7cbb209"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Api/Student/QuizApiController.php",
+                      "size":  16078,
+                      "sha256":  "b7e5eba3c08dedf4a75356d6f3cadd947a0518d792d44980cc36de24afa77b2b"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Student/QuestionModuleAttemptController.php",
+                      "size":  53205,
+                      "sha256":  "05c1c5aaa14af25232b7a9a342c545a151e04aa10a8383953b6445f07eefc86c"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Student/QuestionModuleStatsController.php",
+                      "size":  7731,
+                      "sha256":  "c1f121d17f0cb2830cbf07b82a224cc622e1356590158ab149c3ef098f3094fb"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Student/QuizAttemptController.php",
+                      "size":  43488,
+                      "sha256":  "0535cbabc87783654edf910b254236e8107a0e636648b2beac3c4a3d6d12a5fa"
+                  },
+                  {
+                      "path":  "app/Http/Controllers/Student/QuizReviewController.php",
+                      "size":  18771,
+                      "sha256":  "4d87429b91107f1981e5c68e5ab01d9e44957a44d7753f00b0cd0c0c2f8ef3ba"
+                  },
+                  {
+                      "path":  "app/Http/Middleware/DebugQuestionModuleRoute.php",
+                      "size":  2026,
+                      "sha256":  "dc6392dc9c3e5ddd4e49d1ea704705d6f8cc2e6e2d8c2bb9ffede923c00e2ceb"
+                  },
+                  {
+                      "path":  "app/Models/AIQuestionGeneration.php",
+                      "size":  2613,
+                      "sha256":  "d06d00db68588f87e0124dacea2bbc746b47edd5781a87c88e3f62c6463cad46"
+                  },
+                  {
+                      "path":  "app/Models/AIQuestionSolution.php",
+                      "size":  1906,
+                      "sha256":  "55f44b2d30d862bdf38a2600cc891c60f7ec6f6337cf0d19238a34428dc38a18"
+                  },
+                  {
+                      "path":  "app/Models/CourseSectionQuestion.php",
+                      "size":  894,
+                      "sha256":  "09c4cfd916e5779e7a9b395005c643c1be758405757de8ab08828c19303fbbf5"
+                  },
+                  {
+                      "path":  "app/Models/QuestionBank.php",
+                      "size":  10008,
+                      "sha256":  "5749441ded7f9383c79beaee4e45f2060d35ba064ae6234d3c7dc2b85b1fe585"
+                  },
+                  {
+                      "path":  "app/Models/QuestionModule.php",
+                      "size":  5810,
+                      "sha256":  "c2a22c9e08b174f0b545f02f6eec1991d114afd33a838a5af3cd51088e55d1cd"
+                  },
+                  {
+                      "path":  "app/Models/QuestionModuleAttempt.php",
+                      "size":  4563,
+                      "sha256":  "af7a1c6341ab0dc40838fc7538f7e65db2e93f2b640649aa051298775921c11b"
+                  },
+                  {
+                      "path":  "app/Models/QuestionModuleResponse.php",
+                      "size":  12495,
+                      "sha256":  "728b8673ad020480e97e24551ecc470e905970bed9758512725f32291614cd56"
+                  },
+                  {
+                      "path":  "app/Models/QuestionOption.php",
+                      "size":  2202,
+                      "sha256":  "355529bce2a2a95e866730aff73cc20942e332817fa8bc1113110cc9b1bb08ae"
+                  },
+                  {
+                      "path":  "app/Models/QuestionPool.php",
+                      "size":  2891,
+                      "sha256":  "ed73610566d2a34480cac61a72c1dbad0b8e0e98b36b04c1b2db940fc42d1bde"
+                  },
+                  {
+                      "path":  "app/Models/QuestionPoolItem.php",
+                      "size":  1130,
+                      "sha256":  "9dd35e899383a7a960b0920f600853d4206ea4a1728e2c295599d4b90472e04f"
+                  },
+                  {
+                      "path":  "app/Models/QuestionType.php",
+                      "size":  2145,
+                      "sha256":  "e86ba8dffec50fcaf310d9af82a5f0049eae120587ae9082d7c6af8c43cdd15f"
+                  },
+                  {
+                      "path":  "app/Models/Quiz.php",
+                      "size":  7974,
+                      "sha256":  "626c5e28d3a543a7548318e759ee4f80cab32ff5ec341fa4ba8cb2e209441bbd"
+                  },
+                  {
+                      "path":  "app/Models/QuizAnalytics.php",
+                      "size":  10300,
+                      "sha256":  "ce58720ffd42a8db6d58cb0e15ec422fd4d5cc9e23d020312d574520efaae16b"
+                  },
+                  {
+                      "path":  "app/Models/QuizAttempt.php",
+                      "size":  11548,
+                      "sha256":  "339526db7c97c3c4f3b13bd6a0af47e43d7aab2ace8261d6e5c4855495937d51"
+                  },
+                  {
+                      "path":  "app/Models/QuizQuestion.php",
+                      "size":  2825,
+                      "sha256":  "69bd4ce97df683d70c430c90115ae0bfeaf34ad4b2c2515e9c98320926beb397"
+                  },
+                  {
+                      "path":  "app/Models/QuizResponse.php",
+                      "size":  27257,
+                      "sha256":  "e6cc304e0564d690a320de04eaf3a1e739802d2339ac315817eacecb8bab056a"
+                  },
+                  {
+                      "path":  "app/Models/QuizSettings.php",
+                      "size":  4163,
+                      "sha256":  "cdb08c699fb69635253e7a6ad6ea262db8994f63b36d8e275ea5fe0bfb6973fd"
+                  },
+                  {
+                      "path":  "app/Services/Ai/AIEssayGradingService.php",
+                      "size":  10848,
+                      "sha256":  "88e852751cd83749a23f26bcb74a32702d7f0f44d96779500a843efa139ce242"
+                  },
+                  {
+                      "path":  "app/Services/Ai/AIQuestionCreationService.php",
+                      "size":  43656,
+                      "sha256":  "543e7074b178ad3f4f6bedf9493baa50c11fb08de90fab5113b4f8fef7571725"
+                  },
+                  {
+                      "path":  "app/Services/Ai/AIQuestionGenerationService.php",
+                      "size":  23352,
+                      "sha256":  "f6b95e2d987fe1192885a24d67c83c15fafebe3774b20fa087c753f64b5d748e"
+                  },
+                  {
+                      "path":  "app/Services/Ai/AIQuestionSolvingService.php",
+                      "size":  6616,
+                      "sha256":  "62d157bc9ea0af80d1e9bedc63b54bf8e4f257ef80940b55572e0ca5fb112ab0"
+                  },
+                  {
+                      "path":  "app/Services/Api/StudentQuizApiService.php",
+                      "size":  14107,
+                      "sha256":  "7f1badbe10b2900148205a074df0052f5a925dfd4b83d45d38df43c1197616c7"
+                  },
+                  {
+                      "path":  "app/Services/QuestionBank/TypeImport/CanonicalImportRow.php",
+                      "size":  1235,
+                      "sha256":  "3f98aa67e14e99e1fb60d76d713bfda3e43eeaf79576fc6364e3bf6d8a443110"
+                  },
+                  {
+                      "path":  "app/Services/QuestionBank/TypeImport/Excel/TypeExcelParser.php",
+                      "size":  1923,
+                      "sha256":  "20c53e8cff62c8bbd7e3e61b48361c2d5962844f661c4cd32b78014cb84550b8"
+                  },
+                  {
+                      "path":  "app/Services/QuestionBank/TypeImport/Excel/TypeExcelTemplateGenerator.php",
+                      "size":  2621,
+                      "sha256":  "0eae5fad11bb0f76e048ee460782654e06d9a2478bbf61da7a5f25481d2d476c"
+                  },
+                  {
+                      "path":  "app/Services/QuestionBank/TypeImport/ImportDefaultsResolver.php",
+                      "size":  2380,
+                      "sha256":  "cfb3269db5a2683fa8219a8821472ead8958aaa20a3c65f614e9e7e78bd19296"
+                  },
+                  {
+                      "path":  "app/Services/QuestionBank/TypeImport/Json/FlatJsonParser.php",
+                      "size":  4927,
+                      "sha256":  "2f6f99b783996351cf0fc578e17e45f58e71930c9b97cf4398496e1eacb5776b"
+                  },
+                  {
+                      "path":  "app/Services/QuestionBank/TypeImport/Json/JsonImportParser.php",
+                      "size":  1717,
+                      "sha256":  "6244238cfcc754a36f241e139b8f2afca26166a72e3965442c1073bd74083bf8"
+                  },
+                  {
+                      "path":  "app/Services/QuestionBank/TypeImport/Json/StructuredJsonParser.php",
+                      "size":  8396,
+                      "sha256":  "0e022ba4f35f8f358ab7ccb74f648b8482e06e22addc08e62b34ddbc583c3b34"
+                  },
+                  {
+                      "path":  "app/Services/QuestionBank/TypeImport/Json/TypeJsonTemplateGenerator.php",
+                      "size":  6216,
+                      "sha256":  "19286b14852674442868cca645d74e507384a590a3efa7b548baab6a57d3a19f"
+                  },
+                  {
+                      "path":  "app/Services/QuestionBank/TypeImport/QuestionBankImportPersister.php",
+                      "size":  11144,
+                      "sha256":  "644988eee2c932ccd75193435d45be05e005c41ca2842f1ec500a7dd403042a1"
+                  },
+                  {
+                      "path":  "app/Services/QuestionBank/TypeImport/TypeImportColumnRegistry.php",
+                      "size":  11493,
+                      "sha256":  "f4f3810a08bf288bd0ccae63a74dd49667c3bece900b95618e96e7bfb668514a"
+                  },
+                  {
+                      "path":  "app/Services/QuestionBank/TypeImport/TypeImportPreviewService.php",
+                      "size":  5967,
+                      "sha256":  "ea72dc8de5495ed3312880048b016c7d7cfe7a1a82164f6d2f18d19db92ef574"
+                  },
+                  {
+                      "path":  "app/Services/QuestionBankExcelImportService.php",
+                      "size":  13496,
+                      "sha256":  "54770c251258c506bb033035b3542153ea177ff9a176286b44956ebd8191324d"
+                  },
+                  {
+                      "path":  "app/Support/QuizGradingAnswerPresenter.php",
+                      "size":  23992,
+                      "sha256":  "3265060583a988aa9cdb2d1566e9c79392e19721a17b104d4dab909ec645dc8d"
+                  },
+                  {
+                      "path":  "config/ai.php",
+                      "size":  6435,
+                      "sha256":  "80836394123356edf0dacf1cafb367281849ce771e5c4d64c34a90d2449f5af3"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_17_100001_create_question_types_table.php",
+                      "size":  1078,
+                      "sha256":  "dfbbf0939886f4109975aa28bec383cae040ba6e5f373bd1c45b5ef3d3b0234d"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_17_100002_create_quizzes_table.php",
+                      "size":  3117,
+                      "sha256":  "c9ba514dc12febacea17888b41470095ab87d9ecacb49b6c5652ed77bfbdf6b8"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_17_100003_create_question_bank_table.php",
+                      "size":  2308,
+                      "sha256":  "cfccfa0d9e434650b5e7eb5a973fb77e0d151f12e373e80de9c560a9fcf82068"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_17_100004_create_question_options_table.php",
+                      "size":  1468,
+                      "sha256":  "39b3021c832b47e4db17ca7f64733c9965fecb53bf220bbeba93b05149e4b047"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_17_100005_create_question_pools_table.php",
+                      "size":  903,
+                      "sha256":  "44e4a527a3a88b8d13305540b1834e6ad4ab2da2427b2b008a9ec9fec418081a"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_17_100006_create_question_pool_items_table.php",
+                      "size":  952,
+                      "sha256":  "da17b74b0072eb6e4a75c10596ea8839ba988a538f8916c9ad74b0adbb026f51"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_17_100007_create_quiz_questions_table.php",
+                      "size":  1550,
+                      "sha256":  "10109e1d8de6cb8a6c875b8dae720e48ec519cb9a839947489236a4cfb4d05b8"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_17_100008_create_quiz_attempts_table.php",
+                      "size":  2890,
+                      "sha256":  "259720147467508f85bb319d3c58b896e5ebd00e4a13fe0b9ac2bf329a77f59c"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_17_100009_create_quiz_responses_table.php",
+                      "size":  2189,
+                      "sha256":  "ba5c6c8c240ee12603071a6069d677fdb0e95ef1a5827d8a8327654edfd07003"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_17_100010_create_quiz_analytics_table.php",
+                      "size":  2697,
+                      "sha256":  "a968484a08c5375c77045d5e4b7b589d86aa1fe6264531a63c1de69e724fe04a"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_17_100011_create_quiz_settings_table.php",
+                      "size":  1856,
+                      "sha256":  "65b4146e545a8fa7cc4bb6ec5c7d33dbd5b371b08071c4ea1660326c1f6c3be2"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_21_153840_create_course_section_questions_table.php",
+                      "size":  1207,
+                      "sha256":  "fb47e8c36f9c18127cd5c56184a9d85b591ed3ea1cb6bae6dc449394ba6efba9"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_21_180207_create_question_modules_table.php",
+                      "size":  1192,
+                      "sha256":  "ea22fadc942be97145d5ed1ddaae1910ae513e97c4acf6fc38daf7ee4a082674"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_21_180501_create_question_module_questions_table.php",
+                      "size":  1080,
+                      "sha256":  "24d017990e360e70caacae8ca3f4f4c5a9360ff91a70be4c7f024fa30528175e"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_21_181602_add_missing_fields_to_question_modules_table.php",
+                      "size":  1256,
+                      "sha256":  "83881d88698b66f47c3245fa43aed749af12b1d7766617ddbb6e2b79bc2c278c"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_21_182239_add_deleted_at_to_question_modules_table.php",
+                      "size":  596,
+                      "sha256":  "bf6bee8ce73058ab27de2069c04cb6eece9cea86b5f4ded373ce203a5f3d38e6"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_21_182619_add_question_module_to_module_type_enum.php",
+                      "size":  704,
+                      "sha256":  "a6b79f68be50f48d0a006f935ddda268a2a7b0553d8744a551290011ffd4c72c"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_21_191752_create_question_module_attempts_table.php",
+                      "size":  1692,
+                      "sha256":  "7d848a26c085426d0f582d3a6388e3a3f1bc6d370ec7fb2b5e1e0983ed10ccf6"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_21_191758_create_question_module_responses_table.php",
+                      "size":  1310,
+                      "sha256":  "70765cf4d0be29a2419dc8e57859a1ea8af76dbdf7da3a0b09c77af0724a1776"
+                  },
+                  {
+                      "path":  "database/migrations/2025_11_22_051600_create_question_programming_language_table.php",
+                      "size":  1005,
+                      "sha256":  "04b9e2840504b01666151edbfc7ed2fe6c475008c64b763e6850d82a81b208c7"
+                  },
+                  {
+                      "path":  "database/migrations/2025_12_31_093715_create_ai_question_generations_table.php",
+                      "size":  1727,
+                      "sha256":  "3136c634c5fd5cfc5caaed8186dbf431aab89cc52a717b370197a152f5d2c5bf"
+                  },
+                  {
+                      "path":  "database/migrations/2025_12_31_093724_create_ai_question_solutions_table.php",
+                      "size":  1381,
+                      "sha256":  "8a9541adb39d9254207d95499fe847043fd0500015a7335aa2dfaa18a1c22225"
+                  },
+                  {
+                      "path":  "database/migrations/2026_04_04_100000_add_lesson_name_to_question_bank_table.php",
+                      "size":  557,
+                      "sha256":  "e41b1af0dbcb380a7512b62763340e57a303b21c3484773420b0d133c4d49ce7"
+                  },
+                  {
+                      "path":  "database/migrations/2026_04_04_120000_add_laravel_ai_model_id_to_ai_question_generations_table.php",
+                      "size":  721,
+                      "sha256":  "1fbf2412bff67e9b7641fed583b243e4d3f7e9e457f1da272e48d9af0ba3d3a4"
+                  },
+                  {
+                      "path":  "database/seeders/ComprehensiveQuestionBankSeeder.php",
+                      "size":  85749,
+                      "sha256":  "3080bcb775df906b5a1af3202a9c2bc2873b23d1860a3ffc14b69428b6d89f06"
+                  },
+                  {
+                      "path":  "database/seeders/HtmlCssQuestionBankSeeder.php",
+                      "size":  16180,
+                      "sha256":  "18f9e4aa67be74082b3545038d8839a6cfe63c534eb473065742c54ce2e81a39"
+                  },
+                  {
+                      "path":  "database/seeders/JavaScriptQuestionBankSeeder.php",
+                      "size":  29785,
+                      "sha256":  "1c9d921a2b2908524b835f1425768ef8801bb46b616f9ac3a3225e5cf84485e3"
+                  },
+                  {
+                      "path":  "database/seeders/LaravelQuestionBankSeeder.php",
+                      "size":  31881,
+                      "sha256":  "61bc1f4d775fe50c68023fad87a08ba3b7234c2266d457704b2abf1b34b49ccb"
+                  },
+                  {
+                      "path":  "database/seeders/QuestionBankSeeder.php",
+                      "size":  1184,
+                      "sha256":  "227f9e0613c7451e8c94a84170ed72cd74b2a8613fbda26ed5fa4aa42c1d8154"
+                  },
+                  {
+                      "path":  "database/seeders/QuestionTypeSeeder.php",
+                      "size":  4619,
+                      "sha256":  "0c24760d5b939cf63e579f9dfd38d68203e2987cd710cd84123ea6d597f9f781"
+                  },
+                  {
+                      "path":  "database/seeders/QuizSeeder.php",
+                      "size":  11667,
+                      "sha256":  "476840724613050e57d2dd8e0507a4508e4fd5240ec7b3ae7d6bda4a8cfbf5b8"
+                  },
+                  {
+                      "path":  "DEPENDENCIES.md",
+                      "size":  2151,
+                      "sha256":  "632d250acff2aa8e71a811297fd997add2e4b35c7cf959c8b902e17554b1dfc5"
+                  },
+                  {
+                      "path":  "INSTALL.md",
+                      "size":  2508,
+                      "sha256":  "0fb4cf10e90879dd3360aad52208b5c4ab8ace6fa6cfe979b93d2b82886bca6f"
+                  },
+                  {
+                      "path":  "INTEGRATION-HOOKS.md",
+                      "size":  1664,
+                      "sha256":  "98d837e616ea6875baeb7fe0ef38f418b62923e56f76d6ec233f6d40dcfaf1e9"
+                  },
+                  {
+                      "path":  "README.md",
+                      "size":  1277,
+                      "sha256":  "20bbbcf84479014e245eafc4c0faef2254fb457646196dceef3f141577c5be19"
+                  },
+                  {
+                      "path":  "resources/prompts/essay_grading.txt",
+                      "size":  1925,
+                      "sha256":  "e88647693fa42868e3c8a9e63547c289dab6c3ca9c10b0ba325e765e43e21c04"
+                  },
+                  {
+                      "path":  "resources/prompts/question_generation.txt",
+                      "size":  1388,
+                      "sha256":  "9e92f91d1d6c097d86f20e1eb1cf3852ec150d39203c9c88cf77b92e7a5538cc"
+                  },
+                  {
+                      "path":  "resources/prompts/quiz_generation.txt",
+                      "size":  1555,
+                      "sha256":  "c64374d602c2ee1938fd8ca7aa94b7e083f308337ae3ee10c5b61039488ea53d"
+                  },
+                  {
+                      "path":  "resources/views/admin/ai/question-creation/create.blade.php",
+                      "size":  22639,
+                      "sha256":  "0e29b05973d98c17c5d2d073804ff5dcaae48cdd850f63913b9d512d9de1cf90"
+                  },
+                  {
+                      "path":  "resources/views/admin/ai/question-generations/create.blade.php",
+                      "size":  11032,
+                      "sha256":  "a211c81d388e7361dec691306263001da1ed8d9847bf0d9fbad6781d186e35c5"
+                  },
+                  {
+                      "path":  "resources/views/admin/ai/question-generations/index.blade.php",
+                      "size":  13602,
+                      "sha256":  "9eee9d9d5e22f1d0e3eaf5a6097832ebe1bb23d20e8f3505e8a5fc0debffa829"
+                  },
+                  {
+                      "path":  "resources/views/admin/ai/question-generations/show.blade.php",
+                      "size":  27277,
+                      "sha256":  "cac3d34922bbb7969d8b1a73f2f647656bb4884145a36965e7bab4d53c9ccb47"
+                  },
+                  {
+                      "path":  "resources/views/admin/ai/question-solutions/index.blade.php",
+                      "size":  5118,
+                      "sha256":  "a6deda1ee7856976d65a9288ad022cf8ea98c2dc74eb4bc3e2c9adaef041ee44"
+                  },
+                  {
+                      "path":  "resources/views/admin/ai/question-solutions/show.blade.php",
+                      "size":  4571,
+                      "sha256":  "d5d4a09f5e196472e6e55d0d5da389eeb597ecbbbdd5bb5a9ca9ed3f6b0dfea3"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/analytics/index.blade.php",
+                      "size":  12727,
+                      "sha256":  "b6199865fe6600a051cdfd3a6ca061a55d2d55feec0ae0658f49df3e4758380a"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/analytics/quiz.blade.php",
+                      "size":  21583,
+                      "sha256":  "ebd8d38b75ac24955929a238ea7c201a8f602919d9fa188ffbda3e2cfa389cef"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/grading/attempt-report.blade.php",
+                      "size":  10377,
+                      "sha256":  "252171032aaece7db1900d9015d149d3efe7a8c7c68cb088e45bb11d839369a7"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/grading/index.blade.php",
+                      "size":  16018,
+                      "sha256":  "b8a0710329aa2bd933e9bd3845059b253b622b33567b062f3b9cee56b632b668"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/grading/partials/correct-answer-block.blade.php",
+                      "size":  804,
+                      "sha256":  "686a7d25d9431f77a400192908675c74918c8e8b164f11bdd0eba627e14d8a56"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/grading/partials/student-answer-block.blade.php",
+                      "size":  462,
+                      "sha256":  "a4bba9f22e863b8d6e8efd863c4e43a86e30a1fe6dbd79ee52394c55b5cbb27e"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/grading/show.blade.php",
+                      "size":  26201,
+                      "sha256":  "796f45a10028e4cbb2beee23cee7cd8ec564a13b72848abe55f3ed02450f965c"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-bank/_questions_table.blade.php",
+                      "size":  7289,
+                      "sha256":  "01b6e9e3824cb3bcd15581efe0b0226146ef80f319d9d26cea1d95d56b355b30"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-bank/create.blade.php",
+                      "size":  16012,
+                      "sha256":  "66e94f08db701648d762a8820b67cde1f2fb3391c23bafcc2a531f673e4ed436"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-bank/edit.blade.php",
+                      "size":  34276,
+                      "sha256":  "a054c99dafedf10bbd981ec96675810c0ed2cddedca1a4c647e3347d9528c2f8"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-bank/import-excel.blade.php",
+                      "size":  20510,
+                      "sha256":  "dbbf012df4da5a22dad79316447825c98c2e5f2d462fa7bc5dd00b15f9148ad2"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-bank/index.blade.php",
+                      "size":  31157,
+                      "sha256":  "ae8934ad91f1b7e9d63beb9b988b52cc28a39914408bb5cff52edb12b9a6070c"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-bank/partials/import-defaults-fields.blade.php",
+                      "size":  1339,
+                      "sha256":  "0d052cbc4ce6137418467c2e68b0235d0a93c517da250b4763c54105720e1744"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-bank/partials/import-defaults-script.blade.php",
+                      "size":  770,
+                      "sha256":  "ceb191fc95696ad85fca7f089f8050977cef5ca09769756f59aebec1ac475ce2"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-bank/partials/import-dropzone-script.blade.php",
+                      "size":  1444,
+                      "sha256":  "705247f783ab534a93c0df92286e8e2f1872ab09b3ac3e58eedebab0cff60df3"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-bank/partials/import-ui-styles.blade.php",
+                      "size":  4598,
+                      "sha256":  "f93dc654e07140061ca6747096874476b927f819c92d8eaee87f82243d5adc53"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-bank/partials/page-styles.blade.php",
+                      "size":  3502,
+                      "sha256":  "a30e1d8f03d7e3d714a4627aa5b0e186ba3a15aa3816862f2ea489a3134ef01d"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-bank/partials/stats.blade.php",
+                      "size":  2053,
+                      "sha256":  "f15680d25093c5313584dcf6d8a6792de409ef378d117723128f7c72575c3c30"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-bank/select-type.blade.php",
+                      "size":  8789,
+                      "sha256":  "21a33a9dff3722bc3a70904f9ff6b4d7eb62dca7db64d7d69f41be0a5f97874e"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-bank/show.blade.php",
+                      "size":  20896,
+                      "sha256":  "eff87d8117b04b3d0c6925942ae25c9e98be9b8c613d3deb22e8854a1a27de5c"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-bank/type-import/import.blade.php",
+                      "size":  17217,
+                      "sha256":  "47cd2615b6e57459ed0475deec4f589c1f8340465fd83913d4916761f75e1631"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-bank/type-import/select-type.blade.php",
+                      "size":  4770,
+                      "sha256":  "c793d59350d60eded26c6eb98a37b8ad7b9ba558e7b76e838ca58f17ba23cca4"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-bank/types/drag-drop.blade.php",
+                      "size":  26689,
+                      "sha256":  "d2e32c7b5d90459eec44d73fcb0bc21e0a51ba122db587a23e11fadfe8f0b72b"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-bank/types/essay.blade.php",
+                      "size":  12948,
+                      "sha256":  "dee4a2c15297d9945f1bc323df6ebe9d3264de6f8b1cebe02991d082360524e2"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-bank/types/fill-blank.blade.php",
+                      "size":  14211,
+                      "sha256":  "58ada01aa17ffa1b09b05e8d228e6e35c674bf75b1936fcee00e8667eaee43f8"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-bank/types/matching.blade.php",
+                      "size":  19162,
+                      "sha256":  "147eb998a43db868438760fe0e45347f2d2a879fc23759df1e6c1fcd282a7a55"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-bank/types/multiple-choice-multiple.blade.php",
+                      "size":  23259,
+                      "sha256":  "5705957667f67076cb4c796fe834ef22f3239bef56a52ff1c917d7cfcd9ab4fa"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-bank/types/multiple-choice-single.blade.php",
+                      "size":  23366,
+                      "sha256":  "3334271742e9f66351065b1e1854ddb51bdc46e3409a1296078482d503bcf712"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-bank/types/numerical.blade.php",
+                      "size":  13135,
+                      "sha256":  "b70e1c73d6ed20aaf5441ed83430702485c20dc04e4f14c23c7a480804677b5c"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-bank/types/ordering.blade.php",
+                      "size":  16935,
+                      "sha256":  "5b9c45672b787a514760b912c3c164860fc907a6f5cdf7411d1d269ff1c8812b"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-bank/types/short-answer.blade.php",
+                      "size":  13219,
+                      "sha256":  "06172c99d0f4dfe746b14732e3edaedcae55989d47b6ed04709140812b601e96"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-bank/types/true-false.blade.php",
+                      "size":  12995,
+                      "sha256":  "b4880322432f1588a60e02a59c806b1388bc0499e44a2479eca0c11acc96eeaa"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-module-grading/index.blade.php",
+                      "size":  11873,
+                      "sha256":  "28b65f70604da669f7d08a1f4361800345612617db338e78dd020ff6feadc544"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-module-grading/show.blade.php",
+                      "size":  39468,
+                      "sha256":  "d5fb350c7e2acb68def76ec4bbd6fc68a53c7918cb4f746aca9eb53fc7a6dcd4"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-modules/create.blade.php",
+                      "size":  14207,
+                      "sha256":  "46288d2337827f6e01c4cfe6714160f5cff907325b19065a8ea36dce492c32f1"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-modules/edit.blade.php",
+                      "size":  14155,
+                      "sha256":  "d1c6f1c45a22a4d1075d477d79bd977b79749e491beefb397a5fa67a9163ad87"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-modules/import-questions.blade.php",
+                      "size":  16414,
+                      "sha256":  "4edcc84be4713fd68b3983010d7af92a80d50ca40390ed3be7272d1963ed3e86"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-modules/index.blade.php",
+                      "size":  15865,
+                      "sha256":  "5fd19fb931818c5e4908ba2ef4ac9296817e94fd36d1aeedf3c9085a26eae006"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-modules/manage-questions.blade.php",
+                      "size":  16452,
+                      "sha256":  "4a03e7fb1ea7e533a2505aa53bf6953559ed2113be3bb8fd57e685735937edd2"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-modules/show.blade.php",
+                      "size":  11888,
+                      "sha256":  "10ed935bca0ef0a934df559000f7c314f5b19915b1726b7b55c05d4717afa687"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-pools/create.blade.php",
+                      "size":  14947,
+                      "sha256":  "db7b652604524ee0bc2d7f889b280ac5b3e810b135521fffe079267378f72d8e"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-pools/edit.blade.php",
+                      "size":  20406,
+                      "sha256":  "63a39d9c623a87a89f6529c57b9454bee4a7bf029b127144c2cbf1d8798b4f25"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-pools/index.blade.php",
+                      "size":  15738,
+                      "sha256":  "a07d6a1a2fad752b19d9b77fa920630cc8aeac737e1f9a9843f2dd7996e77abe"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/question-pools/show.blade.php",
+                      "size":  25813,
+                      "sha256":  "d299ba03d4deea17bb56eec1052ce4aaf1e5bab97a2e86012b5bf863ae610ba4"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/quizzes/_quizzes_table.blade.php",
+                      "size":  6546,
+                      "sha256":  "0c0654e216d309b34504bb783aa300b5fc77a2c22d9e7e2899311559a7c9f306"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/quizzes/create.blade.php",
+                      "size":  24020,
+                      "sha256":  "61cd37b9bc52d65c5226fa8f583c18f4ad47b49f053b5b49b3e42164fef316c6"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/quizzes/edit.blade.php",
+                      "size":  21835,
+                      "sha256":  "cfede849327efa9386bb6f9c98b7914a4fbe2d776ec92c927017b0b0453f01f5"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/quizzes/index.blade.php",
+                      "size":  14297,
+                      "sha256":  "42fd795009e0b59b334129d6065e2dcd72f421a49f7e89572951b9e0c16bc212"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/quizzes/manage-questions.blade.php",
+                      "size":  46744,
+                      "sha256":  "be4969175ebbaa87ef03935fac90d0d6084e9be64b1be08c858b044a20c85a46"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/quizzes/partials/form-scripts.blade.php",
+                      "size":  1754,
+                      "sha256":  "9e14a5a0e9a197cd928739380fa05469d3149d20268844e73ed8ed6130985073"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/quizzes/partials/page-styles.blade.php",
+                      "size":  1821,
+                      "sha256":  "0e3585f0a447eebd0ef9e57b0092a8f83e832a99d0c803242ed7f700daed119c"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/quizzes/partials/stats.blade.php",
+                      "size":  2547,
+                      "sha256":  "2ebdbdce72775d23da77469d672eea9af96c5241b542da471526d06b7e5ae137"
+                  },
+                  {
+                      "path":  "resources/views/admin/pages/quizzes/show.blade.php",
+                      "size":  33606,
+                      "sha256":  "0556a886a053852ed5029c2224cc0e704d28a469ccbd0f7cb3c3701157ffb629"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/learn/partials/quiz.blade.php",
+                      "size":  12571,
+                      "sha256":  "b117c15d258b49acc53b021bc246e68732e928f6ed1591dbb17ddb5c6b7b7a17"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/quizzes/analytics.blade.php",
+                      "size":  6532,
+                      "sha256":  "7a067f3d5808ef63a2104b735fdc120fc98c17dba641a94ecf826d0b741209d6"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/quizzes/compare.blade.php",
+                      "size":  7644,
+                      "sha256":  "2cb98aac23f3a500c6a96b00d507d2a46bd0f16a5545d2aab9945c4ec56998fb"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/quizzes/history.blade.php",
+                      "size":  9601,
+                      "sha256":  "743674088c0203e71deb2ea76b3643d46edbfbf269cf23ffb2925619ab6679f9"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/quizzes/index.blade.php",
+                      "size":  3704,
+                      "sha256":  "d6f61404df1a183bbdd3acd90590ad9723fa88f22daca3b1c44b063115868bb5"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/quizzes/partials/analytics-by-course.blade.php",
+                      "size":  5045,
+                      "sha256":  "2623303fe4cf22d8cf7df6b32dee57a8df37acf3138f51ccdca3c9b3e92d5296"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/quizzes/partials/analytics-insights.blade.php",
+                      "size":  1739,
+                      "sha256":  "a29824da7b782030b5ce52768e666f21d9a6e87eacc83c39a2f8cc8b07b1b3d7"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/quizzes/partials/analytics-stats.blade.php",
+                      "size":  1828,
+                      "sha256":  "fdbea5c98f3845d3409c87abb44a3f8bdd494d27d663ff93ad049a0d05310fc4"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/quizzes/partials/available-empty.blade.php",
+                      "size":  830,
+                      "sha256":  "bad211bb67f458b0d578ef50f44d3448a52f57334e8a1678f162a15372801889"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/quizzes/partials/available-filters.blade.php",
+                      "size":  3100,
+                      "sha256":  "1e0c567b03dfa6cd3840737308498555a411f5f6983c79ab8f5a73c86df3e3ff"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/quizzes/partials/available-quiz-card.blade.php",
+                      "size":  6561,
+                      "sha256":  "b59bc2bb526881b18e044b9e5091ca8a42f9c5d1c040002bbb476846d95138e0"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/quizzes/partials/available-stats.blade.php",
+                      "size":  1451,
+                      "sha256":  "6e23a8c1ecbb6bf325b15302e0d6d2e0f0b1e29742731302f56c08f5b467b1b3"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/quizzes/partials/review-actions.blade.php",
+                      "size":  387,
+                      "sha256":  "9a1877bf5532d2047dd80b07e509b73247c7336e7d21bf0dd73e538dadfed3c0"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/quizzes/partials/review-attempt-card.blade.php",
+                      "size":  1668,
+                      "sha256":  "6487e433572cadf81a007cda8dcac6f9cfb761b71249225aeddf065d218d6a38"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/quizzes/partials/review-attempts-empty.blade.php",
+                      "size":  538,
+                      "sha256":  "9fa2f684e4f9d33c0ac108ab7fde9a9f3ca904c4e9b4fce8512c68c8d20a536a"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/quizzes/partials/review-attempts-table.blade.php",
+                      "size":  4284,
+                      "sha256":  "99c6cb3dcc5907c32126550e60b9db5c8de2cf93b414334246938c4f8a72aab9"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/quizzes/partials/review-filters.blade.php",
+                      "size":  2668,
+                      "sha256":  "56369312e07e32daabc1b4e13293c85ec49d60a77624ed9dd08ed5edb1a97a2a"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/quizzes/partials/review-result.blade.php",
+                      "size":  1031,
+                      "sha256":  "769114e679eff5957fdf2acf4de0b4fa137d7fce2d639437e898ae57515f9e11"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/quizzes/partials/review-show-stats.blade.php",
+                      "size":  2994,
+                      "sha256":  "068bffde1b0540c2e2da553a0c75da94819555cd9d4a49a48be3e35efd8749a8"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/quizzes/partials/review-stats.blade.php",
+                      "size":  2078,
+                      "sha256":  "85700e002854a1083d64de12df68cffd915014831f7c747f7cf0973a86b18cd7"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/quizzes/partials/review-status-badge.blade.php",
+                      "size":  630,
+                      "sha256":  "35de4eb33004d421cd76e87ce21441d1593923a247b05740f20ee7329d457b58"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/quizzes/review/index.blade.php",
+                      "size":  20080,
+                      "sha256":  "bd3d7bf986707c05476fee993978fa933a79521f85123bc2cf471a0f4e8624d8"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/quizzes/review-index.blade.php",
+                      "size":  4510,
+                      "sha256":  "0618558180c71bc15a597b03646286e0aca75f772f44d9a418d7e3cce4561dc3"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/quizzes/review-show.blade.php",
+                      "size":  64003,
+                      "sha256":  "fd1e6cbf329b87328dd36e2e8335864efe3629a1f01e4decc2702e3c83b8f528"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/quizzes/show.blade.php",
+                      "size":  21440,
+                      "sha256":  "67f8acf499fd66aadd5c073ffa0a5d57dfebbfd12dbaa7e68a8eb181fd2f92c8"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/quizzes/take.blade.php",
+                      "size":  101880,
+                      "sha256":  "a85390ac1cbe4bc3e33f40bd2db4e7feaf6717a6aaeaddc29b36efc0147ceb8e"
+                  },
+                  {
+                      "path":  "resources/views/student/pages/quizzes/take_new.blade.php",
+                      "size":  65617,
+                      "sha256":  "ea0b8639344465f3d250b030ff488ea3fbbba514f2a4d22b66fa2ae6bdd02570"
+                  },
+                  {
+                      "path":  "resources/views/student/question-modules/module-stats.blade.php",
+                      "size":  14323,
+                      "sha256":  "6907168156ec7bad47fb20b8dddbd56825f64ac2546da30effa3234a39f317f8"
+                  },
+                  {
+                      "path":  "resources/views/student/question-modules/partials/stats-kpi.blade.php",
+                      "size":  2454,
+                      "sha256":  "0b4bfccff6e27cd3f6c42c487a52d06865936c0b087d451df988d71ffc43fcd5"
+                  },
+                  {
+                      "path":  "resources/views/student/question-modules/partials/stats-recent-attempts.blade.php",
+                      "size":  5549,
+                      "sha256":  "8153e50094e6909b71133685ffb75f33841747005c2cbea57b243ee13348ba8c"
+                  },
+                  {
+                      "path":  "resources/views/student/question-modules/partials/stats-sidebar.blade.php",
+                      "size":  5752,
+                      "sha256":  "2757a9c6307aff77540c2a1fcae1afe22c812814425143988fed7394e336c2c4"
+                  },
+                  {
+                      "path":  "resources/views/student/question-modules/result.blade.php",
+                      "size":  42516,
+                      "sha256":  "4b8e5fca9d94c6c39f0063f3a67bb42429963ca3bd8cd813afc6fed9186db18d"
+                  },
+                  {
+                      "path":  "resources/views/student/question-modules/stats.blade.php",
+                      "size":  12344,
+                      "sha256":  "bd3dbea37d1b71c9c29e9998c54232b273438308b2d901057325e93a2b138a13"
+                  },
+                  {
+                      "path":  "resources/views/student/question-modules/take.blade.php",
+                      "size":  64363,
+                      "sha256":  "7e241bc22c3725352ba2bcaea8dcf490b9115ec6eee6c2839be0872f9838aa99"
+                  },
+                  {
+                      "path":  "routes/admin.php",
+                      "size":  10898,
+                      "sha256":  "15490ff868e03eab4809910cfbb64632b9aa534ef739ca4368f2c196d4c29797"
+                  },
+                  {
+                      "path":  "routes/admin-ai-questions.php",
+                      "size":  2362,
+                      "sha256":  "27476627d9266288a5f19ccbfdf5e96da0eb3ddd397c20fa05e6b0d66ac4992b"
+                  },
+                  {
+                      "path":  "routes/api.php",
+                      "size":  1211,
+                      "sha256":  "6ae87aed9f73ab009eaf00656832fa685ed48d434c1560829eaa4c0ccffc456c"
+                  },
+                  {
+                      "path":  "routes/student.php",
+                      "size":  4759,
+                      "sha256":  "d1a4200f59390769423169230188a50beceda32ce49bc39ac7595060784aefc7"
+                  },
+                  {
+                      "path":  "snippets/sidebar-admin.blade.php",
+                      "size":  1250,
+                      "sha256":  "2c66cc0e170b52e1b91fc9e3702689203d82d45be20b8d0d0c6e336bb0101f67"
+                  },
+                  {
+                      "path":  "snippets/user-relationships.php",
+                      "size":  512,
+                      "sha256":  "8d81ec7e3ea910714e67c8f406e3f793e89c746622914ebe11c6c5ad032ff045"
+                  },
+                  {
+                      "path":  "tests/Feature/Admin/QuestionBankTypeImportMysqlTestCase.php",
+                      "size":  399,
+                      "sha256":  "c2ad1d5373ea844e2c505d31acdbe5d2e3f0597b898dbb9edea389c404134123"
+                  },
+                  {
+                      "path":  "tests/Feature/Admin/QuestionBankTypeImportTest.php",
+                      "size":  14158,
+                      "sha256":  "272ef157ca7b5a5200eb69b5dc15b5487e7e912c5c72927d0820365f03dcb26b"
+                  },
+                  {
+                      "path":  "tests/Unit/QuestionBank/TypeImport/ImportDefaultsResolverTest.php",
+                      "size":  2786,
+                      "sha256":  "a2f4513b6def4a47b49cfaf8d5e28b8646cbe6456b70a5d8665eadbc52093ef5"
+                  },
+                  {
+                      "path":  "tests/Unit/QuestionBank/TypeImport/TypeImportParserTest.php",
+                      "size":  3615,
+                      "sha256":  "282881608b4d9896aedde00fdff558c5641060e73afc7654917d89f075160fe6"
+                  }
+              ]
+}
