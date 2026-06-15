@@ -20,34 +20,34 @@ class VideoWatchedListener implements ShouldQueue
     {
         try {
             $minPercentage = (int) config('gamification.points.video_watch.min_watch_percentage', 80);
+            $watchPercentage = (int) ($event->percentWatched ?? 100);
 
-            if ($event->watchPercentage < $minPercentage) {
+            if ($watchPercentage < $minPercentage) {
                 return;
             }
 
+            $lesson = $event->lesson;
+
             $result = $this->gamificationService->handleVideoWatch(
                 $event->user,
-                $event->module->id,
-                (int) round($event->watchPercentage),
+                $lesson->id,
+                $watchPercentage,
                 [
-                    'module_title' => $event->module->title ?? '',
-                    'watch_time' => $event->watchedSeconds,
-                    'duration' => $event->totalSeconds,
+                    'module_title' => $lesson->title ?? '',
                 ]
             );
 
             if ($result['success'] ?? false) {
                 Log::info('Gamification: Video watch rewarded', [
                     'user_id' => $event->user->id,
-                    'module_id' => $event->module->id,
-                    'watch_percentage' => $event->watchPercentage,
+                    'lesson_id' => $lesson->id,
+                    'watch_percentage' => $watchPercentage,
                     'points_awarded' => $result['points_awarded'] ?? 0,
                 ]);
             }
         } catch (\Exception $e) {
             Log::error('Gamification: Failed to handle video watch', [
                 'user_id' => $event->user->id,
-                'module_id' => $event->module->id,
                 'error' => $e->getMessage(),
             ]);
         }

@@ -16,7 +16,7 @@ class CompetitionSeeder extends Seeder
     public function run(): void
     {
         // الحصول على بعض الطلاب للتجربة
-        $students = User::where('role', 'student')
+        $students = User::role('student')
             ->where('is_active', true)
             ->limit(10)
             ->get();

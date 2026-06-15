@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Concerns\RespondsWithAjaxTable;
 use App\Http\Controllers\Controller;
-use App\Models\Course;
 use App\Models\Student;
 use App\Models\User;
 use App\Services\StudentService;
@@ -76,7 +75,7 @@ class StudentController extends Controller
 
         $courses = Course::published()->orderBy('title')->get(['id', 'title']);
 
-        return view('admin.pages.students.show', compact('student', 'courses'));
+        return view('admin.pages.students.show', compact('student'));
     }
 
     public function edit(Student $student): View

@@ -63,7 +63,11 @@ Route::middleware(['auth', 'check.user.active'])->prefix('admin')->name('admin.'
     // الطلاب والتسجيلات والطلبات
     Route::resource('students', StudentController::class);
     Route::post('students/{student}/toggle-status', [StudentController::class, 'toggleStatus'])->name('students.toggle-status');
-    Route::post('students/{student}/enrollments', [EnrollmentController::class, 'store'])->name('students.enrollments.store');
+    Route::get('enrollments/search-students', [EnrollmentController::class, 'searchStudents'])->name('enrollments.search-students');
+    Route::get('enrollments/search-courses', [EnrollmentController::class, 'searchCourses'])->name('enrollments.search-courses');
+    Route::get('enrollments', [EnrollmentController::class, 'index'])->name('enrollments.index');
+    Route::post('enrollments', [EnrollmentController::class, 'store'])->name('enrollments.store');
+    Route::post('students/{student}/enrollments', [EnrollmentController::class, 'storeForStudent'])->name('students.enrollments.store');
     Route::delete('enrollments/{enrollment}', [EnrollmentController::class, 'destroy'])->name('enrollments.destroy');
     Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');

@@ -2,6 +2,7 @@
 
 namespace App\Services\Gamification;
 
+use App\Events\Gamification\ChallengeCompleted;
 use App\Models\User;
 use App\Models\Challenge;
 use App\Models\UserChallenge;
@@ -39,7 +40,7 @@ class ChallengeService
 
             // التحقق من عدد التحديات النشطة
             $activeCount = UserChallenge::where('user_id', $user->id)
-                ->where('status', 'active')
+                ->active()
                 ->where('expires_at', '>', now())
                 ->count();
 
@@ -57,8 +58,8 @@ class ChallengeService
             return UserChallenge::create([
                 'user_id' => $user->id,
                 'challenge_id' => $challenge->id,
-                'status' => 'active',
-                'current_progress' => 0,
+                'status' => 'in_progress',
+                'current_value' => 0,
                 'progress_percentage' => 0,
                 'started_at' => now(),
                 'expires_at' => $this->calculateExpiryDate($challenge),
@@ -99,7 +100,7 @@ class ChallengeService
             return DB::transaction(function () use ($user, $challenge, $incrementBy) {
                 $userChallenge = UserChallenge::where('user_id', $user->id)
                     ->where('challenge_id', $challenge->id)
-                    ->where('status', 'active')
+                    ->active()
                     ->first();
 
                 if (!$userChallenge) {
@@ -112,12 +113,12 @@ class ChallengeService
                     return null;
                 }
 
-                $newProgress = $userChallenge->current_progress + $incrementBy;
+                $newProgress = $userChallenge->current_value + $incrementBy;
                 $targetValue = $challenge->target_value;
                 $progressPercentage = min(100, ($newProgress / $targetValue) * 100);
 
                 $userChallenge->update([
-                    'current_progress' => $newProgress,
+                    'current_value' => $newProgress,
                     'progress_percentage' => round($progressPercentage, 2),
                 ]);
 
@@ -171,8 +172,7 @@ class ChallengeService
             'challenge_name' => $challenge->name,
         ]);
 
-        // إطلاق حدث إكمال التحدي
-        // event(new ChallengeCompleted($user, $challenge));
+        ChallengeCompleted::dispatch($user, $challenge, $userChallenge);
     }
 
     /**
@@ -196,11 +196,11 @@ class ChallengeService
         }
 
         // منح XP
-        if ($challenge->reward_xp > 0) {
+        if ($challenge->xp_reward > 0) {
             $levelService = app(LevelService::class);
             $levelService->awardXP(
                 $user,
-                $challenge->reward_xp,
+                $challenge->xp_reward,
                 'challenge_completed',
                 "إتمام تحدي: {$challenge->name}"
             );
@@ -219,10 +219,7 @@ class ChallengeService
             }
         }
 
-        // منح أحجار كريمة
-        if ($challenge->reward_gems > 0) {
-            $user->stats->increment('available_gems', $challenge->reward_gems);
-        }
+        // Gems are awarded via points transactions when configured on challenges
     }
 
     /**
@@ -230,7 +227,7 @@ class ChallengeService
      */
     public function expireChallenge(UserChallenge $userChallenge): void
     {
-        if ($userChallenge->status !== 'active') {
+        if (!$userChallenge->isActive()) {
             return;
         }
 
@@ -250,7 +247,7 @@ class ChallengeService
      */
     public function checkExpiredChallenges(): int
     {
-        $expired = UserChallenge::where('status', 'active')
+        $expired = UserChallenge::active()
             ->where('expires_at', '<', now())
             ->get();
 
@@ -299,7 +296,7 @@ class ChallengeService
     public function getActiveChallenges(User $user, ?string $type = null)
     {
         $query = UserChallenge::where('user_id', $user->id)
-            ->where('status', 'active')
+            ->active()
             ->where('expires_at', '>', now())
             ->with('challenge');
 
@@ -360,11 +357,11 @@ class ChallengeService
      */
     public function cancelChallenge(UserChallenge $userChallenge): bool
     {
-        if ($userChallenge->status !== 'active') {
+        if (!$userChallenge->isActive()) {
             return false;
         }
 
-        $userChallenge->update(['status' => 'cancelled']);
+        $userChallenge->update(['status' => 'failed']);
 
         Log::info("Challenge cancelled", [
             'user_id' => $userChallenge->user_id,
@@ -382,7 +379,7 @@ class ChallengeService
         $stats = $user->stats;
 
         $activeChallenges = UserChallenge::where('user_id', $user->id)
-            ->where('status', 'active')
+            ->active()
             ->where('expires_at', '>', now())
             ->count();
 
@@ -439,8 +436,7 @@ class ChallengeService
         return Challenge::where('is_active', true)
             ->where('difficulty', $recommendedDifficulty)
             ->whereDoesntHave('userChallenges', function($q) use ($user) {
-                $q->where('user_id', $user->id)
-                  ->where('status', 'active');
+                $q->where('user_id', $user->id)->active();
             })
             ->inRandomOrder()
             ->limit($limit)

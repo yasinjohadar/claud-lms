@@ -38,7 +38,7 @@ class LevelController extends Controller
             ->orderBy('level')
             ->get();
 
-        return view('student.gamification.levels.index', compact(
+        return view('student.pages.gamification.levels.index', compact(
             'levelInfo',
             'timeToNextLevel',
             'nearbyLevels'
@@ -55,7 +55,7 @@ class LevelController extends Controller
 
         $levels = ExperienceLevel::orderBy('level')->get();
 
-        return view('student.gamification.levels.all', compact(
+        return view('student.pages.gamification.levels.all', compact(
             'levels',
             'currentLevel'
         ));
@@ -71,13 +71,13 @@ class LevelController extends Controller
         $totalXP = $user->stats->total_xp ?? 0;
 
         $isUnlocked = $currentLevel >= $level->level;
-        $xpNeeded = max(0, $level->total_xp_required - $totalXP);
+        $xpNeeded = max(0, $level->xp_required - $totalXP);
 
         // المستوى السابق والتالي
         $previousLevel = ExperienceLevel::where('level', $level->level - 1)->first();
         $nextLevel = ExperienceLevel::where('level', $level->level + 1)->first();
 
-        return view('student.gamification.levels.show', compact(
+        return view('student.pages.gamification.levels.show', compact(
             'level',
             'isUnlocked',
             'xpNeeded',

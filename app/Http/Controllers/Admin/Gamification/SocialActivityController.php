@@ -21,7 +21,7 @@ class SocialActivityController extends Controller
      */
     public function index(Request $request)
     {
-        $query = SocialActivity::with('user:id,name,email,avatar');
+        $query = SocialActivity::with('user:id,name,email,photo');
 
         // فلترة حسب النوع
         if ($request->filled('type')) {

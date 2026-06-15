@@ -236,12 +236,13 @@ class CompetitionService
         }
 
         // منح الأحجار الكريمة
-        if (isset($rewards['gems'])) {
+        if (isset($rewards['gems']) && $winner->stats) {
             $winner->stats->increment('available_gems', $rewards['gems']);
         }
 
-        // تحديث إحصائيات
-        $winner->stats->increment('competitions_won');
+        if ($winner->stats) {
+            $winner->stats->increment('competitions_won');
+        }
     }
 
     /**
@@ -270,7 +271,7 @@ class CompetitionService
             ->whereHas('participants', function($q) use ($user) {
                 $q->where('user_id', $user->id);
             })
-            ->with(['participants.user:id,name,email,avatar', 'creator:id,name'])
+            ->with(['participants.user:id,name,email,photo', 'creator:id,name'])
             ->latest('created_at')
             ->get();
     }
@@ -284,7 +285,7 @@ class CompetitionService
             ->whereHas('participants', function($q) use ($user) {
                 $q->where('user_id', $user->id);
             })
-            ->with(['participants.user:id,name,email,avatar', 'creator:id,name'])
+            ->with(['participants.user:id,name,email,photo', 'creator:id,name'])
             ->latest('completed_at')
             ->get();
     }

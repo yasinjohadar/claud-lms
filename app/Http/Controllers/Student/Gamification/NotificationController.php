@@ -44,7 +44,7 @@ class NotificationController extends Controller
         // Paginate
         $notifications = $query->paginate(20);
 
-        return view('student.gamification.notifications.index', compact('notifications'));
+        return view('student.pages.gamification.notifications.index', compact('notifications'));
     }
 
     /**

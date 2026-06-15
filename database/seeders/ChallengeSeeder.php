@@ -337,9 +337,27 @@ class ChallengeSeeder extends Seeder
         ];
 
         foreach ($challenges as $challenge) {
+            $payload = [
+                'name' => $challenge['name'],
+                'description' => $challenge['description'],
+                'type' => $challenge['type'],
+                'difficulty' => $challenge['difficulty'],
+                'icon' => $challenge['icon'],
+                'metric' => $challenge['target_type'],
+                'target_value' => $challenge['target_value'],
+                'points_reward' => $challenge['reward_points'],
+                'xp_reward' => $challenge['reward_xp'],
+                'badge_id' => $challenge['badge_id'],
+                'is_active' => $challenge['is_active'],
+                'auto_assign' => $challenge['auto_assign'],
+                'participation_type' => $challenge['auto_assign'] ? 'auto' : 'opt_in',
+                'sort_order' => $challenge['sort_order'],
+                'is_visible' => true,
+            ];
+
             Challenge::updateOrCreate(
                 ['slug' => $challenge['slug']],
-                $challenge
+                $payload
             );
         }
 

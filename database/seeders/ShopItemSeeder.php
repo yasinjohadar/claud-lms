@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\ShopItem;
-use App\Models\ShopCategory;
+use App\Models\Gamification\ShopItem;
+use App\Models\Gamification\ShopCategory;
 
 class ShopItemSeeder extends Seeder
 {
@@ -13,12 +13,17 @@ class ShopItemSeeder extends Seeder
      */
     public function run(): void
     {
-        // الحصول على الفئات
-        $cosmetics = ShopCategory::where('slug', 'cosmetics')->first();
-        $boosters = ShopCategory::where('slug', 'boosters')->first();
-        $courseAccess = ShopCategory::where('slug', 'course-access')->first();
-        $features = ShopCategory::where('slug', 'features')->first();
-        $physicalRewards = ShopCategory::where('slug', 'physical-rewards')->first();
+        $cosmetics = ShopCategory::where('name', 'التخصيص والمظهر')->first();
+        $boosters = ShopCategory::where('name', 'المعززات والمضاعفات')->first();
+        $courseAccess = ShopCategory::where('name', 'الوصول للكورسات')->first();
+        $features = ShopCategory::where('name', 'الميزات الخاصة')->first();
+        $physicalRewards = ShopCategory::where('name', 'الجوائز الحقيقية')->first();
+
+        if (! $cosmetics || ! $boosters) {
+            $this->command?->warn('Shop categories missing — run ShopCategorySeeder first.');
+
+            return;
+        }
 
         $items = [
             // ========================================
@@ -490,10 +495,19 @@ class ShopItemSeeder extends Seeder
             ],
         ];
 
+        $allowed = ['category_id', 'name', 'description', 'icon', 'price_points', 'price_gems', 'required_level', 'is_active'];
+
         foreach ($items as $item) {
+            if (empty($item['category_id'])) {
+                continue;
+            }
+
+            $payload = array_intersect_key($item, array_flip($allowed));
+            $payload['is_active'] = $payload['is_active'] ?? true;
+
             ShopItem::updateOrCreate(
-                ['slug' => $item['slug']],
-                $item
+                ['name' => $payload['name'], 'category_id' => $payload['category_id']],
+                $payload
             );
         }
 

@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
         actions.innerHTML = '';
 
         if (payload.isMe) {
-            actions.innerHTML += '<a href="{{ route('student.profile.index') }}" class="btn btn-primary btn-sm"><i class="ri ri-user-line me-1"></i>ملفي الشخصي</a>';
+            actions.innerHTML += '<a href="{{ route('gamification.profile') }}" class="btn btn-primary btn-sm"><i class="ri ri-user-line me-1"></i>ملفي الشخصي</a>';
         } else if (payload.profilePublic) {
             actions.innerHTML += '<a href="{{ url('/students') }}/' + payload.userId + '" class="btn btn-outline-primary btn-sm" target="_blank" rel="noopener"><i class="ri ri-external-link-line me-1"></i>الملف العام</a>';
         }

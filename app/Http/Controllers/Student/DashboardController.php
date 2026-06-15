@@ -3,13 +3,19 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
+use App\Services\Gamification\GamificationService;
 use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
+    public function __construct(
+        protected GamificationService $gamificationService
+    ) {}
+
     public function index(): View
     {
-        $student = auth()->user()->student;
+        $user = auth()->user();
+        $student = $user->student;
         $student->load(['activeEnrollments.course', 'orders']);
 
         $stats = [
@@ -25,6 +31,9 @@ class DashboardController extends Controller
             ->limit(5)
             ->get();
 
-        return view('student.dashboard', compact('student', 'stats', 'recentEnrollments'));
+        $user->stats()->firstOrCreate(['user_id' => $user->id]);
+        $gamification = $this->gamificationService->getUserDashboard($user);
+
+        return view('student.pages.dashboard', compact('student', 'stats', 'recentEnrollments', 'gamification'));
     }
 }

@@ -18,6 +18,39 @@ class CompetitionController extends Controller
     }
 
     /**
+     * صفحة المسابقات
+     */
+    public function index(Request $request)
+    {
+        $user = $request->user();
+        $activeCompetitions = $this->competitionService->getUserActiveCompetitions($user);
+        $completedCompetitions = $this->competitionService->getUserCompletedCompetitions($user);
+        $stats = $this->competitionService->getUserCompetitionStats($user);
+
+        foreach ($activeCompetitions as $competition) {
+            $competition->my_participation = $this->competitionService->getUserParticipation($user, $competition);
+        }
+        foreach ($completedCompetitions as $competition) {
+            $competition->my_participation = $this->competitionService->getUserParticipation($user, $competition);
+        }
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'active_competitions' => $activeCompetitions,
+                'completed_competitions' => $completedCompetitions,
+                'stats' => $stats,
+            ]);
+        }
+
+        return view('student.pages.gamification.competitions.index', compact(
+            'activeCompetitions',
+            'completedCompetitions',
+            'stats'
+        ));
+    }
+
+    /**
      * عرض المنافسات النشطة
      */
     public function active(Request $request)
@@ -93,7 +126,7 @@ class CompetitionController extends Controller
     {
         $user = $request->user();
 
-        $competition->load(['creator:id,name,email,avatar', 'participants.user:id,name,email,avatar']);
+        $competition->load(['creator:id,name,email,photo', 'participants.user:id,name,email,photo']);
 
         $myParticipation = $this->competitionService->getUserParticipation($user, $competition);
 

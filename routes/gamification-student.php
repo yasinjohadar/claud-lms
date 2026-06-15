@@ -121,6 +121,7 @@ Route::prefix('gamification')->name('gamification.')->group(function () {
     });
 
     Route::prefix('competitions')->name('competitions.')->group(function () {
+        Route::get('/', [StudentCompetitionController::class, 'index'])->name('index');
         Route::get('/active', [StudentCompetitionController::class, 'active'])->name('active');
         Route::get('/completed', [StudentCompetitionController::class, 'completed'])->name('completed');
         Route::post('/create', [StudentCompetitionController::class, 'create'])->name('create');
@@ -131,6 +132,7 @@ Route::prefix('gamification')->name('gamification.')->group(function () {
     });
 
     Route::prefix('social')->name('social.')->group(function () {
+        Route::get('/', [StudentSocialActivityController::class, 'index'])->name('index');
         Route::get('/feed', [StudentSocialActivityController::class, 'feed'])->name('feed');
         Route::get('/my-activities', [StudentSocialActivityController::class, 'myActivities'])->name('my-activities');
         Route::get('/users/{targetUser}/activities', [StudentSocialActivityController::class, 'userActivities'])->name('user-activities');

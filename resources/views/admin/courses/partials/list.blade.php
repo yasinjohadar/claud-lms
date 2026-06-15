@@ -84,6 +84,17 @@
                                    class="action-btn action-btn--edit" title="تعديل">
                                     <i class="ri-pencil-line"></i>
                                 </a>
+                                @can('enrollment-manage')
+                                <button type="button"
+                                        class="action-btn action-btn--success"
+                                        title="إضافة طالب"
+                                        data-open-enrollment-grant
+                                        data-modal-id="coursesIndexGrantModal"
+                                        data-course-id="{{ $course->id }}"
+                                        data-course-label="{{ e($course->title) }}">
+                                    <i class="ri-user-add-line"></i>
+                                </button>
+                                @endcan
                                 <form action="{{ route('admin.courses.toggle-featured', $course) }}"
                                       method="POST" class="d-inline">
                                     @csrf

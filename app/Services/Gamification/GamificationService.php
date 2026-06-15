@@ -3,7 +3,7 @@
 namespace App\Services\Gamification;
 
 use App\Events\VideoWatched;
-use App\Models\CourseModule;
+use App\Models\CourseLesson;
 use App\Models\User;
 use App\Models\UserStat;
 use Illuminate\Support\Facades\DB;
@@ -425,7 +425,7 @@ class GamificationService
      */
     public function dispatchVideoWatchIfEligible(
         User $user,
-        CourseModule $module,
+        CourseLesson $lesson,
         float $watchPercentage,
         int $watchedSeconds = 0,
         int $totalSeconds = 0
@@ -436,7 +436,7 @@ class GamificationService
             return;
         }
 
-        VideoWatched::dispatch($user, $module, $watchPercentage, $watchedSeconds, $totalSeconds);
+        VideoWatched::dispatch($user, $lesson, (int) round($watchPercentage));
     }
 
     /**

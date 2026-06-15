@@ -28,6 +28,7 @@ class Challenge extends Model
         'end_date',
         'duration_hours',
         'participation_type',
+        'auto_assign',
         'max_participants',
         'min_level',
         'is_team_challenge',
@@ -60,6 +61,7 @@ class Challenge extends Model
         'participants_count' => 'integer',
         'completed_count' => 'integer',
         'sort_order' => 'integer',
+        'auto_assign' => 'boolean',
     ];
 
     /**

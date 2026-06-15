@@ -3,43 +3,44 @@
     $currentStatus = request('status', 'all');
 
     $tierFilters = [
-        ['key' => 'all', 'label' => 'كل المستويات', 'icon' => 'fe-grid', 'params' => array_filter(['status' => request('status') !== 'all' ? request('status') : null])],
-        ['key' => 'bronze', 'label' => 'برونزي', 'icon' => 'fe-shield', 'params' => array_filter(['tier' => 'bronze', 'status' => request('status') !== 'all' ? request('status') : null])],
-        ['key' => 'silver', 'label' => 'فضي', 'icon' => 'fe-star', 'params' => array_filter(['tier' => 'silver', 'status' => request('status') !== 'all' ? request('status') : null])],
-        ['key' => 'gold', 'label' => 'ذهبي', 'icon' => 'fe-award', 'params' => array_filter(['tier' => 'gold', 'status' => request('status') !== 'all' ? request('status') : null])],
-        ['key' => 'platinum', 'label' => 'بلاتيني', 'icon' => 'fe-zap', 'params' => array_filter(['tier' => 'platinum', 'status' => request('status') !== 'all' ? request('status') : null])],
-        ['key' => 'diamond', 'label' => 'ماسي', 'icon' => 'fe-aperture', 'params' => array_filter(['tier' => 'diamond', 'status' => request('status') !== 'all' ? request('status') : null])],
+        ['key' => 'all', 'label' => 'كل المستويات', 'params' => array_filter(['status' => request('status') !== 'all' ? request('status') : null])],
+        ['key' => 'bronze', 'label' => 'برونزي', 'params' => array_filter(['tier' => 'bronze', 'status' => request('status') !== 'all' ? request('status') : null])],
+        ['key' => 'silver', 'label' => 'فضي', 'params' => array_filter(['tier' => 'silver', 'status' => request('status') !== 'all' ? request('status') : null])],
+        ['key' => 'gold', 'label' => 'ذهبي', 'params' => array_filter(['tier' => 'gold', 'status' => request('status') !== 'all' ? request('status') : null])],
+        ['key' => 'platinum', 'label' => 'بلاتيني', 'params' => array_filter(['tier' => 'platinum', 'status' => request('status') !== 'all' ? request('status') : null])],
+        ['key' => 'diamond', 'label' => 'ماسي', 'params' => array_filter(['tier' => 'diamond', 'status' => request('status') !== 'all' ? request('status') : null])],
     ];
 @endphp
 
-<div class="student-achievements-filters mb-4">
-    <div class="student-achievements-filters__group">
-        <span class="student-achievements-filters__label">المستوى</span>
-        <div class="student-my-courses-filters student-achievements-filters__pills">
+<div class="filter-panel mb-4">
+    <div class="filter-panel__title">تصفية الإنجازات</div>
+    <div class="filter-panel__subtitle">اختر مستوى الإنجاز أو حالته لعرض النتائج المناسبة</div>
+
+    <div class="mb-3">
+        <label class="form-label fs-12 text-muted mb-2">المستوى</label>
+        <div class="d-flex flex-wrap gap-2">
             @foreach ($tierFilters as $filter)
                 <a href="{{ route('gamification.achievements.index', $filter['params']) }}"
-                   class="student-my-courses-filter student-achievements-tier-tab student-achievements-tier-tab--{{ $filter['key'] }} {{ $currentTier === $filter['key'] || ($filter['key'] === 'all' && !request('tier')) ? 'is-active' : '' }}">
-                    <i class="fe {{ $filter['icon'] }}"></i>
-                    <span>{{ $filter['label'] }}</span>
+                   class="btn btn-sm {{ ($currentTier === $filter['key'] || ($filter['key'] === 'all' && !request('tier'))) ? 'btn-primary' : 'btn-light border' }} btn-wave">
+                    {{ $filter['label'] }}
                 </a>
             @endforeach
         </div>
     </div>
 
-    <div class="student-achievements-filters__group mt-3">
-        <span class="student-achievements-filters__label">الحالة</span>
-        <div class="student-my-courses-filters student-achievements-filters__pills" id="achievementStatusFilters">
+    <div>
+        <label class="form-label fs-12 text-muted mb-2">الحالة</label>
+        <div class="d-flex flex-wrap gap-2" id="achievementStatusFilters">
             @foreach ([
-                ['key' => 'all', 'label' => 'الكل', 'icon' => 'fe-grid'],
-                ['key' => 'completed', 'label' => 'مكتمل', 'icon' => 'fe-check-circle'],
-                ['key' => 'in_progress', 'label' => 'قيد التقدم', 'icon' => 'fe-loader'],
-                ['key' => 'not_started', 'label' => 'لم يبدأ', 'icon' => 'fe-lock'],
+                ['key' => 'all', 'label' => 'الكل'],
+                ['key' => 'completed', 'label' => 'مكتمل'],
+                ['key' => 'in_progress', 'label' => 'قيد التقدم'],
+                ['key' => 'not_started', 'label' => 'لم يبدأ'],
             ] as $filter)
                 <button type="button"
-                    class="student-my-courses-filter student-achievements-status-tab {{ $currentStatus === $filter['key'] || ($filter['key'] === 'all' && !request('status')) ? 'is-active' : '' }}"
+                    class="btn btn-sm {{ $currentStatus === $filter['key'] || ($filter['key'] === 'all' && !request('status')) ? 'btn-primary' : 'btn-light border' }} btn-wave"
                     data-status-filter="{{ $filter['key'] }}">
-                    <i class="fe {{ $filter['icon'] }}"></i>
-                    <span>{{ $filter['label'] }}</span>
+                    {{ $filter['label'] }}
                 </button>
             @endforeach
         </div>

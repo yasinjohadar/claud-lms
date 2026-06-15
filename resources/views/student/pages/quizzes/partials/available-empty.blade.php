@@ -1,16 +1,12 @@
 <div class="col-12">
-    <div class="card custom-card student-quizzes-panel">
-        <div class="card-body text-center py-5">
-            <div class="student-quizzes-available-empty__icon">
-                <i class="fe fe-clipboard"></i>
-            </div>
-            <h5 class="mb-2">لا توجد اختبارات متاحة حالياً</h5>
-            <p class="text-muted mb-4">جرّب تغيير الفلاتر أو عد لاحقاً عند إضافة اختبارات جديدة</p>
-            @if(request()->hasAny(['course_id', 'quiz_type']))
-                <a href="{{ route('student.quizzes.index') }}" class="btn btn-primary rounded-pill px-4">
-                    <i class="fe fe-refresh-cw me-1"></i>إعادة تعيين الفلاتر
-                </a>
-            @endif
-        </div>
+    <div class="empty-state py-5">
+        <div class="empty-state-icon mx-auto mb-3"><i class="ri-clipboard-line"></i></div>
+        <p class="text-muted mb-1">لا توجد اختبارات متاحة حالياً</p>
+        <p class="text-muted fs-12 mb-3">جرّب تغيير الفلاتر أو عد لاحقاً عند إضافة اختبارات جديدة</p>
+        @if(request()->hasAny(['course_id', 'quiz_type']))
+            <a href="{{ route('student.quizzes.index') }}" class="btn btn-sm btn-primary btn-wave">
+                <i class="ri-refresh-line me-1"></i>إعادة تعيين الفلاتر
+            </a>
+        @endif
     </div>
 </div>

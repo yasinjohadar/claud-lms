@@ -13,9 +13,9 @@
     $points = (int) ($achievement->points_reward ?? 0);
     $tier = $achievement->tier ?? 'bronze';
     $icon = $achievement->icon ?? '🏆';
+    $isNearComplete = !$isCompleted && $progress >= 70;
 
     $statusKey = $isCompleted ? 'completed' : ($isLocked || $progress <= 0 ? 'not_started' : 'in_progress');
-    $isNearComplete = !$isCompleted && $progress >= 70;
 
     $tierLabels = [
         'bronze' => 'برونزي',
@@ -33,13 +33,16 @@
     $completedAt = $userAchievement->completed_at
         ? $userAchievement->completed_at->format('Y/m/d')
         : '';
+
+    $stateClass = $isCompleted ? 'is-completed' : ($isLocked || $progress <= 0 ? 'is-locked' : 'is-active');
+    $delay = ($index ?? 0) * 45;
 @endphp
 
-<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 student-my-courses-stagger achievement-grid-item"
-     style="--stagger-delay: {{ ($index ?? 0) * 45 }}ms"
+<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 achievement-grid-item"
+     style="--achievement-delay: {{ $delay }}ms"
      data-achievement-status="{{ $statusKey }}"
      data-achievement-tier="{{ $tier }}">
-    <article class="student-achievement-card student-achievement-card--{{ $tier }} {{ $isCompleted ? 'is-completed' : ($isLocked ? 'is-locked' : 'is-active') }} {{ $isNearComplete ? 'is-near-complete' : '' }}"
+    <article class="gamification-achievement-widget gamification-achievement-widget--{{ $tier }} {{ $stateClass }} {{ $isNearComplete ? 'is-near-complete' : '' }}"
         role="button"
         tabindex="0"
         data-achievement-open
@@ -57,55 +60,68 @@
         data-completed-at="{{ $completedAt }}"
         data-show-url="{{ route('gamification.achievements.show', $achievement) }}"
         data-claim-url="{{ $userAchievement->status === 'completed' && $points > 0 ? route('gamification.achievements.claim', $userAchievement) : '' }}">
-        <span class="student-achievement-card__tier badge">{{ $tierLabels[$tier] ?? $tier }}</span>
+        <span class="gamification-achievement-widget__glow" aria-hidden="true"></span>
+        <span class="gamification-achievement-widget__shine" aria-hidden="true"></span>
 
-        @if($isNearComplete)
-            <span class="student-achievement-card__pulse" aria-hidden="true"></span>
-        @endif
+        <span class="gamification-achievement-widget__tier">{{ $tierLabels[$tier] ?? $tier }}</span>
 
-        <div class="student-achievement-card__glow" aria-hidden="true"></div>
-
-        <div class="student-achievement-card__icon-wrap">
-            <span class="student-achievement-card__emoji">{{ $icon }}</span>
+        <div class="gamification-achievement-widget__icon-wrap">
+            <span class="gamification-achievement-widget__icon">{{ $icon }}</span>
             @if($isCompleted)
-                <span class="student-achievement-card__check"><i class="fe fe-check"></i></span>
+                <span class="gamification-achievement-widget__earned-mark" aria-hidden="true">
+                    <i class="ri-checkbox-circle-fill"></i>
+                </span>
+            @elseif($isNearComplete)
+                <span class="gamification-achievement-widget__pulse" aria-hidden="true"></span>
             @endif
         </div>
 
-        <h6 class="student-achievement-card__title">{{ $achievement->name }}</h6>
+        <h6 class="gamification-achievement-widget__title">{{ $achievement->name }}</h6>
 
         @if($achievement->description)
-            <p class="student-achievement-card__desc">{{ $achievement->description }}</p>
+            <p class="gamification-achievement-widget__desc">{{ Str::limit($achievement->description, 88) }}</p>
         @endif
 
-        <span class="student-achievement-card__requirement">{{ $requirementText }}</span>
+        <p class="gamification-achievement-widget__requirement">
+            <i class="ri-flag-line"></i>{{ $requirementText }}
+        </p>
 
         @if($isCompleted)
-            <div class="student-achievement-card__footer">
+            <div class="gamification-achievement-widget__footer">
                 @if($points > 0)
-                    <span class="student-achievement-card__reward">+{{ number_format($points) }} نقطة</span>
+                    <span class="gamification-achievement-widget__points">+{{ number_format($points) }} نقطة</span>
                 @endif
                 @if($completedAt)
-                    <span class="student-achievement-card__date"><i class="fe fe-calendar me-1"></i>{{ $completedAt }}</span>
+                    <span class="gamification-achievement-widget__status is-done">
+                        <i class="ri-calendar-line"></i>{{ $completedAt }}
+                    </span>
+                @else
+                    <span class="gamification-achievement-widget__status is-done">
+                        <i class="ri-checkbox-circle-line"></i>مكتمل
+                    </span>
                 @endif
             </div>
         @else
-            <div class="student-achievement-card__progress">
-                <div class="d-flex justify-content-between mb-1">
-                    <small class="text-muted">التقدم</small>
-                    <small class="fw-semibold student-achievement-card__pct">{{ number_format($progress, 0) }}%</small>
+            <div class="gamification-achievement-widget__progress">
+                <div class="gamification-achievement-widget__progress-meta">
+                    <span>التقدم</span>
+                    <span>{{ number_format($progress, 0) }}%</span>
                 </div>
-                <div class="student-achievement-card__track">
-                    <div class="student-achievement-card__bar" style="--progress: {{ max(0, min(100, $progress)) }}%"></div>
+                <div class="gamification-achievement-widget__progress-track">
+                    <div class="gamification-achievement-widget__progress-bar" style="width: {{ max(6, min(100, $progress)) }}%"></div>
                 </div>
-                <small class="student-achievement-card__ratio">{{ $current }} / {{ $target }}</small>
+                <div class="gamification-achievement-widget__progress-foot">
+                    <span>{{ $current }} / {{ $target }}</span>
+                    @if($points > 0)
+                        <span>{{ number_format($points) }} نقطة</span>
+                    @endif
+                </div>
             </div>
-            @if($points > 0)
-                <span class="student-achievement-card__reward student-achievement-card__reward--muted">مكافأة: {{ number_format($points) }} نقطة</span>
-            @endif
         @endif
 
-        <span class="student-achievement-card__hint"><i class="fe fe-maximize-2 me-1"></i>اضغط للتفاصيل</span>
+        <span class="gamification-achievement-widget__hint">
+            <i class="ri-external-link-line"></i>اضغط للتفاصيل
+        </span>
     </article>
 </div>
 @endif

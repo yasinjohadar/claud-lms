@@ -5,42 +5,48 @@
 @stop
 
 @section('content')
-<div class="main-content app-content student-badges-page">
+<div class="main-content app-content">
     <div class="container-fluid">
 
-        @include('student.components.alerts')
+        @include('admin.partials.ui.alerts')
 
-        <div class="d-md-flex d-block align-items-center justify-content-between my-4">
-            <div>
-                <h4 class="student-my-courses-welcome__title mb-1">شاراتي</h4>
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="{{ route('student.dashboard') }}">الرئيسية</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('gamification.dashboard') }}">التلعيب</a></li>
-                        <li class="breadcrumb-item active">شاراتي</li>
-                    </ol>
-                </nav>
-            </div>
-            <div class="mt-3 mt-md-0">
-                <a href="{{ route('gamification.dashboard') }}" class="btn btn-outline-primary rounded-pill">
-                    <i class="fe fe-bar-chart-2 me-1"></i>لوحة التلعيب
-                </a>
-            </div>
-        </div>
+        @include('admin.partials.ui.page-header', [
+            'breadcrumbs' => [
+                ['label' => 'لوحة التحكم', 'url' => route('student.dashboard')],
+                ['label' => 'التلعيب', 'url' => route('gamification.dashboard')],
+                ['label' => 'شاراتي'],
+            ],
+            'title' => 'شاراتي',
+            'subtitle' => 'اجمع الشارات بإكمال الأنشطة والتحديات في رحلة التعلم',
+            'actions' => '
+                <div class="d-flex flex-wrap gap-2">
+                    <a href="' . route('gamification.badges.recommended') . '" class="btn btn-light border btn-wave">
+                        <i class="ri-flashlight-line me-1"></i>الأقرب للإنجاز
+                    </a>
+                    <a href="' . route('gamification.badges.collection') . '" class="btn btn-light border btn-wave">
+                        <i class="ri-gallery-line me-1"></i>مجموعتي
+                    </a>
+                    <a href="' . route('gamification.dashboard') . '" class="btn btn-primary btn-wave">
+                        <i class="ri-trophy-line me-1"></i>لوحة التلعيب
+                    </a>
+                </div>
+            ',
+        ])
 
         @include('student.pages.gamification.partials.badges-stats', ['stats' => $stats])
 
-        <div class="card custom-card student-quizzes-panel mb-4">
-            <div class="card-body">
-                <div class="d-flex align-items-center gap-2 mb-4">
-                    <span class="avatar avatar-sm bg-success-transparent">
-                        <i class="fe fe-award text-success"></i>
-                    </span>
-                    <h6 class="card-title mb-0">الشارات المكتسبة ({{ count($earnedBadges ?? []) }})</h6>
-                </div>
-
+        <div class="card custom-card mb-4">
+            <div class="card-header border-0 pb-0">
+                <h5 class="card-title mb-1">
+                    <i class="ri-medal-line text-success me-1"></i>
+                    الشارات المكتسبة
+                    <span class="text-muted fw-normal fs-13">({{ count($earnedBadges ?? []) }})</span>
+                </h5>
+                <p class="text-muted fs-12 mb-0">الشارات التي حصلت عليها بالفعل</p>
+            </div>
+            <div class="card-body pt-3">
                 @if(count($earnedBadges ?? []) > 0)
-                    <div class="row g-4">
+                    <div class="row g-3">
                         @foreach($earnedBadges as $index => $item)
                             @php
                                 $badge = $item->badge ?? $item;
@@ -64,19 +70,19 @@
             </div>
         </div>
 
-        <div class="card custom-card student-quizzes-panel">
-            <div class="card-body">
-                <div class="d-flex align-items-center gap-2 mb-3">
-                    <span class="avatar avatar-sm bg-primary-transparent">
-                        <i class="fe fe-grid text-primary"></i>
-                    </span>
-                    <h6 class="card-title mb-0">جميع الشارات</h6>
-                </div>
-
+        <div class="card custom-card">
+            <div class="card-header border-0 pb-0">
+                <h5 class="card-title mb-1">
+                    <i class="ri-grid-line text-primary me-1"></i>
+                    جميع الشارات
+                </h5>
+                <p class="text-muted fs-12 mb-0">استكشف كل الشارات المتاحة واطّلع على شروط الحصول عليها</p>
+            </div>
+            <div class="card-body pt-3">
                 @include('student.pages.gamification.partials.badges-filters')
 
                 @if(count($allBadges ?? []) > 0)
-                    <div class="row g-4">
+                    <div class="row g-3" id="badgeGrid">
                         @foreach($allBadges as $index => $badge)
                             @include('student.pages.gamification.partials.badge-card', [
                                 'badge' => $badge,
@@ -97,38 +103,4 @@
 
     </div>
 </div>
-@stop
-
-@section('scripts')
-<script>
-    (function () {
-        function formatNumber(value, decimals) {
-            if (decimals) {
-                return new Intl.NumberFormat('ar-EG', {
-                    minimumFractionDigits: 1,
-                    maximumFractionDigits: 1,
-                }).format(value);
-            }
-            return new Intl.NumberFormat('ar-EG').format(Math.round(value));
-        }
-
-        document.querySelectorAll('[data-countup]').forEach(function (el) {
-            var target = parseFloat(el.dataset.countup || '0');
-            var isPercent = el.dataset.countupSuffix === '%';
-            var decimals = el.dataset.countupDecimals === '1';
-            var duration = 800;
-            var start = performance.now();
-
-            function step(now) {
-                var progress = Math.min((now - start) / duration, 1);
-                var eased = 1 - Math.pow(1 - progress, 3);
-                var value = formatNumber(target * eased, decimals);
-                el.textContent = isPercent ? value + '%' : value;
-                if (progress < 1) requestAnimationFrame(step);
-            }
-
-            requestAnimationFrame(step);
-        });
-    })();
-</script>
 @stop

@@ -28,30 +28,34 @@ class ShopController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
+        $user->stats()->firstOrCreate(['user_id' => $user->id]);
         $categoryId = $request->input('category_id');
 
-        // الحصول على الفئات
         $categories = ShopCategory::where('is_active', true)
-            ->withCount(['items' => function($q) {
-                $q->where('is_active', true);
-            }])
+            ->with(['items' => fn ($q) => $q->where('is_active', true)->where('in_stock', true)->orderBy('sort_order')->orderBy('price_points')])
             ->orderBy('sort_order')
+            ->orderBy('name')
             ->get();
 
-        // الحصول على العناصر المتاحة
         $items = $this->shopService->getAvailableItems($user, $categoryId);
 
-        // رصيد المستخدم
         $balance = [
             'points' => $user->stats->available_points ?? 0,
             'gems' => $user->stats->available_gems ?? 0,
         ];
 
+        $userPoints = $balance['points'];
+        $userGems = $balance['gems'];
+        $myPurchases = $this->shopService->getUserPurchases($user)->take(10);
+
         return view('student.pages.gamification.shop', compact(
             'categories',
             'items',
             'balance',
-            'categoryId'
+            'categoryId',
+            'userPoints',
+            'userGems',
+            'myPurchases'
         ));
     }
 

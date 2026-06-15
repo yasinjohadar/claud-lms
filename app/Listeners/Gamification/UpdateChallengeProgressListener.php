@@ -57,58 +57,58 @@ class UpdateChallengeProgressListener
         $eventClass = get_class($event);
 
         // تحديات إكمال الدروس
-        if ($this->isLessonCompletedEvent($eventClass) && $challenge->target_type === 'lessons_completed') {
+        if ($this->isLessonCompletedEvent($eventClass) && $challenge->metric === 'lessons_completed') {
             $this->challengeService->updateProgress($user, $challenge, 1);
         }
 
         // تحديات مشاهدة الفيديوهات
-        if ($this->isVideoWatchedEvent($eventClass) && $challenge->target_type === 'videos_watched') {
+        if ($this->isVideoWatchedEvent($eventClass) && $challenge->metric === 'videos_watched') {
             $this->challengeService->updateProgress($user, $challenge, 1);
         }
 
         // تحديات اجتياز الاختبارات
-        if ($this->isQuizPassedEvent($eventClass) && $challenge->target_type === 'quizzes_passed') {
+        if ($this->isQuizPassedEvent($eventClass) && $challenge->metric === 'quizzes_passed') {
             $this->challengeService->updateProgress($user, $challenge, 1);
         }
 
         // تحديات الدرجات الكاملة
-        if ($this->isPerfectScoreEvent($eventClass) && $challenge->target_type === 'perfect_scores') {
+        if ($this->isPerfectScoreEvent($eventClass) && $challenge->metric === 'perfect_scores') {
             $this->challengeService->updateProgress($user, $challenge, 1);
         }
 
         // تحديات كسب النقاط
-        if ($this->isPointsEarnedEvent($eventClass) && $challenge->target_type === 'points_earned') {
+        if ($this->isPointsEarnedEvent($eventClass) && $challenge->metric === 'points_earned') {
             $points = $event->points ?? 0;
             $this->challengeService->updateProgress($user, $challenge, $points);
         }
 
         // تحديات السلاسل
-        if ($this->isStreakEvent($eventClass) && $challenge->target_type === 'login_streak') {
+        if ($this->isStreakEvent($eventClass) && $challenge->metric === 'login_streak') {
             $streak = $user->stats->current_streak ?? 0;
             // نحدث القيمة الحالية مباشرة
-            $userChallenge = $user->challenges()
+            $userChallenge = $user->userChallenges()
                 ->where('challenge_id', $challenge->id)
-                ->where('status', 'active')
+                ->active()
                 ->first();
 
-            if ($userChallenge && $streak > $userChallenge->current_progress) {
-                $diff = $streak - $userChallenge->current_progress;
+            if ($userChallenge && $streak > $userChallenge->current_value) {
+                $diff = $streak - $userChallenge->current_value;
                 $this->challengeService->updateProgress($user, $challenge, $diff);
             }
         }
 
         // تحديات إنهاء الكورسات
-        if ($this->isCourseCompletedEvent($eventClass) && $challenge->target_type === 'courses_completed') {
+        if ($this->isCourseCompletedEvent($eventClass) && $challenge->metric === 'courses_completed') {
             $this->challengeService->updateProgress($user, $challenge, 1);
         }
 
         // تحديات كسب الشارات
-        if ($this->isBadgeEarnedEvent($eventClass) && $challenge->target_type === 'badges_earned') {
+        if ($this->isBadgeEarnedEvent($eventClass) && $challenge->metric === 'badges_earned') {
             $this->challengeService->updateProgress($user, $challenge, 1);
         }
 
         // تحديات إكمال الإنجازات
-        if ($this->isAchievementCompletedEvent($eventClass) && $challenge->target_type === 'achievements_completed') {
+        if ($this->isAchievementCompletedEvent($eventClass) && $challenge->metric === 'achievements_completed') {
             $this->challengeService->updateProgress($user, $challenge, 1);
         }
     }

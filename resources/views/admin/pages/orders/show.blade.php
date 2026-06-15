@@ -17,7 +17,12 @@
             ],
             'title' => 'طلب #' . $order->order_number,
             'subtitle' => $order->status_label . ' • ' . ($order->student?->user?->name ?? ''),
-            'actions' => '<a href="' . route('admin.orders.index') . '" class="btn btn-light border btn-wave"><i class="ri-arrow-right-line me-1"></i> رجوع</a>',
+            'actions' => '
+                <a href="' . route('admin.enrollments.index', ['order_id' => $order->id]) . '" class="btn btn-primary btn-wave me-2">
+                    <i class="ri-book-mark-line me-1"></i> إدارة التسجيلات
+                </a>
+                <a href="' . route('admin.orders.index') . '" class="btn btn-light border btn-wave"><i class="ri-arrow-right-line me-1"></i> رجوع</a>
+            ',
         ])
 
         <div class="row g-4">
@@ -88,7 +93,12 @@
 
                 @if($order->enrollments->isNotEmpty())
                 <div class="card custom-card data-table-card">
-                    <div class="card-header"><span class="fw-bold">التسجيلات المرتبطة</span></div>
+                    <div class="card-header d-flex align-items-center justify-content-between flex-wrap gap-2">
+                        <span class="fw-bold">التسجيلات المرتبطة</span>
+                        <a href="{{ route('admin.enrollments.index', ['order_id' => $order->id]) }}" class="btn btn-sm btn-light border">
+                            عرض في التسجيلات
+                        </a>
+                    </div>
                     <div class="card-body p-0">
                         <table class="table data-table mb-0">
                             <thead>

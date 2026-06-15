@@ -25,7 +25,7 @@ class StudentQuizApiService
     {
         $isEnrolled = $user->enrollments()
             ->where('course_id', $quiz->course_id)
-            ->where('enrollment_status', 'active')
+            ->where('course_enrollments.status', 'active')
             ->exists();
 
         if (! $isEnrolled) {

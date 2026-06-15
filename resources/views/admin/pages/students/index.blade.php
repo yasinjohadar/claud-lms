@@ -10,6 +10,14 @@
         <div class="admin-toast-container" id="adminToastContainer"></div>
         @include('admin.partials.ui.alerts')
 
+        @php
+            $studentHeaderActions = '';
+            if (auth()->user()?->can('enrollment-manage')) {
+                $studentHeaderActions .= '<button type="button" class="btn btn-success btn-wave me-2" data-open-enrollment-grant data-modal-id="studentsIndexGrantModal"><i class="ri-user-add-line me-1"></i> تسجيل في كورس</button>';
+            }
+            $studentHeaderActions .= '<a href="' . route('admin.students.create') . '" class="btn btn-link text-primary fw-bold text-decoration-none p-0"><i class="ri-user-add-line me-1 fs-18"></i> إضافة طالب</a>';
+        @endphp
+
         @include('admin.partials.ui.page-header', [
             'breadcrumbs' => [
                 ['label' => 'لوحة التحكم', 'url' => route('admin.dashboard')],
@@ -17,7 +25,7 @@
             ],
             'title' => 'إدارة الطلاب',
             'subtitle' => 'ملفات الطلاب والتسجيلات والتقدم',
-            'actions' => '<a href="' . route('admin.students.create') . '" class="btn btn-link text-primary fw-bold text-decoration-none p-0"><i class="ri-user-add-line me-1 fs-18"></i> إضافة طالب</a>',
+            'actions' => $studentHeaderActions,
         ])
 
         <div class="row g-3 mb-4">
@@ -110,6 +118,16 @@
             activate-confirm-text="نعم، فعّل"
             deactivate-confirm-text="نعم، أوقف"
         />
+
+        @can('enrollment-manage')
+        @include('admin.partials.enrollments.grant-modal', ['modalId' => 'studentsIndexGrantModal'])
+        @endcan
     </div>
 </div>
 @stop
+
+@push('scripts')
+    @can('enrollment-manage')
+    @include('admin.partials.enrollments.grant-scripts')
+    @endcan
+@endpush

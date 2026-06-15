@@ -12,12 +12,14 @@ class CompetitionParticipant extends Model
         'user_id',
         'current_value',
         'rank',
+        'is_winner',
         'joined_at',
     ];
 
     protected $casts = [
         'current_value' => 'integer',
         'rank' => 'integer',
+        'is_winner' => 'boolean',
         'joined_at' => 'datetime',
     ];
 

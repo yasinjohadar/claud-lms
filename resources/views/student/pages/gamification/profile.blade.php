@@ -24,7 +24,7 @@
                             </div>
                             <h4 class="fw-bold mb-1">{{ auth()->user()->name }}</h4>
                             <p class="text-muted mb-3">{{ auth()->user()->email }}</p>
-                            <a href="{{ route('student.profile.edit') }}" class="btn btn-outline-primary btn-sm">
+                            <a href="{{ route('profile.edit') }}" class="btn btn-outline-primary btn-sm">
                                 <i class="fas fa-edit me-1"></i>تعديل الملف الشخصي
                             </a>
                         </div>

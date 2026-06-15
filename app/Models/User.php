@@ -38,6 +38,8 @@ class User extends Authenticatable
         'last_login_at',
         'last_login_ip',
         'last_login_user_agent',
+        'referral_code',
+        'referred_by_user_id',
     ];
 
     /**
@@ -154,6 +156,11 @@ class User extends Authenticatable
     public function userAchievements(): HasMany
     {
         return $this->hasMany(UserAchievement::class);
+    }
+
+    public function userChallenges(): HasMany
+    {
+        return $this->hasMany(UserChallenge::class);
     }
 
     public function achievements(): BelongsToMany

@@ -17,7 +17,22 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        return view('auth.login');
+        $demoLogins = app()->environment('local') ? [
+            'admin' => [
+                'label' => 'تسجيل كأدمن',
+                'email' => 'admin@admin.com',
+                'password' => '123456789',
+                'icon' => 'fa-user-shield',
+            ],
+            'student' => [
+                'label' => 'تسجيل كطالب',
+                'email' => 'student1@edumatic.com',
+                'password' => '123456789',
+                'icon' => 'fa-user-graduate',
+            ],
+        ] : null;
+
+        return view('auth.login', compact('demoLogins'));
     }
 
     /**

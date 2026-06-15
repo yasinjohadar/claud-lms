@@ -49,7 +49,10 @@
         if (grid) grid.classList.toggle('d-none', visible === 0);
 
         statusTabs.forEach(function (tab) {
-            tab.classList.toggle('is-active', tab.dataset.statusFilter === status);
+            var isActive = tab.dataset.statusFilter === status;
+            tab.classList.toggle('btn-primary', isActive);
+            tab.classList.toggle('btn-light', !isActive);
+            tab.classList.toggle('border', !isActive);
         });
     }
 
@@ -127,12 +130,6 @@
                 e.preventDefault();
                 openFromCard(card);
             }
-        });
-    });
-
-    document.querySelectorAll('.student-achievement-card__bar').forEach(function (bar) {
-        requestAnimationFrame(function () {
-            bar.style.width = bar.style.getPropertyValue('--progress');
         });
     });
 })();

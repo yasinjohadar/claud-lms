@@ -85,6 +85,15 @@
                             </a>
                         </li>
 
+                        <li class="slide {{ request()->routeIs('admin.enrollments.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.enrollments.index') }}" class="side-menu__item {{ request()->routeIs('admin.enrollments.*') ? 'active' : '' }}">
+                                <span class="side-menu__icon side-menu__icon--boxed side-menu__icon--consultation">
+                                    <i class="ri-book-mark-line"></i>
+                                </span>
+                                <span class="side-menu__label">التسجيلات</span>
+                            </a>
+                        </li>
+
                         <li class="slide {{ request()->routeIs('admin.orders.*') ? 'active' : '' }}">
                             <a href="{{ route('admin.orders.index') }}" class="side-menu__item {{ request()->routeIs('admin.orders.*') ? 'active' : '' }}">
                                 <span class="side-menu__icon side-menu__icon--boxed side-menu__icon--blog">

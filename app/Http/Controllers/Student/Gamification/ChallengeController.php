@@ -98,7 +98,7 @@ class ChallengeController extends Controller
                 ->where('status', 'completed')
                 ->count(),
             'current_active' => UserChallenge::where('challenge_id', $challenge->id)
-                ->where('status', 'active')
+                ->active()
                 ->count(),
             'average_completion_time' => null, // يمكن حسابه لاحقاً
         ];
@@ -403,7 +403,7 @@ class ChallengeController extends Controller
         $userChallenge->load('challenge');
 
         $timeRemaining = null;
-        if ($userChallenge->expires_at && $userChallenge->status === 'active') {
+        if ($userChallenge->expires_at && $userChallenge->isActive()) {
             $timeRemaining = [
                 'seconds' => now()->diffInSeconds($userChallenge->expires_at, false),
                 'human' => now()->diffForHumans($userChallenge->expires_at),

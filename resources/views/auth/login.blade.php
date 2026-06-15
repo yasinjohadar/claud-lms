@@ -123,6 +123,25 @@
                         </button>
                     </form>
 
+                    @if(!empty($demoLogins))
+                        <div class="auth-quick-login">
+                            <p class="auth-quick-login__label">دخول سريع للتجربة</p>
+                            <div class="auth-quick-login__buttons">
+                                @foreach($demoLogins as $role => $demo)
+                                    <button type="button"
+                                            class="auth-quick-login__btn auth-quick-login__btn--{{ $role }}"
+                                            data-demo-email="{{ $demo['email'] }}"
+                                            data-demo-password="{{ $demo['password'] }}"
+                                            data-demo-label="{{ $demo['label'] }}">
+                                        <i class="fas {{ $demo['icon'] }}"></i>
+                                        <span>{{ $demo['label'] }}</span>
+                                    </button>
+                                @endforeach
+                            </div>
+                            <p class="auth-quick-login__hint">ينسخ البريد وكلمة المرور ويسجّل الدخول مباشرة</p>
+                        </div>
+                    @endif
+
                     <div class="auth-footer">
                         <p>ليس لديك حساب؟ <a href="{{ route('register') }}">إنشاء حساب جديد</a></p>
                     </div>
@@ -132,6 +151,107 @@
     </div>
 @endsection
 
+@push('styles')
+    <style>
+        .auth-quick-login {
+            margin-top: 1.25rem;
+            padding-top: 1.25rem;
+            border-top: 1px dashed var(--glass-border, rgba(255, 255, 255, 0.12));
+        }
+
+        .auth-quick-login__label {
+            margin: 0 0 0.75rem;
+            text-align: center;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .auth-quick-login__buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.65rem;
+        }
+
+        .auth-quick-login__btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            padding: 0.7rem 0.75rem;
+            border-radius: 10px;
+            border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.15));
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-primary);
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .auth-quick-login__btn:hover {
+            transform: translateY(-1px);
+            border-color: rgba(16, 185, 129, 0.45);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .auth-quick-login__btn--admin:hover {
+            border-color: rgba(59, 130, 246, 0.45);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .auth-quick-login__btn--student:hover {
+            border-color: rgba(16, 185, 129, 0.45);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .auth-quick-login__hint {
+            margin: 0.65rem 0 0;
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            opacity: 0.85;
+        }
+    </style>
+@endpush
+
 @push('scripts')
     @include('frontend.layouts.partials.auth-scripts')
+    @if(!empty($demoLogins))
+        <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var loginForm = document.getElementById('loginForm');
+            var emailInput = document.getElementById('email');
+            var passwordInput = document.getElementById('password');
+            var submitBtn = loginForm ? loginForm.querySelector('.btn-auth') : null;
+
+            document.querySelectorAll('.auth-quick-login__btn').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    if (!loginForm || !emailInput || !passwordInput) return;
+
+                    var email = btn.dataset.demoEmail;
+                    var password = btn.dataset.demoPassword;
+                    var label = btn.dataset.demoLabel || 'الحساب';
+
+                    emailInput.value = email;
+                    passwordInput.value = password;
+                    emailInput.dispatchEvent(new Event('input', { bubbles: true }));
+                    passwordInput.dispatchEvent(new Event('input', { bubbles: true }));
+
+                    var copyText = 'البريد: ' + email + '\nكلمة المرور: ' + password;
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(copyText).catch(function () {});
+                    }
+
+                    if (submitBtn) {
+                        submitBtn.classList.add('loading');
+                        submitBtn.disabled = true;
+                    }
+
+                    loginForm.submit();
+                });
+            });
+        });
+        </script>
+    @endif
 @endpush

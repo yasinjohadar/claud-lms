@@ -198,8 +198,23 @@ public function index(Request $request)
      */
     public function show(string $id)
     {
-        $user = User::findOrFail($id);
-        return view("admin.pages.users.profile" , compact("user"));
+        $user = User::with([
+            'roles',
+            'student.enrollments.course',
+            'student.enrollments.order',
+            'student.orders',
+        ])->findOrFail($id);
+
+        $student = $user->student;
+
+        $stats = [
+            'enrollments' => $student?->enrollments->count() ?? 0,
+            'active' => $student?->enrollments->where('status', 'active')->count() ?? 0,
+            'completed' => $student?->enrollments->where('status', 'completed')->count() ?? 0,
+            'orders' => $student?->orders->count() ?? 0,
+        ];
+
+        return view('admin.pages.users.profile', compact('user', 'student', 'stats'));
     }
 
     /**

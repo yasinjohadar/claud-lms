@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\ShopCategory;
+use App\Models\Gamification\ShopCategory;
 
 class ShopCategorySeeder extends Seeder
 {
@@ -56,8 +56,9 @@ class ShopCategorySeeder extends Seeder
         ];
 
         foreach ($categories as $category) {
+            unset($category['slug'], $category['sort_order']);
             ShopCategory::updateOrCreate(
-                ['slug' => $category['slug']],
+                ['name' => $category['name']],
                 $category
             );
         }

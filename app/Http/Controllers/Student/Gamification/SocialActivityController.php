@@ -18,6 +18,26 @@ class SocialActivityController extends Controller
     }
 
     /**
+     * صفحة النشاط الاجتماعي
+     */
+    public function index(Request $request)
+    {
+        $user = $request->user();
+        $activities = $this->socialActivityService->getFriendsActivities($user, 30);
+        $stats = $this->socialActivityService->getUserSocialStats($user);
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'activities' => $activities,
+                'stats' => $stats,
+            ]);
+        }
+
+        return view('student.pages.gamification.social.index', compact('activities', 'stats'));
+    }
+
+    /**
      * عرض آخر الأنشطة (News Feed)
      */
     public function feed(Request $request)

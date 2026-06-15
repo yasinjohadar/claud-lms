@@ -92,6 +92,17 @@
                                    href="{{ route('admin.students.show', $student) }}">
                                     <i class="ri-eye-line"></i>
                                 </a>
+                                @can('enrollment-manage')
+                                <button type="button"
+                                        class="action-btn action-btn--success"
+                                        title="تسجيل في كورس"
+                                        data-open-enrollment-grant
+                                        data-modal-id="studentsIndexGrantModal"
+                                        data-student-id="{{ $student->id }}"
+                                        data-student-label="{{ e(($user?->name ?? 'طالب') . ($student->student_code ? ' — #' . $student->student_code : '')) }}">
+                                    <i class="ri-user-add-line"></i>
+                                </button>
+                                @endcan
                                 <a class="action-btn action-btn--edit" title="تعديل"
                                    href="{{ route('admin.students.edit', $student) }}">
                                     <i class="ri-pencil-line"></i>

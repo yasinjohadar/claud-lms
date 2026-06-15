@@ -44,11 +44,15 @@ class InventoryController extends Controller
 
         $stats = $this->inventoryService->getInventoryStats($user);
 
-        return response()->json([
-            'success' => true,
-            'inventory' => $inventory,
-            'stats' => $stats,
-        ]);
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'inventory' => $inventory,
+                'stats' => $stats,
+            ]);
+        }
+
+        return view('student.pages.gamification.inventory.index', compact('inventory', 'stats', 'type', 'status'));
     }
 
     /**

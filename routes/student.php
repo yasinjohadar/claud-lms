@@ -3,6 +3,7 @@
 use App\Http\Controllers\Student\DashboardController;
 use App\Http\Controllers\Student\LessonProgressController;
 use App\Http\Controllers\Student\StudentCourseController;
+use App\Http\Controllers\Student\StudentLessonController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'check.user.active', 'role:student', 'ensure.student'])
@@ -11,6 +12,8 @@ Route::middleware(['auth', 'check.user.active', 'role:student', 'ensure.student'
     ->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('/courses', [StudentCourseController::class, 'index'])->name('courses.index');
+        Route::get('/courses/{course:slug}', [StudentCourseController::class, 'show'])->name('courses.show');
+        Route::get('/lessons/{lesson}', [StudentLessonController::class, 'show'])->name('lessons.show');
         Route::post('/lessons/{lesson}/progress', [LessonProgressController::class, 'store'])
             ->middleware('ensure.enrolled')
             ->name('lessons.progress');

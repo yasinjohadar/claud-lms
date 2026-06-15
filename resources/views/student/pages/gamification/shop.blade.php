@@ -5,114 +5,201 @@
 @stop
 
 @section('content')
-    <div class="main-content app-content">
-        <div class="container-fluid">
-            <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-                <h4 class="mb-0">المتجر</h4>
-                <div>
-                    <span class="badge bg-primary fs-6 me-2"><i class="fas fa-star me-1"></i>{{ $userPoints ?? 0 }} نقطة</span>
-                    <span class="badge bg-warning fs-6"><i class="fas fa-gem me-1"></i>{{ $userGems ?? 0 }} جوهرة</span>
+<div class="main-content app-content">
+    <div class="container-fluid pb-3">
+
+        @include('admin.partials.ui.alerts')
+
+        @include('admin.partials.ui.page-header', [
+            'breadcrumbs' => [
+                ['label' => 'لوحة التحكم', 'url' => route('student.dashboard')],
+                ['label' => 'التلعيب', 'url' => route('gamification.dashboard')],
+                ['label' => 'المتجر'],
+            ],
+            'title' => 'متجر المكافآت',
+            'subtitle' => 'استبدل نقاطك وجواهرك بمكافآت وتعزيزات ومظهر مميز',
+            'actions' => '
+                <div class="d-flex flex-wrap gap-2">
+                    <a href="' . route('gamification.inventory.index') . '" class="btn btn-light border btn-wave">
+                        <i class="ri-archive-line me-1"></i>مخزوني
+                    </a>
+                    <a href="' . route('gamification.dashboard') . '" class="btn btn-primary btn-wave">
+                        <i class="ri-trophy-line me-1"></i>لوحة التلعيب
+                    </a>
+                </div>
+            ',
+        ])
+
+        <div class="row g-3 mb-4">
+            @include('admin.partials.ui.stat-card-gradient', [
+                'variant' => 'purple',
+                'icon' => 'ri-coin-line',
+                'label' => 'رصيد النقاط',
+                'value' => number_format($userPoints ?? 0),
+                'hint' => 'متاح للشراء',
+            ])
+            @include('admin.partials.ui.stat-card-gradient', [
+                'variant' => 'orange',
+                'icon' => 'ri-vip-diamond-line',
+                'label' => 'رصيد الجواهر',
+                'value' => number_format($userGems ?? 0),
+                'hint' => 'عملة مميزة',
+            ])
+            @include('admin.partials.ui.stat-card-gradient', [
+                'variant' => 'green',
+                'icon' => 'ri-store-2-line',
+                'label' => 'المنتجات',
+                'value' => number_format(collect($categories ?? [])->sum(fn ($c) => $c->items->count())),
+                'hint' => 'عناصر متاحة الآن',
+            ])
+            @include('admin.partials.ui.stat-card-gradient', [
+                'variant' => 'cyan',
+                'icon' => 'ri-shopping-bag-3-line',
+                'label' => 'مشترياتي',
+                'value' => number_format(count($myPurchases ?? [])),
+                'hint' => 'آخر العمليات',
+            ])
+        </div>
+
+        <div id="shopAlert" class="d-none alert mb-3"></div>
+
+        @forelse($categories ?? [] as $category)
+            <div class="card custom-card mb-4">
+                <div class="card-header border-0 pb-0">
+                    <h5 class="card-title mb-1">
+                        <span class="me-1">{{ $category->icon ?? '📦' }}</span>
+                        {{ $category->name }}
+                    </h5>
+                    @if($category->description)
+                        <p class="text-muted fs-12 mb-0">{{ $category->description }}</p>
+                    @endif
+                </div>
+                <div class="card-body pt-3">
+                    <div class="row g-3">
+                        @forelse($category->items as $index => $item)
+                            @include('student.pages.gamification.partials.shop-item-card', [
+                                'item' => $item,
+                                'category' => $category,
+                                'userPoints' => $userPoints,
+                                'userGems' => $userGems,
+                                'index' => $index,
+                            ])
+                        @empty
+                            <div class="col-12">
+                                <div class="empty-state py-4">
+                                    <div class="empty-state-icon mx-auto mb-3"><i class="ri-shopping-bag-3-line"></i></div>
+                                    <p class="text-muted mb-0">لا توجد منتجات في هذه الفئة</p>
+                                </div>
+                            </div>
+                        @endforelse
+                    </div>
                 </div>
             </div>
-
-            @if(session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
-            @endif
-
-            @if(session('error'))
-                <div class="alert alert-danger">{{ session('error') }}</div>
-            @endif
-
-            <!-- الفئات -->
-            @forelse($categories ?? [] as $category)
-                <div class="card border-0 shadow-sm mb-4">
-                    <div class="card-header bg-light">
-                        <h5 class="mb-0">{{ $category->icon ?? '📦' }} {{ $category->name }}</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            @forelse($category->items ?? [] as $item)
-                                <div class="col-lg-3 col-md-4 col-6 mb-4">
-                                    <div class="card border-0 shadow-sm h-100">
-                                        <div class="card-body text-center">
-                                            <div class="fs-1 mb-3">{{ $item->icon ?? '🎁' }}</div>
-                                            <h6 class="fw-bold">{{ $item->name }}</h6>
-                                            <p class="small text-muted mb-3">{{ $item->description }}</p>
-
-                                            <div class="mb-3">
-                                                @if($item->price_points > 0)
-                                                    <span class="badge bg-primary me-1">{{ $item->price_points }} نقطة</span>
-                                                @endif
-                                                @if($item->price_gems > 0)
-                                                    <span class="badge bg-warning">{{ $item->price_gems }} جوهرة</span>
-                                                @endif
-                                            </div>
-
-                                            @if($item->required_level > 1)
-                                                <p class="small text-muted mb-2">المستوى المطلوب: {{ $item->required_level }}</p>
-                                            @endif
-
-                                            @if($item->stock !== null)
-                                                <p class="small text-muted mb-2">متبقي: {{ $item->stock }}</p>
-                                            @endif
-
-                                            <form action="{{ route('gamification.shop.purchase', $item->id) }}" method="POST">
-                                                @csrf
-                                                <button type="submit" class="btn btn-sm btn-primary w-100"
-                                                    @if(($userPoints ?? 0) < $item->price_points || ($userGems ?? 0) < $item->price_gems) disabled @endif>
-                                                    <i class="fas fa-shopping-cart me-1"></i> شراء
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            @empty
-                                <div class="col-12">
-                                    <p class="text-muted text-center py-3">لا توجد منتجات في هذه الفئة</p>
-                                </div>
-                            @endforelse
-                        </div>
-                    </div>
+        @empty
+            <div class="card custom-card">
+                <div class="card-body text-center py-5">
+                    <div class="empty-state-icon mx-auto mb-3"><i class="ri-store-2-line"></i></div>
+                    <p class="text-muted mb-1">لا توجد فئات في المتجر حالياً</p>
+                    <p class="text-muted fs-12 mb-0">ستظهر المنتجات هنا عند تفعيلها من الإدارة</p>
                 </div>
-            @empty
-                <div class="card border-0 shadow-sm">
-                    <div class="card-body text-center py-5">
-                        <i class="fas fa-store fa-3x text-muted mb-3"></i>
-                        <p class="text-muted">المتجر فارغ حالياً</p>
-                    </div>
-                </div>
-            @endforelse
+            </div>
+        @endforelse
 
-            <!-- مشترياتي -->
-            @if(count($myPurchases ?? []) > 0)
-                <div class="card border-0 shadow-sm">
-                    <div class="card-header bg-light">
-                        <h5 class="mb-0"><i class="fas fa-shopping-bag me-2"></i>مشترياتي</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
+        @if(!empty($myPurchases) && count($myPurchases))
+            <div class="card custom-card">
+                <div class="card-header border-0 pb-0">
+                    <h5 class="card-title mb-1">
+                        <i class="ri-history-line text-info me-1"></i>
+                        مشترياتي الأخيرة
+                    </h5>
+                    <p class="text-muted fs-12 mb-0">آخر عمليات الشراء من المتجر</p>
+                </div>
+                <div class="card-body pt-3 p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th>العنصر</th>
+                                    <th>الطريقة</th>
+                                    <th>السعر</th>
+                                    <th>التاريخ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($myPurchases as $purchase)
                                     <tr>
-                                        <th>المنتج</th>
-                                        <th>السعر</th>
-                                        <th>تاريخ الشراء</th>
+                                        <td class="fw-semibold fs-13">{{ $purchase->item_name ?? $purchase->shopItem?->name ?? '—' }}</td>
+                                        <td>
+                                            <span class="badge {{ $purchase->payment_method === 'gems' ? 'bg-warning-transparent text-warning' : 'bg-primary-transparent text-primary' }}">
+                                                {{ $purchase->payment_method === 'gems' ? 'جواهر' : 'نقاط' }}
+                                            </span>
+                                        </td>
+                                        <td>{{ number_format($purchase->final_price ?? 0) }}</td>
+                                        <td class="text-muted fs-12">{{ $purchase->created_at?->locale('ar')->diffForHumans() }}</td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($myPurchases as $purchase)
-                                        <tr>
-                                            <td>{{ $purchase->item->icon ?? '' }} {{ $purchase->item->name }}</td>
-                                            <td>{{ $purchase->price_paid }} {{ $purchase->currency == 'points' ? 'نقطة' : 'جوهرة' }}</td>
-                                            <td>{{ $purchase->created_at->format('Y/m/d') }}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            @endif
-        </div>
+            </div>
+        @endif
     </div>
+</div>
 @stop
+
+@push('scripts')
+<script>
+document.querySelectorAll('.shop-purchase-btn').forEach(function (btn) {
+    btn.addEventListener('click', async function () {
+        if (this.disabled || this.classList.contains('is-disabled')) {
+            return;
+        }
+
+        const itemId = this.dataset.itemId;
+        const method = this.dataset.method;
+        const alertEl = document.getElementById('shopAlert');
+        const card = this.closest('.gamification-shop-widget');
+
+        this.disabled = true;
+        if (card) {
+            card.classList.add('is-purchasing');
+        }
+
+        try {
+            const res = await fetch(`{{ url('/student/gamification/shop/items') }}/${itemId}/purchase`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify({ payment_method: method }),
+            });
+            const data = await res.json();
+            alertEl.classList.remove('d-none', 'alert-success', 'alert-danger');
+            if (data.success) {
+                alertEl.classList.add('alert-success');
+                alertEl.textContent = data.message || 'تم الشراء بنجاح';
+                setTimeout(() => location.reload(), 1200);
+            } else {
+                alertEl.classList.add('alert-danger');
+                alertEl.textContent = data.message || 'تعذّر إتمام الشراء';
+                this.disabled = false;
+                if (card) {
+                    card.classList.remove('is-purchasing');
+                }
+            }
+        } catch (e) {
+            alertEl.classList.remove('d-none');
+            alertEl.classList.add('alert-danger');
+            alertEl.textContent = 'حدث خطأ أثناء الشراء';
+            this.disabled = false;
+            if (card) {
+                card.classList.remove('is-purchasing');
+            }
+        }
+    });
+});
+</script>
+@endpush

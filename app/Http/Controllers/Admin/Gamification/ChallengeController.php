@@ -121,7 +121,7 @@ class ChallengeController extends Controller
         $stats = [
             'total_assigned' => UserChallenge::where('challenge_id', $challenge->id)->count(),
             'active' => UserChallenge::where('challenge_id', $challenge->id)
-                ->where('status', 'active')
+                ->active()
                 ->count(),
             'completed' => UserChallenge::where('challenge_id', $challenge->id)
                 ->where('status', 'completed')
@@ -196,7 +196,7 @@ class ChallengeController extends Controller
     {
         // التحقق من عدم وجود مستخدمين نشطين في التحدي
         $activeCount = UserChallenge::where('challenge_id', $challenge->id)
-            ->where('status', 'active')
+            ->active()
             ->count();
 
         if ($activeCount > 0) {
@@ -300,7 +300,7 @@ class ChallengeController extends Controller
         $activeChallenges = Challenge::where('is_active', true)->count();
 
         $totalAssignments = UserChallenge::count();
-        $activeAssignments = UserChallenge::where('status', 'active')->count();
+        $activeAssignments = UserChallenge::active()->count();
         $completedAssignments = UserChallenge::where('status', 'completed')->count();
         $expiredAssignments = UserChallenge::where('status', 'expired')->count();
 

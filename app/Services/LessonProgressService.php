@@ -9,12 +9,14 @@ use App\Models\CourseEnrollment;
 use App\Models\CourseLesson;
 use App\Models\LessonProgress;
 use App\Models\Student;
+use App\Services\Gamification\GamificationService;
 use Illuminate\Support\Facades\DB;
 
 class LessonProgressService
 {
     public function __construct(
-        protected EnrollmentService $enrollmentService
+        protected EnrollmentService $enrollmentService,
+        protected GamificationService $gamificationService
     ) {}
 
     public function updateProgress(
@@ -52,6 +54,15 @@ class LessonProgressService
             }
 
             $progress->save();
+
+            if ($student->user && $lesson->duration_seconds > 0 && $progress->status !== 'completed') {
+                $watchPercent = min(100, (int) round(($progress->watched_seconds / $lesson->duration_seconds) * 100));
+                $this->gamificationService->dispatchVideoWatchIfEligible(
+                    $student->user,
+                    $lesson,
+                    $watchPercent
+                );
+            }
 
             $this->enrollmentService->recalculateProgress($enrollment->fresh());
             $enrollment = $enrollment->fresh(['course']);

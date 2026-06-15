@@ -23,16 +23,31 @@ class FriendshipController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
+        $user->stats()->firstOrCreate(['user_id' => $user->id]);
 
         $friends = $this->friendshipService->getFriends($user);
 
         $stats = $this->friendshipService->getFriendshipStats($user);
 
-        return response()->json([
-            'success' => true,
-            'friends' => $friends,
-            'stats' => $stats,
-        ]);
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'friends' => $friends,
+                'stats' => $stats,
+            ]);
+        }
+
+        $pendingRequests = $this->friendshipService->getPendingRequests($user);
+        $sentRequests = $this->friendshipService->getSentRequests($user);
+        $suggestions = $this->friendshipService->suggestFriends($user, 6);
+
+        return view('student.pages.gamification.friends.index', compact(
+            'friends',
+            'stats',
+            'pendingRequests',
+            'sentRequests',
+            'suggestions'
+        ));
     }
 
     /**
@@ -43,10 +58,20 @@ class FriendshipController extends Controller
         $user = $request->user();
 
         $validated = $request->validate([
-            'friend_id' => 'required|exists:users,id',
+            'friend_id' => 'nullable|exists:users,id',
+            'email' => 'nullable|email|exists:users,email',
         ]);
 
-        $friend = User::findOrFail($validated['friend_id']);
+        if (empty($validated['friend_id']) && empty($validated['email'])) {
+            return response()->json([
+                'success' => false,
+                'message' => 'يرجى تحديد الطالب أو إدخال بريده الإلكتروني.',
+            ], 422);
+        }
+
+        $friend = ! empty($validated['friend_id'])
+            ? User::findOrFail($validated['friend_id'])
+            : User::where('email', $validated['email'])->firstOrFail();
 
         $friendship = $this->friendshipService->sendFriendRequest($user, $friend);
 

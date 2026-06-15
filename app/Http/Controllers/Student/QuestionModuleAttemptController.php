@@ -7,6 +7,8 @@ use App\Models\QuestionModule;
 use App\Models\QuestionModuleAttempt;
 use App\Models\QuestionModuleResponse;
 use App\Models\CourseEnrollment;
+use App\Services\Gamification\BadgeService;
+use App\Services\Gamification\GamificationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -509,7 +511,7 @@ class QuestionModuleAttemptController extends Controller
                 'remaining_time' => $remainingTime,
             ]);
 
-            return view('student.question-modules.take', compact('attempt', 'questions', 'remainingTime'));
+            return view('student.pages.question-modules.take', compact('attempt', 'questions', 'remainingTime'));
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             Log::error('Attempt not found in take method', [
                 'attempt_id' => $attemptId,
@@ -912,7 +914,7 @@ class QuestionModuleAttemptController extends Controller
 
             $showResults = $attempt->questionModule->show_results;
 
-            return view('student.question-modules.result', compact('attempt', 'questionsWithResponses', 'showResults'));
+            return view('student.pages.question-modules.result', compact('attempt', 'questionsWithResponses', 'showResults'));
         } catch (\Exception $e) {
             return redirect()->back()
                 ->with('error', 'حدث خطأ أثناء تحميل النتيجة: ' . $e->getMessage());
@@ -1062,6 +1064,8 @@ class QuestionModuleAttemptController extends Controller
             ]);
 
             DB::commit();
+
+            $this->rewardGamificationForAttempt($attempt);
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Error in submitAttempt', [
@@ -1177,5 +1181,37 @@ class QuestionModuleAttemptController extends Controller
             'fallback_module_id' => $fallbackModuleId,
         ]);
         return $redirect;
+    }
+
+    private function rewardGamificationForAttempt(QuestionModuleAttempt $attempt): void
+    {
+        try {
+            $attempt->loadMissing(['student.user', 'questionModule', 'responses']);
+            $user = $attempt->student?->user;
+
+            if (! $user || ! $attempt->is_passed) {
+                return;
+            }
+
+            $gamification = app(GamificationService::class);
+            $gamification->handleQuizCompletion(
+                $user,
+                (int) $attempt->question_module_id,
+                (int) ($attempt->total_score ?? 0),
+                $attempt->responses->count(),
+                [
+                    'quiz_title' => $attempt->questionModule?->title ?? 'وحدة أسئلة',
+                    'attempt_id' => $attempt->id,
+                    'time_taken' => $attempt->time_spent ?? 0,
+                ]
+            );
+
+            app(BadgeService::class)->checkAllBadgesWithCascade($user);
+        } catch (\Exception $e) {
+            Log::warning('Gamification reward skipped for question module attempt', [
+                'attempt_id' => $attempt->id,
+                'error' => $e->getMessage(),
+            ]);
+        }
     }
 }

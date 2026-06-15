@@ -97,6 +97,8 @@ class FriendshipService
             ]);
 
             // تحديث إحصائيات المستخدمين
+            $user->stats()->firstOrCreate(['user_id' => $user->id]);
+            $friendship->user->stats()->firstOrCreate(['user_id' => $friendship->user_id]);
             $user->stats->increment('total_friends');
             $friendship->user->stats->increment('total_friends');
 
@@ -171,8 +173,12 @@ class FriendshipService
             $friendship->delete();
 
             // تحديث الإحصائيات
-            $user->stats->decrement('total_friends');
-            $friend->stats->decrement('total_friends');
+            if ($user->stats) {
+                $user->stats->decrement('total_friends');
+            }
+            if ($friend->stats) {
+                $friend->stats->decrement('total_friends');
+            }
 
             Log::info('Friendship removed', [
                 'user_id' => $user->id,
@@ -244,7 +250,7 @@ class FriendshipService
 
         return User::whereIn('id', $friendIds)
             ->where('is_active', true)
-            ->select('id', 'name', 'email', 'avatar', 'created_at')
+            ->select('id', 'name', 'email', 'photo', 'created_at')
             ->with('stats:user_id,current_level,total_points,total_badges')
             ->get();
     }
@@ -256,7 +262,7 @@ class FriendshipService
     {
         return Friendship::where('friend_id', $user->id)
             ->where('status', 'pending')
-            ->with('user:id,name,email,avatar')
+            ->with('user:id,name,email,photo')
             ->latest('requested_at')
             ->get();
     }
@@ -268,7 +274,7 @@ class FriendshipService
     {
         return Friendship::where('user_id', $user->id)
             ->where('status', 'pending')
-            ->with('friend:id,name,email,avatar')
+            ->with('friend:id,name,email,photo')
             ->latest('requested_at')
             ->get();
     }
@@ -337,27 +343,33 @@ class FriendshipService
         // الحصول على أصدقاء الأصدقاء
         $currentFriendIds = $this->getFriends($user)->pluck('id');
 
-        $friendsOfFriends = Friendship::where('status', 'accepted')
-            ->whereIn('user_id', $currentFriendIds)
-            ->orWhereIn('friend_id', $currentFriendIds)
-            ->get()
-            ->map(function($friendship) use ($currentFriendIds) {
-                return $currentFriendIds->contains($friendship->user_id)
-                    ? $friendship->friend_id
-                    : $friendship->user_id;
-            })
-            ->filter(fn($id) => $id !== $user->id && !$currentFriendIds->contains($id))
-            ->unique();
+        $friendsOfFriends = collect();
+        if ($currentFriendIds->isNotEmpty()) {
+            $friendsOfFriends = Friendship::where('status', 'accepted')
+                ->where(function ($q) use ($currentFriendIds) {
+                    $q->whereIn('user_id', $currentFriendIds)
+                        ->orWhereIn('friend_id', $currentFriendIds);
+                })
+                ->get()
+                ->map(function ($friendship) use ($currentFriendIds) {
+                    return $currentFriendIds->contains($friendship->user_id)
+                        ? $friendship->friend_id
+                        : $friendship->user_id;
+                })
+                ->filter(fn ($id) => $id !== $user->id && ! $currentFriendIds->contains($id))
+                ->unique();
+        }
 
         // الحصول على الطلاب بنفس المستوى
-        $sameLevelUsers = User::where('role', 'student')
+        $userLevel = (int) ($user->stats?->current_level ?? 1);
+        $sameLevelUsers = User::role('student')
             ->where('is_active', true)
             ->where('id', '!=', $user->id)
-            ->whereNotIn('id', $currentFriendIds)
-            ->whereHas('stats', function($q) use ($user) {
+            ->when($currentFriendIds->isNotEmpty(), fn ($q) => $q->whereNotIn('id', $currentFriendIds))
+            ->whereHas('stats', function ($q) use ($userLevel) {
                 $q->whereBetween('current_level', [
-                    $user->stats->current_level - 5,
-                    $user->stats->current_level + 5
+                    max(1, $userLevel - 5),
+                    $userLevel + 5,
                 ]);
             })
             ->pluck('id');
@@ -367,8 +379,12 @@ class FriendshipService
             ->unique()
             ->take($limit * 2);
 
+        if ($suggestedIds->isEmpty()) {
+            return collect();
+        }
+
         return User::whereIn('id', $suggestedIds)
-            ->select('id', 'name', 'email', 'avatar')
+            ->select('id', 'name', 'email', 'photo')
             ->with('stats:user_id,current_level,total_points,total_badges')
             ->inRandomOrder()
             ->limit($limit)
@@ -398,7 +414,7 @@ class FriendshipService
     {
         $currentFriendIds = $this->getFriends($currentUser)->pluck('id');
 
-        return User::where('role', 'student')
+        return User::role('student')
             ->where('is_active', true)
             ->where('id', '!=', $currentUser->id)
             ->whereNotIn('id', $currentFriendIds)
@@ -406,7 +422,7 @@ class FriendshipService
                 $q->where('name', 'like', "%{$query}%")
                   ->orWhere('email', 'like', "%{$query}%");
             })
-            ->select('id', 'name', 'email', 'avatar')
+            ->select('id', 'name', 'email', 'photo')
             ->with('stats:user_id,current_level,total_points,total_badges')
             ->limit($limit)
             ->get();

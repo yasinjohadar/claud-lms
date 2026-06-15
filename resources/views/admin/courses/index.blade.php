@@ -11,6 +11,14 @@
             <div class="admin-toast-container" id="adminToastContainer"></div>
             @include('admin.partials.ui.alerts')
 
+        @php
+            $courseHeaderActions = '';
+            if (auth()->user()?->can('enrollment-manage')) {
+                $courseHeaderActions .= '<button type="button" class="btn btn-success btn-wave me-2" data-open-enrollment-grant data-modal-id="coursesIndexGrantModal"><i class="ri-user-add-line me-1"></i> إضافة طالب لكورس</button>';
+            }
+            $courseHeaderActions .= '<a href="' . route('admin.courses.create') . '" class="btn btn-link text-primary fw-bold text-decoration-none p-0"><i class="ri-add-circle-line me-1 fs-18"></i> إضافة كورس جديد</a>';
+        @endphp
+
             @include('admin.partials.ui.page-header', [
                 'breadcrumbs' => [
                     ['label' => 'لوحة التحكم', 'url' => route('admin.dashboard')],
@@ -18,7 +26,7 @@
                 ],
                 'title' => 'كافة الكورسات',
                 'subtitle' => 'إدارة كورسات المنصة والنشر والتصنيف',
-                'actions' => '<a href="' . route('admin.courses.create') . '" class="btn btn-link text-primary fw-bold text-decoration-none p-0"><i class="ri-add-circle-line me-1 fs-18"></i> إضافة كورس جديد</a>',
+                'actions' => $courseHeaderActions,
             ])
 
             <div class="row g-3 mb-4">
@@ -131,9 +139,16 @@
         message="لا يمكن التراجع عن هذا الإجراء. سيتم حذف الكورس نهائياً."
         confirm-text="نعم، احذف الكورس"
     />
+
+    @can('enrollment-manage')
+    @include('admin.partials.enrollments.grant-modal', ['modalId' => 'coursesIndexGrantModal'])
+    @endcan
 @stop
 
 @push('scripts')
+    @can('enrollment-manage')
+    @include('admin.partials.enrollments.grant-scripts')
+    @endcan
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     var deleteModal = document.getElementById('deleteCourseModal');

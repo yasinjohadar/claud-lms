@@ -70,4 +70,38 @@ class CourseLesson extends Model
             default => $this->video_provider,
         };
     }
+
+    public function isDirectVideo(): bool
+    {
+        return $this->video_provider === 'bunny_cdn';
+    }
+
+    public function getEmbedUrlAttribute(): ?string
+    {
+        if (! $this->video_provider || ! $this->video_reference) {
+            return null;
+        }
+
+        return match ($this->video_provider) {
+            'youtube' => 'https://www.youtube.com/embed/' . $this->video_reference . '?rel=0',
+            'vimeo' => 'https://player.vimeo.com/video/' . $this->video_reference,
+            'bunny_stream' => $this->resolveBunnyStreamEmbedUrl(),
+            default => null,
+        };
+    }
+
+    protected function resolveBunnyStreamEmbedUrl(): ?string
+    {
+        $decoded = json_decode($this->video_reference, true);
+
+        if (! is_array($decoded) || empty($decoded['library_id']) || empty($decoded['video_id'])) {
+            return null;
+        }
+
+        return sprintf(
+            'https://iframe.mediadelivery.net/embed/%s/%s',
+            $decoded['library_id'],
+            $decoded['video_id']
+        );
+    }
 }

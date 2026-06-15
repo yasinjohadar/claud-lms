@@ -138,6 +138,11 @@ class UserChallenge extends Model
         return $query->whereIn('status', ['not_started', 'in_progress']);
     }
 
+    public function isActive(): bool
+    {
+        return in_array($this->status, ['not_started', 'in_progress'], true);
+    }
+
     /**
      * Scope by minimum progress
      */

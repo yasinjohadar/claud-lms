@@ -196,11 +196,11 @@ class SocialActivityService
     public function getFriendsActivities(User $user, int $limit = 20)
     {
         $friendshipService = app(FriendshipService::class);
-        $friendIds = $friendshipService->getFriends($user)->pluck('id');
+        $friendIds = $friendshipService->getFriends($user)->pluck('id')->push($user->id)->unique();
 
         return SocialActivity::whereIn('user_id', $friendIds)
             ->where('is_public', true)
-            ->with(['user:id,name,email,avatar', 'likes', 'comments.user:id,name,avatar'])
+            ->with(['user:id,name,email,photo', 'likes', 'comments.user:id,name,photo'])
             ->latest('created_at')
             ->limit($limit)
             ->get()
@@ -227,7 +227,7 @@ class SocialActivityService
             }
         }
 
-        return $query->with(['user:id,name,email,avatar', 'likes', 'comments.user:id,name,avatar'])
+        return $query->with(['user:id,name,email,photo', 'likes', 'comments.user:id,name,photo'])
             ->latest('created_at')
             ->limit($limit)
             ->get()

@@ -16,12 +16,14 @@ class Competition extends Model
         'starts_at',
         'ends_at',
         'status',
+        'completed_at',
     ];
 
     protected $casts = [
         'target_value' => 'integer',
         'starts_at' => 'datetime',
         'ends_at' => 'datetime',
+        'completed_at' => 'datetime',
     ];
 
     public function creator(): BelongsTo

@@ -23,7 +23,7 @@ class QuizAttemptController extends Controller
 
         // Get enrolled courses
         $enrolledCourseIds = auth()->user()->enrollments()
-            ->where('enrollment_status', 'active')
+            ->where('course_enrollments.status', 'active')
             ->pluck('course_id');
 
         // Get quizzes for enrolled courses
@@ -961,7 +961,7 @@ class QuizAttemptController extends Controller
         // Check enrollment
         $isEnrolled = auth()->user()->enrollments()
             ->where('course_id', $quiz->course_id)
-            ->where('enrollment_status', 'active')
+            ->where('course_enrollments.status', 'active')
             ->exists();
 
         if (!$isEnrolled) {

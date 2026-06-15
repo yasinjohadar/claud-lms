@@ -5,65 +5,83 @@
     $points = $badge->points_value ?? $badge->points_reward ?? 0;
     $icon = $badge->icon ?? '🏅';
     $isIconClass = is_string($icon) && preg_match('/\b(fa[srb]?|fe|bi|ri)-/', $icon);
+    $rarityKey = $badge->rarity ?? 'common';
 
     $rarityMap = [
-        'common' => ['class' => 'secondary', 'label' => 'عادية'],
-        'rare' => ['class' => 'info', 'label' => 'نادرة'],
-        'epic' => ['class' => 'primary', 'label' => 'ملحمية'],
-        'legendary' => ['class' => 'warning', 'label' => 'أسطورية'],
-        'mythic' => ['class' => 'danger', 'label' => 'خرافية'],
+        'common' => ['label' => 'عادية'],
+        'rare' => ['label' => 'نادرة'],
+        'epic' => ['label' => 'ملحمية'],
+        'legendary' => ['label' => 'أسطورية'],
+        'mythic' => ['label' => 'خرافية'],
     ];
-    $rarity = $rarityMap[$badge->rarity ?? ''] ?? null;
+    $rarity = $rarityMap[$rarityKey] ?? $rarityMap['common'];
+    $showUrl = isset($badge->id) ? route('gamification.badges.show', $badge) : null;
+    $delay = ($index ?? 0) * 45;
 @endphp
 
-<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 student-my-courses-stagger" style="--stagger-delay: {{ ($index ?? 0) * 40 }}ms">
-    <article class="student-badge-card {{ $isEarned ? 'is-earned' : 'is-locked' }} student-badge-card--{{ $badge->rarity ?? 'common' }}">
-        @if($rarity)
-            <span class="student-badge-card__rarity badge bg-{{ $rarity['class'] }}-transparent">{{ $rarity['label'] }}</span>
-        @endif
+<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 badge-grid-item"
+     data-badge-rarity="{{ $rarityKey }}"
+     style="--badge-delay: {{ $delay }}ms">
+    @if($showUrl)
+        <a href="{{ $showUrl }}" class="gamification-badge-widget gamification-badge-widget--{{ $rarityKey }} {{ $isEarned ? 'is-earned' : 'is-locked' }}">
+    @else
+        <article class="gamification-badge-widget gamification-badge-widget--{{ $rarityKey }} {{ $isEarned ? 'is-earned' : 'is-locked' }}">
+    @endif
+        <span class="gamification-badge-widget__glow" aria-hidden="true"></span>
+        <span class="gamification-badge-widget__shine" aria-hidden="true"></span>
 
-        <div class="student-badge-card__icon-wrap">
-            @if($isIconClass)
-                <i class="{{ $icon }}"></i>
-            @else
-                <span class="student-badge-card__emoji">{{ $icon }}</span>
+        <span class="gamification-badge-widget__rarity">{{ $rarity['label'] }}</span>
+
+        <div class="gamification-badge-widget__icon-wrap">
+            <span class="gamification-badge-widget__icon">
+                @if($isIconClass)
+                    <i class="{{ $icon }}"></i>
+                @else
+                    {{ $icon }}
+                @endif
+            </span>
+            @if($isEarned)
+                <span class="gamification-badge-widget__earned-mark" aria-hidden="true">
+                    <i class="ri-checkbox-circle-fill"></i>
+                </span>
             @endif
         </div>
 
-        <h6 class="student-badge-card__title">{{ $badge->name ?? 'شارة' }}</h6>
+        <h6 class="gamification-badge-widget__title">{{ $badge->name ?? 'شارة' }}</h6>
+
         @if(!empty($badge->description))
-            <p class="student-badge-card__desc">{{ $badge->description }}</p>
+            <p class="gamification-badge-widget__desc">{{ Str::limit($badge->description, 88) }}</p>
         @endif
 
-        <span class="badge bg-primary-transparent student-badge-card__points">+{{ $points }} نقطة</span>
+        <span class="gamification-badge-widget__points">+{{ number_format($points) }} نقطة</span>
 
         @if(!$isEarned && $progressPct > 0 && $progressPct < 100)
-            <div class="student-badge-card__progress mt-3">
-                <div class="d-flex justify-content-between mb-1">
-                    <small class="text-muted">التقدم</small>
-                    <small class="fw-semibold">{{ number_format($progressPct, 0) }}%</small>
+            <div class="gamification-badge-widget__progress">
+                <div class="gamification-badge-widget__progress-meta">
+                    <span>التقدم</span>
+                    <span>{{ number_format($progressPct, 0) }}%</span>
                 </div>
-                <div class="student-course-card__progress-track">
-                    <div class="student-course-card__progress-bar" style="width: {{ max(0, min(100, $progressPct)) }}%"></div>
+                <div class="gamification-badge-widget__progress-track">
+                    <div class="gamification-badge-widget__progress-bar" style="width: {{ max(6, min(100, $progressPct)) }}%"></div>
                 </div>
             </div>
         @endif
 
-        <div class="student-badge-card__status mt-3">
+        <span class="gamification-badge-widget__status">
             @if($isEarned)
-                <span class="badge bg-success-transparent">
-                    <i class="fe fe-check-circle me-1"></i>
-                    @if(!empty($awardedAt))
-                        {{ $awardedAt instanceof \Carbon\Carbon ? $awardedAt->format('Y/m/d') : \Carbon\Carbon::parse($awardedAt)->format('Y/m/d') }}
-                    @else
-                        تم الحصول عليها
-                    @endif
-                </span>
+                <i class="ri-checkbox-circle-line"></i>
+                @if(!empty($awardedAt))
+                    {{ $awardedAt instanceof \Carbon\Carbon ? $awardedAt->format('Y/m/d') : \Carbon\Carbon::parse($awardedAt)->format('Y/m/d') }}
+                @else
+                    مكتسبة
+                @endif
             @else
-                <span class="badge bg-secondary-transparent">
-                    <i class="fe fe-lock me-1"></i>غير مكتسب
-                </span>
+                <i class="ri-lock-line"></i> غير مكتسبة
             @endif
-        </div>
-    </article>
+        </span>
+    @if($showUrl)
+        </a>
+    @else
+        </article>
+    @endif
 </div>

@@ -5,130 +5,160 @@
 @stop
 
 @section('content')
-<div class="main-content app-content student-points-page">
+<div class="main-content app-content">
     <div class="container-fluid">
 
-        @include('student.components.alerts')
+        @include('admin.partials.ui.alerts')
 
-        <div class="d-md-flex d-block align-items-center justify-content-between my-4">
-            <div>
-                <h4 class="student-my-courses-welcome__title mb-1">النقاط</h4>
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="{{ route('student.dashboard') }}">الرئيسية</a></li>
-                        <li class="breadcrumb-item active">النقاط</li>
-                    </ol>
-                </nav>
-                <p class="text-muted fs-13 mb-0 mt-2">تابع رصيدك وطرق كسب النقاط واستخدمها في المتجر</p>
+        @include('admin.partials.ui.page-header', [
+            'breadcrumbs' => [
+                ['label' => 'لوحة التحكم', 'url' => route('student.dashboard')],
+                ['label' => 'التلعيب', 'url' => route('gamification.dashboard')],
+                ['label' => 'النقاط'],
+            ],
+            'title' => 'النقاط',
+            'subtitle' => 'تابع رصيدك وطرق كسب النقاط واستخدمها في المتجر',
+            'actions' => '
+                <div class="d-flex flex-wrap gap-2">
+                    <a href="' . route('gamification.points.history') . '" class="btn btn-light border btn-wave">
+                        <i class="ri-history-line me-1"></i>سجل النقاط
+                    </a>
+                    <a href="' . route('gamification.points.how-to-earn') . '" class="btn btn-primary btn-wave">
+                        <i class="ri-lightbulb-line me-1"></i>كيف أكسب نقاط؟
+                    </a>
+                </div>
+            ',
+        ])
+
+        @include('student.pages.gamification.points.partials.stats', compact(
+            'totalPoints', 'availablePoints', 'spentPoints', 'monthlyEarned'
+        ))
+
+        <div class="gamification-points-balance-banner mb-4">
+            <div class="gamification-points-balance-banner__content">
+                <span class="gamification-points-balance-banner__label">رصيدك المتاح للشراء</span>
+                <strong class="gamification-points-balance-banner__value">{{ number_format($availablePoints ?? 0) }}</strong>
+                <span class="gamification-points-balance-banner__hint">نقطة · إجمالي مكتسب {{ number_format($totalPoints ?? 0) }}</span>
             </div>
-            <div class="mt-3 mt-md-0 d-flex flex-wrap gap-2">
-                <a href="{{ route('gamification.points.history') }}" class="btn btn-outline-primary btn-sm">
-                    <i class="ri ri-history-line me-1"></i>سجل النقاط
+            <div class="gamification-points-balance-banner__actions">
+                <a href="{{ route('gamification.shop.index') }}" class="btn btn-light btn-wave">
+                    <i class="ri-store-2-line me-1"></i>المتجر
                 </a>
-                <a href="{{ route('gamification.points.how-to-earn') }}" class="btn btn-outline-info btn-sm">
-                    <i class="ri ri-question-line me-1"></i>كيف أكسب نقاط؟
+                <a href="{{ route('gamification.points.how-to-earn') }}" class="btn btn-primary btn-wave">
+                    <i class="ri-add-line me-1"></i>اكسب المزيد
                 </a>
             </div>
         </div>
 
-        @include('student.pages.gamification.points.partials.stats', [
-            'totalPoints' => $totalPoints,
-            'availablePoints' => $availablePoints,
-            'spentPoints' => $spentPoints,
-            'monthlyEarned' => $monthlyEarned,
-        ])
-
-        <div class="row g-3">
+        <div class="row g-4">
             <div class="col-lg-8">
-                <div class="card custom-card student-quizzes-panel mb-3">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center justify-content-between gap-2 mb-4">
-                            <div class="d-flex align-items-center gap-2">
-                                <span class="avatar avatar-sm bg-primary-transparent">
-                                    <i class="ri ri-coin-line text-primary"></i>
-                                </span>
-                                <div>
-                                    <h6 class="card-title mb-0">طرق كسب النقاط</h6>
-                                    <p class="text-muted fs-12 mb-0">أهم الأنشطة التي تمنحك نقاطاً</p>
-                                </div>
-                            </div>
-                            <a href="{{ route('gamification.points.how-to-earn') }}" class="btn btn-sm btn-outline-primary">عرض الكل</a>
+                <div class="card custom-card mb-4">
+                    <div class="card-header border-0 pb-0 d-flex align-items-center justify-content-between flex-wrap gap-2">
+                        <div>
+                            <h5 class="card-title mb-1">
+                                <i class="ri-coin-line text-primary me-1"></i>
+                                طرق كسب النقاط
+                            </h5>
+                            <p class="text-muted fs-12 mb-0">أهم الأنشطة التي تمنحك نقاطاً — اضغط للانتقال</p>
                         </div>
+                        <a href="{{ route('gamification.points.how-to-earn') }}" class="btn btn-sm btn-light border btn-wave">عرض الكل</a>
+                    </div>
+                    <div class="card-body pt-3">
                         @include('student.pages.gamification.points.partials.earning-methods', ['earningMethods' => $earningMethods])
                     </div>
                 </div>
 
-                <div class="card custom-card student-quizzes-panel">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center gap-2 mb-3">
-                            <span class="avatar avatar-sm bg-info-transparent">
-                                <i class="ri ri-history-line text-info"></i>
-                            </span>
-                            <h6 class="card-title mb-0">آخر المعاملات</h6>
+                <div class="card custom-card">
+                    <div class="card-header border-0 pb-0 d-flex align-items-center justify-content-between flex-wrap gap-2">
+                        <div>
+                            <h5 class="card-title mb-1">
+                                <i class="ri-history-line text-info me-1"></i>
+                                آخر المعاملات
+                            </h5>
+                            <p class="text-muted fs-12 mb-0">أحدث حركات النقاط في حسابك</p>
                         </div>
                         @if(($recentTransactions ?? collect())->isNotEmpty())
-                            <div class="table-responsive">
-                                <table class="table table-hover mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th>الوصف</th>
-                                            <th>النقاط</th>
-                                            <th>التاريخ</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($recentTransactions as $tx)
-                                            <tr>
-                                                <td>{{ $tx->description ?? $tx->source }}</td>
-                                                <td>
-                                                    <span class="{{ $tx->points >= 0 ? 'text-success' : 'text-danger' }}">
-                                                        {{ $tx->points >= 0 ? '+' : '' }}{{ number_format($tx->points) }}
-                                                    </span>
-                                                </td>
-                                                <td class="text-muted fs-12">{{ $tx->created_at->diffForHumans() }}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                            <a href="{{ route('gamification.points.history') }}" class="btn btn-sm btn-light border btn-wave">السجل الكامل</a>
+                        @endif
+                    </div>
+                    <div class="card-body pt-3">
+                        @if(($recentTransactions ?? collect())->isNotEmpty())
+                            <div class="gamification-points-tx-list">
+                                @foreach($recentTransactions as $tx)
+                                    @include('student.pages.gamification.points.partials.transaction-item', ['transaction' => $tx])
+                                @endforeach
                             </div>
                         @else
-                            <p class="text-muted mb-0">لا توجد معاملات بعد. ابدأ التعلم لكسب النقاط!</p>
+                            <div class="empty-state py-4">
+                                <div class="empty-state-icon mx-auto mb-3"><i class="ri-coin-line"></i></div>
+                                <p class="text-muted mb-2">لا توجد معاملات بعد</p>
+                                <p class="text-muted fs-12 mb-3">ابدأ التعلم لكسب نقاطك الأولى</p>
+                                <a href="{{ route('gamification.points.how-to-earn') }}" class="btn btn-sm btn-primary btn-wave">اكتشف طرق الكسب</a>
+                            </div>
                         @endif
                     </div>
                 </div>
             </div>
 
             <div class="col-lg-4">
-                <div class="card custom-card student-quizzes-panel mb-3">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center gap-2 mb-3">
-                            <span class="avatar avatar-sm bg-warning-transparent">
-                                <i class="ri ri-store-2-line text-warning"></i>
-                            </span>
-                            <h6 class="card-title mb-0">استخدم نقاطك</h6>
-                        </div>
-                        <p class="text-muted fs-13">يمكنك شراء معززات XP، عناصر تجميلية، وحماية السلسلة من <a href="{{ route('gamification.shop.index') }}">المتجر</a>.</p>
-                        <a href="{{ route('gamification.shop.index') }}" class="btn btn-primary w-100">
-                            <i class="ri ri-store-2-line me-1"></i>زيارة المتجر
-                        </a>
+                <div class="shortcut-section mb-4">
+                    <div class="shortcut-section__header mb-3">
+                        <h5 class="shortcut-section__title mb-1">
+                            <i class="ri-flashlight-line text-warning"></i>
+                            إجراءات سريعة
+                        </h5>
+                        <p class="shortcut-section__subtitle mb-0">استخدم نقاطك أو اكسب المزيد</p>
+                    </div>
+                    <div class="row g-3 shortcut-grid">
+                        @include('admin.partials.ui.shortcut-card', [
+                            'url' => route('gamification.shop.index'),
+                            'title' => 'زيارة المتجر',
+                            'description' => 'معززات ومظهر ومكافآت',
+                            'icon' => 'ri-store-2-line',
+                            'icon_color' => 'warning',
+                            'col' => 'col-12',
+                        ])
+                        @include('admin.partials.ui.shortcut-card', [
+                            'url' => route('student.courses.index'),
+                            'title' => 'تابع التعلم',
+                            'description' => 'أكمل دروساً وكورسات',
+                            'icon' => 'ri-book-open-line',
+                            'icon_color' => 'primary',
+                            'col' => 'col-12',
+                        ])
+                        @include('admin.partials.ui.shortcut-card', [
+                            'url' => route('gamification.streak.index'),
+                            'title' => 'السلسلة اليومية',
+                            'description' => 'مضاعفات يومية إضافية',
+                            'icon' => 'ri-fire-line',
+                            'icon_color' => 'danger',
+                            'col' => 'col-12',
+                        ])
+                        @include('admin.partials.ui.shortcut-card', [
+                            'url' => route('gamification.challenges.index'),
+                            'title' => 'التحديات',
+                            'description' => 'مهام بمكافآت سريعة',
+                            'icon' => 'ri-focus-3-line',
+                            'icon_color' => 'success',
+                            'col' => 'col-12',
+                        ])
                     </div>
                 </div>
 
-                <div class="card custom-card student-quizzes-panel">
+                <div class="card custom-card gamification-points-referral-card">
                     <div class="card-body">
-                        <div class="d-flex align-items-center gap-2 mb-3">
-                            <span class="avatar avatar-sm bg-success-transparent">
-                                <i class="ri ri-user-add-line text-success"></i>
-                            </span>
-                            <h6 class="card-title mb-0">ادعُ صديقاً</h6>
-                        </div>
+                        <h5 class="card-title mb-1">
+                            <i class="ri-user-add-line text-success me-1"></i>
+                            ادعُ صديقاً
+                        </h5>
                         <p class="text-muted fs-13 mb-3">شارك رابط الدعوة واحصل على نقاط عند تسجيل صديقك.</p>
-                        <div class="input-group">
+                        <div class="gamification-points-referral-card__input-wrap">
                             <input type="text" class="form-control form-control-sm" id="referral-link-input" value="{{ $referralLink }}" readonly>
-                            <button type="button" class="btn btn-outline-primary btn-sm" onclick="navigator.clipboard.writeText(document.getElementById('referral-link-input').value)">
-                                نسخ
+                            <button type="button" class="btn btn-primary btn-sm btn-wave" id="copy-referral-btn">
+                                <i class="ri-file-copy-line"></i>
                             </button>
                         </div>
+                        <p class="text-muted fs-11 mb-0 mt-2">انسخ الرابط وشاركه مع أصدقائك</p>
                     </div>
                 </div>
             </div>
@@ -138,25 +168,17 @@
 </div>
 @stop
 
-@push('scripts')
+@section('scripts')
 <script>
-(function () {
-    function animateCount(el, target) {
-        if (!el) return;
-        const duration = 600;
-        const start = performance.now();
-        function step(now) {
-            const progress = Math.min((now - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            el.textContent = new Intl.NumberFormat('ar-EG').format(Math.round(target * eased));
-            if (progress < 1) requestAnimationFrame(step);
-        }
-        requestAnimationFrame(step);
-    }
-
-    document.querySelectorAll('.student-points-page [data-countup]').forEach(function (el) {
-        animateCount(el, parseFloat(el.dataset.countup || '0'));
+document.getElementById('copy-referral-btn')?.addEventListener('click', function () {
+    var input = document.getElementById('referral-link-input');
+    if (!input) return;
+    navigator.clipboard.writeText(input.value).then(function () {
+        var btn = document.getElementById('copy-referral-btn');
+        var original = btn.innerHTML;
+        btn.innerHTML = '<i class="ri-check-line"></i>';
+        setTimeout(function () { btn.innerHTML = original; }, 2000);
     });
-})();
+});
 </script>
-@endpush
+@stop

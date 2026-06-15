@@ -5,188 +5,212 @@
 @stop
 
 @section('content')
-    <div class="main-content app-content">
-        <div class="container-fluid">
-            <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-                <h4 class="mb-0">السلسلة اليومية</h4>
-                <div>
-                    <a href="{{ route('gamification.streak.calendar') }}" class="btn btn-outline-primary btn-sm">
-                        <i class="fas fa-calendar me-1"></i>التقويم
+<div class="main-content app-content">
+    <div class="container-fluid">
+
+        @include('admin.partials.ui.alerts')
+
+        @include('admin.partials.ui.page-header', [
+            'breadcrumbs' => [
+                ['label' => 'لوحة التحكم', 'url' => route('student.dashboard')],
+                ['label' => 'التلعيب', 'url' => route('gamification.dashboard')],
+                ['label' => 'السلسلة اليومية'],
+            ],
+            'title' => 'السلسلة اليومية',
+            'subtitle' => 'حافظ على نشاطك اليومي لكسب مكافآت إضافية ومضاعف نقاط أعلى',
+            'actions' => '
+                <div class="d-flex flex-wrap gap-2">
+                    <a href="' . route('gamification.streak.calendar') . '" class="btn btn-light border btn-wave">
+                        <i class="ri-calendar-2-line me-1"></i>التقويم
                     </a>
-                    <a href="{{ route('gamification.streak.history') }}" class="btn btn-outline-info btn-sm">
-                        <i class="fas fa-history me-1"></i>السجل
+                    <a href="' . route('gamification.streak.history') . '" class="btn btn-primary btn-wave">
+                        <i class="ri-history-line me-1"></i>السجل
                     </a>
                 </div>
-            </div>
+            ',
+        ])
 
-            <!-- إحصائيات السلسلة -->
-            <div class="row mb-4">
-                <div class="col-lg-4 col-md-6 mb-3">
-                    <div class="card text-center border-0 shadow-sm">
-                        <div class="card-body">
-                            <div class="text-danger mb-2"><i class="fas fa-fire fa-3x"></i></div>
-                            <h2 class="fw-bold mb-1 text-danger">{{ $streakInfo['current_streak'] ?? 0 }}</h2>
-                            <p class="text-muted mb-0">السلسلة الحالية</p>
-                            @if(isset($streakInfo['current_streak']) && $streakInfo['current_streak'] > 0)
-                                <small class="text-success">
-                                    <i class="fas fa-check-circle me-1"></i>نشط
-                                </small>
-                            @else
-                                <small class="text-muted">
-                                    <i class="fas fa-times-circle me-1"></i>غير نشط
-                                </small>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-3">
-                    <div class="card text-center border-0 shadow-sm">
-                        <div class="card-body">
-                            <div class="text-warning mb-2"><i class="fas fa-trophy fa-3x"></i></div>
-                            <h2 class="fw-bold mb-1 text-warning">{{ $streakInfo['longest_streak'] ?? 0 }}</h2>
-                            <p class="text-muted mb-0">أطول سلسلة</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-3">
-                    <div class="card text-center border-0 shadow-sm">
-                        <div class="card-body">
-                            <div class="text-info mb-2"><i class="fas fa-calendar-check fa-3x"></i></div>
-                            <h2 class="fw-bold mb-1 text-info">{{ $monthlyStats['active_days'] ?? 0 }}</h2>
-                            <p class="text-muted mb-0">أيام نشطة هذا الشهر</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        @include('student.pages.gamification.streak.partials.stats', compact('streakInfo', 'monthlyStats'))
 
-            <!-- معلومات السلسلة -->
-            <div class="row mb-4">
-                <div class="col-lg-8 mb-4">
-                    <div class="card border-0 shadow-sm">
-                        <div class="card-header bg-light">
-                            <h5 class="mb-0"><i class="fas fa-info-circle me-2 text-info"></i>معلومات السلسلة</h5>
-                        </div>
-                        <div class="card-body">
-                            @if(isset($streakInfo['current_streak']) && $streakInfo['current_streak'] > 0)
-                                <div class="alert alert-success">
-                                    <h6 class="alert-heading">
-                                        <i class="fas fa-fire me-2"></i>سلسلة نشطة!
-                                    </h6>
-                                    <p class="mb-0">
-                                        أنت في سلسلة من <strong>{{ $streakInfo['current_streak'] }}</strong> يوم متتالي.
-                                        استمر في التعلم اليوم للحفاظ على السلسلة!
-                                    </p>
-                                </div>
-                            @else
-                                <div class="alert alert-warning">
-                                    <h6 class="alert-heading">
-                                        <i class="fas fa-exclamation-triangle me-2"></i>لا توجد سلسلة نشطة
-                                    </h6>
-                                    <p class="mb-0">
-                                        ابدأ سلسلة جديدة اليوم! قم بإكمال درس أو اختبار لبدء السلسلة.
-                                    </p>
-                                </div>
-                            @endif
-
-                            @if(isset($streakInfo['last_activity_date']))
-                                <div class="d-flex justify-content-between align-items-center p-3 bg-light rounded mb-3">
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <div class="card custom-card mb-4">
+                    <div class="card-header border-0 pb-0">
+                        <h5 class="card-title mb-1">
+                            <i class="ri-fire-line text-danger me-1"></i>
+                            معلومات السلسلة
+                        </h5>
+                        <p class="text-muted fs-12 mb-0">تقدّمك اليومي ومسارك نحو الهدف القادم</p>
+                    </div>
+                    <div class="card-body pt-3">
+                        @if(($streakInfo['current_streak'] ?? 0) > 0)
+                            <div class="alert alert-success border-0 mb-3">
+                                <div class="d-flex align-items-start gap-2">
+                                    <i class="ri-fire-fill fs-18 mt-1"></i>
                                     <div>
-                                        <h6 class="mb-0">آخر نشاط</h6>
-                                        <small class="text-muted">{{ \Carbon\Carbon::parse($streakInfo['last_activity_date'])->diffForHumans() }}</small>
+                                        <h6 class="alert-heading mb-1">سلسلة نشطة!</h6>
+                                        <p class="mb-0 fs-13">
+                                            أنت في سلسلة من <strong>{{ $streakInfo['current_streak'] }}</strong> يوم متتالي.
+                                            استمر في التعلم اليوم للحفاظ عليها.
+                                        </p>
                                     </div>
-                                    <i class="fas fa-clock fa-2x text-muted"></i>
                                 </div>
-                            @endif
-
-                            @if(isset($streakInfo['next_milestone']))
-                                <div class="d-flex justify-content-between align-items-center p-3 bg-primary text-white rounded">
+                            </div>
+                        @else
+                            <div class="alert alert-warning border-0 mb-3">
+                                <div class="d-flex align-items-start gap-2">
+                                    <i class="ri-error-warning-line fs-18 mt-1"></i>
                                     <div>
-                                        <h6 class="mb-0 text-white">الهدف القادم</h6>
-                                        <small>{{ $streakInfo['next_milestone']['days'] }} يوم متتالي</small>
-                                    </div>
-                                    <div class="text-end">
-                                        <h4 class="mb-0">+{{ $streakInfo['next_milestone']['points'] ?? 0 }} نقطة</h4>
+                                        <h6 class="alert-heading mb-1">لا توجد سلسلة نشطة</h6>
+                                        <p class="mb-0 fs-13">أكمل درساً أو اختباراً اليوم لبدء سلسلة جديدة.</p>
                                     </div>
                                 </div>
-                            @endif
-                        </div>
+                            </div>
+                        @endif
+
+                        @include('student.pages.gamification.streak.partials.week-activity', compact('streakInfo'))
+
+                        @if(!empty($streakInfo['last_activity_date']))
+                            <div class="gamification-streak-info-tile mb-3">
+                                <div>
+                                    <span class="gamification-streak-info-tile__label">آخر نشاط</span>
+                                    <strong>{{ \Carbon\Carbon::parse($streakInfo['last_activity_date'])->diffForHumans() }}</strong>
+                                </div>
+                                <span class="gamification-streak-info-tile__icon"><i class="ri-time-line"></i></span>
+                            </div>
+                        @endif
+
+                        @if(!empty($streakInfo['next_milestone']))
+                            <div class="gamification-streak-next-goal">
+                                <div class="gamification-streak-next-goal__content">
+                                    <span class="gamification-streak-next-goal__label">الهدف القادم</span>
+                                    <strong>{{ $streakInfo['next_milestone']['days'] }} يوم متتالي</strong>
+                                    @if(!empty($streakInfo['next_milestone']['description']))
+                                        <small>{{ $streakInfo['next_milestone']['description'] }}</small>
+                                    @endif
+                                </div>
+                                <div class="gamification-streak-next-goal__reward">
+                                    <span>مكافأة</span>
+                                    <strong>+{{ number_format($streakInfo['next_milestone']['points'] ?? 0) }}</strong>
+                                    <small>نقطة</small>
+                                </div>
+                            </div>
+                        @else
+                            <div class="gamification-streak-next-goal gamification-streak-next-goal--complete">
+                                <div class="gamification-streak-next-goal__content">
+                                    <span class="gamification-streak-next-goal__label">جميع المعالم</span>
+                                    <strong>أكملت كل أهداف السلسلة!</strong>
+                                    <small>استمر في النشاط اليومي للحفاظ على مضاعفك</small>
+                                </div>
+                                <div class="gamification-streak-next-goal__reward">
+                                    <i class="ri-trophy-fill"></i>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
 
-                <div class="col-lg-4 mb-4">
-                    <div class="card border-0 shadow-sm">
-                        <div class="card-header bg-light">
-                            <h5 class="mb-0"><i class="fas fa-gift me-2 text-warning"></i>مكافآت السلسلة</h5>
+                @if(isset($monthlyStats))
+                    <div class="card custom-card">
+                        <div class="card-header border-0 pb-0">
+                            <h5 class="card-title mb-1">
+                                <i class="ri-bar-chart-box-line text-success me-1"></i>
+                                إحصائيات الشهر الحالي
+                            </h5>
+                            <p class="text-muted fs-12 mb-0">ملخص نشاطك خلال هذا الشهر</p>
                         </div>
-                        <div class="card-body">
-                            @if(isset($streakRewards) && count($streakRewards) > 0)
-                                @foreach($streakRewards as $days => $reward)
-                                    <div class="d-flex justify-content-between align-items-center p-2 mb-2 bg-light rounded">
-                                        <div>
-                                            <i class="fas fa-fire text-danger me-2"></i>
-                                            <strong>{{ $days }} يوم</strong>
-                                        </div>
-                                        <span class="badge bg-warning">+{{ $reward['points'] ?? 0 }} نقطة</span>
-                                    </div>
-                                @endforeach
-                            @else
-                                <p class="text-muted text-center mb-0">لا توجد مكافآت محددة</p>
-                            @endif
+                        <div class="card-body pt-3">
+                            <div class="row g-3">
+                                @include('admin.partials.ui.stat-card-gradient', [
+                                    'col' => 'col-md-4',
+                                    'variant' => 'green',
+                                    'icon' => 'ri-calendar-check-line',
+                                    'label' => 'أيام نشطة',
+                                    'value' => number_format($monthlyStats['active_days'] ?? 0),
+                                    'hint' => 'أيام سجّلت فيها نشاطاً',
+                                ])
+                                @include('admin.partials.ui.stat-card-gradient', [
+                                    'col' => 'col-md-4',
+                                    'variant' => 'purple',
+                                    'icon' => 'ri-coin-line',
+                                    'label' => 'نقاط مكتسبة',
+                                    'value' => number_format($monthlyStats['total_points'] ?? 0),
+                                    'hint' => 'من النشاط اليومي',
+                                ])
+                                @include('admin.partials.ui.stat-card-gradient', [
+                                    'col' => 'col-md-4',
+                                    'variant' => 'cyan',
+                                    'icon' => 'ri-flashlight-line',
+                                    'label' => 'XP مكتسب',
+                                    'value' => number_format($monthlyStats['total_xp'] ?? 0),
+                                    'hint' => 'خبرة إضافية',
+                                ])
+                            </div>
                         </div>
                     </div>
+                @endif
+            </div>
 
-                    <div class="card border-0 shadow-sm mt-4">
-                        <div class="card-header bg-light">
-                            <h5 class="mb-0"><i class="fas fa-bolt me-2 text-primary"></i>إجراءات سريعة</h5>
-                        </div>
-                        <div class="card-body">
-                            <a href="{{ route('student.courses.my-courses') }}" class="btn btn-primary w-100 mb-2">
-                                <i class="fas fa-book me-1"></i>ابدأ التعلم
-                            </a>
-                            <a href="{{ route('gamification.streak.calendar') }}" class="btn btn-outline-primary w-100 mb-2">
-                                <i class="fas fa-calendar me-1"></i>عرض التقويم
-                            </a>
-                            <a href="{{ route('gamification.streak.history') }}" class="btn btn-outline-info w-100">
-                                <i class="fas fa-history me-1"></i>عرض السجل
-                            </a>
-                        </div>
+            <div class="col-lg-4">
+                <div class="card custom-card mb-4">
+                    <div class="card-header border-0 pb-0">
+                        <h5 class="card-title mb-1">
+                            <i class="ri-gift-line text-warning me-1"></i>
+                            مكافآت السلسلة
+                        </h5>
+                        <p class="text-muted fs-12 mb-0">معالم يومية ونقاط مكافأة</p>
+                    </div>
+                    <div class="card-body pt-3">
+                        @include('student.pages.gamification.streak.partials.rewards-roadmap', compact('streakInfo', 'streakRewards'))
+                    </div>
+                </div>
+
+                <div class="shortcut-section">
+                    <div class="shortcut-section__header mb-3">
+                        <h5 class="shortcut-section__title mb-1">
+                            <i class="ri-flashlight-line text-warning"></i>
+                            إجراءات سريعة
+                        </h5>
+                        <p class="shortcut-section__subtitle mb-0">واصل سلسلتك من هنا</p>
+                    </div>
+                    <div class="row g-3 shortcut-grid">
+                        @include('admin.partials.ui.shortcut-card', [
+                            'url' => route('student.courses.index'),
+                            'title' => 'ابدأ التعلم',
+                            'description' => 'تابع دروسك وكورساتك',
+                            'icon' => 'ri-book-open-line',
+                            'icon_color' => 'primary',
+                            'col' => 'col-12',
+                        ])
+                        @include('admin.partials.ui.shortcut-card', [
+                            'url' => route('gamification.streak.calendar'),
+                            'title' => 'عرض التقويم',
+                            'description' => 'أيام نشاطك الشهرية',
+                            'icon' => 'ri-calendar-2-line',
+                            'icon_color' => 'info',
+                            'col' => 'col-12',
+                        ])
+                        @include('admin.partials.ui.shortcut-card', [
+                            'url' => route('gamification.streak.history'),
+                            'title' => 'سجل السلسلة',
+                            'description' => 'آخر 90 يوماً من النشاط',
+                            'icon' => 'ri-history-line',
+                            'icon_color' => 'success',
+                            'col' => 'col-12',
+                        ])
+                        @include('admin.partials.ui.shortcut-card', [
+                            'url' => route('gamification.shop.index'),
+                            'title' => 'المتجر',
+                            'description' => 'اشترِ حماية السلسلة',
+                            'icon' => 'ri-store-2-line',
+                            'icon_color' => 'warning',
+                            'col' => 'col-12',
+                        ])
                     </div>
                 </div>
             </div>
-
-            <!-- إحصائيات الشهر الحالي -->
-            @if(isset($monthlyStats))
-                <div class="card border-0 shadow-sm">
-                    <div class="card-header bg-light">
-                        <h5 class="mb-0"><i class="fas fa-chart-bar me-2 text-success"></i>إحصائيات الشهر الحالي</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4 mb-3">
-                                <div class="text-center p-3 bg-light rounded">
-                                    <h4 class="fw-bold text-success">{{ $monthlyStats['active_days'] ?? 0 }}</h4>
-                                    <p class="text-muted mb-0">أيام نشطة</p>
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <div class="text-center p-3 bg-light rounded">
-                                    <h4 class="fw-bold text-primary">{{ number_format($monthlyStats['total_points'] ?? 0) }}</h4>
-                                    <p class="text-muted mb-0">نقاط مكتسبة</p>
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <div class="text-center p-3 bg-light rounded">
-                                    <h4 class="fw-bold text-info">{{ number_format($monthlyStats['total_xp'] ?? 0) }}</h4>
-                                    <p class="text-muted mb-0">XP مكتسب</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endif
         </div>
+
     </div>
+</div>
 @stop
-
-
-

@@ -34,7 +34,7 @@ class UserLoginListener implements ShouldQueue
     {
         try {
             // التحقق من أن المستخدم هو طالب فقط
-            if (!$event->user || $event->user->role !== 'student') {
+            if (! $event->user || ! $event->user->isStudent()) {
                 return;
             }
 

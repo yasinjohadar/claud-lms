@@ -92,7 +92,7 @@ class QuestionModuleStatsController extends Controller
             return $module->canStudentAttempt($student->id);
         });
 
-        return view('student.question-modules.stats', compact(
+        return view('student.pages.question-modules.stats', compact(
             'totalAttempts',
             'passedAttempts',
             'failedAttempts',
@@ -184,7 +184,7 @@ class QuestionModuleStatsController extends Controller
             ];
         }
 
-        return view('student.question-modules.module-stats', compact(
+        return view('student.pages.question-modules.module-stats', compact(
             'questionModule',
             'attempts',
             'averageScore',

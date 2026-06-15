@@ -1,7 +1,5 @@
-<div class="student-my-courses-empty text-center py-5">
-    <div class="student-my-courses-empty__icon mb-4">
-        <i class="fe fe-award"></i>
-    </div>
-    <h4 class="mb-2">{{ $title ?? 'لا توجد شارات' }}</h4>
-    <p class="text-muted mb-0">{{ $message ?? '' }}</p>
+<div class="text-center py-5">
+    <div class="empty-state-icon mx-auto mb-3"><i class="ri-medal-line"></i></div>
+    <p class="text-muted mb-1 fw-semibold">{{ $title ?? 'لا توجد شارات' }}</p>
+    <p class="text-muted fs-12 mb-0">{{ $message ?? '' }}</p>
 </div>

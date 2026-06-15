@@ -121,11 +121,15 @@ class CourseController extends Controller
     public function edit(Course $course)
     {
         $course->loadCount('sections');
+        $enrollments = $course->enrollments()
+            ->with(['student.user', 'order'])
+            ->orderByDesc('enrolled_at')
+            ->paginate(10, ['*'], 'enrollments_page');
         $categories = CourseCategory::orderBy('name')->get();
         $tags = CourseTag::orderBy('name')->get();
         $instructors = User::role('instructor')->orderBy('name')->get();
 
-        return view('admin.courses.edit', compact('course', 'categories', 'tags', 'instructors'));
+        return view('admin.courses.edit', compact('course', 'categories', 'tags', 'instructors', 'enrollments'));
     }
 
     public function update(Request $request, Course $course)
