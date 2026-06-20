@@ -23,7 +23,11 @@ class CloudFirstStorageRouter
      * المسارات المحلية المعروفة
      */
     private const LOCAL_PATHS = [
-        'blog/images' => 'public',
+        'blog/images' => 'images',
+        'courses/thumbnails' => 'images',
+        'courses/images' => 'images',
+        'hero-slides/backgrounds' => 'images',
+        'hero-slides/visuals' => 'images',
         'users/photos' => 'avatars',
         'uploads/images' => 'images',
         'uploads/documents' => 'documents',
@@ -307,6 +311,76 @@ class CloudFirstStorageRouter
         }
 
         return Storage::disk($this->localFallbackDisk())->exists($path);
+    }
+
+    /**
+     * قراءة محتوى ملف (سحابة أولاً ثم لوكال)
+     *
+     * @return array{content: string, mime: string}|null
+     */
+    public function retrieve(string $path, ?string $diskName = null): ?array
+    {
+        $path = ltrim(str_replace('\\', '/', trim($path)), '/');
+        if ($path === '') {
+            return null;
+        }
+
+        $targetDisk = $diskName ?? $this->resolveDiskForPath($path);
+        $mapping = $this->resolveActiveMapping($targetDisk);
+
+        if ($mapping) {
+            foreach ($this->storagesFromMapping($mapping) as $storageConfig) {
+                if (! $storageConfig || ! $storageConfig->is_active) {
+                    continue;
+                }
+                try {
+                    $disk = AppStorageFactory::create($storageConfig);
+                    if ($disk->exists($path)) {
+                        return [
+                            'content' => $disk->get($path),
+                            'mime' => $this->guessMimeType($path, $disk),
+                        ];
+                    }
+                } catch (\Throwable) {
+                    //
+                }
+            }
+        }
+
+        try {
+            $localDisk = Storage::disk($this->localFallbackDisk());
+            if ($localDisk->exists($path)) {
+                return [
+                    'content' => $localDisk->get($path),
+                    'mime' => $this->guessMimeType($path, $localDisk),
+                ];
+            }
+        } catch (\Throwable) {
+            //
+        }
+
+        return null;
+    }
+
+    private function guessMimeType(string $path, Filesystem $disk): string
+    {
+        try {
+            $mime = $disk->mimeType($path);
+            if (is_string($mime) && $mime !== '') {
+                return $mime;
+            }
+        } catch (\Throwable) {
+            //
+        }
+
+        return match (strtolower(pathinfo($path, PATHINFO_EXTENSION))) {
+            'jpg', 'jpeg' => 'image/jpeg',
+            'png' => 'image/png',
+            'gif' => 'image/gif',
+            'webp' => 'image/webp',
+            'svg' => 'image/svg+xml',
+            default => 'application/octet-stream',
+        };
     }
 
     /**

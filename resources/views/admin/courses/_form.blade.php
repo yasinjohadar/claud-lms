@@ -140,8 +140,26 @@
                 <input type="text" name="icon" class="form-control" value="{{ old('icon', $course?->icon) }}" placeholder="fa-laptop-code">
             </div>
             <div class="mb-3">
-                <label class="form-label">صورة مصغرة</label>
-                <input type="file" name="thumbnail" class="form-control" accept="image/*">
+                <label class="form-label" for="courseThumbnail">صورة مصغرة</label>
+                @if($course?->thumbnail)
+                    <div class="mb-2" id="courseThumbnailCurrent">
+                        <img src="{{ $course->thumbnail_url }}" alt="{{ $course->thumbnail_alt ?? $course->title }}"
+                             class="rounded border" style="max-height: 120px; max-width: 100%; object-fit: cover;">
+                        <div class="form-check mt-2">
+                            <input class="form-check-input" type="checkbox" name="remove_thumbnail" value="1" id="removeCourseThumbnail">
+                            <label class="form-check-label" for="removeCourseThumbnail">حذف الصورة الحالية</label>
+                        </div>
+                    </div>
+                @endif
+                <div class="d-none mb-2" id="courseThumbnailPreview">
+                    <img src="" alt="معاينة الصورة" class="rounded border" style="max-height: 120px; max-width: 100%; object-fit: cover;">
+                </div>
+                <input type="file" name="thumbnail" id="courseThumbnail"
+                       class="form-control @error('thumbnail') is-invalid @enderror" accept="image/jpeg,image/png,image/webp,image/gif">
+                <small class="text-muted fs-12 d-block mt-1">JPG, PNG, WebP أو GIF — حتى 5MB</small>
+                @error('thumbnail')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label class="form-label">التاغات</label>

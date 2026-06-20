@@ -7,6 +7,7 @@ use App\Models\BlogPost;
 use App\Models\BlogCategory;
 use App\Models\BlogTag;
 use App\Services\Ai\AIBlogPostService;
+use App\Services\BlogFeaturedImageStorage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -17,6 +18,7 @@ class AIBlogPostController extends Controller
 {
     public function __construct(
         private AIBlogPostService $blogPostService,
+        private BlogFeaturedImageStorage $featuredImageStorage,
     ) {}
 
     /**
@@ -201,7 +203,7 @@ class AIBlogPostController extends Controller
 
             // Handle featured image upload
             if ($request->hasFile('featured_image')) {
-                $validated['featured_image'] = $request->file('featured_image')->store('blog/images', 'public');
+                $validated['featured_image'] = $this->featuredImageStorage->store($request->file('featured_image'));
             }
 
             // Set published_at if status is published and not set

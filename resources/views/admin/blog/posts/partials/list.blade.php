@@ -20,7 +20,7 @@
                         <td>
                             <div class="d-flex align-items-center gap-2">
                                 @if($post->featured_image)
-                                    <img src="{{ asset('storage/' . ltrim($post->featured_image, '/')) }}"
+                                    <img src="{{ blog_image_url($post->featured_image) }}"
                                          alt="{{ $post->title }}"
                                          class="row-avatar row-avatar--img">
                                 @else

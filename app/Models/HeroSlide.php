@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
 
 class HeroSlide extends Model
 {
@@ -105,28 +104,12 @@ class HeroSlide extends Model
 
     public function getBackgroundImageUrlAttribute(): ?string
     {
-        if (! $this->background_image) {
-            return null;
-        }
-
-        if (str_starts_with($this->background_image, 'http')) {
-            return $this->background_image;
-        }
-
-        return Storage::disk('public')->url($this->background_image);
+        return hero_image_url($this->background_image);
     }
 
     public function getVisualImageUrlAttribute(): ?string
     {
-        if (! $this->visual_image) {
-            return null;
-        }
-
-        if (str_starts_with($this->visual_image, 'http')) {
-            return $this->visual_image;
-        }
-
-        return Storage::disk('public')->url($this->visual_image);
+        return hero_image_url($this->visual_image);
     }
 
     public function isContentOnly(): bool

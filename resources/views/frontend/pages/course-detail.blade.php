@@ -262,7 +262,13 @@
                 <aside class="course-purchase-card position-sticky section-fade-up">
                     <div class="course-purchase-preview">
                         <div class="course-purchase-preview-bg" style="--course-color: {{ $categoryColor }};">
-                            <i class="{{ $icon }}"></i>
+                            @if($course->thumbnail)
+                                <img src="{{ $course->thumbnail_url }}"
+                                     alt="{{ $course->thumbnail_alt ?? $course->title }}"
+                                     class="course-purchase-preview-image">
+                            @else
+                                <i class="{{ $icon }}"></i>
+                            @endif
                         </div>
                         <button type="button" class="course-purchase-play" aria-label="معاينة الكورس">
                             <i class="fas fa-play"></i>

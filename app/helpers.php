@@ -49,25 +49,129 @@ if (! function_exists('course_image_url')) {
 
         $imagePath = ltrim($imagePath, '/');
         $filename = basename($imagePath);
+        $mediaUrl = '';
 
         try {
-            $url = media_public_url($imagePath);
-            if (! empty($url)) {
-                return $url;
+            $mediaUrl = media_public_url($imagePath);
+            if (! empty($mediaUrl) && preg_match('#^https?://#i', $mediaUrl)) {
+                return $mediaUrl;
             }
         } catch (\Throwable $e) {
             // continue
         }
 
         try {
-            if (str_contains($imagePath, 'courses/thumbnails/')) {
-                return route('course.thumbnail', ['filename' => $filename]);
-            }
-            if (str_contains($imagePath, 'courses/images/')) {
-                return route('course.image', ['filename' => $filename]);
+            $localExists = \Illuminate\Support\Facades\Storage::disk(
+                config('storage.fallback_disk', 'public')
+            )->exists($imagePath);
+
+            if ($localExists) {
+                if (str_contains($imagePath, 'courses/thumbnails/')) {
+                    return route('course.thumbnail', ['filename' => $filename], false);
+                }
+                if (str_contains($imagePath, 'courses/images/')) {
+                    return route('course.image', ['filename' => $filename], false);
+                }
             }
         } catch (\Throwable $e) {
             // continue
+        }
+
+        if (! empty($mediaUrl)) {
+            return $mediaUrl;
+        }
+
+        return asset('storage/'.$imagePath);
+    }
+}
+
+if (! function_exists('blog_image_url')) {
+    function blog_image_url(?string $imagePath): string
+    {
+        if (empty($imagePath)) {
+            return asset('frontend/assets/images/placeholder.jpg');
+        }
+
+        if (str_starts_with($imagePath, 'http')) {
+            return $imagePath;
+        }
+
+        $imagePath = ltrim($imagePath, '/');
+        $filename = basename($imagePath);
+        $mediaUrl = '';
+
+        try {
+            $mediaUrl = media_public_url($imagePath);
+            if (! empty($mediaUrl) && preg_match('#^https?://#i', $mediaUrl)) {
+                return $mediaUrl;
+            }
+        } catch (\Throwable $e) {
+            // continue
+        }
+
+        try {
+            $localExists = \Illuminate\Support\Facades\Storage::disk(
+                config('storage.fallback_disk', 'public')
+            )->exists($imagePath);
+
+            if ($localExists && str_contains($imagePath, 'blog/images/')) {
+                return route('blog.image', ['filename' => $filename], false);
+            }
+        } catch (\Throwable $e) {
+            // continue
+        }
+
+        if (! empty($mediaUrl)) {
+            return $mediaUrl;
+        }
+
+        return asset('storage/'.$imagePath);
+    }
+}
+
+if (! function_exists('hero_image_url')) {
+    function hero_image_url(?string $imagePath): ?string
+    {
+        if (empty($imagePath)) {
+            return null;
+        }
+
+        if (str_starts_with($imagePath, 'http')) {
+            return $imagePath;
+        }
+
+        $imagePath = ltrim($imagePath, '/');
+        $filename = basename($imagePath);
+        $mediaUrl = '';
+
+        try {
+            $mediaUrl = media_public_url($imagePath);
+            if (! empty($mediaUrl) && preg_match('#^https?://#i', $mediaUrl)) {
+                return $mediaUrl;
+            }
+        } catch (\Throwable $e) {
+            // continue
+        }
+
+        try {
+            $localExists = \Illuminate\Support\Facades\Storage::disk(
+                config('storage.fallback_disk', 'public')
+            )->exists($imagePath);
+
+            if ($localExists) {
+                if (str_contains($imagePath, 'hero-slides/backgrounds/')) {
+                    return route('hero.background', ['filename' => $filename], false);
+                }
+                if (str_contains($imagePath, 'hero-slides/visuals/')) {
+                    return route('hero.visual', ['filename' => $filename], false);
+                }
+            }
+        } catch (\Throwable $e) {
+            // continue
+        }
+
+        if (! empty($mediaUrl)) {
+            return $mediaUrl;
         }
 
         return asset('storage/'.$imagePath);

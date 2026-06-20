@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\BlogCategory;
 use App\Models\BlogPost;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class BlogController extends Controller
@@ -71,26 +69,5 @@ class BlogController extends Controller
             'prevPost',
             'nextPost'
         ));
-    }
-
-    public function serveImage(string $filename): Response
-    {
-        $path = 'blog/images/' . $filename;
-
-        if (! Storage::disk('public')->exists($path)) {
-            abort(404);
-        }
-
-        $fullPath = Storage::disk('public')->path($path);
-        $mime = match (strtolower(pathinfo($filename, PATHINFO_EXTENSION))) {
-            'jpg', 'jpeg' => 'image/jpeg',
-            'png' => 'image/png',
-            'gif' => 'image/gif',
-            'webp' => 'image/webp',
-            'svg' => 'image/svg+xml',
-            default => 'application/octet-stream',
-        };
-
-        return response()->file($fullPath, ['Content-Type' => $mime]);
     }
 }

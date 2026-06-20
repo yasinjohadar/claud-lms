@@ -264,7 +264,7 @@
                             @if($post->featured_image)
                             <div class="mb-3" id="featuredImageContainer">
                                 @php
-                                    $imageUrl = $post->featured_image ? asset('storage/' . ltrim($post->featured_image, '/')) : '';
+                                    $imageUrl = $post->featured_image ? blog_image_url($post->featured_image) : '';
                                 @endphp
                                 <div class="position-relative">
                                     <a href="{{ $imageUrl }}" 

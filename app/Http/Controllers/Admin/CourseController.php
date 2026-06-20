@@ -8,14 +8,16 @@ use App\Models\Course;
 use App\Models\CourseCategory;
 use App\Models\CourseTag;
 use App\Models\User;
+use App\Services\CourseThumbnailStorage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class CourseController extends Controller
 {
     use RespondsWithAjaxTable;
+
+    public function __construct(protected CourseThumbnailStorage $thumbnailStorage) {}
 
     public function index(Request $request)
     {
@@ -163,7 +165,7 @@ class CourseController extends Controller
         $category = $course->category;
 
         if ($course->thumbnail) {
-            Storage::disk('public')->delete($course->thumbnail);
+            $this->thumbnailStorage->delete($course->thumbnail);
         }
 
         $course->tags()->detach();
@@ -213,7 +215,8 @@ class CourseController extends Controller
             'currency' => 'nullable|string|max:3',
             'badge' => 'nullable|string|max:50',
             'icon' => 'nullable|string|max:50',
-            'thumbnail' => 'nullable|image|max:2048',
+            'thumbnail' => 'nullable|image|mimes:jpeg,jpg,png,webp,gif|max:5120',
+            'remove_thumbnail' => 'nullable|boolean',
             'thumbnail_alt' => 'nullable|string|max:255',
             'rating_avg' => 'nullable|numeric|min:0|max:5',
             'rating_count' => 'nullable|integer|min:0',
@@ -273,11 +276,15 @@ class CourseController extends Controller
             'meta_description' => $validated['meta_description'] ?? null,
         ];
 
-        if ($request->hasFile('thumbnail')) {
+        if ($request->boolean('remove_thumbnail') && $course?->thumbnail) {
+            $this->thumbnailStorage->delete($course->thumbnail);
+            $data['thumbnail'] = null;
+        } elseif ($request->hasFile('thumbnail')) {
             if ($course?->thumbnail) {
-                Storage::disk('public')->delete($course->thumbnail);
+                $this->thumbnailStorage->delete($course->thumbnail);
             }
-            $data['thumbnail'] = $request->file('thumbnail')->store('courses/thumbnails', 'public');
+
+            $data['thumbnail'] = $this->thumbnailStorage->store($request->file('thumbnail'));
         }
 
         return $data;

@@ -110,6 +110,11 @@ return [
     'disk_map' => [
         'avatars' => 'images',
         'images' => 'images',
+        'blog/images' => 'images',
+        'courses/thumbnails' => 'images',
+        'courses/images' => 'images',
+        'hero-slides/backgrounds' => 'images',
+        'hero-slides/visuals' => 'images',
         'videos' => 'videos',
         'attachments' => 'attachments',
         'library' => 'library',

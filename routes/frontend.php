@@ -9,13 +9,22 @@ use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\LessonController;
 use App\Http\Controllers\Frontend\NewsletterController;
 use App\Http\Controllers\Frontend\PageController;
+use App\Http\Controllers\Frontend\StoredMediaController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/serve/blog-image/{filename}', [BlogController::class, 'serveImage'])
+Route::get('/serve/blog-image/{filename}', [StoredMediaController::class, 'serveBlogImage'])
     ->where('filename', '[a-zA-Z0-9_.-]+')
     ->name('blog.image');
+
+Route::get('/serve/hero-background/{filename}', [StoredMediaController::class, 'serveHeroBackground'])
+    ->where('filename', '[a-zA-Z0-9_.-]+')
+    ->name('hero.background');
+
+Route::get('/serve/hero-visual/{filename}', [StoredMediaController::class, 'serveHeroVisual'])
+    ->where('filename', '[a-zA-Z0-9_.-]+')
+    ->name('hero.visual');
 
 Route::get('/serve/course-image/{filename}', [CourseController::class, 'serveImage'])
     ->where('filename', '[a-zA-Z0-9_.-]+')

@@ -6,22 +6,22 @@ use App\Models\HeroSlide;
 use App\Support\HeroSlidePresenter;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class HeroSlideService
 {
+    public function __construct(private HeroSlideImageStorage $imageStorage) {}
     public function store(array $data, ?UploadedFile $backgroundImage = null, ?UploadedFile $visualImage = null): HeroSlide
     {
         $sortOrder = (int) HeroSlide::max('sort_order') + 1;
         $attributes = $this->buildAttributes($data, $sortOrder);
 
         if ($backgroundImage) {
-            $attributes['background_image'] = $this->storeImage($backgroundImage, 'hero-slides/backgrounds');
+            $attributes['background_image'] = $this->imageStorage->storeBackground($backgroundImage);
         }
 
         if ($visualImage) {
-            $attributes['visual_image'] = $this->storeImage($visualImage, 'hero-slides/visuals');
+            $attributes['visual_image'] = $this->imageStorage->storeVisual($visualImage);
         }
 
         return HeroSlide::create($attributes);
@@ -38,21 +38,21 @@ class HeroSlideService
         $attributes = $this->buildAttributes($data, $slide->sort_order);
 
         if ($removeBackgroundImage) {
-            $this->deleteStoredFile($slide->background_image);
+            $this->imageStorage->delete($slide->background_image);
             $attributes['background_image'] = null;
         } elseif ($backgroundImage) {
-            $this->deleteStoredFile($slide->background_image);
-            $attributes['background_image'] = $this->storeImage($backgroundImage, 'hero-slides/backgrounds');
+            $this->imageStorage->delete($slide->background_image);
+            $attributes['background_image'] = $this->imageStorage->storeBackground($backgroundImage);
         } else {
             $attributes['background_image'] = $slide->background_image;
         }
 
         if ($removeVisualImage) {
-            $this->deleteStoredFile($slide->visual_image);
+            $this->imageStorage->delete($slide->visual_image);
             $attributes['visual_image'] = null;
         } elseif ($visualImage) {
-            $this->deleteStoredFile($slide->visual_image);
-            $attributes['visual_image'] = $this->storeImage($visualImage, 'hero-slides/visuals');
+            $this->imageStorage->delete($slide->visual_image);
+            $attributes['visual_image'] = $this->imageStorage->storeVisual($visualImage);
         } else {
             $attributes['visual_image'] = $slide->visual_image;
         }
@@ -64,8 +64,8 @@ class HeroSlideService
 
     public function destroy(HeroSlide $slide): void
     {
-        $this->deleteStoredFile($slide->background_image);
-        $this->deleteStoredFile($slide->visual_image);
+        $this->imageStorage->delete($slide->background_image);
+        $this->imageStorage->delete($slide->visual_image);
         $slide->delete();
     }
 
@@ -260,17 +260,5 @@ class HeroSlideService
         }
 
         return null;
-    }
-
-    private function storeImage(UploadedFile $file, string $directory): string
-    {
-        return $file->store($directory, 'public');
-    }
-
-    private function deleteStoredFile(?string $path): void
-    {
-        if ($path && ! str_starts_with($path, 'http')) {
-            Storage::disk('public')->delete($path);
-        }
     }
 }

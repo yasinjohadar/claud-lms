@@ -30,14 +30,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrapFive();
 
-        // دالة مساعد لعرض صورة تدوينة المدونة من التخزين
-        if (! function_exists(__NAMESPACE__.'\\blog_image_url')) {
-            function blog_image_url(?string $path): string
-            {
-                return media_public_url($path);
-            }
-        }
-
         // متغير مسارات أصول الفرونت إند متاح لجميع الـ views
         View::share('fa', asset('frontend/assets'));
 

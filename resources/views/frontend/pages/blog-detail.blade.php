@@ -120,11 +120,13 @@
                                 <span class="blog-detail-widget-icon"><i class="fas fa-folder"></i></span>
                                 <h2>التصنيفات</h2>
                             </header>
-                            <ul class="list-unstyled mb-0">
+                            <ul class="blog-sidebar-categories">
                                 @foreach($categories as $category)
-                                    <li class="mb-2">
-                                        <a href="{{ route('blog') }}?category={{ $category->slug }}">{{ $category->name }}</a>
-                                        <span class="text-secondary small">({{ $category->published_posts_count }})</span>
+                                    <li>
+                                        <a href="{{ route('blog') }}?category={{ $category->slug }}" class="blog-sidebar-category">
+                                            <span class="blog-sidebar-category-name">{{ $category->name }}</span>
+                                            <span class="blog-sidebar-category-count en-text">{{ $category->published_posts_count }}</span>
+                                        </a>
                                     </li>
                                 @endforeach
                             </ul>

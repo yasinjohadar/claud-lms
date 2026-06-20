@@ -78,24 +78,26 @@ if (!function_exists('course_image_url')) {
         $imagePath = ltrim($imagePath, '/');
         $filename = basename($imagePath);
         
-        // Method 1: Try StorageHelperService (dynamic storage) - FIRST
+        // Method 1: Cloud/CDN absolute URLs
         try {
             $storageHelper = app(\App\Services\Storage\StorageHelperService::class);
             $url = $storageHelper->getFileUrl('public', $imagePath);
-            if (!empty($url) && filter_var($url, FILTER_VALIDATE_URL)) {
+            if (! empty($url) && preg_match('#^https?://#i', $url)) {
                 return $url;
             }
         } catch (\Exception $e) {
             // Continue to next method
         }
-        
-        // Method 2: Try route (local storage fallback) - SECOND
+
+        // Method 2: Local serve route (works without storage symlink)
         try {
-            if (strpos($imagePath, 'courses/images/') !== false) {
-                return route('course.image', ['filename' => $filename]);
-            }
-            if (strpos($imagePath, 'courses/thumbnails/') !== false) {
-                return route('course.thumbnail', ['filename' => $filename]);
+            if (\App\Services\Storage\MediaStorageService::exists($imagePath)) {
+                if (strpos($imagePath, 'courses/images/') !== false) {
+                    return route('course.image', ['filename' => $filename], false);
+                }
+                if (strpos($imagePath, 'courses/thumbnails/') !== false) {
+                    return route('course.thumbnail', ['filename' => $filename], false);
+                }
             }
         } catch (\Exception $e) {
             // Continue to next method

@@ -42,6 +42,39 @@
         }
     }
 
+    function initCourseThumbnailPreview(root) {
+        var scope = root || document;
+        var input = scope.querySelector('#courseThumbnail');
+        var previewWrap = scope.querySelector('#courseThumbnailPreview');
+        var previewImg = previewWrap ? previewWrap.querySelector('img') : null;
+        var currentWrap = scope.querySelector('#courseThumbnailCurrent');
+
+        if (!input || !previewWrap || !previewImg) return;
+
+        input.addEventListener('change', function () {
+            var file = this.files && this.files[0];
+            if (!file) return;
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                previewImg.src = e.target.result;
+                previewWrap.classList.remove('d-none');
+                if (currentWrap) currentWrap.classList.add('d-none');
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+
+    function initCourseFormSubmit(root) {
+        var form = (root || document).querySelector('[data-course-post-form]');
+        if (!form) return;
+
+        form.addEventListener('submit', function () {
+            if (typeof tinymce !== 'undefined') {
+                tinymce.triggerSave();
+            }
+        });
+    }
     function initFeaturedImagePreview(root) {
         var scope = root || document;
         var input = scope.querySelector('#featuredImage');
@@ -138,6 +171,8 @@
             window.AdminBlogPostForm.init({
                 contentSelectors: ['#description']
             });
+            initCourseThumbnailPreview(document);
+            initCourseFormSubmit(document);
         }
     });
 })(window);

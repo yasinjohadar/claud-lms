@@ -7,10 +7,10 @@ use App\Models\Course;
 use App\Models\CourseCategory;
 use App\Models\CourseTag;
 use App\Services\CourseCatalogService;
+use App\Services\Storage\CloudFirstStorageRouter;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class CourseController extends Controller
@@ -116,14 +116,14 @@ class CourseController extends Controller
 
     protected function serveFile(string $path): Response
     {
-        if (! Storage::disk('public')->exists($path)) {
+        $file = app(CloudFirstStorageRouter::class)->retrieve($path);
+
+        if (! $file) {
             abort(404);
         }
 
-        $mime = Storage::disk('public')->mimeType($path);
-
-        return response(Storage::disk('public')->get($path), 200, [
-            'Content-Type' => $mime,
+        return response($file['content'], 200, [
+            'Content-Type' => $file['mime'],
             'Cache-Control' => 'public, max-age=31536000',
         ]);
     }
