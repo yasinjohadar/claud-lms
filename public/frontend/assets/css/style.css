@@ -3439,8 +3439,10 @@ html[data-theme="dark"] .course-card:hover {
 .course-card-thumb {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 10;
-  max-height: 140px;
+  height: 130px;
+  min-height: 130px;
+  max-height: 130px;
+  flex-shrink: 0;
   background: var(--course-thumb-bg);
   background-color: color-mix(in srgb, var(--course-color, var(--accent-color)) 10%, var(--course-card-bg));
   display: flex;
@@ -3495,14 +3497,18 @@ html[data-theme="light"] .course-card-thumb::before {
   z-index: 2;
 }
 
-.course-card-image {
+.course-card .course-card-thumb .course-card-image {
   position: absolute;
   inset: 0;
+  z-index: 1;
+  display: block;
   width: 100%;
   height: 100%;
+  max-width: none;
+  min-width: 100%;
+  min-height: 100%;
   object-fit: cover;
   object-position: center;
-  z-index: 1;
   transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -4144,13 +4150,14 @@ html[data-theme="dark"] .course-purchase-card {
 
 .course-purchase-preview {
   position: relative;
-  aspect-ratio: 16 / 10;
-  max-height: 160px;
+  height: 150px;
+  min-height: 150px;
+  max-height: 150px;
+  overflow: hidden;
   background: #134e4a;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
 }
 
 html[data-theme="dark"] .course-purchase-preview {
@@ -4167,11 +4174,15 @@ html[data-theme="dark"] .course-purchase-preview {
   color: rgba(255, 255, 255, 0.08);
 }
 
-.course-purchase-preview-image {
+.course-purchase-preview .course-purchase-preview-image {
   position: absolute;
   inset: 0;
+  display: block;
   width: 100%;
   height: 100%;
+  max-width: none;
+  min-width: 100%;
+  min-height: 100%;
   object-fit: cover;
   object-position: center;
 }
@@ -9618,8 +9629,9 @@ html[data-theme="dark"] .course-list-card {
 .course-list-thumb {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 10;
-  max-height: 140px;
+  height: 130px;
+  min-height: 130px;
+  max-height: 130px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9628,22 +9640,26 @@ html[data-theme="dark"] .course-list-card {
   flex-shrink: 0;
 }
 
-.course-list-thumb .course-card-image {
+.course-list-card .course-list-thumb .course-card-image {
   position: absolute;
   inset: 0;
+  z-index: 1;
+  display: block;
   width: 100%;
   height: 100%;
+  max-width: none;
+  min-width: 100%;
+  min-height: 100%;
   object-fit: cover;
   object-position: center;
 }
 
 @media (min-width: 768px) {
   .course-list-thumb {
-    width: 220px;
+    width: 200px;
+    height: auto;
+    min-height: 130px;
     max-height: none;
-    aspect-ratio: auto;
-    min-height: 0;
-    height: 100%;
     align-self: stretch;
   }
 }
