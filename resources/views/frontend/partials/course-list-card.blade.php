@@ -14,7 +14,14 @@
             @if($course->badge)
                 <span class="course-card-badge">{{ $course->badge }}</span>
             @endif
-            <div class="course-card-icon-wrap"><i class="{{ $icon }}"></i></div>
+            @if($course->thumbnail)
+                <img src="{{ $course->thumbnail_url }}"
+                     alt="{{ $course->thumbnail_alt ?? $course->title }}"
+                     class="course-card-image"
+                     loading="lazy">
+            @else
+                <div class="course-card-icon-wrap"><i class="{{ $icon }}"></i></div>
+            @endif
         </div>
         <div class="course-list-body">
             <div class="course-card-top">
